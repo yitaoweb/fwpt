@@ -1,19 +1,49 @@
-<nav class="navbar navbar-default navbar-fixed-top active">
-    <div class="container active">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="__ROOT__/">{$theme_vars.company_name|default='ThinkCMF'}</a>
+<div class="topbar">
+    <div class="bar">     
+        <div class="barleft" id="topleft">
+            
+            <ul class="fol list-unstyled" id="main-menu-user">
+                <!--
+                <li class="login">
+                    <a class="dropdown-toggle notifactions" href="/index.php/user/notification/index"> <i
+                            class="fa fa-envelope"></i> <span class="count">0</span></a>
+                </li>
+                -->
+                <li class="dropdown user login">
+                        <php>$user=cmf_get_current_user();</php>
+                    您好，
+                    [<a href="{:cmf_url('user/Profile/center')}"><i class="fa fa-user"></i> &nbsp;<span class="user-nickname"></span></a>]&nbsp;[<a href="{:cmf_url('user/Index/logout')}"><i class="fa fa-sign-out"></i> &nbsp;退出</a>]，欢迎来到 {$site_info.site_name|default=''}！
+                </li>
+                <li class="dropdown user offline" style="display: list-item;">
+                        您好，欢迎来到 {$site_info.site_name|default=''}！请[<a href="{:cmf_url('user/Login/index')}"> &nbsp;登录</a>]
+                        [<a href="{:cmf_url('user/Register/index')}">&nbsp;注册</a>]
+                </li>
+            </ul>
+            
         </div>
 
-        <div class="collapse navbar-collapse active" id="bs-example-navbar-collapse-1">
-            <ul id="main-menu" class="nav navbar-nav">
-                <navigation nav-id="" root="" id="main-navigation" class="nav navbar-nav navbar-nav-custom" max-level="0">
+        <div class="barright">
+           【<a href="http://www.xysmlt.gov.cn:8080/smes/manage.action">我的服务中心</a>】
+           【<a href="javascript:void(0);" onclick="javascript:addFav();return false;">加入收藏</a>】
+        </div>
+    </div>
+</div>
+<div class="top">
+    <div class="logo">
+        <a href="/index.jhtml"><img src="__TMPL__/public/assets/images/home_logo.png"></a>
+        <div class="header-right">
+            <img src="__TMPL__/public/assets/images/header-bg2.png">
+        </div>
+    </div>
+</div>
+
+
+
+<div class="navbar    navbar-blue">
+        <div class="container">
+            <div class="navbar-inner">
+                <ul class="nav navbar-nav nav-default">
+                  <navigation nav-id="" root="" id="main-navigation" class="nav navbar-nav navbar-nav-custom" max-level="0">
                     <navigationMenu root="li" class="menu-item menu-item-level-{$level}">
                         <a href="{$menu.href|default=''}" target="{$menu.target|default=''}">
                             {$menu.name|default=''}
@@ -28,49 +58,7 @@
                         </a>
                     </navigationFolder>
                 </navigation>
-            </ul>
-            <ul class="nav navbar-nav navbar-right" id="main-menu-user">
-                <!--
-                <li class="login">
-                    <a class="dropdown-toggle notifactions" href="/index.php/user/notification/index"> <i
-                            class="fa fa-envelope"></i> <span class="count">0</span></a>
-                </li>
-                -->
-                <li class="dropdown user login">
-                    <a class="dropdown-toggle user" data-toggle="dropdown" href="#">
-                        <php>$user=cmf_get_current_user();</php>
-                        <if condition="empty($user['avatar'])">
-                            <img src="__TMPL__/public/assets/images/headicon.png" class="headicon">
-                            <else/>
-                            <img src="{:cmf_get_user_avatar_url($user['avatar'])}" class="headicon" width="30"/>
-                        </if>
-                        <span class="user-nickname"></span><b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu pull-right">
-                        <li><a href="{:cmf_url('user/Profile/center')}"><i class="fa fa-user"></i> &nbsp;个人中心</a></li>
-                        <li class="divider"></li>
-                        <li><a href="{:cmf_url('user/Index/logout')}"><i class="fa fa-sign-out"></i> &nbsp;退出</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown user offline" style="display: list-item;">
-                    <a class="dropdown-toggle user" data-toggle="dropdown" href="#">
-                        <img src="__TMPL__/public/assets/images/headicon.png" class="headicon">
-                        登录<b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu pull-right">
-                        <li><a href="{:cmf_url('user/Login/index')}"><i class="fa fa-sign-in"></i> &nbsp;登录</a></li>
-                        <li class="divider"></li>
-                        <li><a href="{:cmf_url('user/Register/index')}"><i class="fa fa-user"></i> &nbsp;注册</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <form class="navbar-form navbar-right" method="post" action="{:cmf_url('portal/Search/index')}">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="keyword" placeholder="Search"
-                           value="{:input('param.keyword','')}">
-                </div>
-                <input type="submit" class="btn btn-primary" value="Go" style="margin:0"/>
-            </form>
-        </div>
-    </div>
-</nav>
+                </ul>
+            </div>
+        </div> 
+</div>
