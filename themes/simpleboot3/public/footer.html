@@ -1,23 +1,29 @@
 <br>
 <!-- Footer ================================================== -->
-<hr>
+
+<!--第9楼-->
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 p0">
+        <div class="box-l">
+          <div class="mod">
+              <div class="fly-panel fly-link ">
+                <h3 class="fly-panel-title icon-qy tleft" style="font-size: 18px;padding-bottom: 10px;">友情链接</h3>
+                <links>
+                    <a class="fol" href="{$vo.url|default=''}" target="{$vo.target|default=''}">{$vo.name|default=''}</a><a class="fol">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                </links>                 
+              </div>
+          </div>
+        </div>
+    </div>      
+</div>
+
+
+
 <div id="footer">
     <hook name="footer_start"/>
-    <div class="links">
-        <links>
-            <a href="{$vo.url|default=''}" target="{$vo.target|default=''}">{$vo.name|default=''}</a>&nbsp;
-        </links>
-
-    </div>
     <p>
-        Made by <a href="http://www.thinkcmf.com" target="_blank">ThinkCMF</a>
-        Code licensed under the
-        <a href="http://www.apache.org/licenses/LICENSE-2.0" rel="nofollow" target="_blank">Apache License v2.0</a>.
-        <br/>
-        Based on
-        <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a>.
-        Icons from
-        <a href="http://fortawesome.github.com/Font-Awesome/" target="_blank">Font Awesome</a>
+        
         <br>
         备案号:
         <notempty name="site_info.site_icp">

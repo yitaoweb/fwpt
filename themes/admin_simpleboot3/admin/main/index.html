@@ -286,7 +286,8 @@
                 $.each(data, function (i, n) {
                     var $tpl = $(tpl);
                     $(".title", $tpl).html(n.title);
-                    $(".content", $tpl).html(n.content);
+                    //$(".content", $tpl).html(n.content);
+                    $(".content", $tpl).html("接受系统通知信息！");
                     $notices.append($tpl);
                 });
             } else {
