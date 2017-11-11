@@ -1,0 +1,57 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('AdminTxl/index')}">通讯录管理</a></li>
+        <li><a href="{:url('AdminTxl/add')}">添加通讯录</a></li>
+    </ul>
+    <form method="post" class="js-ajax-form margin-top-20">
+        <div class="table-actions">
+            <!--<button type="submit" class="btn btn-primary btn-sm js-ajax-submit">{:lang('SORT')}</button>-->
+        </div>
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th width="50">ID</th>
+                <th>名字</th>
+                <th>手机号</th>
+                <th>电话号</th>
+                <th>邮箱</th>
+                <th width="160">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach name="tags" item="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.names}</td>
+                    <td>{$vo.sjh}</td>
+                    <td>{$vo.dh}</td>
+                    <td>{$vo.yx}</td>
+                    <td>
+                        <a class="js-ajax-delete" href="{:url('AdminTxl/delete',['id'=>$vo['id']])}">删除</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th width="50">ID</th>
+                <th>名字</th>
+                <th>手机号</th>
+                <th>电话号</th>
+                <th>邮箱</th>
+                <th width="160">操作</th>
+            </tr>
+            </tfoot>
+        </table>
+        <div class="table-actions">
+            <!--<button type="submit" class="btn btn-primary btn-sm js-ajax-submit">{:lang('SORT')}</button>-->
+        </div>
+    </form>
+    <ul class="pagination">{$page|default=''}</ul>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

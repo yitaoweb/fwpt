@@ -39,7 +39,7 @@ return [
     "USER_HAVE_NOT_LOGIN"                => '该用户还没登陆过',
     //main
     'SYSTEM_INFORMATIONS'                => '系统信息',
-    'SYSTEM_NOTIFICATIONS'               => '系统通知',
+    'SYSTEM_NOTIFICATIONS'               => '通知公告',
     'INITIATE_TEAM'                      => '发起团队',
     'CONTRIBUTORS'                       => '贡献者',
     'CONTACT_EMAIL'                      => '联系邮箱',

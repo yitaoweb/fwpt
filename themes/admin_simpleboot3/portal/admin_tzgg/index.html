@@ -1,0 +1,36 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('AdminTzgg/index')}">{:lang('ADMIN_TAG_INDEX')}</a></li>
+        <li class="active"><a href="{:url('AdminTzgg/add')}">{:lang('ADMIN_TAG_ADD')}</a></li>
+        <!--<li><a  href="{:url('nav/edit')}" >{:lang('ADMIN_NAV_EDIT')}</a></li>-->
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('AdminTzgg/editPost')}">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>发布人名称:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="fbrname" name="fbrname" value="{$tzgg.fbrname}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">通知内容:</label>
+            <div class="col-md-6 col-sm-10">
+                <textarea class="form-control" id="nr" name="nr" value="{$tzgg.nr}">
+                {$tzgg.nr}
+                </textarea>
+            </div>
+        </div>
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="hidden" name="id" id='id' value="{$tzgg.id}">
+            <button type="submit" class="btn btn-primary js-ajax-submit" >修改</button>
+            <a class="btn btn-default" href="__URL__">返回</a>
+        </div>
+    </form>
+
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

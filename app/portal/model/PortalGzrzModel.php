@@ -6,25 +6,16 @@
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
-// | Author: 老猫 <thinkcmf@126.com>
+// | Author:kane < chengjin005@163.com>
 // +----------------------------------------------------------------------
-namespace app\portal\controller;
+namespace app\portal\model;
 
-use cmf\controller\HomeBaseController;
-use app\portal\model\PortalTagModel;
+use think\Model;
 
-class TagController extends HomeBaseController
+class PortalGzrzModel extends Model
 {
-    public function index()
-    {
-        $id             = $this->request->param('id', 0, 'intval');
-        $portalTagModel = new PortalTagModel();
-
-        $tag = $portalTagModel->where('id', $id)->where('status', 1)->find();
-
-        $this->assign('tag', $tag);
-
-        return $this->fetch('/tags');
-    }
-
+    public static   $STATUS = array(
+        0=>"未启用",
+        1=>"已启用",
+    );
 }
