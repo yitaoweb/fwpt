@@ -13,6 +13,8 @@ namespace app\user\controller;
 use cmf\controller\HomeBaseController;
 use think\Validate;
 use app\user\model\UserModel;
+use app\portal\model\PortalSshyModel;
+use think\Db;
 
 class RegisterController extends HomeBaseController
 {
@@ -28,6 +30,13 @@ class RegisterController extends HomeBaseController
         } else {
             $redirect = base64_decode($redirect);
         }
+        $area=Db::name('portal_xzqy')->where(array('parent_id' => 8))->order('list_order')->select();
+        $parentId            = $this->request->param('parent', 0, 'intval');
+        $portalCategoryModel = new PortalSshyModel();
+        $categoriesTree      = $portalCategoryModel->adminCategoryTree($parentId);
+        $this->assign('area', $area);
+        $this->assign('categories_tree', $categoriesTree);
+
         session('login_http_referer', $redirect);
 
         if (cmf_is_user_login()) {
