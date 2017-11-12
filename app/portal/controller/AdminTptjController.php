@@ -12,12 +12,12 @@ namespace app\portal\controller;
 
 use app\admin\model\RouteModel;
 use cmf\controller\AdminBaseController;
-use app\portal\model\PortalXzqyModel;
+use app\portal\model\PortalSshyModel;
 use think\Db;
 use app\admin\model\ThemeModel;
 
 
-class AdminXzqyController extends AdminBaseController
+class AdminSshyController extends AdminBaseController
 {
     /**
      * 文章分类列表
@@ -34,7 +34,7 @@ class AdminXzqyController extends AdminBaseController
      */
     public function index()
     {
-        $portalCategoryModel = new PortalXzqyModel();
+        $portalCategoryModel = new PortalSshyModel();
         $categoryTree        = $portalCategoryModel->adminCategoryTableTree();
 
         $this->assign('category_tree', $categoryTree);
@@ -57,7 +57,7 @@ class AdminXzqyController extends AdminBaseController
     public function add()
     {
         $parentId            = $this->request->param('parent', 0, 'intval');
-        $portalCategoryModel = new PortalXzqyModel();
+        $portalCategoryModel = new PortalSshyModel();
         $categoriesTree      = $portalCategoryModel->adminCategoryTree($parentId);
 
         $themeModel        = new ThemeModel();
@@ -85,7 +85,7 @@ class AdminXzqyController extends AdminBaseController
      */
     public function addPost()
     {
-        $portalCategoryModel = new PortalXzqyModel();
+        $portalCategoryModel = new PortalSshyModel();
 
         $data = $this->request->param();
 
@@ -101,7 +101,7 @@ class AdminXzqyController extends AdminBaseController
             $this->error('添加失败!');
         }
 
-        $this->success('添加成功!', url('AdminXzqy/index'));
+        $this->success('添加成功!', url('AdminSshy/index'));
 
     }
 
@@ -122,9 +122,9 @@ class AdminXzqyController extends AdminBaseController
     {
         $id = $this->request->param('id', 0, 'intval');
         if ($id > 0) {
-            $category = PortalXzqyModel::get($id)->toArray();
+            $category = PortalSshyModel::get($id)->toArray();
 
-            $portalCategoryModel = new PortalXzqyModel();
+            $portalCategoryModel = new PortalSshyModel();
             $categoriesTree      = $portalCategoryModel->adminCategoryTree($category['parent_id'], $id);
 
             $themeModel        = new ThemeModel();
@@ -169,7 +169,7 @@ class AdminXzqyController extends AdminBaseController
             $this->error($result);
         }
 
-        $portalCategoryModel = new PortalXzqyModel();
+        $portalCategoryModel = new PortalSshyModel();
 
         $result = $portalCategoryModel->editCategory($data);
 
@@ -197,7 +197,7 @@ class AdminXzqyController extends AdminBaseController
     {
         $ids                 = $this->request->param('ids');
         $selectedIds         = explode(',', $ids);
-        $portalCategoryModel = new PortalXzqyModel();
+        $portalCategoryModel = new PortalSshyModel();
 
         $tpl = <<<tpl
 <tr class='data-item-tr'>
@@ -236,7 +236,7 @@ tpl;
      */
     public function listOrder()
     {
-        parent::listOrders(Db::name('portal_xzqy'));
+        parent::listOrders(Db::name('portal_category'));
         $this->success("排序更新成功！", '');
     }
 
@@ -255,7 +255,7 @@ tpl;
      */
     public function delete()
     {
-        $portalCategoryModel = new PortalXzqyModel();
+        $portalCategoryModel = new PortalSshyModel();
         $id                  = $this->request->param('id');
         //获取删除的内容
         $findCategory = $portalCategoryModel->where('id', $id)->find();
