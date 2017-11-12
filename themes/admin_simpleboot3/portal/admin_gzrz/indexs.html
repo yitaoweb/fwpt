@@ -3,9 +3,9 @@
 <body>
 <div class="wrap">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="{:url('AdminGzrz/index')}">工作日志管理</a></li>
+        <li ><a href="{:url('AdminGzrz/index')}">工作日志管理</a></li>
         <li><a href="{:url('AdminGzrz/add')}">发送日志</a></li>
-        <li><a href="{:url('AdminGzrz/indexs')}">我接受的</a></li>
+        <li class="active"><a href="{:url('AdminGzrz/indexs')}">我接受的</a></li>
     </ul>
     <form method="post" class="js-ajax-form margin-top-20">
         <div class="table-actions">
@@ -15,7 +15,7 @@
             <thead>
             <tr>
                 <th width="50">ID</th>
-                <th>接收人</th>
+                <th>发送人</th>
                 <th>发送时间</th>
                 <th>日志内容</th>
                 <th>状态</th>
@@ -24,11 +24,11 @@
             </thead>
             <tbody>
             <foreach name="tags" item="vo">
-            <if condition="$vo.fsr eq $userid">
+            <if condition="$vo.jsr eq $userid">
                 <tr>
                     <td>{$vo.id}</td>
                     <foreach name="username" item="vos">
-                    <if condition="$vos.id eq $vo.jsr">
+                    <if condition="$vos.id eq $vo.fsr">
                     <td>{$vos.user_nickname}</td>
                     </if>
                     </foreach>
@@ -38,7 +38,7 @@
                     {$vo.nr}
                     </div>
                     </td>
-                    <td><a href="{:url('AdminGzrz/stat',['id'=>$vo['id']])}">{$vo.stat}</a></td>
+                   <td><a href="{:url('AdminGzrz/stat',['id'=>$vo['id']])}">{$vo.stat}</a></td>
                     <td>
                         <a class="js-ajax-delete" href="{:url('AdminGzrz/delete',['id'=>$vo['id']])}">删除</a>
                     </td>
@@ -49,7 +49,7 @@
             <tfoot>
             <tr>
                <th width="50">ID</th>
-                <th>接收人</th>
+                <th>发送人</th>
                 <th>发送时间</th>
                 <th>日志内容</th>
                 <th>状态</th>
