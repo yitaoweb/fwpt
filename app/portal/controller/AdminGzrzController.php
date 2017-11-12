@@ -37,13 +37,28 @@ class AdminGzrzController extends AdminBaseController
     {
         $portalTagModel = new PortalGzrzModel();
         $tags = $portalTagModel->paginate();
-
+        $id = cmf_get_current_admin_id();
+        $username = Db::name('user')->select();
         $this->assign("arrStatus", $portalTagModel::$STATUS);
         $this->assign("tags", $tags);
+        $this->assign("username", $username);
+        $this->assign("userid", $id);
         $this->assign('page', $tags->render());
         return $this->fetch();
     }
-
+    public function indexs()
+    {
+        $portalTagModel = new PortalGzrzModel();
+        $tags = $portalTagModel->paginate();
+        $id = cmf_get_current_admin_id();
+        $username = Db::name('user')->select();
+        $this->assign("username", $username);
+        $this->assign("arrStatus", $portalTagModel::$STATUS);
+        $this->assign("tags", $tags);
+        $this->assign("userid", $id);
+        $this->assign('page', $tags->render());
+        return $this->fetch();
+    }
     /**
      * 添加文章标签
      * @adminMenu(
@@ -83,11 +98,14 @@ class AdminGzrzController extends AdminBaseController
     {
 
         $portalTagModel = new PortalGzrzModel();
-        $portalTagModel->fsr = $_POST['fsr'];
+        $id = cmf_get_current_admin_id();
+        $portalTagModel->fsr = $id;
+        $portalTagModel->jsr = $_POST['jsr'];
         $portalTagModel->time = date('y-m-d h:i:s',time());
         $portalTagModel->nr = $_POST['nr'];
         $portalTagModel->stat = '未读';
-        $portalTagModel->save();
+        $a = $portalTagModel->save();
+
         $this->success(lang("SAVE_SUCCESS"));
 
     }
@@ -146,5 +164,11 @@ class AdminGzrzController extends AdminBaseController
         $portalTagModel->where(['id' => $intId])->delete();
         //Db::name('portal_tag_post')->where('tag_id', $intId)->delete();
         $this->success(lang("DELETE_SUCCESS"));
+    }
+    public function stat(){
+        $intId = $this->request->param("id", 0, 'intval');
+        $portalTagModel = new PortalGzrzModel();
+        $portalTagModel->save(["stat" => '已读'],['id' => $intId]);
+        $this->success("阅读成功~！");
     }
 }
