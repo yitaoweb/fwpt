@@ -37,9 +37,10 @@ class AdminGzrzController extends AdminBaseController
     {
         $portalTagModel = new PortalGzrzModel();
         $tags = $portalTagModel->paginate();
-
+        $id = cmf_get_current_admin_id();
         $this->assign("arrStatus", $portalTagModel::$STATUS);
         $this->assign("tags", $tags);
+        $this->assign("userid", $id);
         $this->assign('page', $tags->render());
         return $this->fetch();
     }
@@ -83,11 +84,14 @@ class AdminGzrzController extends AdminBaseController
     {
 
         $portalTagModel = new PortalGzrzModel();
-        $portalTagModel->fsr = $_POST['fsr'];
+        $id = cmf_get_current_admin_id();
+        $portalTagModel->fsr = $id;
+        $portalTagModel->jsr = $_POST['jsr'];
         $portalTagModel->time = date('y-m-d h:i:s',time());
         $portalTagModel->nr = $_POST['nr'];
         $portalTagModel->stat = '未读';
-        $portalTagModel->save();
+        $a = $portalTagModel->save();
+
         $this->success(lang("SAVE_SUCCESS"));
 
     }

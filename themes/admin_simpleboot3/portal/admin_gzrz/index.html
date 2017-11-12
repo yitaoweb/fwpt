@@ -5,7 +5,7 @@
     <ul class="nav nav-tabs">
         <li class="active"><a href="{:url('AdminGzrz/index')}">工作日志管理</a></li>
         <li><a href="{:url('AdminGzrz/add')}">发送日志</a></li>
-        <li><a href="{:url('AdminGzrz/index')}">我接受的</a></li>
+        <li><a id='jsr'>我接受的</a></li>
     </ul>
     <form method="post" class="js-ajax-form margin-top-20">
         <div class="table-actions">
@@ -24,7 +24,8 @@
             </thead>
             <tbody>
             <foreach name="tags" item="vo">
-                <tr>
+            <if condition="$vo.fsr eq $userid">
+                <tr id="fsr">
                     <td>{$vo.id}</td>
                     <td>{$vo.fsr}</td>
                     <td>{$vo.time}</td>
@@ -38,6 +39,23 @@
                         <a class="js-ajax-delete" href="{:url('AdminTxl/delete',['id'=>$vo['id']])}">删除</a>
                     </td>
                 </tr>
+            </if>
+            <if condition="$vo.jsr eq $userid">
+                <tr id="jsrs" style="display:none;">
+                    <td>{$vo.id}</td>
+                    <td>{$vo.fsr}</td>
+                    <td>{$vo.time}</td>
+                    <td height="100px">
+                    <div style="overflow-y:scroll;height: 100px">
+                    {$vo.nr}
+                    </div>
+                    </td>
+                    <td>{$vo.stat}</td>
+                    <td>
+                        <a class="js-ajax-delete" href="{:url('AdminTxl/delete',['id'=>$vo['id']])}">删除</a>
+                    </td>
+                </tr>
+            </if>
             </foreach>
             </tbody>
             <tfoot>
@@ -58,5 +76,11 @@
     <ul class="pagination">{$page|default=''}</ul>
 </div>
 <script src="__STATIC__/js/admin.js"></script>
+<script type="text/javascript">
+   $("#jsr").click(function(){
+      $("#jsrs").show();
+      $("#fsr").hidden();
+   })
+</script>
 </body>
 </html>

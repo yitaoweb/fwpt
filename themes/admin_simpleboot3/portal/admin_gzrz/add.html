@@ -12,7 +12,7 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label"><span class="form-required">*</span>接收人:</label>
 			<div class="col-md-6 col-sm-10">
-			 <select class="form-control" name="fsr" id="fsr">
+			 <select class="form-control" name="jsr" id="jsr">
 				<foreach name="user" item="vo">
                      <option value="{$vo.id}">{$vo.user_nickname}</option> 
 				</foreach>
@@ -22,11 +22,13 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label"><span class="form-required">*</span>日志内容:</label>
 			<div class="col-md-6 col-sm-10">
-				<input type="text" class="form-control" name="sjh" id="sjh" value="">
+				<textarea type="text" class="form-control" name="nr" id="nr" value="">
+
+				</textarea>
 			</div>
 		</div>
 		<div class="col-sm-offset-2 col-sm-10">
-			<button type="submit" class="btn btn-primary js-ajax-submit">添加</button>
+			<button type="submit" class="btn btn-primary js-ajax-submit" >添加</button>
 			<a class="btn btn-default" href="__URL__">返回</a>
 		</div>
 	</form>
