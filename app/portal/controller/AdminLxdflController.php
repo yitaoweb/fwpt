@@ -12,12 +12,12 @@ namespace app\portal\controller;
 
 use app\admin\model\RouteModel;
 use cmf\controller\AdminBaseController;
-use app\portal\model\PortalTptjModel;
+use app\portal\model\PortalLxdflModel;
 use think\Db;
 use app\admin\model\ThemeModel;
 
 
-class AdminTptjController extends AdminBaseController
+class AdminLxdflController extends AdminBaseController
 {
     /**
      * 文章分类列表
@@ -34,7 +34,7 @@ class AdminTptjController extends AdminBaseController
      */
     public function index()
     {
-        $portalCategoryModel = new PortalTptjModel();
+        $portalCategoryModel = new PortalLxdflModel();
         $categoryTree        = $portalCategoryModel->adminCategoryTableTree();
 
         $this->assign('category_tree', $categoryTree);
@@ -57,7 +57,7 @@ class AdminTptjController extends AdminBaseController
     public function add()
     {
         $parentId            = $this->request->param('parent', 0, 'intval');
-        $portalCategoryModel = new PortalTptjModel();
+        $portalCategoryModel = new PortalLxdflModel();
         $categoriesTree      = $portalCategoryModel->adminCategoryTree($parentId);
 
         $themeModel        = new ThemeModel();
@@ -85,7 +85,7 @@ class AdminTptjController extends AdminBaseController
      */
     public function addPost()
     {
-        $portalCategoryModel = new PortalTptjModel();
+        $portalCategoryModel = new PortalLxdflModel();
 
         $data = $this->request->param();
 
@@ -101,7 +101,7 @@ class AdminTptjController extends AdminBaseController
             $this->error('添加失败!');
         }
 
-        $this->success('添加成功!', url('AdminTptj/index'));
+        $this->success('添加成功!', url('AdminLxdfl/index'));
 
     }
 
@@ -122,9 +122,9 @@ class AdminTptjController extends AdminBaseController
     {
         $id = $this->request->param('id', 0, 'intval');
         if ($id > 0) {
-            $category = PortalTptjModel::get($id)->toArray();
+            $category = PortalLxdflModel::get($id)->toArray();
 
-            $portalCategoryModel = new PortalTptjModel();
+            $portalCategoryModel = new PortalLxdflModel();
             $categoriesTree      = $portalCategoryModel->adminCategoryTree($category['parent_id'], $id);
 
             $themeModel        = new ThemeModel();
@@ -169,7 +169,7 @@ class AdminTptjController extends AdminBaseController
             $this->error($result);
         }
 
-        $portalCategoryModel = new PortalTptjModel();
+        $portalCategoryModel = new PortalLxdflModel();
 
         $result = $portalCategoryModel->editCategory($data);
 
@@ -197,7 +197,7 @@ class AdminTptjController extends AdminBaseController
     {
         $ids                 = $this->request->param('ids');
         $selectedIds         = explode(',', $ids);
-        $portalCategoryModel = new PortalTptjModel();
+        $portalCategoryModel = new PortalLxdflModel();
 
         $tpl = <<<tpl
 <tr class='data-item-tr'>
@@ -255,7 +255,7 @@ tpl;
      */
     public function delete()
     {
-        $portalCategoryModel = new PortalTptjModel();
+        $portalCategoryModel = new PortalLxdflModel();
         $id                  = $this->request->param('id');
         //获取删除的内容
         $findCategory = $portalCategoryModel->where('id', $id)->find();

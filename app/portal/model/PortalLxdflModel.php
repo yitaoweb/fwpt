@@ -14,7 +14,7 @@ use app\admin\model\RouteModel;
 use think\Model;
 use tree\Tree;
 
-class PortalTptjModel extends Model
+class PortalLxdflModel extends Model
 {
 
     protected $type = [
@@ -78,7 +78,7 @@ class PortalTptjModel extends Model
         foreach ($categories as $item) {
             $item['checked'] = in_array($item['id'], $currentIds) ? "checked" : "";
             $item['url']     = cmf_url('portal/List/index', ['id' => $item['id']]);;
-            $item['str_action'] = '<a href="' . url("AdminTptj/add", ["parent" => $item['id']]) . '">添加子分类</a>  <a href="' . url("AdminTptj/edit", ["id" => $item['id']]) . '">' . lang('EDIT') . '</a>  <a class="js-ajax-delete" href="' . url("AdminTptj/delete", ["id" => $item['id']]) . '">' . lang('DELETE') . '</a> ';
+            $item['str_action'] = '<a href="' . url("AdminLxdfl/add", ["parent" => $item['id']]) . '">添加子分类</a>  <a href="' . url("AdminLxdfl/edit", ["id" => $item['id']]) . '">' . lang('EDIT') . '</a>  <a class="js-ajax-delete" href="' . url("AdminLxdfl/delete", ["id" => $item['id']]) . '">' . lang('DELETE') . '</a> ';
             array_push($newCategories, $item);
         }
 

@@ -1,0 +1,58 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('AdminLxdwz/index')}">联系点管理</a></li>
+        <li><a href="{:url('AdminLxdwz/add')}">添加联系点</a></li>
+    </ul>
+    <form method="post" class="js-ajax-form margin-top-20">
+        <div class="table-actions">
+            <!--<button type="submit" class="btn btn-primary btn-sm js-ajax-submit">{:lang('SORT')}</button>-->
+        </div>
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th width="50">ID</th>
+                <th>名称</th>
+                <th>联系方式</th>
+                <th>时间</th>
+
+                <th width="160">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach name="tags" item="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.name}</td>
+                    <td>{$vo.lxfs}</td>
+                    <td>{$vo.time}</td>
+
+                    <td>
+                        <a href="{:url('AdminLxdwz/edit',array('id'=>$vo['id']))}">编辑</a>
+                        <a class="js-ajax-delete" href="{:url('AdminLxdwz/delete',['id'=>$vo['id']])}">删除</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
+            <tfoot>
+            <tr>
+               <th width="50">ID</th>
+                <th>名称</th>
+                <th>联系方式</th>
+                <th>时间</th>
+
+                <th width="160">操作</th>
+            </tr>
+            </tfoot>
+        </table>
+        <div class="table-actions">
+            <!--<button type="submit" class="btn btn-primary btn-sm js-ajax-submit">{:lang('SORT')}</button>-->
+        </div>
+    </form>
+    <ul class="pagination">{$page|default=''}</ul>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
