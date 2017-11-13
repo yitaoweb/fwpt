@@ -26,17 +26,20 @@
                         <div class="tabbable reg" id="tabs-624345">
                             <notempty name="theme_vars.enable_mobile">
                                 <ul class="nav nav-tabs" id="myTab">
-                                    <li class="active"><a href="#mobile" data-toggle="tab">企业注册</a></li>
-                                    <li><a href="#email" data-toggle="tab">机构注册</a></li>
+                                    <li class="active"><a href="#qiye" data-toggle="tab">企业注册</a></li>
+                                    <li><a href="#jigou" data-toggle="tab">机构注册</a></li>
                                 </ul>
                             </notempty>
                             <php>
-                                $is_open_registration = cmf_is_open_registration();
+                                $is_registration = is_registration();
+                                $is_sj = is_sj();
+                                $is_yx = is_yx();
                             </php>
                             <div class="tab-content">
                                 <notempty name="theme_vars.enable_mobile">
-                                    <div class="tab-pane {$mobile_tab_active}" id="mobile">
+                                    <div class="tab-pane {$mobile_tab_active}" id="qiye">
                                         <form class="js-ajax-form form-horizontal" action="{:url('user/Register/doRegister')}" method="post">
+
 
                                             <div class="form-group">
                                                 <label for="ename" class="col-md-2 control-label">企业名称</label>
@@ -79,7 +82,7 @@
 
                                             <div class="form-group">
                                                 <label for="sshy" class="col-md-2 control-label">所属行业</label>
-                                                <div class="col-md-10">
+                                                <div class="col-md-4">
                                                     <select class="form-control" name="sshy" id="input-parent">
                                                         <option value="0">请选择行业分类</option>
                                                         {$categories_tree}
@@ -94,7 +97,7 @@
                                             <div class="form-group">
                                                 <label for="mobile" class="col-md-2 control-label">手机号</label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" name="mobile" id="mobile" placeholder="请输入联系人手机号">
+                                                    <input type="text" class="form-control" name="mobile" id="js-mobile-input" placeholder="请输入联系人手机号">
                                                 </div>
                                                 <label for="email" class="col-sm-2 control-label">邮箱</label>
                                                 <div class="col-sm-4">
@@ -102,26 +105,54 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label for="jianjie" class="col-md-2 control-label">单位简介</label>
-                                                <div class="col-md-10">
-                                                    <textarea class="form-control" name="jianjie" id="jianjie" rows="3"></textarea>
+                                            <empty name="is_sj">
+                                                <div class="form-group">
+                                                    <div style="position: relative;">
+                                                        <input type="text" name="code" placeholder="手机验证码" style="width:170px;"
+                                                               class="form-control">
+                                                        <a class="btn btn-success js-get-mobile-code"
+                                                           style="width: 163px;position: absolute;top:0;right: 0;"
+                                                           data-wait-msg="[second]秒后才能再次获取" data-mobile-input="#js-mobile-input"
+                                                           data-url="{:url('user/VerificationCode/send')}"
+                                                           data-init-second-left="60">获取手机验证码</a>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </empty>
+
+                                            <empty name="is_yx">
+                                                <div class="form-group">
+                                                    <div style="position: relative;">
+                                                        <input type="text" name="code" placeholder="邮件验证码" style="width:170px;"
+                                                               class="form-control">
+                                                        <a class="btn btn-success js-get-email-code"
+                                                           style="width: 163px;position: absolute;top:0;right: 0;"
+                                                           data-wait-msg="[second]秒后才能再次获取" data-email-input="#js-email-input"
+                                                           data-url="{:url('user/VerificationCode/send')}"
+                                                           data-init-second-left="60">获取邮箱验证码</a>
+                                                    </div>
+                                                </div>
+                                            </empty>
 
                                             <div class="form-group">
                                                 <label for="inputEmail3" class="col-md-2 control-label">统一社会信用代码证</label>
-                                                <div class="col-md-8">
+                                                <div class="col-md-4">
                                                     <input type="hidden" name="daima" id="daima" value="">
                                                     <a href="javascript:uploadOneImage('图片上传','#daima');">
                                                         <img src="__TMPL__/public/assets/images/default-thumbnail.png"
                                                              id="daima-preview"
-                                                             width="135" style="cursor: pointer"/>
+                                                             width="135" height="100" style="cursor: pointer"/>
                                                     </a>
                                                     <input type="button" class="btn btn-sm btn-cancel-daima" value="取消图片">
                                                 </div>
+                                                <label for="jianjie" class="col-md-2 control-label">单位简介</label>
+                                                <div class="col-md-4">
+                                                    <textarea class="form-control" name="jianjie" id="jianjie" rows="4"></textarea>
+                                                </div>
+                                                
 
                                             </div>
+
+
 
                                             <div class="form-group">
                                                 <div class="col-md-4"></div>
@@ -142,7 +173,7 @@
                                         </form>
                                     </div>
                                 </notempty>
-                                <div class="tab-pane {$email_tab_active}" id="email">
+                                <div class="tab-pane {$email_tab_active}" id="jigou">
                                     <form class="js-ajax-form" action="{:url('user/register/doRegister')}" method="post">
 
                                         <div class="form-group">
@@ -201,24 +232,6 @@
 
 </div>
 <!-- /container -->
-
-<script type="text/javascript">
-    $(function () {
-
-        editorcontent = new baidu.editor.ui.Editor();
-        editorcontent.render('content');
-        try {
-            editorcontent.sync();
-        } catch (err) {
-        }
-
-        $('.btn-cancel-daima').click(function () {
-            $('#daima-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
-            $('#daima').val('');
-        });
-
-    });
-</script>
 
 <include file="public@scripts"/>
 </body>

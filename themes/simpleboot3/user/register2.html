@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content="">
+    <include file="public@head"/>
+</head>
+
+<body class="body-white">
+<include file="public@nav"/>
+
+<div class="container tc-main">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <h2 class="text-center">用户注册</h2>
+            <php>
+                $mobile_tab_active=empty($theme_vars['enable_mobile'])?'':'active';
+                $email_tab_active=empty($theme_vars['enable_mobile'])?'active':'';
+            </php>
+            <notempty name="theme_vars.enable_mobile">
+                <ul class="nav nav-tabs nav-justified" id="myTab" style="margin-bottom: 15px;">
+                    <li class="active"><a href="#mobile" data-toggle="tab">手机注册</a></li>
+                    <li><a href="#email" data-toggle="tab">邮箱注册</a></li>
+                </ul>
+            </notempty>
+
+            <php>
+                $is_open_registration = cmf_is_open_registration();
+            </php>
+
+            <div class="tab-content">
+                <notempty name="theme_vars.enable_mobile">
+                    <div class="tab-pane {$mobile_tab_active}" id="mobile">
+                        <form class="js-ajax-form" action="{:url('user/Register/doRegister')}" method="post">
+
+
+                                            <div class="form-group">
+                                                <label for="ename" class="col-md-2 control-label">企业名称</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" id="ename" placeholder="请输入企业全称">
+                                                </div>
+                                                <label for="password" class="col-sm-2 control-label">Password</label>
+                                                <div class="col-sm-4">
+                                                    <input type="password" class="form-control" id="password" placeholder="请输入密码">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="xydm" class="col-md-2 control-label">统一社会信用代码</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" id="xydm" placeholder="统一社会信用代码">
+                                                </div>
+                                                <label for="faren" class="col-sm-2 control-label">法人代表</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" id="faren" placeholder="法人代表">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="area" class="col-md-2 control-label">地区</label>
+                                                <div class="col-md-4">
+                                                    <select class="form-control" name="area">
+                                                        <option value="0">请选择地区</option>
+                                                    <volist name="area" id="vo">
+                                                        <option value="{$vo.id}">{$vo.name}</option>
+                                                    </volist>
+                                                    </select>
+                                                </div>
+                                                <label for="address" class="col-sm-2 control-label">办公地址</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" name="address" id="address" placeholder="请输入办公地址">
+                                                </div>
+                                                
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="sshy" class="col-md-2 control-label">所属行业</label>
+                                                <div class="col-md-10">
+                                                    <select class="form-control" name="sshy" id="input-parent">
+                                                        <option value="0">请选择行业分类</option>
+                                                        {$categories_tree}
+                                                    </select>
+                                                </div>
+                                                <label for="lxname" class="col-sm-2 control-label">联系人</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" name="lxname" id="lxname" placeholder="请输入联系人姓名">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="mobile" class="col-md-2 control-label">手机号</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="mobile" id="mobile" placeholder="请输入联系人手机号">
+                                                </div>
+                                                <label for="email" class="col-sm-2 control-label">邮箱</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" name="email" id="email" placeholder="请输入邮箱地址">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="jianjie" class="col-md-2 control-label">单位简介</label>
+                                                <div class="col-md-10">
+                                                    <textarea class="form-control" name="jianjie" id="jianjie" rows="3"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputEmail3" class="col-md-2 control-label">统一社会信用代码证</label>
+                                                <div class="col-md-8">
+                                                    <input type="hidden" name="daima" id="daima" value="">
+                                                    <a href="javascript:uploadOneImage('图片上传','#daima');">
+                                                        <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                                             id="daima-preview"
+                                                             width="135" style="cursor: pointer"/>
+                                                    </a>
+                                                    <input type="button" class="btn btn-sm btn-cancel-daima" value="取消图片">
+                                                </div>
+
+                                            </div>
+                            
+
+                            <empty name="is_open_registration">
+                                <div class="form-group">
+                                    <input type="text" name="username" placeholder="手机号" class="form-control"
+                                           id="js-mobile-input">
+                                </div>
+                                <div class="form-group">
+                                    <div style="position: relative;">
+                                        <input type="text" name="code" placeholder="手机验证码" style="width:170px;"
+                                               class="form-control">
+                                        <a class="btn btn-success js-get-mobile-code"
+                                           style="width: 163px;position: absolute;top:0;right: 0;"
+                                           data-wait-msg="[second]秒后才能再次获取" data-mobile-input="#js-mobile-input"
+                                           data-url="{:url('user/VerificationCode/send')}"
+                                           data-init-second-left="60">获取手机验证码</a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                <div style="position: relative;">
+                                        <input type="text" name="captcha" placeholder="验证码" class="form-control"
+                                               style="width: 170px;float: left;margin-right: 30px">
+                                        <captcha height="38" width="160" font-size="20"/>
+                                    </div>
+                                </div>
+                            </empty>
+
+                           
+
+                            
+
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-block js-ajax-submit" type="submit" data-wait="1500"
+                                        style="margin-left: 0px;">确定注册
+                                </button>
+                            </div>
+
+                            <div class="form-group" style="text-align: center;">
+                                <p>
+                                    已有账号? <a href="{:cmf_url('user/Login/index')}">点击此处登录</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </notempty>
+                <div class="tab-pane {$email_tab_active}" id="email">
+                    <form class="js-ajax-form" action="{:url('user/register/doRegister')}" method="post">
+
+                        <div class="form-group">
+                            <input type="text" name="username" placeholder="邮箱" class="form-control"
+                                   id="js-email-input">
+                        </div>
+
+                        <empty name="is_open_registration">
+                            <div class="form-group">
+                                <div style="position: relative;">
+                                    <input type="text" name="code" placeholder="邮件验证码" style="width:170px;"
+                                           class="form-control">
+                                    <a class="btn btn-success js-get-email-code"
+                                       style="width: 163px;position: absolute;top:0;right: 0;"
+                                       data-wait-msg="[second]秒后才能再次获取" data-email-input="#js-email-input"
+                                       data-url="{:url('user/VerificationCode/send')}"
+                                       data-init-second-left="60">获取邮箱验证码</a>
+                                </div>
+                            </div>
+                        </empty>
+
+                        <div class="form-group">
+                            <input type="password" name="password" placeholder="密码" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <div style="position: relative;">
+                                <input type="text" name="captcha" placeholder="验证码" class="form-control"
+                                       style="width: 170px;float: left;margin-right: 30px">
+                                <captcha height="38" width="160" font-size="20"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-block js-ajax-submit" type="submit" data-wait="1500"
+                                    style="margin-left: 0px;">确定注册
+                            </button>
+                        </div>
+
+                        <div class="form-group" style="text-align: center;">
+                            <p>
+                                已有账号? <a href="{:cmf_url('user/Login/index')}">点击此处登录</a>
+                            </p>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!-- /container -->
+
+<include file="public@scripts"/>
+</body>
+</html>
