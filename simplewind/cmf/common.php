@@ -467,6 +467,8 @@ function cmf_get_option($key)
 
     $cmfGetOption[$key] = $optionValue;
 
+    //var_dump($cmfGetOption);
+
     return $optionValue;
 }
 
@@ -1753,3 +1755,37 @@ function cmf_is_open_registration()
 
     return empty($cmfSettings['open_registration']) ? false : true;
 }
+
+/**
+ * 判断是否允许开放注册
+ */
+function is_registration()
+{
+
+    $cmfSettings = cmf_get_option('cmf_settings');
+
+    return $cmfSettings['open_registration'] == 1 ? true : false;
+}
+
+/**
+ * 判断是否允许手机注册
+ */
+function is_sj()
+{
+
+    $cmfSettings = cmf_get_option('cmf_settings');
+
+    return $cmfSettings['open_registration'] == 2 ? true : '';
+}
+
+/**
+ * 判断是否允许邮箱注册
+ */
+function is_yx()
+{
+
+    $cmfSettings = cmf_get_option('cmf_settings');
+
+    return $cmfSettings['open_registration'] == 2 ? true : '';
+}
+

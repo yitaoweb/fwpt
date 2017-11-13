@@ -32,6 +32,7 @@ class MailerController extends AdminBaseController
     public function index()
     {
         $emailSetting = cmf_get_option('smtp_setting');
+        //var_dump($emailSetting);die;
         $this->assign($emailSetting);
         return $this->fetch();
     }
