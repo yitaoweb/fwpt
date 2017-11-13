@@ -1,0 +1,107 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+	<ul class="nav nav-tabs">
+		<li><a href="{:url('AdminLxdwz/index')}">{:lang('ADMIN_TAG_INDEX')}</a></li>
+		<li class="active"><a href="{:url('AdminLxdwz/add')}">{:lang('ADMIN_TAG_ADD')}</a></li>
+		<!--<li><a  href="{:url('nav/edit')}" >{:lang('ADMIN_NAV_EDIT')}</a></li>-->
+	</ul>
+	<form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('AdminLxdwz/addPost')}">
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label"><span class="form-required">*</span>名称:</label>
+			<div class="col-md-6 col-sm-10">
+				<input type="text" class="form-control" name="name" id="name" value="">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label"><span class="form-required">*</span>选择分类:</label>
+			<div class="col-md-6 col-sm-10">
+				<select class="form-control" name="fl_id" id="fl_id">
+				          <option value="">请选择</option>
+				  <foreach name="portal_lxdfl" item="vo">
+                         <option value="{$vo.id}">{$vo.name}</option>
+				  </foreach>
+                </select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label"><span class="form-required">*</span>选择联系点:</label>
+			<div class="col-md-6 col-sm-10">
+				<select class="form-control" name="lxd_id" id="lxd_id">
+				          <option value="">请选择</option>
+				  <foreach name="portal_lxd" item="vo">
+                         <option value="{$vo.id}">{$vo.lxd_name}</option>
+				  </foreach>
+                </select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label"><span class="form-required">*</span>联系方式:</label>
+			<div class="col-md-6 col-sm-10">
+				<input type="text" class="form-control" name="lxfs" id="lxfs" value="">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label"><span class="form-required">*</span>内容:</label>
+			<div class="col-md-6 col-sm-10">
+				<script type="text/plain" id="content" name="nr"></script>
+			</div>
+		</div>
+		<div class="col-sm-offset-2 col-sm-10">
+		<input type="hidden" name="time" value="{$time}">
+			<button type="submit" class="btn btn-primary js-ajax-submit">添加</button>
+			<a class="btn btn-default" href="__URL__">返回</a>
+		</div>
+	</form>
+
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<script type="text/javascript">
+    //编辑器路径定义
+    var editorURL = GV.WEB_ROOT;
+</script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        editorcontent = new baidu.editor.ui.Editor();
+        editorcontent.render('content');
+        try {
+            editorcontent.sync();
+        } catch (err) {
+        }
+
+        $('.btn-cancel-thumbnail').click(function () {
+            $('#thumbnail-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
+            $('#thumbnail').val('');
+        });
+
+    });
+
+    function doSelectCategory() {
+        var selectedCategoriesId = $('#js-categories-id-input').val();
+        openIframeLayer("{:url('AdminCategory/select')}?ids=" + selectedCategoriesId, '请选择分类', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedCategories = iframeWin.confirm();
+                if (selectedCategories.selectedCategoriesId.length == 0) {
+                    layer.msg('请选择分类');
+                    return;
+                }
+                $('#js-categories-id-input').val(selectedCategories.selectedCategoriesId.join(','));
+                $('#js-categories-name-input').val(selectedCategories.selectedCategoriesName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    }
+</script>
+</body>
+</html>

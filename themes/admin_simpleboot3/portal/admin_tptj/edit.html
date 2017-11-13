@@ -3,8 +3,8 @@
 <body>
 <div class="wrap js-check-wrap">
     <ul class="nav nav-tabs">
-        <li><a href="{:url('AdminSshy/index')}">分类管理</a></li>
-        <li><a href="{:url('AdminSshy/add')}">添加分类</a></li>
+        <li><a href="{:url('AdminTptj/index')}">分类管理</a></li>
+        <li><a href="{:url('AdminTptj/add')}">添加分类</a></li>
         <li class="active"><a>编辑分类</a></li>
     </ul>
     <div class="row margin-top-20">
@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <form class="js-ajax-form" action="{:url('AdminSshy/editPost')}" method="post">
+            <form class="js-ajax-form" action="{:url('AdminTptj/editPost')}" method="post">
                 <div class="tab-content">
                     <div class="tab-pane active" id="A">
                         <div class="form-group">
@@ -122,7 +122,7 @@
                     <input type="hidden" name="id" value="{$id}">
                     <button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="0">{:lang('SAVE')}
                     </button>
-                    <a class="btn btn-default" href="{:url('AdminSshy/index')}">{:lang('BACK')}</a>
+                    <a class="btn btn-default" href="{:url('AdminTptj/index')}">{:lang('BACK')}</a>
                 </div>
             </form>
         </div>

@@ -2,7 +2,7 @@
 </head>
 <body>
 <div class="wrap js-check-wrap">
-    <form method="post" class="js-ajax-form" action="{:url('AdminTptj/listorders')}">
+    <form method="post" class="js-ajax-form" action="{:url('AdminLxd/listorders')}">
         <table class="table table-hover table-bordered table-list">
             <thead>
             <tr>
@@ -13,10 +13,10 @@
                 </th>
                 <th width="50">ID</th>
                 <th>分类名称</th>
+                <th>分类描述</th>
             </tr>
             </thead>
             <tbody>
-            <!--
             <foreach name="categories" item="vo">
                 <tr>
                     <td>
@@ -29,30 +29,12 @@
                     <td>{$vo.description}</td>
                 </tr>
             </foreach>
-            -->
-            {$categories_tree}
             </tbody>
         </table>
     </form>
 </div>
 <script src="__STATIC__/js/admin.js"></script>
 <script>
-    $('.data-item-tr').click(function (e) {
-
-        console.log(e);
-        var $this = $(this);
-        if ($(e.target).is('input')) {
-            return;
-        }
-
-        var $input = $this.find('input');
-        if ($input.is(':checked')) {
-            $input.prop('checked', false);
-        } else {
-            $input.prop('checked', true);
-        }
-    });
-
     function confirm() {
         var selectedCategoriesId   = [];
         var selectedCategoriesName = [];
