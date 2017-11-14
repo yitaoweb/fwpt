@@ -36,12 +36,26 @@ class AdminLxdController extends AdminBaseController
      */
     public function index()
     {
+      
         $portalTagModel = new PortalLxdModel();
+        $arrData = $this->request->param(); 
+        if($arrData){
+            if($arrData['lxd_xzqy'] != ''){
+                 $portalTagModel->where('lxd_xzqy='.$arrData['lxd_xzqy']);
+            }
+            if($arrData['lxd_name'] != ''){
+                 $portalTagModel->where('lxd_name','like',"%{$arrData['lxd_name']}%");
+                 $this->assign('lxd_name', $arrData['lxd_name']);
+            }
+           
+        }     
         $tags = $portalTagModel->paginate();
+        $xzqy = Db::name('portal_xzqy')->select();  
         $this->assign("arrStatus", $portalTagModel::$STATUS);
         $this->assign("tags", $tags);
-
+        $this->assign("xzqy", $xzqy);
         $this->assign('page', $tags->render());
+
         return $this->fetch();
     }
 
