@@ -1,0 +1,110 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#">审核</a></li>
+        <!--<li><a  href="{:url('nav/edit')}" >{:lang('ADMIN_NAV_EDIT')}</a></li>-->
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('AdminQysh/editPost')}">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>企业名称:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="qy_name" id="qy_name" value="{$post.qy_name}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>统一社会信用代码:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="qy_xydm" id="qy_xydm" value="{$post.qy_xydm}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>法人代表:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="qy_faren" id="qy_faren" value="{$post.qy_faren}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>地区:</label>
+            <div class="col-md-6 col-sm-10">
+                <select class="form-control" name="qy_area" id="qy_area">
+                  <foreach name="portal_xzqy" item="vo">
+                  <if condition="$post.qy_area eq $vo.id">
+                          <option value="{$vo.id}">{$vo.name}</option>
+                  </if>
+                  </foreach>
+                  <foreach name="portal_xzqy" item="vos">
+                           <option value="{$vos.id}">{$vos.name}</option>
+                  </foreach>
+                </select>
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>办公地址:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="qy_address" id="qy_address" value="{$post.qy_address}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>所属行业:</label>
+            <div class="col-md-6 col-sm-10">
+                                <select class="form-control" name="parent_id" id="input-parent">
+                                    <option value="0">作为一级分类</option>
+                                    {$categoriesTree}
+                                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>联系人:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="qy_lxname" id="qy_lxname" value="{$post.qy_lxname}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>手机号:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="mobile" id="mobile" value="{$post.mobile}">
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>邮箱:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="user_email" id="user_email" value="{$post.user_email}">
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>证件照:</label>
+            <div class="col-md-6 col-sm-10">
+                <img src="{:cmf_get_image_preview_url($post.daima)}"
+                                                 id="js-thumbnail-input-preview"
+                                            width="135" style="cursor: pointer"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>简介:</label>
+            <div class="col-md-6 col-sm-10">
+               <textarea>{$post.qy_jianjie}</textarea>
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>驳回意见:</label>
+            <div class="col-md-6 col-sm-10">
+               <textarea name="qy_bhyj" id="qy_bhyj"></textarea>
+            </div>
+        </div>
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="hidden" name="id" value="{$post.id}">
+            <if condition="$post.qy_shstat eq 0">
+            <button type="submit" class="btn btn-primary js-ajax-submit" name='bh' value="t">审核</button>
+            <button type="submit" class="btn btn-primary js-ajax-submit" name='bh' value="f">驳回</button>
+            </if>
+            <a class="btn btn-default" href="__URL__">返回</a>
+        </div>
+    </form>
+
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
