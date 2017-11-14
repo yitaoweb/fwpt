@@ -36,10 +36,20 @@ class AdminLxdwzController extends AdminBaseController
     public function index()
     {
         $portalTagModel = new PortalLxdwzModel();
-        $tags           = $portalTagModel->paginate();
-
+        
+        $arrData = $this->request->param(); 
+        if($arrData){
+            if($arrData['name'] != ''){
+                 $portalTagModel->where('name','like',"%{$arrData['name']}%");
+                 $this->assign('name', $arrData['name']);
+            }
+           
+        } 
+        $tags = $portalTagModel->paginate();    
+        $xzqy = Db::name('portal_xzqy')->select();  
         $this->assign("arrStatus", $portalTagModel::$STATUS);
         $this->assign("tags", $tags);
+        $this->assign("xzqy", $xzqy);
         $this->assign('page', $tags->render());
         return $this->fetch();
     }

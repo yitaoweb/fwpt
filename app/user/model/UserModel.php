@@ -171,7 +171,7 @@ class UserModel extends Model
         if (empty($result)) {
             $data   = [
                 'user_login'      => '',
-                'user_email'      => '',
+                'user_email'      => $user['user_email'],
                 'mobile'          => $user['mobile'],
                 'user_nickname'   => '',
                 'user_pass'       => cmf_password($user['user_pass']),
@@ -179,18 +179,28 @@ class UserModel extends Model
                 'create_time'     => time(),
                 'last_login_time' => time(),
                 'user_status'     => $userStatus,
-                "user_type"       => 2,//会员
+                "user_type"       => $user['user_type'],//会员
+                "qy_name"       => $user['qy_name'],
+                "qy_xydm"       => $user['qy_xydm'],
+                "qy_faren"       => $user['qy_faren'],
+                "qy_area"       => $user['qy_area'],
+                "qy_address"       => $user['qy_address'],
+                "qy_sshy"       => $user['qy_sshy'],
+                "qy_lxname"       => $user['qy_lxname'],
+                "daima"       => $user['daima'],
+                "qy_jianjie"       => $user['qy_jianjie'],
+                "qy_shstat"       => 0,
             ];
             $userId = Db::name("user")->insertGetId($data);
             $data   = Db::name("user")->where('id', $userId)->find();
             cmf_update_current_user($data);
             return 0;
         }
-        return 1;
+        return 0;
     }
 
     /**
-     * 通过邮箱重置密码
+     * 通过邮箱重置密码s
      * @param $email
      * @param $password
      * @return int

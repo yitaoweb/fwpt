@@ -36,7 +36,6 @@ class AdminSshyController extends AdminBaseController
     {
         $portalCategoryModel = new PortalSshyModel();
         $categoryTree        = $portalCategoryModel->adminCategoryTableTree();
-
         $this->assign('category_tree', $categoryTree);
         return $this->fetch();
     }
@@ -126,7 +125,6 @@ class AdminSshyController extends AdminBaseController
 
             $portalCategoryModel = new PortalSshyModel();
             $categoriesTree      = $portalCategoryModel->adminCategoryTree($category['parent_id'], $id);
-
             $themeModel        = new ThemeModel();
             $listThemeFiles    = $themeModel->getActionThemeFiles('portal/List/index');
             $articleThemeFiles = $themeModel->getActionThemeFiles('portal/Article/index');

@@ -26,7 +26,7 @@ class AdminArticleController extends AdminBaseController
      *     'parent' => 'portal/AdminIndex/default',
      *     'display'=> true,
      *     'hasView'=> true,
-     *     'order'  => 10000,
+     *     'order'  => 10000s,
      *     'icon'   => '',
      *     'remark' => '文章列表',
      *     'param'  => ''

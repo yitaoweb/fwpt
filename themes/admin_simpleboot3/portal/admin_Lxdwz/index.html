@@ -3,9 +3,16 @@
 <body>
 <div class="wrap">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="{:url('AdminLxdwz/index')}">联系点管理</a></li>
-        <li><a href="{:url('AdminLxdwz/add')}">添加联系点</a></li>
+        <li class="active"><a href="{:url('AdminLxdwz/index')}">联系点文章管理</a></li>
+        <li><a href="{:url('AdminLxdwz/add')}">添加联系点文章</a></li>
     </ul>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminLxdwz/index')}">
+        关键字:
+        <input type="text" class="form-control" name="name" style="width: 200px;"
+               value="{$name|default=''}" placeholder="请输入关键字...">
+        <input type="submit" class="btn btn-primary" value="搜索联系点名称"/>
+        <a class="btn btn-danger" href="{:url('AdminLxdwz/index')}">清空</a>
+    </form>
     <form method="post" class="js-ajax-form margin-top-20">
         <div class="table-actions">
             <!--<button type="submit" class="btn btn-primary btn-sm js-ajax-submit">{:lang('SORT')}</button>-->
