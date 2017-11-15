@@ -170,11 +170,11 @@ class UserModel extends Model
 
         if (empty($result)) {
             $data   = [
-                'user_login'      => '',
-                'user_email'      => $user['user_email'],
+                'user_login'      => $user['qy_xydm'],
+                'user_email'      => $user['email'],
                 'mobile'          => $user['mobile'],
-                'user_nickname'   => '',
-                'user_pass'       => cmf_password($user['user_pass']),
+                'user_nickname'   => $user['user_nickname'],
+                'user_pass'       => cmf_password(rand_number(0,999999)),
                 'last_login_ip'   => get_client_ip(0, true),
                 'create_time'     => time(),
                 'last_login_time' => time(),

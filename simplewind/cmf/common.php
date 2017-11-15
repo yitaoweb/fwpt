@@ -1764,7 +1764,7 @@ function is_registration()
 
     $cmfSettings = cmf_get_option('cmf_settings');
 
-    return $cmfSettings['open_registration'] == 1 ? true : false;
+    return $cmfSettings['open_registration'] == 1 ? 1 : 0;
 }
 
 /**
@@ -1775,7 +1775,7 @@ function is_sj()
 
     $cmfSettings = cmf_get_option('cmf_settings');
 
-    return $cmfSettings['open_registration'] == 2 ? true : '';
+    return $cmfSettings['open_registration'] == 2 ? 1 : 0;
 }
 
 /**
@@ -1786,6 +1786,6 @@ function is_yx()
 
     $cmfSettings = cmf_get_option('cmf_settings');
 
-    return $cmfSettings['open_registration'] == 2 ? true : '';
+    return $cmfSettings['open_registration'] == 3 ? 1 : 0;
 }
 
