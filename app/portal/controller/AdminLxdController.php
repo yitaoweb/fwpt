@@ -42,13 +42,16 @@ class AdminLxdController extends AdminBaseController
         if($arrData){
             if($arrData['lxd_xzqy'] != ''){
                  $portalTagModel->where('lxd_xzqy='.$arrData['lxd_xzqy']);
+                 $portalTagModel->order(["lxd_listorder" => "ASC"]);
             }
             if($arrData['lxd_name'] != ''){
                  $portalTagModel->where('lxd_name','like',"%{$arrData['lxd_name']}%");
+                 $portalTagModel->order(["lxd_listorder" => "ASC"]);
                  $this->assign('lxd_name', $arrData['lxd_name']);
             }
            
-        }     
+        } 
+        $portalTagModel->order(["lxd_listorder" => "ASC"]);
         $tags = $portalTagModel->paginate();
         $xzqy = Db::name('portal_xzqy')->select();  
         $this->assign("arrStatus", $portalTagModel::$STATUS);
@@ -94,8 +97,10 @@ class AdminLxdController extends AdminBaseController
      *     'param'  => ''
      * )
      */
+
     public function addPost()
     {
+        $xh = $this->sjs();
         $portalTagModel = new PortalLxdModel();
         $arrData = $this->request->param();  
         $qybm = Db::name('portal_xzqy')->where('id', $arrData['lxd_xzqy'])->find();  
@@ -138,7 +143,7 @@ class AdminLxdController extends AdminBaseController
         $data = $this->request->param();
         $portalPostModel = new PortalLxdModel();
         $a = $portalPostModel->where('id',$data['id'])->update(
-                 ['lxd_name'=>$data['lxd_name'],'lxd_wz'=>$data['lxd_wz'],'lxd_dz'=>$data['lxd_dz'],'lxd_qq'=>$data['lxd_qq'],'lxd_dh'=>$data['lxd_dh'],'lxd_jj'=>$data['lxd_jj'],'lxd_logo'=>$data['lxd_logo'],'lxd_yyzz'=>$data['lxd_yyzz']]
+                 ['lxd_name'=>$data['lxd_name'],'lxd_wz'=>$data['lxd_wz'],'lxd_dz'=>$data['lxd_dz'],'lxd_qq'=>$data['lxd_qq'],'lxd_dh'=>$data['lxd_dh'],'lxd_jj'=>$data['lxd_jj'],'lxd_logo'=>$data['lxd_logo'],'lxd_yyzz'=>$data['lxd_yyzz'],'lxd_listorder'=>$data['lxd_listorder']]
             );
         $this->success('保存成功!');
     }

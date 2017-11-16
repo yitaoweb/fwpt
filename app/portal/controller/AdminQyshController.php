@@ -45,7 +45,7 @@ class AdminQyshController extends AdminBaseController
             }
            
         } 
-        $portalTagModel->where('user_type=3');
+        $portalTagModel->where('user_type=2');
         $tags           = $portalTagModel->paginate();
         $this->assign("tags", $tags);
         $this->assign('page', $tags->render());
