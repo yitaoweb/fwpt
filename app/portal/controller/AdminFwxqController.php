@@ -10,16 +10,16 @@
 // +----------------------------------------------------------------------
 namespace app\portal\controller;
 
-use app\portal\model\PortalLxdModel;
-use app\portal\model\PortalLxdwzModel;
+use app\portal\model\PortalFwxqModel;
 use cmf\controller\AdminBaseController;
+use app\portal\model\PortalSsfwModel;
 use think\Db;
 
 /**
  * Class AdminTagController 标签管理控制器
  * @package app\portal\controller
  */
-class AdminLxdController extends AdminBaseController
+class AdminFwxqController extends AdminBaseController
 {
     /**
      * 文章标签管理
@@ -36,29 +36,24 @@ class AdminLxdController extends AdminBaseController
      */
     public function index()
     {
-      
-        $portalTagModel = new PortalLxdModel();
+        $portalTagModel = new PortalFwxqModel();
+        
         $arrData = $this->request->param(); 
         if($arrData){
-            if($arrData['lxd_xzqy'] != ''){
-                 $portalTagModel->where('lxd_xzqy='.$arrData['lxd_xzqy']);
-                 $portalTagModel->order(["list_order" => "ASC"]);
-            }
-            if($arrData['lxd_name'] != ''){
-                 $portalTagModel->where('lxd_name','like',"%{$arrData['lxd_name']}%");
-                 $portalTagModel->order(["list_order" => "ASC"]);
-                 $this->assign('lxd_name', $arrData['lxd_name']);
+            if($arrData['name'] != ''){
+                 $portalTagModel->where('title','like',"%{$arrData['name']}%");
+                 $this->assign('name', $arrData['name']);
             }
            
         } 
-        $portalTagModel->order(["list_order" => "ASC"]);
-        $tags = $portalTagModel->paginate();
-        $xzqy = Db::name('portal_xzqy')->select();  
+        $tags = $portalTagModel->paginate();    
+        $user = Db::name('user')->select();  
+        $portal_ssfw = Db::name('portal_ssfw')->select();  
         $this->assign("arrStatus", $portalTagModel::$STATUS);
         $this->assign("tags", $tags);
-        $this->assign("xzqy", $xzqy);
+        $this->assign("user", $user);
+        $this->assign("portal_ssfw", $portal_ssfw);
         $this->assign('page', $tags->render());
-
         return $this->fetch();
     }
 
@@ -77,10 +72,14 @@ class AdminLxdController extends AdminBaseController
      */
     public function add()
     {
-        $portalTagModel = new PortalLxdModel();
-                $xzqy = Db::name('portal_xzqy')->select();
-                $this->assign("xzqy", $xzqy);
-        $this->assign("arrStatus", $portalTagModel::$STATUS);
+        $parentId = $this->request->param('parent', 0, 'intval');
+        $portalTagModel = new PortalFwxqModel();
+        $user = Db::name('user')->where('user_type=2')->select(); 
+        $portalCategoryModel = new PortalSsfwModel();
+        $categoriesTree      = $portalCategoryModel->adminCategoryTree($parentId); 
+        $this->assign("categories_tree", $categoriesTree);
+        $this->assign("time", date('y-m-d h:i:s',time())); 
+        $this->assign("user", $user);   
         return $this->fetch();
     }
 
@@ -97,23 +96,13 @@ class AdminLxdController extends AdminBaseController
      *     'param'  => ''
      * )
      */
-
     public function addPost()
     {
-        $xh = $this->sjs();
-        $portalTagModel = new PortalLxdModel();
-        $arrData = $this->request->param();  
-        $qybm = Db::name('portal_xzqy')->where('id', $arrData['lxd_xzqy'])->find();  
-        $counts = $portalTagModel->where('lxd_xzqy='.$arrData['lxd_xzqy'])->count();
-        $bm = $qybm['qybm'].'B';
-        $bms = $counts+1;
-        $bmss =$bm.$bms;
-        //var_dump($qybm['qybm']);die;  
+
+        $arrData = $this->request->param();
+        $portalTagModel = new PortalFwxqModel();
         $portalTagModel->isUpdate(false)->allowField(true)->save($arrData);
-        //var_dump($portalTagModel->id);die;
-        $portalTagModel->where('id',$portalTagModel->id)->update(
-                 ['lxd_bm'=>$bmss]
-            );
+
         $this->success(lang("SAVE_SUCCESS"));
 
     }
@@ -134,18 +123,57 @@ class AdminLxdController extends AdminBaseController
     public function edit()
     {
         $id = $this->request->param('id', 0, 'intval');
-        $portalPostModel = new PortalLxdModel();
+        $portalPostModel = new PortalFwxqModel();
         $post = $portalPostModel->where('id', $id)->find();
+        $user = Db::name('user')->where('user_type=2')->select();  
+        $ssfw = Db::name('portal_ssfw')->select();  
+        $portalCategoryModel = new PortalSsfwModel();
+        $categoriesTree = $portalCategoryModel->adminCategoryTree();
+        $this->assign("time", date('y-m-d h:i:s',time()));
+        $this->assign("user", $user);
+        $this->assign("ssfw", $ssfw);
+        $this->assign('categories_tree', $categoriesTree);
         $this->assign('post', $post);
         return $this->fetch();
     }
     public function editPost(){
         $data = $this->request->param();
-        $portalPostModel = new PortalLxdModel();
+        $portalPostModel = new PortalFwxqModel();
         $a = $portalPostModel->where('id',$data['id'])->update(
-                 ['lxd_name'=>$data['lxd_name'],'lxd_wz'=>$data['lxd_wz'],'lxd_dz'=>$data['lxd_dz'],'lxd_qq'=>$data['lxd_qq'],'lxd_dh'=>$data['lxd_dh'],'lxd_jj'=>$data['lxd_jj'],'lxd_logo'=>$data['lxd_logo'],'lxd_yyzz'=>$data['lxd_yyzz'],'list_order'=>$data['list_order']]
+                 ['title'=>$data['title'],'ssfw_id'=>$data['ssfw_id'],'user_id'=>$data['user_id'],'img'=>$data['img'],'time'=>$data['time'],'content'=>$data['content']]
             );
         $this->success('保存成功!');
+    }
+    public function sh()
+    {
+        $id = $this->request->param('id', 0, 'intval');
+        $portalPostModel = new PortalFwxqModel();
+        $post = $portalPostModel->where('id', $id)->find();
+        $user = Db::name('user')->where('user_type=2')->select();  
+        $ssfw = Db::name('portal_ssfw')->select();  
+        $portalCategoryModel = new PortalSsfwModel();
+        $categoriesTree = $portalCategoryModel->adminCategoryTree();
+        $this->assign("time", date('y-m-d h:i:s',time()));
+        $this->assign("user", $user);
+        $this->assign("ssfw", $ssfw);
+        $this->assign('categories_tree', $categoriesTree);
+        $this->assign('post', $post);
+        return $this->fetch();
+    }
+    public function shPost(){
+        $data = $this->request->param();
+        $portalPostModel = new PortalFwxqModel();
+       if($data['bh'] == 't'){
+            $a = $portalPostModel->where('id',$data['id'])->update(
+                 ['sh_state'=>1]
+            );
+            $this->success('审核成功!');
+         }
+         if($data['bh'] == 'f'){
+            $a = $portalPostModel->where('id',$data['id'])->update(
+                 ['sh_state'=>2,'bh'=>$data['bh']]);
+                 $this->success('已驳回!');
+         }
     }
     public function upStatus()
     {
@@ -156,7 +184,7 @@ class AdminLxdController extends AdminBaseController
             $this->error(lang("NO_ID"));
         }
 
-        $portalTagModel = new PortalLxdModel();
+        $portalTagModel = new PortalFwxqModel();
         $portalTagModel->isUpdate(true)->save(["status" => $intStatus], ["id" => $intId]);
 
         $this->success(lang("SAVE_SUCCESS"));
@@ -183,10 +211,9 @@ class AdminLxdController extends AdminBaseController
         if (empty($intId)) {
             $this->error(lang("NO_ID"));
         }
-        $portalTagModel = new PortalLxdModel();
+        $portalTagModel = new PortalFwxqModel();
+
         $portalTagModel->where(['id' => $intId])->delete();
-        $PortalLxdwzModel = new PortalLxdwzModel();
-        $PortalLxdwzModel->where(['lxd_id' => $intId])->delete();
         //Db::name('portal_tag_post')->where('tag_id', $intId)->delete();
         $this->success(lang("DELETE_SUCCESS"));
     }
