@@ -31,10 +31,18 @@ class RegisterController extends HomeBaseController
             $redirect = base64_decode($redirect);
         }
         $area=Db::name('portal_xzqy')->where(array('parent_id' => 8))->order('list_order')->select();
+        $sq=Db::name('portal_lxd')->where('1=1')->order('list_order')->select();
+        $xueli=Db::name('portal_xl')->where('1=1')->order('id')->select();
+        $djlx=Db::name('portal_djlx')->where('1=1')->order('id')->select();
+        $huafen=Db::name('portal_huafenlx')->where('1=1')->order('id')->select();
         $parentId            = $this->request->param('parent', 0, 'intval');
         $portalCategoryModel = new PortalSshyModel();
         $categoriesTree      = $portalCategoryModel->adminCategoryTree($parentId);
         $this->assign('area', $area);
+        $this->assign('sq', $sq);
+        $this->assign('xueli', $xueli);
+        $this->assign('djlx', $djlx);
+        $this->assign('huafen', $huafen);
         $this->assign('categories_tree', $categoriesTree);
 
         session('login_http_referer', $redirect);
@@ -53,6 +61,7 @@ class RegisterController extends HomeBaseController
     {
         if ($this->request->isPost()) {
             $rules = [
+                'xieyi'          => 'require',
                 'user_nickname'  => 'require',
                 'qy_xydm'        => 'require',
                 'qy_area'        => 'require|gt:0',
@@ -64,7 +73,7 @@ class RegisterController extends HomeBaseController
                 'qy_lxname'      => 'require',
 
                 'mobile'         => 'require',
-                'email'          => 'require',
+                'user_email'     => 'require',
 
                 'qy_zczj'        => 'require',
                 'qy_zcsj'        => 'require',
@@ -75,8 +84,7 @@ class RegisterController extends HomeBaseController
 
                 'qy_jyfw'        => 'require',
                 'qy_jianjie'     => 'require',
-
-                'captcha'        => 'require',
+                'daima'          => 'require',
                 'code'           => 'require',
 
             ];
@@ -89,6 +97,7 @@ class RegisterController extends HomeBaseController
 
             $validate = new Validate($rules);
             $validate->message([
+                'xieyi.require'  => '请同意《企业用户注册协议书》',
                 'user_nickname.require'  => '企业名称不能为空',
                 'qy_xydm.require'        => '统一社会信用代码不能为空',
                 'qy_area.require'        => '行政区域不能为空',
@@ -101,7 +110,7 @@ class RegisterController extends HomeBaseController
 
                 'qy_lxname.require'      => '联系人不能为空',
                 'mobile.require'         => '手机号不能为空',
-                'email.require'          => '电子邮箱不能为空',
+                'user_email.require'          => '电子邮箱不能为空',
 
                 'qy_zczj.require'        => '企业注册资金不能为空',
                 'qy_zcsj.require'        => '企业注册登记时间不能为空',
@@ -112,9 +121,9 @@ class RegisterController extends HomeBaseController
 
                 'qy_jyfw.require'        => '经营范围不能为空',
                 'qy_jianjie.require'     => '企业简介不能为空',
-
+                'daima.require'     => '统一社会信用代码证扫描件不能为空',
                 'code.require'     => '验证码不能为空',
-                'captcha.require'  => '验证码不能为空',
+  
             ]);
 
              $data = $this->request->post();
@@ -126,24 +135,20 @@ class RegisterController extends HomeBaseController
             }
 
             if(!$isOpenRegistration){
-                $errMsg = cmf_check_verification_code($data['username'], $data['code']);
+                $errMsg = cmf_check_verification_code($data['user_email'], $data['code']);
                 if (!empty($errMsg)) {
                     $this->error($errMsg);
                 }
             }
 
             $register          = new UserModel();
-            $log            = $register->registerMobile($data);
-            $user['user_pass'] = $data['password'];
-            if (Validate::is($data['username'], 'email')) {
-                $user['user_email'] = $data['username'];
-                $log                = $register->registerEmail($user);
-            } else if (preg_match('/(^(13\d|15[^4\D]|17[013678]|18\d)\d{8})$/', $data['username'])) {
-                $user['mobile'] = $data['username'];
-                $log            = $register->registerMobile($user);
+            
+            if (Validate::is($data['user_email'], 'user_email') || preg_match('/(^(13\d|15[^4\D]|17[013678]|18\d)\d{8})$/', $data['mobile'])) {
+                $log            = $register->registerMobile($data);
             } else {
                 $log = 2;
             }
+      
             $sessionLoginHttpReferer = session('login_http_referer');
             $redirect                = empty($sessionLoginHttpReferer) ? cmf_get_root() . '/' : $sessionLoginHttpReferer;
             switch ($log) {

@@ -41,7 +41,7 @@ class Validate
         'integer'     => ':attribute必须是整数',
         'float'       => ':attribute必须是浮点数',
         'boolean'     => ':attribute必须是布尔值',
-        'email'       => ':attribute格式不符',
+        'user_email'       => ':attribute格式不符',
         'array'       => ':attribute必须是数组',
         'accepted'    => ':attribute必须是yes、on或者1',
         'date'        => ':attribute格式不符合',

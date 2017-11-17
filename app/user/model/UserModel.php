@@ -92,7 +92,7 @@ class UserModel extends Model
 
         $userQuery = Db::name("user");
 
-        $result = $userQuery->where('user_email', $user['user_email'])->find();
+        $result = $userQuery->where('email', $user['email'])->find();
 
 
         if (!empty($result)) {
@@ -129,7 +129,9 @@ class UserModel extends Model
     public function registerEmail($user)
     {
         $userQuery = Db::name("user");
-        $result    = $userQuery->where('user_email', $user['user_email'])->find();
+        $userQuery->where('user_email', $user['email']);
+        $userQuery->where('mobile', $user['mobile']);
+        $result    = $userQuery->find();
 
         $userStatus = 1;
 
@@ -140,7 +142,7 @@ class UserModel extends Model
         if (empty($result)) {
             $data   = [
                 'user_login'      => '',
-                'user_email'      => $user['user_email'],
+                'user_email'      => $user['email'],
                 'mobile'          => '',
                 'user_nickname'   => '',
                 'user_pass'       => cmf_password($user['user_pass']),
@@ -160,7 +162,11 @@ class UserModel extends Model
 
     public function registerMobile($user)
     {
-        $result = Db::name("user")->where('mobile', $user['mobile'])->find();
+        $userQuery = Db::name("user");
+        $userQuery->where('user_email', $user['user_email']);
+        $userQuery->where('mobile', $user['mobile']);
+        $condition['_logic'] = 'OR';
+        $result    = $userQuery->find();
 
         $userStatus = 1;
 
@@ -168,31 +174,64 @@ class UserModel extends Model
             $userStatus = 2;
         }
 
+        $pass    = rand_number(0,999999);
+        $qy_code = encode('user',1,$user['qy_area']);
+
         if (empty($result)) {
-            $data   = [
-                'user_login'      => $user['qy_xydm'],
-                'user_email'      => $user['email'],
-                'mobile'          => $user['mobile'],
-                'user_nickname'   => $user['user_nickname'],
-                'user_pass'       => cmf_password(rand_number(0,999999)),
-                'last_login_ip'   => get_client_ip(0, true),
-                'create_time'     => time(),
-                'last_login_time' => time(),
-                'user_status'     => $userStatus,
-                "user_type"       => $user['user_type'],//会员
-                "qy_name"       => $user['qy_name'],
-                "qy_xydm"       => $user['qy_xydm'],
-                "qy_faren"       => $user['qy_faren'],
-                "qy_area"       => $user['qy_area'],
-                "qy_address"       => $user['qy_address'],
-                "qy_sshy"       => $user['qy_sshy'],
-                "qy_lxname"       => $user['qy_lxname'],
-                "daima"       => $user['daima'],
-                "qy_jianjie"       => $user['qy_jianjie'],
-                "qy_shstat"       => 0,
+            $data  =[
+                'user_type'                =>    2,
+                'user_nickname'            =>    $user['user_nickname'],
+                'qy_xydm'                  =>    $user['qy_xydm'],
+                'qy_hghm'                  =>    $user['qy_hghm'],
+                'qy_code'                  =>    $qy_code,
+                'qy_area'                  =>    $user['qy_area'],
+                'qy_address'               =>    $user['qy_address'],
+                'qy_sq'                    =>    $user['qy_sq'],
+                'qy_zip'                   =>    '046000',
+                'user_email'               =>    $user['user_email'],
+                'qy_zczj'                  =>    $user['qy_zczj'],
+                'qy_zcsj'                  =>    $user['qy_zcsj'],
+                'qy_zxsj'                  =>    $user['qy_zxsj'],
+                'qy_faren'                 =>    $user['qy_faren'],
+                'sex'                      =>    $user['sex'],
+                'birthday'                 =>    $user['birthday'],
+                'qy_xueli'                 =>    $user['qy_xueli'],
+                'qy_lxname'                =>    $user['qy_lxname'],
+                'tel'                      =>    $user['tel'],
+                'mobile'                   =>    $user['mobile'],
+                'fax'                      =>    $user['fax'],
+                'qy_class'                 =>    $user['qy_class'],
+                'qy_zg_num'                =>    $user['qy_zg_num'],
+                'qy_dz_num'                =>    $user['qy_dz_num'],
+                'qy_kf_num'                =>    $user['qy_kf_num'],
+                'qy_sshy'                  =>    $user['qy_sshy'],
+                'qy_sme_class'             =>    $user['qy_sme_class'],
+                'qy_jyfw'                  =>    $user['qy_jyfw'],
+                'qy_jianjie'               =>    $user['qy_jianjie'],
+                'last_login_time'          =>    time(),
+                'score'                    =>    0,
+              
+                'create_time'              =>    time(),
+                'user_status'              =>    $userStatus,
+                'user_login'               =>    $qy_code,
+                'user_pass'                =>    cmf_password($pass),
+ 
+
+                'last_login_ip'            =>    get_client_ip(0, true),
+                
+                'daima'                    =>    $user['daima'],
+                'qy_shstat'                =>    0,
+
             ];
+        
+
             $userId = Db::name("user")->insertGetId($data);
             $data   = Db::name("user")->where('id', $userId)->find();
+            $subject="用户注册通知";
+            $content="尊敬的企业用户".$user['user_nickname'].":<br>";
+            $content=$content."您已成功注册，账号：".$qy_code."  密码：".$pass."<br>请牢记！";
+
+            $result = cmf_send_email($user['user_email'], $subject, $content);
             cmf_update_current_user($data);
             return 0;
         }

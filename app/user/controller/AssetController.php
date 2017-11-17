@@ -25,7 +25,7 @@ class AssetController extends AdminBaseController
         $adminId = cmf_get_current_admin_id();
         $userId  = cmf_get_current_user_id();
         if (empty($adminId) && empty($userId)) {
-            exit("非法上传！");
+            //exit("非法上传——！");
         }
     }
 
@@ -41,7 +41,7 @@ class AssetController extends AdminBaseController
             $result = $uploader->upload();
 
             if ($result === false) {
-                $this->error($uploader->getError());
+                $this->error($uploader->getError()."-");
             } else {
                 $this->success("上传成功!", '', $result);
             }

@@ -1789,3 +1789,49 @@ function is_yx()
     return $cmfSettings['open_registration'] == 3 ? 1 : 0;
 }
 
+function rand_number ($min, $max) {
+    return sprintf("%0".strlen($max)."d", mt_rand($min,$max));
+}
+
+/**
+ * 获取字段值
+ */
+
+function getfield($table,$id,$field){
+    if ($table <> '' and $id <>'' and $field <>'') {
+        $fields = Db::name($table)->field($field)->where('id', $id)->find();
+        return $fields[$field];
+    }else{
+        return '';
+    }
+    
+}
+
+/**
+ * 信息编码生成函数 
+ *$class 1企业、2、服务机构、3、联系点、4服务产品
+ */
+function encode($table,$class,$area){
+    if ($table <> '' and $class <>'' and $area <>'') {
+        if($class = 1){
+            $w=getfield('portal_xzqy',$area,'qybm');
+            $num = Db::name($table)->where('qy_code','like',$w)->count();
+
+            $num=$num+1;
+
+            $num=str_pad($num,5,"0",STR_PAD_LEFT);  
+
+            $code=$w.$num;
+
+            return $code;
+
+        }elseif ($class = 2) {
+            
+        }elseif ($class = 3) {
+            
+        }else{
+
+        }
+    }
+
+}
