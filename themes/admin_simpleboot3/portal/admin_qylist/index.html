@@ -3,15 +3,15 @@
 <body>
 <div class="wrap">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="{:url('AdminTzgg/index')}">通知公告管理</a></li>
-        <li><a href="{:url('AdminTzgg/add')}">添加通知公告</a></li>
+        <li class="active"><a href="{:url('AdminQylist/index')}">企业用户管理</a></li>
+        <li><a href="{:url('AdminQylist/add')}">添加企业</a></li>
     </ul>
-    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminTzgg/index')}">
+    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminQylist/index')}">
         关键字:
         <input type="text" class="form-control" name="name" style="width: 200px;"
                value="{$name|default=''}" placeholder="请输入关键字...">
         <input type="submit" class="btn btn-primary" value="搜索联系点名称"/>
-        <a class="btn btn-danger" href="{:url('AdminTzgg/index')}">清空</a>
+        <a class="btn btn-danger" href="{:url('AdminQylist/index')}">清空</a>
     </form>
     <form method="post" class="js-ajax-form margin-top-20">
         <div class="table-actions">
@@ -21,10 +21,12 @@
             <thead>
             <tr>
                 <th width="50">ID</th>
-                <th>标题</th>
-                <th>发布人</th>
-                <th>时间</th>
-
+                <th>企业名称</th>
+                <th>统一社会信用码</th>
+                <th>法人姓名</th>
+                <th>联系人</th>
+                <th>手机号</th>
+                <th>办公地址</th>
                 <th width="160">操作</th>
             </tr>
             </thead>
@@ -32,13 +34,16 @@
             <foreach name="tags" item="vo">
                 <tr>
                     <td>{$vo.id}</td>
-                    <td>{$vo.title}</td>
-                    <td>{$vo.fbrname}</td>
-                    <td>{$vo.time}</td>
+                    <td>{$vo.user_nickname}</td>
+                    <td>{$vo.qy_xydm}</td>
+                    <td>{$vo.qy_faren}</td>
+                    <td>{$vo.qy_lxname}</td>
+                    <td>{$vo.mobile}</td>
+                    <td>{$vo.qy_address}</td>
 
                     <td>
-                        <a href="{:url('AdminTzgg/edit',array('id'=>$vo['id']))}">编辑</a>
-                        <a class="js-ajax-delete" href="{:url('AdminTzgg/delete',['id'=>$vo['id']])}">删除</a>
+                        <a href="{:url('AdminQylist/edit',array('id'=>$vo['id']))}">编辑</a>
+                        <a class="js-ajax-delete" href="{:url('AdminQylist/delete',['id'=>$vo['id']])}">删除</a>
                     </td>
                 </tr>
             </foreach>
@@ -46,9 +51,12 @@
             <tfoot>
             <tr>
                <th width="50">ID</th>
-                <th>标题</th>
-                <th>发布人</th>
-                <th>时间</th>
+                <th>企业名称</th>
+                <th>统一社会信用码</th>
+                <th>法人姓名</th>
+                <th>联系人</th>
+                <th>手机号</th>
+                <th>办公地址</th>
 
                 <th width="160">操作</th>
             </tr>

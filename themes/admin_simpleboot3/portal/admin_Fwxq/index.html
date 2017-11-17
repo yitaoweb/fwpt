@@ -41,7 +41,11 @@
                           </if>
                       </foreach>                 
                     <td>{$vo.title}</td>
-                    <td>{$vo.ssfw_id}</td>
+                    <foreach name="portal_ssfw" item="vos">
+                          <if condition="$vo.ssfw_id eq $vos.id">
+                            <td>{$vos.name}</td>
+                          </if>
+                    </foreach>  
                     <if condition="$vo.sh_state eq 0">
                     <td>未审核</td>
                     </if>

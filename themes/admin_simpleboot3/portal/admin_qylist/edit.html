@@ -1,0 +1,297 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('AdminQylist/index')}">{:lang('ADMIN_TAG_INDEX')}</a></li>
+        <li class="active"><a href="{:url('AdminQylist/edit')}">{:lang('ADMIN_TAG_ADD')}</a></li>
+        <!--<li><a  href="{:url('nav/edit')}" >{:lang('ADMIN_NAV_EDIT')}</a></li>-->
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('AdminQylist/editPost')}">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>企业名称:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="user_nickname" id="user_nickname" value="{$post.user_nickname}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>统一社会信用代码:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="qy_xydm" id="qy_xydm" value="{$post.qy_xydm}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>海关登记号码:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="qy_hghm" id="qy_hghm" value="{$post.qy_hghm}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>地区:</label>
+            <div class="col-md-6 col-sm-10">
+                <select class="form-control" name="qy_area" id="qy_area">
+                  <foreach name="xzqy" item="vo">
+                      <if condition="$post.qy_area eq $vo.id">
+                              <option value="{$vo.id}">{$vo.name}</option>
+                      </if>
+                  </foreach>
+                  <foreach name="xzqy" item="vos">
+                         <option value="{$vos.id}">{$vos.name}</option>
+                  </foreach>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>办公地址:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="qy_address" id="qy_address" value="{$post.qy_address}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>所属行业:</label>
+            <div class="col-md-6 col-sm-10">                 
+                <select class="form-control" name="qy_sshy" id="qy_sshy">
+                  <foreach name="sshy" item="vo">
+                      <if condition="$post.qy_sshy eq $vo.id">
+                              <option value="{$vo.id}">{$vo.name}</option>
+                      </if>
+                  </foreach>
+                    {$categories_tree}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>所属商圈:</label>
+            <div class="col-md-6 col-sm-10">
+                <select class="form-control" name="qy_sq" id="qy_sq">
+                  <foreach name="lxd" item="vo">
+                      <if condition="$post.qy_sq eq $vo.id">
+                              <option value="{$vo.id}">{$vo.lxd_name}</option>
+                      </if>
+                  </foreach>
+                  <foreach name="lxd" item="vos">
+                          <option value="{$vos.id}">{$vos.lxd_name}</option>
+                  </foreach>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>法人姓名:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="qy_faren" id="qy_faren" value="{$post.qy_faren}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>性别:</label>
+            <div class="col-md-6 col-sm-10">
+                <select class="form-control" name="sex" id="sex">
+                          <if condition="$post.sex eq 0">
+                             <option value="0">女</option>
+                          </if>
+                          <if condition="$post.sex eq 1">
+                             <option value="1">男</option>
+                          </if>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>出生日期:</label>
+            <div class="col-md-6 col-sm-10">
+                <input class="form-control js-bootstrap-date" type="text" id="input-birthday" placeholder="2013-01-04" name="birthday" value="{$post.birthday}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>学历:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="qy_xueli" id="qy_xueli" value="{$post.qy_xueli}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>联系人:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="qy_lxname" id="qy_lxname" value="{$post.qy_lxname}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>电话:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="tel" id="tel" value="{$post.tel}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>手机号:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="mobile" id="mobile" value="{$post.mobile}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>邮箱:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="user_email" id="user_email" value="{$post.user_email}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>传真:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="fax" id="fax" value="{$post.fax}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>注册资金:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="qy_zczj" id="qy_zczj" value="{$post.qy_zczj}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>注册时间:</label>
+            <div class="col-md-6 col-sm-10">
+                <input class="form-control js-bootstrap-date" type="text" id="input-birthday" placeholder="2013-01-04" name="create_time" value="{$post.create_time}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>注消时间:</label>
+            <div class="col-md-6 col-sm-10">
+                <input class="form-control js-bootstrap-date" type="text" id="input-birthday" placeholder="2013-01-04" name="qy_zxsj" value="{$post.qy_zxsj}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>注册登记类型:</label>
+            <div class="col-md-6 col-sm-10">
+                <select class="form-control" name="qy_class" id="qy_class">
+                           <foreach name="djlx" item="vo">
+                              <if condition="$post.qy_class eq $vo.id">
+                                      <option value="{$vo.id}">{$vo.name}</option>
+                              </if>
+                          </foreach>
+                  <foreach name="djlx" item="vos">
+                          <option value="{$vos.id}">{$vos.name}</option>
+                  </foreach>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>职工总数:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="qy_zg_num" id="qy_zg_num" value="{$post.qy_zg_num}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>大专以上人数:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="qy_dz_num" id="qy_dz_num" value="{$post.qy_dz_num}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>研究开发人数:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="qy_kf_num" id="qy_kf_num" value="{$post.qy_kf_num}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>中小企业划分类型:</label>
+            <div class="col-md-6 col-sm-10">
+                <select class="form-control" name="qy_sme_class" id="qy_sme_class">
+                         <foreach name="huafenlx" item="vo">
+                              <if condition="$post.qy_sme_class eq $vo.id">
+                                      <option value="{$vo.id}">{$vo.name}</option>
+                              </if>
+                          </foreach>
+                  <foreach name="huafenlx" item="vos">
+                          <option value="{$vos.id}">{$vos.name}</option>
+                  </foreach>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>经营范围:</label>
+            <div class="col-md-6 col-sm-10">
+                <textarea class="form-control" name="qy_jyfw" id="qy_jyfw">{$post.qy_jyfw}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>企业简介:</label>
+            <div class="col-md-6 col-sm-10">
+                <textarea class="form-control" name="qy_jianjie" id="qy_jianjie">{$post.qy_jianjie}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-6 col-sm-10" for="input-description">统一社会信用代码证</label>
+            <div >
+                <input type="hidden" name="daima" class="form-control"
+                       id="js-thumbnail-input" value="{$post.daima}">
+                <div >
+
+                    <if condition="empty($post.daima)">
+                       <a href="javascript:uploadOneImage('图片上传','#js-thumbnaillogo-input');">
+                        <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                             id="js-thumbnaillogo-input-preview"
+                             width="135" style="cursor: pointer"/>
+                        </a>
+                            <else/>
+                        <a href="javascript:uploadOneImage('图片上传','#js-thumbnaillogo-input');">
+                            <img src="{:cmf_get_image_preview_url($post.daima)}"
+                                 id="js-thumbnaillogo-input-preview"
+                                 width="135" style="cursor: pointer"/>
+                        </a>
+                    </if>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-offset-2 col-sm-10">
+        <input type="hidden" name="time" value="{$time}">
+        <input type="hidden" name="id" value="{$post.id}">
+            <button type="submit" class="btn btn-primary js-ajax-submit">添加</button>
+            <a class="btn btn-default" href="__URL__">返回</a>
+        </div>
+    </form>
+
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<script type="text/javascript">
+    //编辑器路径定义
+    var editorURL = GV.WEB_ROOT;
+</script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        editorcontent = new baidu.editor.ui.Editor();
+        editorcontent.render('content');
+        try {
+            editorcontent.sync();
+        } catch (err) {
+        }
+
+        $('.btn-cancel-thumbnail').click(function () {
+            $('#thumbnail-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
+            $('#thumbnail').val('');
+        });
+
+    });
+
+    function doSelectCategory() {
+        var selectedCategoriesId = $('#js-categories-id-input').val();
+        openIframeLayer("{:url('AdminCategory/select')}?ids=" + selectedCategoriesId, '请选择分类', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedCategories = iframeWin.confirm();
+                if (selectedCategories.selectedCategoriesId.length == 0) {
+                    layer.msg('请选择分类');
+                    return;
+                }
+                $('#js-categories-id-input').val(selectedCategories.selectedCategoriesId.join(','));
+                $('#js-categories-name-input').val(selectedCategories.selectedCategoriesName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    }
+</script>
+</body>
+</html>
