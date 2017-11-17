@@ -26,6 +26,7 @@ class VerificationCodeController extends HomeBaseController
         ]);
 
         $data = $this->request->param();
+
         if (!$validate->check($data)) {
             $this->error($validate->getError());
         }
@@ -52,11 +53,13 @@ class VerificationCodeController extends HomeBaseController
             $emailTemplate = cmf_get_option('email_template_verification_code');
 
             $user     = cmf_get_current_user();
+
             $username = empty($user['user_nickname']) ? $user['user_login'] : $user['user_nickname'];
 
             $message = htmlspecialchars_decode($emailTemplate['template']);
             $message = $this->display($message, ['code' => $code, 'username' => $username]);
             $subject = empty($emailTemplate['subject']) ? 'ThinkCMF验证码' : $emailTemplate['subject'];
+
             $result  = cmf_send_email($data['username'], $subject, $message);
 
             if (empty($result['error'])) {
