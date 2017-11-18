@@ -122,7 +122,7 @@ class AdminSsfwController extends AdminBaseController
     {
         $id = $this->request->param('id', 0, 'intval');
         if ($id > 0) {
-            $category = PortalSshyModel::get($id)->toArray();
+            $category = PortalSsfwModel::get($id)->toArray();
 
             $portalCategoryModel = new PortalSsfwModel();
             $categoriesTree      = $portalCategoryModel->adminCategoryTree($category['parent_id'], $id);
