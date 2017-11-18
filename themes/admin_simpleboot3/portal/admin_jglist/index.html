@@ -3,15 +3,15 @@
 <body>
 <div class="wrap">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="{:url('AdminQylist/index')}">企业用户管理</a></li>
-        <li><a href="{:url('AdminQylist/add')}">添加企业</a></li>
+        <li class="active"><a href="{:url('AdminJglist/index')}">机构用户管理</a></li>
+        <li><a href="{:url('AdminJglist/add')}">添加机构</a></li>
     </ul>
-    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminQylist/index')}">
+    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminJglist/index')}">
         关键字:
         <input type="text" class="form-control" name="name" style="width: 200px;"
                value="{$name|default=''}" placeholder="请输入关键字...">
         <input type="submit" class="btn btn-primary" value="搜索联系点名称"/>
-        <a class="btn btn-danger" href="{:url('AdminQylist/index')}">清空</a>
+        <a class="btn btn-danger" href="{:url('AdminJglist/index')}">清空</a>
     </form>
     <form method="post" class="js-ajax-form margin-top-20">
         <div class="table-actions">
@@ -21,7 +21,7 @@
             <thead>
             <tr>
                 <th width="50">ID</th>
-                <th>企业名称</th>
+                <th>机构名称</th>
                 <th>统一社会信用码</th>
                 <th>法人姓名</th>
                 <th>联系人</th>
@@ -48,8 +48,11 @@
                               <td>已审核</td>
                     </if>
                     <td>
-                        <a href="{:url('AdminQylist/edit',array('id'=>$vo['id']))}">编辑</a>
-                        <a class="js-ajax-delete" href="{:url('AdminQylist/delete',['id'=>$vo['id']])}">删除</a>
+                     <if condition="$vo.qy_shstat eq 0">
+                        <a href="{:url('AdminJglist/sh',array('id'=>$vo['id']))}">审核</a>
+                     </if>
+                        <a href="{:url('AdminJglist/edit',array('id'=>$vo['id']))}">编辑</a>
+                        <a class="js-ajax-delete" href="{:url('AdminJglist/delete',['id'=>$vo['id']])}">删除</a>
                     </td>
                 </tr>
             </foreach>
@@ -57,7 +60,7 @@
             <tfoot>
             <tr>
                <th width="50">ID</th>
-                <th>企业名称</th>
+                <th>机构名称</th>
                 <th>统一社会信用码</th>
                 <th>法人姓名</th>
                 <th>联系人</th>

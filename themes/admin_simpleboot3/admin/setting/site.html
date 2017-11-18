@@ -9,6 +9,8 @@
 			<!--<li><a href="#E" data-toggle="tab">{:lang('COMMENT_SETTING')}</a></li>-->
 			<li><a href="#F" data-toggle="tab">用户注册设置</a></li>
 			<li><a href="#G" data-toggle="tab">CDN设置</a></li>
+			<li><a href="#Q" data-toggle="tab">企业协议</a></li>
+			<li><a href="#J" data-toggle="tab">机构协议</a></li>
 		</ul>
 		<form class="form-horizontal js-ajax-form margin-top-20" role="form" action="{:url('setting/sitePost')}" method="post">
 			<fieldset>
@@ -152,6 +154,34 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="tab-pane" id="Q">
+							<div class="form-group">
+								<label for="input-html_suffix" class="col-sm-2 control-label">企业协议内容</label>
+								<div class="col-md-6 col-sm-10">
+									<script type="text/plain" id="content" name="options[qyxy]">{$qyxy|default=''}</script>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="0">{:lang('SAVE')}</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="tab-pane" id="J">
+							<div class="form-group">
+								<label for="input-html_suffix" class="col-sm-2 control-label">机构协议内容</label>
+								<div class="col-md-6 col-sm-10">
+									<script type="text/plain" id="contents" name="options[jgxy]">{$jgxy|default=''}</script>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="0">{:lang('SAVE')}</button>
+								</div>
+							</div>
+						</div>
 						<!--
 						<div class="tab-pane" id="E">
 							<div class="form-group">
@@ -229,5 +259,65 @@
 
 	</div>
 	<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+	<script type="text/javascript">
+    //编辑器路径定义
+    var editorURL = GV.WEB_ROOT;
+</script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.all.min.js"></script>
+	<script type="text/javascript">
+    $(function () {
+
+        editorcontent = new baidu.editor.ui.Editor();
+        editorcontent.render('content');
+        try {
+            editorcontent.sync();
+        } catch (err) {
+        }
+
+        $('.btn-cancel-thumbnail').click(function () {
+            $('#thumbnail-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
+            $('#thumbnail').val('');
+        });
+
+    });
+    $(function () {
+
+        editorcontents = new baidu.editor.ui.Editor();
+        editorcontents.render('contents');
+        try {
+            editorcontents.sync();
+        } catch (err) {
+        }
+
+        $('.btn-cancel-thumbnail').click(function () {
+            $('#thumbnail-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
+            $('#thumbnail').val('');
+        });
+
+    });
+
+    function doSelectCategory() {
+        var selectedCategoriesId = $('#js-categories-id-input').val();
+        openIframeLayer("{:url('AdminCategory/select')}?ids=" + selectedCategoriesId, '请选择分类', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedCategories = iframeWin.confirm();
+                if (selectedCategories.selectedCategoriesId.length == 0) {
+                    layer.msg('请选择分类');
+                    return;
+                }
+                $('#js-categories-id-input').val(selectedCategories.selectedCategoriesId.join(','));
+                $('#js-categories-name-input').val(selectedCategories.selectedCategoriesName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    }
+</script>
 </body>
 </html>
