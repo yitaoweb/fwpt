@@ -3,14 +3,14 @@
 <body>
 <div class="wrap js-check-wrap">
     <ul class="nav nav-tabs">
-        <li><a href="{:url('AdminQylist/index')}">{:lang('ADMIN_TAG_INDEX')}</a></li>
-        <li class="active"><a href="{:url('AdminQylist/edit')}">{:lang('ADMIN_TAG_ADD')}</a></li>
+        <li><a href="{:url('AdminJglist/index')}">{:lang('ADMIN_TAG_INDEX')}</a></li>
+        <li class="active"><a href="{:url('AdminJglist/edit')}">{:lang('ADMIN_TAG_ADD')}</a></li>
         <!--<li><a  href="{:url('nav/edit')}" >{:lang('ADMIN_NAV_EDIT')}</a></li>-->
     </ul>
-    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('AdminQylist/editPost')}">
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('AdminJglist/shPost')}">
 
         <div class="form-group">
-            <label class="col-sm-2 control-label"><span class="form-required">*</span>企业名称:</label>
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>机构名称:</label>
             <div class="col-md-6 col-sm-10">
                 <input type="text" class="form-control" name="user_nickname" id="user_nickname" value="{$post.user_nickname}">
             </div>
@@ -22,9 +22,43 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label"><span class="form-required">*</span>海关登记号码:</label>
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>注册资金:</label>
             <div class="col-md-6 col-sm-10">
-                <input type="text" class="form-control" name="qy_hghm" id="qy_hghm" value="{$post.qy_hghm}">
+                <input type="text" class="form-control" name="qy_zczj" id="qy_zczj" value="{$post.qy_zczj}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>注册时间:</label>
+            <div class="col-md-6 col-sm-10">
+                <input class="form-control js-bootstrap-date" type="text" id="input-birthday" placeholder="2013-01-04" name="create_time" value="{$post.create_time}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>注册登记类型:</label>
+            <div class="col-md-6 col-sm-10">
+                <select class="form-control" name="qy_class" id="qy_class">
+                           <foreach name="djlx" item="vo">
+                              <if condition="$post.qy_class eq $vo.id">
+                                      <option value="{$vo.id}">{$vo.name}</option>
+                              </if>
+                          </foreach>
+                  <foreach name="djlx" item="vos">
+                          <option value="{$vos.id}">{$vos.name}</option>
+                  </foreach>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>服务类型:</label>
+            <div class="col-md-6 col-sm-10">                 
+                <select class="form-control" name="qy_ssfw" id="qy_ssfw">
+                  <foreach name="ssfw" item="vo">
+                      <if condition="$post.qy_ssfw eq $vo.id">
+                              <option value="{$vo.id}">{$vo.name}</option>
+                      </if>
+                  </foreach>
+                    {$categories_tree}
+                </select>
             </div>
         </div>
         <div class="form-group">
@@ -48,34 +82,7 @@
                 <input type="text" class="form-control" name="qy_address" id="qy_address" value="{$post.qy_address}">
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label"><span class="form-required">*</span>所属行业:</label>
-            <div class="col-md-6 col-sm-10">                 
-                <select class="form-control" name="qy_sshy" id="qy_sshy">
-                  <foreach name="sshy" item="vo">
-                      <if condition="$post.qy_sshy eq $vo.id">
-                              <option value="{$vo.id}">{$vo.name}</option>
-                      </if>
-                  </foreach>
-                    {$categories_tree}
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label"><span class="form-required">*</span>所属商圈:</label>
-            <div class="col-md-6 col-sm-10">
-                <select class="form-control" name="qy_sq" id="qy_sq">
-                  <foreach name="lxd" item="vo">
-                      <if condition="$post.qy_sq eq $vo.id">
-                              <option value="{$vo.id}">{$vo.lxd_name}</option>
-                      </if>
-                  </foreach>
-                  <foreach name="lxd" item="vos">
-                          <option value="{$vos.id}">{$vos.lxd_name}</option>
-                  </foreach>
-                </select>
-            </div>
-        </div>
+        
         <div class="form-group">
             <label class="col-sm-2 control-label"><span class="form-required">*</span>法人姓名:</label>
             <div class="col-md-6 col-sm-10">
@@ -92,27 +99,6 @@
                           <if condition="$post.sex eq 1">
                              <option value="1">男</option>
                           </if>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label"><span class="form-required">*</span>出生日期:</label>
-            <div class="col-md-6 col-sm-10">
-                <input class="form-control js-bootstrap-date" type="text" id="input-birthday" placeholder="2013-01-04" name="birthday" value="{$post.birthday}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label"><span class="form-required">*</span>学历:</label>
-            <div class="col-md-6 col-sm-10">
-                <select class="form-control" name="qy_xueli" id="qy_xueli">
-                  <foreach name="xl" item="vo">
-                      <if condition="$post.qy_xueli eq $vo.id">
-                              <option value="{$vo.id}">{$vo.name}</option>
-                      </if>
-                  </foreach>
-                  <foreach name="xl" item="vos">
-                          <option value="{$vos.id}">{$vos.name}</option>
-                  </foreach>
                 </select>
             </div>
         </div>
@@ -147,81 +133,52 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label"><span class="form-required">*</span>注册资金:</label>
-            <div class="col-md-6 col-sm-10">
-                <input type="text" class="form-control" name="qy_zczj" id="qy_zczj" value="{$post.qy_zczj}">
-            </div>
+          <label class="col-sm-2 control-label"><span class="form-required">*</span>机构官网:</label>
+          <div class="col-md-6 col-sm-10">
+            <input type="text" class="form-control" name="user_url" id="user_url" value="{$post.user_url}">
+          </div>
         </div>
+        
         <div class="form-group">
-            <label class="col-sm-2 control-label"><span class="form-required">*</span>注册时间:</label>
-            <div class="col-md-6 col-sm-10">
-                <input class="form-control js-bootstrap-date" type="text" id="input-birthday" placeholder="2013-01-04" name="create_time" value="{$post.create_time}">
-            </div>
-        </div>
+      <label class="col-sm-2 control-label"><span class="form-required">*</span>机构简介:</label>
+      <div class="col-md-6 col-sm-10">
+        <textarea class="form-control" name="qy_jianjie" id="qy_jianjie">{$post.qy_jianjie}</textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><span class="form-required">*</span>成功案例:</label>
+      <div class="col-md-6 col-sm-10">
+        <textarea class="form-control" name="qy_anli" id="qy_anli">{$post.qy_anli}</textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><span class="form-required">*</span>荣誉资质:</label>
+      <div class="col-md-6 col-sm-10">
+        <textarea class="form-control" name="qy_rongyu" id="qy_rongyu">{$post.qy_rongyu}</textarea>
+      </div>
+    </div>
+
         <div class="form-group">
-            <label class="col-sm-2 control-label"><span class="form-required">*</span>注消时间:</label>
-            <div class="col-md-6 col-sm-10">
-                <input class="form-control js-bootstrap-date" type="text" id="input-birthday" placeholder="2013-01-04" name="qy_zxsj" value="{$post.qy_zxsj}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label"><span class="form-required">*</span>注册登记类型:</label>
-            <div class="col-md-6 col-sm-10">
-                <select class="form-control" name="qy_class" id="qy_class">
-                           <foreach name="djlx" item="vo">
-                              <if condition="$post.qy_class eq $vo.id">
-                                      <option value="{$vo.id}">{$vo.name}</option>
-                              </if>
-                          </foreach>
-                  <foreach name="djlx" item="vos">
-                          <option value="{$vos.id}">{$vos.name}</option>
-                  </foreach>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label"><span class="form-required">*</span>职工总数:</label>
-            <div class="col-md-6 col-sm-10">
-                <input type="text" class="form-control" name="qy_zg_num" id="qy_zg_num" value="{$post.qy_zg_num}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label"><span class="form-required">*</span>大专以上人数:</label>
-            <div class="col-md-6 col-sm-10">
-                <input type="text" class="form-control" name="qy_dz_num" id="qy_dz_num" value="{$post.qy_dz_num}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label"><span class="form-required">*</span>研究开发人数:</label>
-            <div class="col-md-6 col-sm-10">
-                <input type="text" class="form-control" name="qy_kf_num" id="qy_kf_num" value="{$post.qy_kf_num}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label"><span class="form-required">*</span>中小企业划分类型:</label>
-            <div class="col-md-6 col-sm-10">
-                <select class="form-control" name="qy_sme_class" id="qy_sme_class">
-                         <foreach name="huafenlx" item="vo">
-                              <if condition="$post.qy_sme_class eq $vo.id">
-                                      <option value="{$vo.id}">{$vo.name}</option>
-                              </if>
-                          </foreach>
-                  <foreach name="huafenlx" item="vos">
-                          <option value="{$vos.id}">{$vos.name}</option>
-                  </foreach>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label"><span class="form-required">*</span>经营范围:</label>
-            <div class="col-md-6 col-sm-10">
-                <textarea class="form-control" name="qy_jyfw" id="qy_jyfw">{$post.qy_jyfw}</textarea>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label"><span class="form-required">*</span>企业简介:</label>
-            <div class="col-md-6 col-sm-10">
-                <textarea class="form-control" name="qy_jianjie" id="qy_jianjie">{$post.qy_jianjie}</textarea>
+            <label class="col-md-6 col-sm-10" for="input-description">机构LOGO</label>
+            <div >
+                <input type="hidden" name="avatar" class="form-control"
+                       id="js-avatar-input" value="{$post.avatar}">
+                <div >
+
+                    <if condition="empty($post.avatar)">
+                       <a href="javascript:uploadOneImage('图片上传','#js-avatar-input');">
+                        <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                             id="js-avatar-input-preview"
+                             width="135" style="cursor: pointer"/>
+                        </a>
+                            <else/>
+                        <a href="javascript:uploadOneImage('图片上传','#js-avatar-input');">
+                            <img src="{:cmf_get_image_preview_url($post.avatar)}"
+                                 id="js-avatar-input-preview"
+                                 width="135" style="cursor: pointer"/>
+                        </a>
+                    </if>
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -247,10 +204,19 @@
                 </div>
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>驳回意见:</label>
+            <div class="col-md-6 col-sm-10">
+               <textarea name="qy_bhyj" id="qy_bhyj"></textarea>
+            </div>
+        </div>
         <div class="col-sm-offset-2 col-sm-10">
         <input type="hidden" name="time" value="{$time}">
         <input type="hidden" name="id" value="{$post.id}">
-            <button type="submit" class="btn btn-primary js-ajax-submit">添加</button>
+            <if condition="$post.qy_shstat eq 0">
+            <button type="submit" class="btn btn-primary js-ajax-submit" name='bh' value="t">审核</button>
+            <button type="submit" class="btn btn-primary js-ajax-submit" name='bh' value="f">驳回</button>
+            </if>
             <a class="btn btn-default" href="__URL__">返回</a>
         </div>
     </form>

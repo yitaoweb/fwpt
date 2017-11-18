@@ -11,7 +11,7 @@
 namespace app\portal\controller;
 
 use app\portal\model\UserModel;
-use app\portal\model\PortalSshyModel;
+use app\portal\model\PortalSsfwModel;
 use cmf\controller\AdminBaseController;
 use think\Db;
 
@@ -19,7 +19,7 @@ use think\Db;
  * Class AdminTagController 标签管理控制器
  * @package app\portal\controller
  */
-class AdminQylistController extends AdminBaseController
+class AdminJglistController extends AdminBaseController
 {
     /**
      * 文章标签管理
@@ -46,7 +46,7 @@ class AdminQylistController extends AdminBaseController
             }
            
         } 
-        $portalTagModel->where('user_type',"2");
+        $portalTagModel->where('user_type',"3");
         $tags = $portalTagModel->paginate();    
         $xzqy = Db::name('portal_xzqy')->select();  
         $this->assign("tags", $tags);
@@ -71,7 +71,7 @@ class AdminQylistController extends AdminBaseController
     public function add()
     {
         $portalTagModel = new UserModel();
-        $portalCategoryModel = new PortalSshyModel();
+        $portalCategoryModel = new PortalSsfwModel();
         $xzqy = Db::name('portal_xzqy')->select(); 
         $lxd = Db::name('portal_lxd')->select(); 
         $djlx = Db::name('portal_djlx')->select(); 
@@ -110,9 +110,9 @@ class AdminQylistController extends AdminBaseController
         $qy_code = encode('user',1,$arrData['qy_area']);
         $arrData['qy_code'] = $qy_code;
         $arrData['user_pass'] = cmf_password($pass);
-        $arrData['user_type'] = 2;
+        $arrData['user_type'] = 3;
         $subject="用户注册通知";
-        $content="尊敬的企业用户".$arrData['user_nickname'].":<br>";
+        $content="尊敬的机构用户".$arrData['user_nickname'].":<br>";
         $content=$content."您已成功注册，账号：".$qy_code."  密码：".$pass."<br>请牢记！";
 
         $result = cmf_send_email($arrData['user_email'], $subject, $content);
@@ -140,18 +140,18 @@ class AdminQylistController extends AdminBaseController
         $id = $this->request->param('id', 0, 'intval');
         $portalPostModel = new UserModel();
         $post = $portalPostModel->where('id', $id)->find();
-        $portalCategoryModel = new PortalSshyModel();
+        $portalCategoryModel = new PortalSsfwModel();
         $xzqy = Db::name('portal_xzqy')->select(); 
         $lxd = Db::name('portal_lxd')->select(); 
         $djlx = Db::name('portal_djlx')->select(); 
-        $sshy = Db::name('portal_sshy')->select(); 
+        $ssfw = Db::name('portal_ssfw')->select(); 
         $xl = Db::name('portal_xl')->select(); 
         $huafenlx = Db::name('portal_huafenlx')->select(); 
         $categoriesTree = $portalCategoryModel->adminCategoryTree();
         $this->assign("xzqy", $xzqy); 
         $this->assign("lxd", $lxd); 
         $this->assign("djlx", $djlx); 
-        $this->assign("sshy", $sshy); 
+        $this->assign("ssfw", $ssfw); 
         $this->assign("xl", $xl); 
         $this->assign("huafenlx", $huafenlx); 
         $this->assign("time", date('y-m-d h:i:s',time()));
@@ -206,5 +206,46 @@ class AdminQylistController extends AdminBaseController
         $portalTagModel->where(['id' => $intId])->delete();
         //Db::name('portal_tag_post')->where('tag_id', $intId)->delete();
         $this->success(lang("DELETE_SUCCESS"));
+    }
+    public function sh()
+    {
+        $id = $this->request->param('id', 0, 'intval');
+        $portalPostModel = new UserModel();
+        $post = $portalPostModel->where('id', $id)->find();
+        $portalCategoryModel = new PortalSsfwModel();
+        $xzqy = Db::name('portal_xzqy')->select(); 
+        $lxd = Db::name('portal_lxd')->select(); 
+        $djlx = Db::name('portal_djlx')->select(); 
+        $ssfw = Db::name('portal_ssfw')->select(); 
+        $xl = Db::name('portal_xl')->select(); 
+        $huafenlx = Db::name('portal_huafenlx')->select(); 
+        $categoriesTree = $portalCategoryModel->adminCategoryTree();
+        $this->assign("xzqy", $xzqy); 
+        $this->assign("lxd", $lxd); 
+        $this->assign("djlx", $djlx); 
+        $this->assign("ssfw", $ssfw); 
+        $this->assign("xl", $xl); 
+        $this->assign("huafenlx", $huafenlx); 
+        $this->assign("time", date('y-m-d h:i:s',time()));
+        $this->assign('categories_tree', $categoriesTree);
+        $this->assign('post', $post);
+        return $this->fetch();
+    }
+    public function shPost(){
+        $arrData = $this->request->param();
+         $portalTagModel = new UserModel();
+         if($arrData['bh'] == 't'){
+            $a = $portalTagModel->where('id',$arrData['id'])->update(
+                 ['qy_shstat'=>1]
+            );
+            $this->success('审核成功!');
+         }
+         if($arrData['bh'] == 'f'){
+            $a = $portalTagModel->where('id',$arrData['id'])->update(
+                 ['qy_shstat'=>2,'qy_bhyj'=>$arrData['qy_bhyj']]);
+                 $this->success('已驳回!');
+         }
+         
+         
     }
 }

@@ -10,16 +10,16 @@
 // +----------------------------------------------------------------------
 namespace app\portal\controller;
 
-use app\portal\model\UserModel;
-use app\portal\model\PortalSshyModel;
+use app\portal\model\PortalFwcpModel;
 use cmf\controller\AdminBaseController;
+use app\portal\model\PortalSsfwModel;
 use think\Db;
 
 /**
  * Class AdminTagController 标签管理控制器
  * @package app\portal\controller
  */
-class AdminQylistController extends AdminBaseController
+class AdminFwcpController extends AdminBaseController
 {
     /**
      * 文章标签管理
@@ -36,21 +36,23 @@ class AdminQylistController extends AdminBaseController
      */
     public function index()
     {
-        $portalTagModel = new UserModel();
+        $portalTagModel = new PortalFwcpModel();
         
         $arrData = $this->request->param(); 
         if($arrData){
             if($arrData['name'] != ''){
-                 $portalTagModel->where('user_nickname','like',"%{$arrData['name']}%");
+                 $portalTagModel->where('title','like',"%{$arrData['name']}%");
                  $this->assign('name', $arrData['name']);
             }
            
         } 
-        $portalTagModel->where('user_type',"2");
         $tags = $portalTagModel->paginate();    
-        $xzqy = Db::name('portal_xzqy')->select();  
+        $user = Db::name('user')->select();  
+        $portal_ssfw = Db::name('portal_ssfw')->select();  
+        $this->assign("arrStatus", $portalTagModel::$STATUS);
         $this->assign("tags", $tags);
-        $this->assign("xzqy", $xzqy);
+        $this->assign("user", $user);
+        $this->assign("portal_ssfw", $portal_ssfw);
         $this->assign('page', $tags->render());
         return $this->fetch();
     }
@@ -70,21 +72,14 @@ class AdminQylistController extends AdminBaseController
      */
     public function add()
     {
-        $portalTagModel = new UserModel();
-        $portalCategoryModel = new PortalSshyModel();
-        $xzqy = Db::name('portal_xzqy')->select(); 
-        $lxd = Db::name('portal_lxd')->select(); 
-        $djlx = Db::name('portal_djlx')->select(); 
-        $xl = Db::name('portal_xl')->select(); 
-        $huafenlx = Db::name('portal_huafenlx')->select(); 
-        $categoriesTree = $portalCategoryModel->adminCategoryTree();
-        $this->assign("xzqy", $xzqy); 
-        $this->assign("lxd", $lxd); 
-        $this->assign("djlx", $djlx); 
-        $this->assign("xl", $xl); 
-        $this->assign("huafenlx", $huafenlx); 
-        $this->assign("time", date('y-m-d h:i:s',time()));
-        $this->assign('categories_tree', $categoriesTree);
+        $parentId = $this->request->param('parent', 0, 'intval');
+        $portalTagModel = new PortalFwcpModel();
+        $user = Db::name('user')->where('user_type=3')->select(); 
+        $portalCategoryModel = new PortalSsfwModel();
+        $categoriesTree      = $portalCategoryModel->adminCategoryTree($parentId); 
+        $this->assign("categories_tree", $categoriesTree);
+        $this->assign("time", date('y-m-d h:i:s',time())); 
+        $this->assign("user", $user);   
         return $this->fetch();
     }
 
@@ -105,17 +100,7 @@ class AdminQylistController extends AdminBaseController
     {
 
         $arrData = $this->request->param();
-        $portalTagModel = new UserModel();
-        $pass = rand_number(0,999999);
-        $qy_code = encode('user',1,$arrData['qy_area']);
-        $arrData['qy_code'] = $qy_code;
-        $arrData['user_pass'] = cmf_password($pass);
-        $arrData['user_type'] = 2;
-        $subject="用户注册通知";
-        $content="尊敬的企业用户".$arrData['user_nickname'].":<br>";
-        $content=$content."您已成功注册，账号：".$qy_code."  密码：".$pass."<br>请牢记！";
-
-        $result = cmf_send_email($arrData['user_email'], $subject, $content);
+        $portalTagModel = new PortalFwcpModel();
         $portalTagModel->isUpdate(false)->allowField(true)->save($arrData);
 
         $this->success(lang("SAVE_SUCCESS"));
@@ -138,32 +123,57 @@ class AdminQylistController extends AdminBaseController
     public function edit()
     {
         $id = $this->request->param('id', 0, 'intval');
-        $portalPostModel = new UserModel();
+        $portalPostModel = new PortalFwcpModel();
         $post = $portalPostModel->where('id', $id)->find();
-        $portalCategoryModel = new PortalSshyModel();
-        $xzqy = Db::name('portal_xzqy')->select(); 
-        $lxd = Db::name('portal_lxd')->select(); 
-        $djlx = Db::name('portal_djlx')->select(); 
-        $sshy = Db::name('portal_sshy')->select(); 
-        $xl = Db::name('portal_xl')->select(); 
-        $huafenlx = Db::name('portal_huafenlx')->select(); 
+        $user = Db::name('user')->where('user_type=3')->select();  
+        $ssfw = Db::name('portal_ssfw')->select();  
+        $portalCategoryModel = new PortalSsfwModel();
         $categoriesTree = $portalCategoryModel->adminCategoryTree();
-        $this->assign("xzqy", $xzqy); 
-        $this->assign("lxd", $lxd); 
-        $this->assign("djlx", $djlx); 
-        $this->assign("sshy", $sshy); 
-        $this->assign("xl", $xl); 
-        $this->assign("huafenlx", $huafenlx); 
         $this->assign("time", date('y-m-d h:i:s',time()));
+        $this->assign("user", $user);
+        $this->assign("ssfw", $ssfw);
         $this->assign('categories_tree', $categoriesTree);
         $this->assign('post', $post);
         return $this->fetch();
     }
     public function editPost(){
         $data = $this->request->param();
-        $portalPostModel = new UserModel();
-        $portalPostModel->allowField(true)->save($data,['id' => $data['id']]);    
+        $portalPostModel = new PortalFwcpModel();
+        $a = $portalPostModel->where('id',$data['id'])->update(
+                 ['title'=>$data['title'],'ssfw_id'=>$data['ssfw_id'],'user_id'=>$data['user_id'],'img'=>$data['img'],'time'=>$data['time'],'content'=>$data['content']]
+            );
         $this->success('保存成功!');
+    }
+    public function sh()
+    {
+        $id = $this->request->param('id', 0, 'intval');
+        $portalPostModel = new PortalFwcpModel();
+        $post = $portalPostModel->where('id', $id)->find();
+        $user = Db::name('user')->where('user_type=2')->select();  
+        $ssfw = Db::name('portal_ssfw')->select();  
+        $portalCategoryModel = new PortalSsfwModel();
+        $categoriesTree = $portalCategoryModel->adminCategoryTree();
+        $this->assign("time", date('y-m-d h:i:s',time()));
+        $this->assign("user", $user);
+        $this->assign("ssfw", $ssfw);
+        $this->assign('categories_tree', $categoriesTree);
+        $this->assign('post', $post);
+        return $this->fetch();
+    }
+    public function shPost(){
+        $data = $this->request->param();
+        $portalPostModel = new PortalFwcpModel();
+       if($data['bh'] == 't'){
+            $a = $portalPostModel->where('id',$data['id'])->update(
+                 ['sh_state'=>1]
+            );
+            $this->success('审核成功!');
+         }
+         if($data['bh'] == 'f'){
+            $a = $portalPostModel->where('id',$data['id'])->update(
+                 ['sh_state'=>2,'bh'=>$data['bh']]);
+                 $this->success('已驳回!');
+         }
     }
     public function upStatus()
     {
@@ -174,7 +184,7 @@ class AdminQylistController extends AdminBaseController
             $this->error(lang("NO_ID"));
         }
 
-        $portalTagModel = new UserModel();
+        $portalTagModel = new PortalFwcpModel();
         $portalTagModel->isUpdate(true)->save(["status" => $intStatus], ["id" => $intId]);
 
         $this->success(lang("SAVE_SUCCESS"));
@@ -201,7 +211,7 @@ class AdminQylistController extends AdminBaseController
         if (empty($intId)) {
             $this->error(lang("NO_ID"));
         }
-        $portalTagModel = new UserModel();
+        $portalTagModel = new PortalFwcpModel();
 
         $portalTagModel->where(['id' => $intId])->delete();
         //Db::name('portal_tag_post')->where('tag_id', $intId)->delete();
