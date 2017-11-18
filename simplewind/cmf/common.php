@@ -1815,8 +1815,11 @@ function encode($table,$class,$area){
     if ($table <> '' and $class <>'' and $area <>'') {
         if($class = 1){
             $w=getfield('portal_xzqy',$area,'qybm');
-            $num = Db::name($table)->where('qy_code','like',$w)->count();
-
+            $numdb = Db::name($table);
+            $w2="%".$w."%";
+            $num =$numdb->where('qy_code','like',$w2);
+            $numdb->where('user_type',2);
+            $num =$numdb->count();
             $num=$num+1;
 
             $num=str_pad($num,5,"0",STR_PAD_LEFT);  
@@ -1826,6 +1829,20 @@ function encode($table,$class,$area){
             return $code;
 
         }elseif ($class = 2) {
+
+            $w=getfield('portal_xzqy',$area,'qybm');
+            $numdb = Db::name($table);
+            $w2="%".$w."%";
+            $num =$numdb->where('qy_code','like',$w2);
+            $numdb->where('user_type',3);
+            $num =$numdb->count();
+            $num=$num+1;
+
+            $num=str_pad($num,5,"0",STR_PAD_LEFT);  
+
+            $code=$w.$num;
+
+            return $code;
             
         }elseif ($class = 3) {
             

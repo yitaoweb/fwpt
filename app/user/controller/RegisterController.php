@@ -35,6 +35,7 @@ class RegisterController extends HomeBaseController
         $xueli=Db::name('portal_xl')->where('1=1')->order('id')->select();
         $djlx=Db::name('portal_djlx')->where('1=1')->order('id')->select();
         $huafen=Db::name('portal_huafenlx')->where('1=1')->order('id')->select();
+        $fuwu=Db::name('portal_ssfw')->where('1=1')->order('id')->select();
         $parentId            = $this->request->param('parent', 0, 'intval');
         $portalCategoryModel = new PortalSshyModel();
         $categoriesTree      = $portalCategoryModel->adminCategoryTree($parentId);
@@ -43,6 +44,7 @@ class RegisterController extends HomeBaseController
         $this->assign('xueli', $xueli);
         $this->assign('djlx', $djlx);
         $this->assign('huafen', $huafen);
+        $this->assign('fuwu', $fuwu);
         $this->assign('categories_tree', $categoriesTree);
 
         session('login_http_referer', $redirect);
@@ -55,7 +57,7 @@ class RegisterController extends HomeBaseController
     }
 
     /**
-     * 前台用户注册提交
+     * 前台企业用户注册提交
      */
     public function doRegister()
     {
@@ -84,7 +86,7 @@ class RegisterController extends HomeBaseController
 
                 'qy_jyfw'        => 'require',
                 'qy_jianjie'     => 'require',
-                'daima'          => 'require',
+                'qydaima'          => 'require',
                 'code'           => 'require',
 
             ];
@@ -121,7 +123,7 @@ class RegisterController extends HomeBaseController
 
                 'qy_jyfw.require'        => '经营范围不能为空',
                 'qy_jianjie.require'     => '企业简介不能为空',
-                'daima.require'     => '统一社会信用代码证扫描件不能为空',
+                'yqdaima.require'     => '统一社会信用代码证扫描件不能为空',
                 'code.require'     => '验证码不能为空',
   
             ]);
@@ -130,14 +132,17 @@ class RegisterController extends HomeBaseController
             if (!$validate->check($data)) {
                 $this->error($validate->getError());
             }
-            if (!cmf_captcha_check($data['captcha'])) {
-                $this->error('验证码错误');
+            if (isset($data['captcha'])) {
+                if (!cmf_captcha_check($data['captcha'])) {
+                    $this->error('验证码错误');
+                }
             }
-
-            if(!$isOpenRegistration){
-                $errMsg = cmf_check_verification_code($data['user_email'], $data['code']);
-                if (!empty($errMsg)) {
-                    $this->error($errMsg);
+            if (isset($data['code'])) {
+                if(!$isOpenRegistration){
+                    $errMsg = cmf_check_verification_code($data['user_email'], $data['code']);
+                    if (!empty($errMsg)) {
+                        $this->error($errMsg);
+                    }
                 }
             }
 
@@ -170,4 +175,119 @@ class RegisterController extends HomeBaseController
         }
 
     }
+
+
+    /**
+     * 前台机构用户注册提交
+     */
+    public function dojgRegister()
+    {
+        if ($this->request->isPost()) {
+            $rules = [
+                'xieyi'          => 'require',
+                'user_nickname'  => 'require',
+                'qy_xydm'        => 'require',
+                'qy_area'        => 'require|gt:0',
+                'qy_address'     => 'require',
+                'qy_ssfw'        => 'require|gt:0',
+
+                'qy_faren'       => 'require',
+
+                'qy_lxname'      => 'require',
+
+                'mobile'         => 'require',
+                'user_email'     => 'require',
+
+                'qy_zczj'        => 'require',
+                'qy_zcsj'        => 'require',
+                'qy_class'       => 'require',
+               
+                'qy_jianjie'     => 'require',
+                'jgdaima'          => 'require',
+                'code'           => 'require',
+
+            ];
+
+            $isOpenRegistration=cmf_is_open_registration();
+
+            if ($isOpenRegistration) {
+                unset($rules['code']);
+            }
+
+            $validate = new Validate($rules);
+            $validate->message([
+
+                'xieyi.require'  => '请同意《机构用户注册协议书》',
+                'user_nickname.require'  => '机构名称不能为空',
+                'qy_xydm.require'        => '统一社会信用代码不能为空',
+                'qy_area.require'        => '行政区域不能为空',
+                'qy_area.gt'        => '行政区域不能为空',
+                'qy_address.require'     => '办公地址不能为空',
+                'qy_ssfw.require'        => '所属服务类型不能为空',
+                'qy_ssfw.gt'        => '所属服务类型不能为空',
+              
+                'qy_faren.require'       => '机构法人不能为空',
+
+                'qy_lxname.require'      => '联系人不能为空',
+                'mobile.require'         => '手机号不能为空',
+                'user_email.require'          => '电子邮箱不能为空',
+
+                'qy_zczj.require'        => '注册资金不能为空',
+                'qy_zcsj.require'        => '注册登记时间不能为空',
+                'qy_class.require'       => '注册登记类型不能为空',
+
+
+                'qy_jianjie.require'     => '机构简介不能为空',
+                'jgdaima.require'     => '统一社会信用代码证扫描件不能为空',
+                'code.require'     => '验证码不能为空',
+  
+            ]);
+
+             $data = $this->request->post();
+            if (!$validate->check($data)) {
+                $this->error($validate->getError());
+            }
+            if (isset($data['captcha'])) {
+                if (!cmf_captcha_check($data['captcha'])) {
+                    $this->error('验证码错误');
+                }
+            }
+            if (isset($data['code'])) {
+                if(!$isOpenRegistration){
+                    $errMsg = cmf_check_verification_code($data['user_email'], $data['code']);
+                    if (!empty($errMsg)) {
+                        $this->error($errMsg);
+                    }
+                }
+            }
+            $register          = new UserModel();
+            
+            if (Validate::is($data['user_email'], 'user_email') || preg_match('/(^(13\d|15[^4\D]|17[013678]|18\d)\d{8})$/', $data['mobile'])) {
+                $log            = $register->registerEmail($data);
+            } else {
+                $log = 2;
+            }
+      
+            $sessionLoginHttpReferer = session('login_http_referer');
+            $redirect                = empty($sessionLoginHttpReferer) ? cmf_get_root() . '/' : $sessionLoginHttpReferer;
+            switch ($log) {
+                case 0:
+                    $this->success('注册成功', $redirect);
+                    break;
+                case 1:
+                    $this->error("您的账户已注册过");
+                    break;
+                case 2:
+                    $this->error("您输入的账号格式错误");
+                    break;
+                default :
+                    $this->error('未受理的请求');
+            }
+
+        } else {
+            $this->error("请求错误");
+        }
+
+    }
+
 }

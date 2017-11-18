@@ -37,36 +37,27 @@
                             </php>
                             <div class="tab-content">
                                 <notempty name="theme_vars.enable_mobile">
-                                    <div class="tab-pane {$mobile_tab_active}" id="qiye">
+                                    <div class="tab-pane {$mobile_tab_active}" style="padding-right: 90px;" id="qiye">
                                         <form class="js-ajax-form form-horizontal" action="{:url('user/Register/doRegister')}" method="post">
 
                                             <input type="hidden" name="user_type" value="3">
                                             <div class="form-group">
                                                 <label for="user_nickname" class="col-md-2 control-label">企业名称</label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" id="user_nickname" name="user_nickname" placeholder="请输入企业全称">
+                                                    <input type="text" class="form-control" name="user_nickname" placeholder="请输入企业全称">
                                                 </div>
                                                 <label for="xydm" class="col-md-2 control-label">统一社会信用代码</label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" name="qy_xydm" id="qy_xydm" placeholder="统一社会信用代码">
+                                                    <input type="text" class="form-control" name="qy_xydm" placeholder="统一社会信用代码">
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label for="qy_hghm" class="col-md-2 control-label">海关登记号码</label>
-                                                <div class="col-md-4">
-                                                    <input type="text" class="form-control" name="qy_hghm" id="qy_hghm" placeholder="海关登记号码">
-                                                </div>
-                                                <label for="faren" class="col-sm-2 control-label">企业编号</label>
-                                                <div class="col-sm-4">
-                                                    <label class="control-label">自动生成</label>
-                                                </div>
-                                            </div>
+                                      
 
                                             <div class="form-group">
                                                 <label for="area" class="col-md-2 control-label">地区</label>
                                                 <div class="col-md-4">
-                                                    <select class="form-control" name="qy_area" id="qy_area">
+                                                    <select class="form-control" name="qy_area" >
                                                         <option value="0">请选择地区</option>
                                                     <volist name="area" id="vo">
                                                         <option value="{$vo.id}">{$vo.name}</option>
@@ -75,7 +66,7 @@
                                                 </div>
                                                 <label for="address" class="col-sm-2 control-label">办公地址</label>
                                                 <div class="col-sm-4">
-                                                    <input type="text" class="form-control" name="qy_address" id="qy_address" placeholder="请输入办公地址">
+                                                    <input type="text" class="form-control" name="qy_address" placeholder="请输入办公地址">
                                                 </div>
                                                 
                                             </div>
@@ -83,14 +74,14 @@
                                             <div class="form-group">
                                                 <label for="sshy" class="col-md-2 control-label">所属行业</label>
                                                 <div class="col-md-4">
-                                                    <select class="form-control" name="qy_sshy" id="qy_sshy">
+                                                    <select class="form-control" name="qy_sshy" >
                                                         <option value="0">请选择行业分类</option>
                                                         {$categories_tree}
                                                     </select>
                                                 </div>
                                                 <label for="qy_sq" class="col-sm-2 control-label">联系点</label>
                                                 <div class="col-sm-4">
-                                                    <select class="form-control" name="qy_sq" id="qy_sq">
+                                                    <select class="form-control" name="qy_sq" >
                                                         <option value="0">请选择联系点</option>
                                                         <volist name="sq" id="vo">
                                                             <option value="{$vo.id}">{$vo.lxd_name}</option>
@@ -102,11 +93,11 @@
                                             <div class="form-group">
                                                 <label for="qy_faren" class="col-sm-2 control-label">法人姓名</label>
                                                 <div class="col-sm-4">
-                                                    <input type="text" class="form-control" name="qy_faren" id="qy_faren" placeholder="请输入法人姓名">
+                                                    <input type="text" class="form-control" name="qy_faren" placeholder="请输入法人姓名">
                                                 </div>
                                                 <label for="sex" class="col-md-2 control-label">性别</label>
                                                 <div class="col-md-4">
-                                                    <select class="form-control" name="sex" id="sex">
+                                                    <select class="form-control" name="sex">
                                                         <option value="0">请选择性别</option>
                                                         <option value="1">男</option>
                                                         <option value="2">女</option>
@@ -117,11 +108,11 @@
                                             <div class="form-group">
                                                 <label for="birthday" class="col-sm-2 control-label">出生日期</label>
                                                 <div class="col-sm-4">
-                                                    <input class="form-control js-bootstrap-date" type="text" id="input-birthday" placeholder="2013-01-04" name="birthday" value="{:date('Y-m-d',time())}">
+                                                    <input class="form-control js-bootstrap-date" type="text"  placeholder="2013-01-04" name="birthday" value="{:date('Y-m-d',time())}">
                                                 </div>
                                                 <label for="qy_xueli" class="col-md-2 control-label">学历</label>
                                                 <div class="col-md-4">
-                                                    <select class="form-control" name="qy_xueli" id="qy_xueli">
+                                                    <select class="form-control" name="qy_xueli" >
                                                         <option value="0">请选择学历</option>
                                                         <volist name="xueli" id="vo">
                                                             <option value="{$vo.id}">{$vo.name}</option>
@@ -133,11 +124,11 @@
                                             <div class="form-group">
                                                 <label for="lxname" class="col-sm-2 control-label">联系人</label>
                                                 <div class="col-sm-4">
-                                                    <input type="text" class="form-control" name="qy_lxname" id="qy_lxname" placeholder="请输入联系人姓名">
+                                                    <input type="text" class="form-control" name="qy_lxname" placeholder="请输入联系人姓名">
                                                 </div>
                                                 <label for="tel" class="col-md-2 control-label">电话</label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" name="tel" id="tel" placeholder="请输入电话">
+                                                    <input type="text" class="form-control" name="tel" placeholder="请输入电话">
                                                 </div>
                                             </div>
 
@@ -145,19 +136,116 @@
                                             <div class="form-group">
                                                 <label for="mobile" class="col-md-2 control-label">手机号</label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" name="mobile" id="mobile" placeholder="请输入手机号">
+                                                    <input type="text" class="form-control" name="mobile" id="qymobile" placeholder="请输入手机号">
                                                 </div>
                                                 <label for="email" class="col-sm-2 control-label">邮箱</label>
                                                 <div class="col-sm-4">
-                                                    <input type="text" class="form-control" name="user_email" id="email" placeholder="请输入邮箱地址">
+                                                    <input type="text" class="form-control" name="user_email" id="qyemail" placeholder="请输入邮箱地址">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="fax" class="col-md-2 control-label">传真</label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" name="fax" id="fax" placeholder="请输入传真号">
+                                                    <input type="text" class="form-control" name="fax" placeholder="请输入传真号">
                                                 </div>
+
+                                                <label for="user_url" class="col-md-2 control-label">机构官网</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="user_url" placeholder="http://www.baidu.com">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="qy_zczj" class="col-sm-2 control-label">注册资金</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" name="qy_zczj" placeholder="请输入注册资金">
+                                                </div>
+                                                <label for="qy_zcsj" class="col-md-2 control-label">注册时间</label>
+                                                <div class="col-md-4">
+                                                    <input class="form-control js-bootstrap-date" type="text"  placeholder="2013-01-04" name="qy_zcsj" value="{:date('Y-m-d',time())}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="qy_zxsj" class="col-sm-2 control-label">注销时间</label>
+                                                <div class="col-sm-4">
+                                                    <input class="form-control js-bootstrap-date" type="text" placeholder="2013-01-04" name="qy_zxsj" value="{:date('Y-m-d',time())}">
+                                                </div>
+                                                <label for="qy_class" class="col-md-2 control-label">注册登记类型</label>
+                                                <div class="col-md-4">
+                                                    <select class="form-control" name="qy_class">
+                                                        <option value="0">请选择注册登记类型</option>
+                                                        <volist name="djlx" id="vo">
+                                                            <option value="{$vo.id}">{$vo.name}</option>
+                                                        </volist>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="qy_zg_num" class="col-sm-2 control-label">职工总数</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" name="qy_zg_num" placeholder="请输入职工总数">
+                                                </div>
+                                                <label for="qy_dz_num" class="col-md-2 control-label">大专以上人数</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="qy_dz_num" placeholder="请输入大专以上人数">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="qy_kf_num" class="col-sm-2 control-label">研究开发人数</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" name="qy_kf_num" placeholder="请输入研究开发人数">
+                                                </div>
+                                                <label for="qy_sme_class" class="col-md-2 control-label">中小企业划分类型</label>
+                                                <div class="col-md-4">
+                                                    <select class="form-control" name="qy_sme_class">
+                                                        <option value="0">请选择注册登记类型</option>
+                                                        <volist name="huafen" id="vo">
+                                                            <option value="{$vo.id}">{$vo.name}</option>
+                                                        </volist>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="qy_jyfw" class="col-sm-2 control-label">经营范围</label>
+                                                <div class="col-sm-10">
+                                                    <textarea class="form-control" name="qy_jyfw" rows="4"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="qy_jianjie" class="col-sm-2 control-label">企业简介</label>
+                                                <div class="col-sm-10">
+                                                    <textarea class="form-control" name="qy_jianjie" rows="4"></textarea>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="qyavatar" class="col-md-2 control-label">企业LOGO</label>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control" name="qyavatar" id="qyavatar" value="">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <a class="btn btn-sm btn-success"  href="javascript:uploadOneImage('图片上传','#qyavatar');">上传</a>
+                                                </div>
+
+                                                 <label for="qydaima" class="col-md-2 control-label">统一社会信用代码证</label>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control" name="qydaima" id="qydaima" value="">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <a class="btn btn-sm btn-success"  href="javascript:uploadOneImage('图片上传','#qydaima');">上传</a>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
                                                 <if condition="($is_sj == 1)"> 
                                                
                                                     <label for="mobile" class="col-md-2 control-label">手机验证码</label>
@@ -168,7 +256,7 @@
                                                     <div class="col-md-2">
                                                         <a class="btn btn-success js-get-mobile-code"
                                                            style="width: 158px;"
-                                                           data-wait-msg="[second]秒后才能再次获取" data-mobile-input="#mobile"
+                                                           data-wait-msg="[second]秒后才能再次获取" data-mobile-input="#yqmobile"
                                                            data-url="{:url('user/VerificationCode/send')}"
                                                            data-init-second-left="60">获取手机验证码</a>
                                                     </div>
@@ -182,106 +270,21 @@
                                                     <div class="col-md-2">
                                                         <a class="btn btn-success js-get-email-code"
                                                            style="width: 158px;"
-                                                           data-wait-msg="[second]秒后才能再次获取" data-email-input="#email"
+                                                           data-wait-msg="[second]秒后才能再次获取" data-email-input="#qyemail"
                                                            data-url="{:url('user/VerificationCode/send')}"
                                                            data-init-second-left="60">获取邮箱验证码</a>
                                                     </div>
                                                 </if>
-                                            </div>
+                                                <if condition="($is_registration == 1)"> 
+                                                    <label for="inputEmail3" class="col-md-2 control-label">验证码</label>
+                                                    <div class="col-md-2">
+                                                        <input type="text" name="captcha" placeholder="验证码" class="form-control" style="width: 170px;float: left;margin-right: 30px">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <captcha height="38" width="150" font-size="20"/>
+                                                    </div>
+                                                </if>
 
-
-                                            <div class="form-group">
-                                                <label for="qy_zczj" class="col-sm-2 control-label">注册资金</label>
-                                                <div class="col-sm-4">
-                                                    <input type="text" class="form-control" name="qy_zczj" id="qy_zczj" placeholder="请输入注册资金">
-                                                </div>
-                                                <label for="qy_zcsj" class="col-md-2 control-label">注册时间</label>
-                                                <div class="col-md-4">
-                                                    <input class="form-control js-bootstrap-date" type="text" id="input-qy_zcsj" placeholder="2013-01-04" name="qy_zcsj" value="{:date('Y-m-d',time())}">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="qy_zxsj" class="col-sm-2 control-label">注销时间</label>
-                                                <div class="col-sm-4">
-                                                    <input class="form-control js-bootstrap-date" type="text" id="input-qy_zxsj" placeholder="2013-01-04" name="qy_zxsj" value="{:date('Y-m-d',time())}">
-                                                </div>
-                                                <label for="qy_class" class="col-md-2 control-label">注册登记类型</label>
-                                                <div class="col-md-4">
-                                                    <select class="form-control" name="qy_class" id="qy_class">
-                                                        <option value="0">请选择注册登记类型</option>
-                                                        <volist name="djlx" id="vo">
-                                                            <option value="{$vo.id}">{$vo.name}</option>
-                                                        </volist>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="qy_zg_num" class="col-sm-2 control-label">职工总数</label>
-                                                <div class="col-sm-4">
-                                                    <input type="text" class="form-control" name="qy_zg_num" id="qy_zg_num" placeholder="请输入职工总数">
-                                                </div>
-                                                <label for="qy_dz_num" class="col-md-2 control-label">大专以上人数</label>
-                                                <div class="col-md-4">
-                                                    <input type="text" class="form-control" name="qy_dz_num" id="qy_dz_num" placeholder="请输入大专以上人数">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="qy_kf_num" class="col-sm-2 control-label">研究开发人数</label>
-                                                <div class="col-sm-4">
-                                                    <input type="text" class="form-control" name="qy_kf_num" id="qy_kf_num" placeholder="请输入研究开发人数">
-                                                </div>
-                                                <label for="qy_sme_class" class="col-md-2 control-label">中小企业划分类型</label>
-                                                <div class="col-md-4">
-                                                    <select class="form-control" name="qy_sme_class" id="qy_sme_class">
-                                                        <option value="0">请选择注册登记类型</option>
-                                                        <volist name="huafen" id="vo">
-                                                            <option value="{$vo.id}">{$vo.name}</option>
-                                                        </volist>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="qy_jyfw" class="col-sm-2 control-label">经营范围</label>
-                                                <div class="col-sm-10">
-                                                    <textarea class="form-control" name="qy_jyfw" id="qy_jyfw" rows="4"></textarea>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="qy_jianjie" class="col-sm-2 control-label">企业简介</label>
-                                                <div class="col-sm-10">
-                                                    <textarea class="form-control" name="qy_jianjie" id="qy_jianjie" rows="4"></textarea>
-                                                </div>
-                                            </div>
-
-
-
-
-
-
-
-                                            <div class="form-group">
-                                                <label for="inputEmail3" class="col-md-2 control-label">统一社会信用代码证</label>
-                                                <div class="col-md-4">
-                                                    <input type="hidden" name="daima" id="daima" value="">
-                                                    <a href="javascript:uploadOneImage('图片上传','#daima');">
-                                                        <img src="__TMPL__/public/assets/images/default-thumbnail.png"
-                                                             id="daima-preview"
-                                                             width="135" height="100" style="cursor: pointer"/>
-                                                    </a>
-                                                    <input type="button" class="btn btn-sm btn-cancel-daima" value="取消图片">
-                                                </div>
-                                                <label for="inputEmail3" class="col-md-2 control-label">验证码</label>
-                                                <div class="col-md-2">
-                                                    <input type="text" name="captcha" placeholder="验证码" class="form-control" style="width: 170px;float: left;margin-right: 30px">
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <captcha height="38" width="160" font-size="20"/>
-                                                </div>
                                             </div>
 
 
@@ -316,49 +319,247 @@
                                         </form>
                                     </div>
                                 </notempty>
-                                <div class="tab-pane {$email_tab_active}" id="jigou">
-                                    <form class="js-ajax-form" action="{:url('user/register/doRegister')}" method="post">
+                                <div class="tab-pane {$email_tab_active}" style="padding-right: 90px;" id="jigou">
+                                    <form class="js-ajax-form form-horizontal" action="{:url('user/Register/dojgRegister')}" method="post">
 
-                                       
-
-                                        <empty name="is_open_registration">
+                                            <input type="hidden" name="user_type" value="3">
                                             <div class="form-group">
-                                                <div style="position: relative;">
-                                                    <input type="text" name="code" placeholder="邮件验证码" style="width:170px;"
-                                                           class="form-control">
-                                                    <a class="btn btn-success js-get-email-code"
-                                                       style="width: 163px;position: absolute;top:0;right: 0;"
-                                                       data-wait-msg="[second]秒后才能再次获取" data-email-input="#js-email-input"
-                                                       data-url="{:url('user/VerificationCode/send')}"
-                                                       data-init-second-left="60">获取邮箱验证码</a>
+                                                <label for="user_nickname" class="col-md-2 control-label">机构名称</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="user_nickname" placeholder="请输入企业全称">
+                                                </div>
+                                                <label for="xydm" class="col-md-2 control-label">统一社会信用代码</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="qy_xydm" placeholder="统一社会信用代码">
                                                 </div>
                                             </div>
-                                        </empty>
 
-                                        <div class="form-group">
-                                            <input type="password" name="password" placeholder="密码" class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div style="position: relative;">
-                                                <input type="text" name="captcha" placeholder="验证码" class="form-control"
-                                                       style="width: 170px;float: left;margin-right: 30px">
-                                                <captcha height="38" width="160" font-size="20"/>
+                                             <div class="form-group">
+                                                <label for="qy_zczj" class="col-sm-2 control-label">注册资金</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" name="qy_zczj" placeholder="请输入注册资金">
+                                                </div>
+                                                <label for="qy_zcsj" class="col-md-2 control-label">注册时间</label>
+                                                <div class="col-md-4">
+                                                    <input class="form-control js-bootstrap-date" type="text"  placeholder="2013-01-04" name="qy_zcsj" value="{:date('Y-m-d',time())}">
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <button class="btn btn-primary btn-block js-ajax-submit" type="submit" data-wait="1500"
-                                                    style="margin-left: 0px;">确定注册
-                                            </button>
-                                        </div>
+                                            <div class="form-group">
+                                                
+                                                <label for="qy_class" class="col-md-2 control-label">注册登记类型</label>
+                                                <div class="col-md-4">
+                                                    <select class="form-control" name="qy_class">
+                                                        <option value="0">请选择注册登记类型</option>
+                                                        <volist name="djlx" id="vo">
+                                                            <option value="{$vo.id}">{$vo.name}</option>
+                                                        </volist>
+                                                    </select>
+                                                </div>
 
-                                        <div class="form-group" style="text-align: center;">
-                                            <p>
-                                                已有账号? <a href="{:cmf_url('user/Login/index')}">点击此处登录</a>
-                                            </p>
-                                        </div>
-                                    </form>
+                                                <label for="qy_ssfw" class="col-md-2 control-label">服务类型</label>
+                                                <div class="col-md-4">
+                                                    <select class="form-control" name="qy_ssfw">
+                                                        <option value="0">请选服务类型</option>
+                                                    <volist name="fuwu" id="vo">
+                                                        <option value="{$vo.id}">{$vo.name}</option>
+                                                    </volist>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="form-group">
+                                                <label for="area" class="col-md-2 control-label">地区</label>
+                                                <div class="col-md-4">
+                                                    <select class="form-control" name="qy_area">
+                                                        <option value="0">请选择地区</option>
+                                                    <volist name="area" id="vo">
+                                                        <option value="{$vo.id}">{$vo.name}</option>
+                                                    </volist>
+                                                    </select>
+                                                </div>
+                                                <label for="address" class="col-sm-2 control-label">办公地址</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" name="qy_address" placeholder="请输入办公地址">
+                                                </div>
+                                                
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="qy_faren" class="col-sm-2 control-label">法人姓名</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" name="qy_faren" placeholder="请输入法人姓名">
+                                                </div>
+                                                <label for="sex" class="col-md-2 control-label">性别</label>
+                                                <div class="col-md-4">
+                                                    <select class="form-control" name="sex" >
+                                                        <option value="0">请选择性别</option>
+                                                        <option value="1">男</option>
+                                                        <option value="2">女</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="lxname" class="col-sm-2 control-label">联系人</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" name="qy_lxname" placeholder="请输入联系人姓名">
+                                                </div>
+                                                <label for="tel" class="col-md-2 control-label">电话</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="tel" placeholder="请输入电话">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="mobile" class="col-md-2 control-label">手机号</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="mobile" id="jgmobile" placeholder="请输入手机号">
+                                                </div>
+                                                <label for="email" class="col-sm-2 control-label">邮箱</label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" name="user_email" id="jgemail" placeholder="请输入邮箱地址">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="fax" class="col-md-2 control-label">传真</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="fax" placeholder="请输入传真号">
+                                                </div>
+                                                <label for="user_url" class="col-md-2 control-label">机构官网</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="user_url" placeholder="http://www.baidu.com">
+                                                </div>
+                                                
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="qy_jianjie" class="col-sm-2 control-label">机构简介</label>
+                                                <div class="col-sm-10">
+                                                    <textarea class="form-control" name="qy_jianjie" rows="4"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="qy_anli" class="col-sm-2 control-label">成功案例</label>
+                                                <div class="col-sm-10">
+                                                    <textarea class="form-control" name="qy_anli" rows="4"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="qy_rongyu" class="col-sm-2 control-label">荣誉资质</label>
+                                                <div class="col-sm-10">
+                                                    <textarea class="form-control" name="qy_rongyu" rows="4"></textarea>
+                                                </div>
+                                            </div>
+
+
+                                            
+
+
+
+
+
+
+
+                                            <div class="form-group">
+                                                <label for="jgavatar" class="col-md-2 control-label">机构LOGO</label>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control" name="jgavatar" id="jgavatar" value="">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <a class="btn btn-sm btn-success"  href="javascript:uploadOneImage('图片上传','#jgavatar');">上传</a>
+                                                </div>
+
+                                                 <label for="inputEmail3" class="col-md-2 control-label">统一社会信用代码证</label>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control" name="jgdaima" id="jgdaima" value="">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <a class="btn btn-sm btn-success"  href="javascript:uploadOneImage('图片上传','#jgdaima');">上传</a>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <if condition="($is_sj == 1)"> 
+                                               
+                                                    <label for="mobile" class="col-md-2 control-label">手机验证码</label>
+                                                    <div class="col-md-2">
+                                                        <input type="text" name="code" placeholder="手机验证码" style="width:180px;"
+                                                               class="form-control">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <a class="btn btn-success js-get-mobile-code"
+                                                           style="width: 158px;"
+                                                           data-wait-msg="[second]秒后才能再次获取" data-mobile-input="#jgmobile"
+                                                           data-url="{:url('user/VerificationCode/send')}"
+                                                           data-init-second-left="60">获取手机验证码</a>
+                                                    </div>
+                                                </if>
+                                                <if condition="($is_yx == 1)"> 
+                                                    <label for="code" class="col-md-2 control-label">邮件验证码</label>
+                                                    <div class="col-md-2">
+                                                        <input type="text" name="code" placeholder="邮件验证码" style="width:180px;"
+                                                               class="form-control">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <a class="btn btn-success js-get-email-code"
+                                                           style="width: 158px;"
+                                                           data-wait-msg="[second]秒后才能再次获取" data-email-input="#jgemail"
+                                                           data-url="{:url('user/VerificationCode/send')}"
+                                                           data-init-second-left="60">获取邮箱验证码</a>
+                                                    </div>
+                                                </if>
+                                                <if condition="($is_registration == 1)"> 
+                                                    <label for="inputEmail3" class="col-md-2 control-label">验证码</label>
+                                                    <div class="col-md-2">
+                                                        <input type="text" name="captcha" placeholder="验证码" class="form-control" style="width: 170px;float: left;margin-right: 30px">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <captcha height="38" width="150" font-size="20"/>
+                                                    </div>
+                                                </if>
+
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <div class="checkbox col-md-12 text-center">
+                                                    <label>
+                                                      <input type="checkbox" name="xieyi" value="1"> 我已阅读
+                                                    </label>
+                                                    <label>
+                                                    
+                                                    <a href="">《机构用户注册协议书》</a>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-4"></div>
+                                                
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-primary text-center js-ajax-submit"  style="width: 100%;" type="submit" data-wait="1500">
+                                                    确定注册
+                                                    </button>
+                                                </div>
+                                                <div class="col-md-4"></div>
+                                            </div>
+
+                                            <div class="form-group" style="text-align: center;">
+                                                <div class="col-md-12 text-center">
+                                                    已有账号? <a href="{:cmf_url('user/Login/index')}">点击此处登录</a>
+                                                </div>
+                                            </div>
+                                        </form>
 
                                 </div>
                             </div>

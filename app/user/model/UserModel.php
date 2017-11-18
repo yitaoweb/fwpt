@@ -129,6 +129,83 @@ class UserModel extends Model
     public function registerEmail($user)
     {
         $userQuery = Db::name("user");
+        $userQuery->where('user_email', $user['user_email']);
+        $userQuery->where('mobile', $user['mobile']);
+        $condition['_logic'] = 'OR';
+        $result    = $userQuery->find();
+
+        $userStatus = 1;
+
+        if (cmf_is_open_registration()) {
+            $userStatus = 2;
+        }
+
+        $pass    = rand_number(0,999999);
+        $qy_code = encode('user',2,$user['qy_area']);
+
+        if (empty($result)) {
+            $data  =[
+                'user_type'                =>    3,
+                'user_nickname'            =>    $user['user_nickname'],
+                'qy_xydm'                  =>    $user['qy_xydm'],
+              
+                'qy_code'                  =>    $qy_code,
+                'qy_area'                  =>    $user['qy_area'],
+                'qy_address'               =>    $user['qy_address'],
+          
+                'qy_zip'                   =>    '046000',
+                'user_email'               =>    $user['user_email'],
+                'qy_zczj'                  =>    $user['qy_zczj'],
+                'qy_zcsj'                  =>    $user['qy_zcsj'],
+                
+                'qy_faren'                 =>    $user['qy_faren'],
+                'sex'                      =>    $user['sex'],
+               
+                'qy_lxname'                =>    $user['qy_lxname'],
+                'tel'                      =>    $user['tel'],
+                'mobile'                   =>    $user['mobile'],
+                'fax'                      =>    $user['fax'],
+                'user_url'                 =>    $user['user_url'],
+                'qy_class'                 =>    $user['qy_class'],
+                
+                'qy_ssfw'                  =>    $user['qy_ssfw'],
+               
+                'qy_jianjie'               =>    $user['qy_jianjie'],
+                'qy_anli'                  =>    $user['qy_anli'],
+                'qy_rongyu'                =>    $user['qy_rongyu'],
+
+                'last_login_time'          =>    time(),
+                'score'                    =>    0,
+                'avatar'                   =>    $user['jgavatar'],
+                'create_time'              =>    time(),
+                'user_status'              =>    $userStatus,
+                'user_login'               =>    $qy_code,
+                'user_pass'                =>    cmf_password($pass),
+ 
+
+                'last_login_ip'            =>    get_client_ip(0, true),
+                
+                'daima'                    =>    $user['jgdaima'],
+                'qy_shstat'                =>    0,
+
+            ];
+        
+
+            $userId = Db::name("user")->insertGetId($data);
+            $data   = Db::name("user")->where('id', $userId)->find();
+            $subject="用户注册通知";
+            $content="尊敬的机构用户".$user['user_nickname'].":<br>";
+            $content=$content."您已成功注册，账号：".$qy_code."  密码：".$pass."<br>请牢记！";
+
+            $result = cmf_send_email($user['user_email'], $subject, $content);
+            cmf_update_current_user($data);
+            return 0;
+        }
+        return 0;
+
+
+
+        $userQuery = Db::name("user");
         $userQuery->where('user_email', $user['email']);
         $userQuery->where('mobile', $user['mobile']);
         $result    = $userQuery->find();
@@ -182,7 +259,7 @@ class UserModel extends Model
                 'user_type'                =>    2,
                 'user_nickname'            =>    $user['user_nickname'],
                 'qy_xydm'                  =>    $user['qy_xydm'],
-                'qy_hghm'                  =>    $user['qy_hghm'],
+              
                 'qy_code'                  =>    $qy_code,
                 'qy_area'                  =>    $user['qy_area'],
                 'qy_address'               =>    $user['qy_address'],
@@ -200,6 +277,7 @@ class UserModel extends Model
                 'tel'                      =>    $user['tel'],
                 'mobile'                   =>    $user['mobile'],
                 'fax'                      =>    $user['fax'],
+                'user_url'                 =>    $user['user_url'],
                 'qy_class'                 =>    $user['qy_class'],
                 'qy_zg_num'                =>    $user['qy_zg_num'],
                 'qy_dz_num'                =>    $user['qy_dz_num'],
@@ -210,7 +288,7 @@ class UserModel extends Model
                 'qy_jianjie'               =>    $user['qy_jianjie'],
                 'last_login_time'          =>    time(),
                 'score'                    =>    0,
-              
+                'avatar'                   =>    $user['qyavatar'],
                 'create_time'              =>    time(),
                 'user_status'              =>    $userStatus,
                 'user_login'               =>    $qy_code,
@@ -219,7 +297,7 @@ class UserModel extends Model
 
                 'last_login_ip'            =>    get_client_ip(0, true),
                 
-                'daima'                    =>    $user['daima'],
+                'daima'                    =>    $user['qydaima'],
                 'qy_shstat'                =>    0,
 
             ];
