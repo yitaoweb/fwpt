@@ -11,6 +11,7 @@
 namespace app\portal\controller;
 
 use app\portal\model\PortalFwxqModel;
+use app\portal\model\PortalFwcpModel;
 use cmf\controller\AdminBaseController;
 use app\portal\model\PortalSsfwModel;
 use think\Db;
@@ -217,4 +218,33 @@ class AdminFwxqController extends AdminBaseController
         //Db::name('portal_tag_post')->where('tag_id', $intId)->delete();
         $this->success(lang("DELETE_SUCCESS"));
     }
+    public function tui_jian_jg(){
+        $portalTagModel = new PortalFwcpModel();
+        $intId = $this->request->param("id", 0, 'intval');
+        $intFw_id = $this->request->param("fw_id", 0, 'intval');
+        $portalTagModel->where('ssfw_id='.$intFw_id);
+        $tags = $portalTagModel->paginate();    
+        $fwxq = Db::name('portal_fwxq')->where('id='.$intId)->find(); 
+        $arr = 0;
+        if($fwxq['tui_jian_jg']){
+            $arr = explode(',',$fwxq['tui_jian_jg']);
+        }
+        
+        $user = Db::name('user')->select();
+        $portal_ssfw = Db::name('portal_ssfw')->select();
+        $this->assign("portal_ssfw", $portal_ssfw);
+        $this->assign("user", $user);
+        $this->assign("tags", $tags);
+        $this->assign("arr", $arr);
+        $this->assign("intId", $intId);
+        return $this->fetch();
+    }
+    public function tjjgPost(){   
+        $data = $this->request->param();
+        $portalTagModel = new PortalFwxqModel();
+         $a = $portalTagModel->where('id',$data['id'])->update(
+                 ['tui_jian_jg'=>json_encode($data['tui_jian_jg'])]
+            );
+         $this->success(lang("推荐成功"));
+    } 
 }

@@ -3,17 +3,17 @@
 <body>
 <div class="wrap">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="{:url('AdminFwcp/index')}">服务需求管理</a></li>
-        <li><a href="{:url('AdminFwcp/add')}">添加服务需求</a></li>
+        <li class="active"><a href="{:url('AdminFwxq/index')}">服务需求管理</a></li>
+        <li><a href="{:url('AdminFwxq/add')}">添加服务需求</a></li>
     </ul>
-    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminFwcp/index')}">
+    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminFwxq/index')}">
         关键字:
         <input type="text" class="form-control" name="name" style="width: 200px;"
                value="{$name|default=''}" placeholder="请输入关键字...">
         <input type="submit" class="btn btn-primary" value="搜索服务需求名称"/>
-        <a class="btn btn-danger" href="{:url('AdminFwcp/index')}">清空</a>
+        <a class="btn btn-danger" href="{:url('AdminFwxq/index')}">清空</a>
     </form>
-    <form method="post" class="js-ajax-form margin-top-20">
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('AdminFwxq/tjjgPost')}">
         <div class="table-actions">
             <!--<button type="submit" class="btn btn-primary btn-sm js-ajax-submit">{:lang('SORT')}</button>-->
         </div>
@@ -54,11 +54,7 @@
                     <td>{$vo.time}</td>
 
                     <td>
-                        <a href="{:url('AdminFwcp/edit',array('id'=>$vo['id']))}">编辑</a>
-                        <if condition="$vo.sh_state eq 0">
-                        <a href="{:url('AdminFwcp/sh',array('id'=>$vo['id']))}">审核</a>
-                        </if>
-                        <a class="js-ajax-delete" href="{:url('AdminFwcp/delete',['id'=>$vo['id']])}">删除</a>
+                    <input type="checkbox" name="tui_jian_jg[]" value="{$vo.id}">推荐                                            
                     </td>
                 </tr>
             </foreach>
@@ -78,6 +74,11 @@
         </table>
         <div class="table-actions">
             <!--<button type="submit" class="btn btn-primary btn-sm js-ajax-submit">{:lang('SORT')}</button>-->
+        </div>
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="hidden" name="id" value="{$intId}">
+            <button type="submit" class="btn btn-primary js-ajax-submit">保存</button>
+            <a class="btn btn-default" href="__URL__">返回</a>
         </div>
     </form>
     <ul class="pagination">{$page|default=''}</ul>

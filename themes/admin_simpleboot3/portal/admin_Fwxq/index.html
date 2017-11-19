@@ -56,6 +56,7 @@
 
                     <td>
                         <a href="{:url('AdminFwxq/edit',array('id'=>$vo['id']))}">编辑</a>
+                        <a href="{:url('AdminFwxq/tui_jian_jg',array('id'=>$vo['id'],'fw_id'=>$vo['ssfw_id']))}">推荐机构</a>
                         <if condition="$vo.sh_state eq 0">
                         <a href="{:url('AdminFwxq/sh',array('id'=>$vo['id']))}">审核</a>
                         </if>
