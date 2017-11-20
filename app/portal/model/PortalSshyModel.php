@@ -127,15 +127,15 @@ class PortalSshyModel extends Model
             $result = false;
         }
 
-        if ($result != false) {
-            //设置别名
-            $routeModel = new RouteModel();
-            if (!empty($data['alias']) && !empty($id)) {
-                $routeModel->setRoute($data['alias'], 'portal/List/index', ['id' => $id], 2, 5000);
-                $routeModel->setRoute($data['alias'] . '/:id', 'portal/Article/index', ['cid' => $id], 2, 4999);
-            }
-            $routeModel->getRoutes(true);
-        }
+        // if ($result != false) {
+        //     //设置别名
+        //     $routeModel = new RouteModel();
+        //     if (!empty($data['alias']) && !empty($id)) {
+        //         $routeModel->setRoute($data['alias'], 'portal/List/index', ['id' => $id], 2, 5000);
+        //         $routeModel->setRoute($data['alias'] . '/:id', 'portal/Article/index', ['cid' => $id], 2, 4999);
+        //     }
+        //     $routeModel->getRoutes(true);
+        // }
 
         return $result;
     }
@@ -179,16 +179,16 @@ class PortalSshyModel extends Model
                 }
             }
 
-            $routeModel = new RouteModel();
-            if (!empty($data['alias'])) {
-                $routeModel->setRoute($data['alias'], 'portal/List/index', ['id' => $data['id']], 2, 5000);
-                $routeModel->setRoute($data['alias'] . '/:id', 'portal/Article/index', ['cid' => $data['id']], 2, 4999);
-            } else {
-                $routeModel->deleteRoute('portal/List/index', ['id' => $data['id']]);
-                $routeModel->deleteRoute('portal/Article/index', ['cid' => $data['id']]);
-            }
+            // $routeModel = new RouteModel();
+            // if (!empty($data['alias'])) {
+            //     $routeModel->setRoute($data['alias'], 'portal/List/index', ['id' => $data['id']], 2, 5000);
+            //     $routeModel->setRoute($data['alias'] . '/:id', 'portal/Article/index', ['cid' => $data['id']], 2, 4999);
+            // } else {
+            //     $routeModel->deleteRoute('portal/List/index', ['id' => $data['id']]);
+            //     $routeModel->deleteRoute('portal/Article/index', ['cid' => $data['id']]);
+            // }
 
-            $routeModel->getRoutes(true);
+            // $routeModel->getRoutes(true);
         }
 
 
