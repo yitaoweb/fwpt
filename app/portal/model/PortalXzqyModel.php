@@ -179,16 +179,7 @@ class PortalXzqyModel extends Model
                 }
             }
 
-            $routeModel = new RouteModel();
-            if (!empty($data['alias'])) {
-                $routeModel->setRoute($data['alias'], 'portal/List/index', ['id' => $data['id']], 2, 5000);
-                $routeModel->setRoute($data['alias'] . '/:id', 'portal/Article/index', ['cid' => $data['id']], 2, 4999);
-            } else {
-                $routeModel->deleteRoute('portal/List/index', ['id' => $data['id']]);
-                $routeModel->deleteRoute('portal/Article/index', ['cid' => $data['id']]);
-            }
-
-            $routeModel->getRoutes(true);
+           
         }
 
 
