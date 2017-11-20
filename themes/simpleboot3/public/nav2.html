@@ -1,0 +1,64 @@
+<div class="topbar">
+    <div class="bar">     
+        <div class="barleft" id="topleft">
+            
+            <ul class="fol list-unstyled" id="main-menu-user">
+                <!--
+                <li class="login">
+                    <a class="dropdown-toggle notifactions" href="/index.php/user/notification/index"> <i
+                            class="fa fa-envelope"></i> <span class="count">0</span></a>
+                </li>
+                -->
+                <li class="dropdown user login">
+                        <php>$user=cmf_get_current_user();</php>
+                    您好，
+                    [<a href="{:cmf_url('user/Profile/center')}"><i class="fa fa-user"></i> &nbsp;<span class="user-nickname"></span></a>]&nbsp;[<a href="{:cmf_url('user/Index/logout')}"><i class="fa fa-sign-out"></i> &nbsp;退出</a>]，欢迎来到 {$site_info.site_name|default=''}！
+                </li>
+                <li class="dropdown user offline" style="display: list-item;">
+                        您好，欢迎来到 {$site_info.site_name|default=''}！请[<a href="{:cmf_url('user/Login/index')}"> &nbsp;登录</a>]
+                        [<a href="{:cmf_url('user/Register/index')}">&nbsp;注册</a>]
+                </li>
+            </ul>
+            
+        </div>
+
+        <div class="barright">
+           【<a href="http://www.xysmlt.gov.cn:8080/smes/manage.action">我的服务中心</a>】
+           【<a href="javascript:void(0);" onclick="javascript:addFav();return false;">加入收藏</a>】
+        </div>
+    </div>
+</div>
+<div class="top">
+    <div class="logo">
+        <a href="/index.jhtml"><img src="__TMPL__/public/assets/images/home_logo.png"></a>
+        <div class="header-right">
+            <img src="__TMPL__/public/assets/images/header-bg2.png">
+        </div>
+    </div>
+</div>
+
+
+
+<div class="navbar  navbar-blue">
+        <div class="container">
+            <div class="navbar-inner">
+                <ul class="nav navbar-nav nav-default">
+                  <navigation nav-id="" root="" id="main-navigation" class="nav navbar-nav navbar-nav-custom" max-level="0">
+                    <navigationMenu root="li" class="menu-item menu-item-level-{$level}">
+                        <a href="{$menu.href|default=''}" target="{$menu.target|default=''}">
+                            {$menu.name|default=''}
+                        </a>
+                    </navigationMenu>
+                    <navigationFolder root="li"
+                                      class="dropdown dropdown-custom dropdown-custom-level-{$level}"
+                                      dropdown="ul"
+                                      dropdown-class="dropdown-menu dropdown-menu-level-{$level}">
+                        <a href="#" class="dropdown-toggle dropdown-toggle-{$level}" data-toggle="dropdown">
+                            {$menu.name|default=''}<span class="caret"></span>
+                        </a>
+                    </navigationFolder>
+                </navigation>
+                </ul>
+            </div>
+        </div> 
+</div>

@@ -20,9 +20,9 @@ class RegisterController extends HomeBaseController
 {
 
     /**
-     * 前台用户注册
+     * 前台企业用户注册
      */
-    public function index()
+    public function qiye()
     {
         $redirect = $this->request->post("redirect");
         if (empty($redirect)) {
@@ -52,7 +52,43 @@ class RegisterController extends HomeBaseController
         if (cmf_is_user_login()) {
             return redirect($this->request->root() . '/');
         } else {
-            return $this->fetch(":register");
+            return $this->fetch(":qyregister");
+        }
+    }
+    /**
+     * 前台机构用户注册
+     */
+    public function jigou()
+    {
+        $redirect = $this->request->post("redirect");
+        if (empty($redirect)) {
+            $redirect = $this->request->server('HTTP_REFERER');
+        } else {
+            $redirect = base64_decode($redirect);
+        }
+        $area=Db::name('portal_xzqy')->where(array('parent_id' => 8))->order('list_order')->select();
+        $sq=Db::name('portal_lxd')->where('1=1')->order('list_order')->select();
+        $xueli=Db::name('portal_xl')->where('1=1')->order('id')->select();
+        $djlx=Db::name('portal_djlx')->where('1=1')->order('id')->select();
+        $huafen=Db::name('portal_huafenlx')->where('1=1')->order('id')->select();
+        $fuwu=Db::name('portal_ssfw')->where('1=1')->order('id')->select();
+        $parentId            = $this->request->param('parent', 0, 'intval');
+        $portalCategoryModel = new PortalSshyModel();
+        $categoriesTree      = $portalCategoryModel->adminCategoryTree($parentId);
+        $this->assign('area', $area);
+        $this->assign('sq', $sq);
+        $this->assign('xueli', $xueli);
+        $this->assign('djlx', $djlx);
+        $this->assign('huafen', $huafen);
+        $this->assign('fuwu', $fuwu);
+        $this->assign('categories_tree', $categoriesTree);
+
+        session('login_http_referer', $redirect);
+
+        if (cmf_is_user_login()) {
+            return redirect($this->request->root() . '/');
+        } else {
+            return $this->fetch(":jgregister");
         }
     }
 

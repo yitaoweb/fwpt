@@ -52,7 +52,7 @@
     $is_sj = is_sj();
     $is_yx = is_yx();
 </php>
-<div class="register_tab"><span>企业注册</span></div>
+<div class="register_tab"><span>企业注册</span><a href="{:cmf_url('user/Register/jigou')}" style="padding: 0 20px;">机构注册</a></div>
 <div class="register_title">企业基本信息</div>
 <div class="register_box radius4" style="height: 1025px;">
 <form action="{:url('user/Register/doRegister')}" method="post" id="register">  
@@ -182,7 +182,7 @@
     </dd>
   </dl>
   <dl>
-    <dt>机构官网</dt>
+    <dt>企业官网</dt>
     <dd>
       <input type="text" name="user_url" class="input large" placeholder="如:http://www.baidu.com"  datatype="*2-100" sucmsg=" " />
     </dd>

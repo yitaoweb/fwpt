@@ -68,6 +68,8 @@ class HomeBaseController extends BaseController
         }
 
 
+
+
     }
 
     /**
@@ -85,6 +87,7 @@ class HomeBaseController extends BaseController
         $more     = $this->getThemeFileMore($template);
         $this->assign('theme_vars', $more['vars']);
         $this->assign('theme_widgets', $more['widgets']);
+        $this->assign('navlist', navlist());
         return parent::fetch($template, $vars, $replace, $config);
     }
 
