@@ -10,12 +10,15 @@
 // +----------------------------------------------------------------------
 namespace app\portal\controller;
 
+use think\Db;
 use cmf\controller\HomeBaseController;
 
 class IndexController extends HomeBaseController
 {
     public function index()
     {
+    	$ssfw = Db::name('portal_ssfw')->where("parent_id",0)->where('status', 1)->order('list_order')->select()->toArray();
+    	$this->assign('ssfw',$ssfw);
         return $this->fetch(':index');
     }
 }

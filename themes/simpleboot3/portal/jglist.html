@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$category.name} {$category.seo_title} {$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$category.seo_keywords},{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$category.seo_description},{$site_info.site_seo_description|default=''}">
+    <include file="public@head"/>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/select-script.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/jquery.pagination.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/jquery.tools.min.js"></script>
+    <hook name="before_head_end"/>
+</head>
+<body class="body-white">
+<include file="public@nav"/>
+
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;<a href="index.html">服务资源</a> &gt;&nbsp;服务产品</div>
+<div class="main">
+<div class="main_l left">
+<div class="left_nav_title">服务分类</div>
+        <ul id="expmenu-freebie">
+            <li>
+                <!-- Start Freebie -->
+                <ul class="expmenu">
+
+                    <li>
+                        <div class="header focusnav">
+                            <span class="label">全部分类</span>
+                            <span class="arrow"></span>
+                        </div>
+                    </li>
+
+                    <volist name="catall" id="vo">
+                    <li>
+                        <div class="header">
+                            <span class="label">{$vo.name}</span>
+                            <span class="arrow up"></span>
+                        </div>
+                    </li>
+                    </volist>
+                </ul>
+                <!-- End Freebie -->
+            </li>
+        </ul>
+</div>
+<div class="main_r right">
+    <ul class="select">
+        <li class="select-list">
+            <dl id="select1">
+                <dt>服务区域：</dt>
+                <dd class="select-all selected"><a href="#">全部</a></dd>
+                <volist name="area" id="vo">
+                    <dd><a href="{:cmf_url('portal/Jglist/index',array('fid'=>$vo['id'],'cid'=>$category['id']))}">{$vo.name}</a></dd>
+                </volist>
+            </dl>
+        </li>
+        <li class="select-list">
+            <dl id="select2">
+                <dt>二级分类：</dt>
+                <dd class="select-all selected"><a href="#">全部</a></dd>
+                <dd><a href="#">牛仔裤</a></dd>
+                <dd><a href="#">小脚/铅笔裤</a></dd>
+                <dd><a href="#">休闲裤</a></dd>
+                <dd><a href="#">打底裤</a></dd>
+                <dd><a href="#">哈伦裤</a></dd>
+            </dl>
+        </li>
+        <li class="select-result" style="display: none;">
+            <dl>
+                <dt>已选条件：</dt>
+                <dd class="select-no">暂时没有选择过滤条件</dd>
+            </dl>
+        </li>
+    </ul>
+    
+    <div class="list">                      
+                            <div class="list-item">                 
+                                    <img src="images/arch-2.jpg" alt="" title=""/>
+                                    <div class="linkto">电话<span>15024698501</span><a href="">进入机构</a></div>
+                                    <h1>长治市易淘网络科技有限公司</h1>
+                                    <p>服务地址：长治市农机公司旁</p>
+                                    <p>服务范围：长治县、平顺县、城区、郊区、壶关县、长子县</p>
+                                    <p>服务项目：商务信息咨询服务</p>
+                            </div>
+                            
+                            <div class="list-item">                     
+                                <img src="images/autumn-1.jpg" alt="" title=""/>
+                                    <div class="linkto">电话<span>15024698501</span><a href="">进入机构</a></div>
+                                    <h1>长治市易淘网络科技有限公司</h1>
+                                    <p>服务地址：长治市农机公司旁</p>
+                                    <p>服务范围：长治县、平顺县、城区、郊区、壶关县、长子县</p>
+                                    <p>服务项目：商务信息咨询服务</p>
+                            </div>
+                            
+                            <div class="list-item">                 
+                                    <img src="images/boats-1.jpg" alt="" title=""/>
+                                    <div class="linkto">电话<span>15024698501</span><a href="">进入机构</a></div>
+                                    <h1>长治市易淘网络科技有限公司</h1>
+                                    <p>服务地址：长治市农机公司旁</p>
+                                    <p>服务范围：长治县、平顺县、城区、郊区、壶关县、长子县</p>
+                                    <p>服务项目：商务信息咨询服务</p>
+                            </div>
+                            
+                            <div class="list-item">                 
+                                    <img src="images/arch-1.jpg" alt="" title=""/>
+                                    <div class="linkto">电话<span>15024698501</span><a href="">进入机构</a></div>
+                                    <h1>长治市易淘网络科技有限公司</h1>
+                                    <p>服务地址：长治市农机公司旁</p>
+                                    <p>服务范围：长治县、平顺县、城区、郊区、壶关县、长子县</p>
+                                    <p>服务项目：商务信息咨询服务</p>
+                            </div>
+                            
+                            <div class="list-item">         
+                                    <img src="images/book-1.jpg" alt="" title=""/>
+                                    <div class="linkto">电话<span>15024698501</span><a href="">进入机构</a></div>
+                                    <h1>长治市易淘网络科技有限公司</h1>
+                                    <p>服务地址：长治市农机公司旁</p>
+                                    <p>服务范围：长治县、平顺县、城区、郊区、壶关县、长子县</p>
+                                    <p>服务项目：商务信息咨询服务</p>
+                            </div>
+                            
+                            <div class="list-item">         
+                                    <img src="images/business-1.jpg" alt="" title=""/>
+                                    <div class="linkto">电话<span>15024698501</span><a href="">进入机构</a></div>
+                                    <h1>长治市易淘网络科技有限公司</h1>
+                                    <p>服务地址：长治市农机公司旁</p>
+                                    <p>服务范围：长治县、平顺县、城区、郊区、壶关县、长子县</p>
+                                    <p>服务项目：商务信息咨询服务</p>
+                            </div>
+                            
+                            <div class="list-item">         
+                                    <img src="images/calendar-1.jpg" alt="" title=""/>
+                                    <div class="linkto">电话<span>15024698501</span><a href="">进入机构</a></div>
+                                    <h1>长治市易淘网络科技有限公司</h1>
+                                    <p>服务地址：长治市农机公司旁</p>
+                                    <p>服务范围：长治县、平顺县、城区、郊区、壶关县、长子县</p>
+                                    <p>服务项目：商务信息咨询服务</p>
+                            </div>
+                            
+                            <div class="list-item"> 
+                                    <img src="images/car-1.jpg" alt="" title=""/>
+                                    <div class="linkto">电话<span>15024698501</span><a href="">进入机构</a></div>
+                                    <h1>长治市易淘网络科技有限公司</h1>
+                                    <p>服务地址：长治市农机公司旁</p>
+                                    <p>服务范围：长治县、平顺县、城区、郊区、壶关县、长子县</p>
+                                    <p>服务项目：商务信息咨询服务</p>
+                            </div>
+                    </div>
+
+    
+     <div class="pages">
+        <div id="Pagination"></div>
+        <div class="searchPage">
+          <span class="page-sum">共<strong class="allPage">15</strong>页</span>
+          <span class="page-go">跳转<input type="text">页</span>
+          <a href="javascript:;" class="page-btn">GO</a>
+        </div>
+    </div>
+    
+</div>
+</div>
+
+
+    <include file="public@footer"/>
+
+
+<include file="public@scripts"/>
+<hook name="before_body_end"/>
+</body>
+</html>

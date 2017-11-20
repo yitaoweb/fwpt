@@ -1,64 +1,84 @@
-<div class="topbar">
-    <div class="bar">     
-        <div class="barleft" id="topleft">
-            
-            <ul class="fol list-unstyled" id="main-menu-user">
-                <!--
-                <li class="login">
-                    <a class="dropdown-toggle notifactions" href="/index.php/user/notification/index"> <i
-                            class="fa fa-envelope"></i> <span class="count">0</span></a>
-                </li>
-                -->
-                <li class="dropdown user login">
-                        <php>$user=cmf_get_current_user();</php>
-                    您好，
-                    [<a href="{:cmf_url('user/Profile/center')}"><i class="fa fa-user"></i> &nbsp;<span class="user-nickname"></span></a>]&nbsp;[<a href="{:cmf_url('user/Index/logout')}"><i class="fa fa-sign-out"></i> &nbsp;退出</a>]，欢迎来到 {$site_info.site_name|default=''}！
-                </li>
-                <li class="dropdown user offline" style="display: list-item;">
-                        您好，欢迎来到 {$site_info.site_name|default=''}！请[<a href="{:cmf_url('user/Login/index')}"> &nbsp;登录</a>]
-                        [<a href="{:cmf_url('user/Register/index')}">&nbsp;注册</a>]
-                </li>
-            </ul>
-            
-        </div>
 
-        <div class="barright">
-           【<a href="http://www.xysmlt.gov.cn:8080/smes/manage.action">我的服务中心</a>】
-           【<a href="javascript:void(0);" onclick="javascript:addFav();return false;">加入收藏</a>】
-        </div>
-    </div>
+<!--- header begin-->
+<div class="topNav">
+  <div class="topNav-width clearfix">
+    <dl class="tnLeft">
+    <dd class="welcome">您好，欢迎来到<a target="_blank" href="Index.html">{$site_info.site_name|default=''}</a></dd>
+    </dl>
+    <dl class="tnRight">
+      <dd>
+        <h3><a target="_blank" href="">立即登录</a></h3>
+      </dd>
+      <dd>
+        <h3><a target="_blank" href="">免费注册</a></h3>
+      </dd>
+      <dd>
+        <h3><a target="_blank" href="">会员中心<i></i></a></h3>
+        <ul>
+          <li><a href="">已对接需求</a></li>
+          <li><a href="">我的需求</a></li>
+          <li><a href="">我的产品</a></li>
+        </ul>
+      </dd>
+      <dd>
+        <h3><a target="_blank" href="">帮助中心<i></i></a></h3>
+        <ul>
+          <li><a href="">帮助中心</a></li>
+          <li><a href="">操作指南</a></li>
+          <li><a href="">关于我们</a></li>
+        </ul>
+      </dd>
+      <dd>
+        <h3><a target="_blank" href="">设为首页</a></h3>
+      </dd>
+      <dd>
+        <h3><a target="_blank" href="">加入收藏</a></h3>
+      </dd>
+    </dl>
+  </div>
 </div>
-<div class="top">
-    <div class="logo">
-        <a href="/index.jhtml"><img src="__TMPL__/public/assets/images/home_logo.png"></a>
-        <div class="header-right">
-            <img src="__TMPL__/public/assets/images/header-bg2.png">
-        </div>
-    </div>
+<script type="text/javascript">jQuery(".topNav").slide({ type:"menu",  titCell:"dd", targetCell:"ul", delayTime:0,defaultPlay:false,returnDefault:true  }); </script>
+<!--- header end-->
+<div class="topBanner">
+<div class="topBanner-width">
+<div class="logo"></div>
+<div class="search radius4">
+    <form name="searchform" method="post" action="">
+        <input name='ecmsfrom' type='hidden' value='9'>
+        <input type="hidden" name="show" value="title,newstext">
+        <select name="classid" id="choose">
+            <option value="0">所有栏目</option>
+            <option value="1">公共信息</option>
+            <option value="2">供求信息</option>
+            <option value="3">服务需求</option>
+            <option value="4">专家</option>
+            <option value="5">联系点</option>
+        </select> 
+        <input class="inp_srh" name="keyboard"  placeholder="请输入您要搜索的关键词" >
+        <input class="btn_srh" type="submit" name="submit" value="站内搜索">
+    </form>
+</div>
+<script type="text/javascript" src="__TMPL__/public/assets/js/jquery.select.js"></script>
+</div>
 </div>
 
-
-
-<div class="navbar    navbar-blue">
-        <div class="container">
-            <div class="navbar-inner">
-                <ul class="nav navbar-nav nav-default">
-                  <navigation nav-id="" root="" id="main-navigation" class="nav navbar-nav navbar-nav-custom" max-level="0">
-                    <navigationMenu root="li" class="menu-item menu-item-level-{$level}">
-                        <a href="{$menu.href|default=''}" target="{$menu.target|default=''}">
-                            {$menu.name|default=''}
-                        </a>
-                    </navigationMenu>
-                    <navigationFolder root="li"
-                                      class="dropdown dropdown-custom dropdown-custom-level-{$level}"
-                                      dropdown="ul"
-                                      dropdown-class="dropdown-menu dropdown-menu-level-{$level}">
-                        <a href="#" class="dropdown-toggle dropdown-toggle-{$level}" data-toggle="dropdown">
-                            {$menu.name|default=''}<span class="caret"></span>
-                        </a>
-                    </navigationFolder>
-                </navigation>
-                </ul>
-            </div>
-        </div> 
+<div class="topMenu">
+  <div class="topMenu-width clearfix">
+    <dl class="tnLeft">
+      <volist name="navlist" id="vo">
+          <dd><h3><a href="{$vo.href|cmf_url=''}">{$vo.name}</a></h3>
+          <notempty name="vo.sub">
+          <ul>
+              <volist name="vo.sub" id='sub'>
+                <li><a href="{$sub.href|cmf_url=''}">{$sub.name}</a></li>
+              </volist>
+          </ul>
+          </notempty>
+          </dd>
+      </volist>
+    </dl>
+  </div>
 </div>
+<script type="text/javascript">
+    jQuery(".topMenu").slide({ type:"menu",  titCell:"dd", targetCell:"ul", delayTime:0,defaultPlay:false,returnDefault:true  });    
+</script>

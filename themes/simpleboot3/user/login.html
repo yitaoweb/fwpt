@@ -4,51 +4,95 @@
 <title></title>
 <meta name="keywords" content="" />
 <meta name="description" content="">
-<include file="public@head" />
+
+<link rel="stylesheet" type="text/css" href="__TMPL__/public/assets/css/style.css">
+<script src="__TMPL__/public/assets/js/jquery-1.8.2.min.js"></script>
+<script src="__TMPL__/public/assets/js/custominput.js"></script>	
 </head>
 
 <body class="body-white">
-	<include file="public@nav" />
 
-	<div class="container tc-main">
-		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
-				<h2 class="text-center">用户登录</h2>
-				<form class="js-ajax-form" action="{:url('user/login/doLogin')}" method="post">
-					<div class="form-group">
-						<input type="text" id="input_username" name="username" placeholder="手机号/邮箱/用户名" class="form-control">
-					</div>
+	<div class="login_logo"></div>
+		<form action="{:url('user/login/doLogin')}" method="post"> 
+		   <div id="view" class="login_type toggle"> 
+		    <input type="radio" name="user_type" id="view-list" value="list" checked="checked" /> 
+		    <label for="view-list">企业登录</label> 
+		    <input type="radio" name="view" id="view-grid" value="grid" /> 
+		    <label for="view-grid">机构登录</label> 
+		   </div> 
+		   <div class="login_box radius4 shadow"> 
+		    <div class="login_box_l left"> 
+		     <div class="login_form"> 
+		      <dl> 
+		       <dt>
+		        用户名
+		       </dt> 
+		       <dd>
+		        <input type="text" name="username" class="input wide" placeholder="请输入用户名" autocomplete="off" />
+		       </dd> 
+		      </dl> 
+		      <dl> 
+		       <dt>
+		        密　码
+		       </dt> 
+		       <dd> 
+		        <input type="password" name="password" class="input wide" placeholder="请输入密码" autocomplete="off" /> 
+		       </dd> 
+		      </dl> 
+		      <dl> 
+		       <dt>
+		        验证码
+		       </dt> 
+		       <dd> 
+		        <input type="text" name="captcha" class="input" placeholder="请输入验证码" autocomplete="off" /> 
+		        <captcha style="float: left;cursor: pointer;" height="36" width="146" font-size="20"/>
+		       </dd> 
+		      </dl> 
+		      <div class="login_tip"></div> 
+		      <div class="login_tip"> 
+		       <span class="left"> <input type="checkbox" name="remember" id="remember" /><label for="remember">记住用户名</label> </span> 
+		       <span class="right"><a href="{:cmf_url('user/Login/findPassword')}">忘记密码？</a></span>
+		      </div> 
+		      <div class="login_tip"></div> 
+		      <div class="login_tip">
+		       <button type="submit" class="btn-block btn-blue">登录</button>
+		      </div> 
+		     </div> 
+		    </div> 
+		    <div class="loginbox_r left"> 
+		     <div class="login_info"> 
+		      <a href="{:cmf_url('user/Register/index')}" class="radius4">企业注册</a> 
+		      <ul> 
+		       <li class="login_info_title">企业用户专享特权</li> 
+		       <li>享受各类服务产品</li> 
+		       <li>优选各类服务机构</li> 
+		       <li>享受发布信息企业推广</li> 
+		      </ul> 
+		     </div> 
+		     <div class="login_info"> 
+		      <a href="{:cmf_url('user/Register/index')}" class="radius4">机构注册</a> 
+		      <ul> 
+		       <li class="login_info_title">服务机构特色功能</li> 
+		       <li>享受机构的专业店面</li> 
+		       <li>在线对接企业需求</li> 
+		       <li>享受法务产品服务</li> 
+		      </ul> 
+		     </div> 
+		    </div> 
+		   </div> 
+		</form> 
 
-					<div class="form-group">
-						<input type="password" id="input_password" name="password" placeholder="密码" class="form-control">
-					</div>
 
-					<div class="form-group">
-						<div style="position: relative;">
-							<input type="text" name="captcha" placeholder="验证码" class="form-control captcha" style="width: 170px;float: left;margin-right: 30px">
-							<captcha height="38" width="160" font-size="20"/>
-						</div>
-					</div>
+	<script>
+		$(function(){
 
-					<div class="form-group">
-						<input type="hidden" name="redirect" value="">
-						<button class="btn btn-primary btn-block js-ajax-submit" type="submit" style="margin-left: 0px">确定</button>
-					</div>
-
-					<div class="form-group" style="text-align: center;">
-						<ul class="list-inline">
-							<li><a href="{:cmf_url('user/Register/index')}">现在注册</a></li>
-							<li><a href="{:cmf_url('user/Login/findPassword')}">忘记密码</a></li>
-						</ul>
-					</div>
-				</form>
-			</div>
-		</div>
-
-
-	</div>
-	<!-- /container -->
-
-	<include file="public@scripts" />
+			$('.login_tip input').customInput();
+			$('.toggle input').customInput();
+			$('.toggle').each(function(){
+				$('div:first',this).addClass('first');
+				$('div:last',this).addClass('last');	
+			}); 
+		});
+	</script>
 </body>
 </html>

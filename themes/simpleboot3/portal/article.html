@@ -5,6 +5,7 @@
     <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}"/>
     <meta name="description" content="{$site_info.site_seo_description|default=''}">
     <include file="public@head"/>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/jquery.print.js"></script>
     <style>
         #article_content img {
             height: auto !important;
@@ -18,7 +19,7 @@
     <hook name="before_head_end"/>
 </head>
 <body class="body-white">
-
+<include file="public@nav"/>
 
 <div class="local">当前位置：<a href="index.html">首页</a> &gt;<a href="newslist.html">公共信息</a> &gt;&nbsp;通知公告</div>
 
@@ -67,17 +68,17 @@
 $(document).ready(function(){
   $("#small").click(function(event){
     event.preventDefault();
-    $(".right_content").animate({"font-size":"15px", "line-height":"2.0"});   
+    $(".right_content").animate({"font-size":"15px", "line-height":"200%"});   
   });
   
   $("#medium").click(function(event){
     event.preventDefault();
-   $(".right_content").animate({"font-size":"16px", "line-height":"2.1"});
+   $(".right_content").animate({"font-size":"16px", "line-height":"210%"});
     
   });  
   $("#large").click(function(event){
     event.preventDefault();
-    $(".right_content").animate({"font-size":"17px", "line-height":"2.2"});   
+    $(".right_content").animate({"font-size":"17px", "line-height":"220%"});   
   }); 
   $( "a" ).click(function() {
    $("a").removeClass("selected");
