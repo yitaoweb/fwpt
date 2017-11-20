@@ -623,7 +623,7 @@ function cmf_send_email($address, $subject, $message)
     }
 }
 
-
+//预警时间对比
  function cmf_send_timebj($date1,$date2){
         $t1 = strtotime($date1);
         $t2 = strtotime($date2);
@@ -1821,8 +1821,11 @@ function encode($table,$class,$area){
     if ($table <> '' and $class <>'' and $area <>'') {
         if($class = 1){
             $w=getfield('portal_xzqy',$area,'qybm');
-            $num = Db::name($table)->where('qy_code','like',$w)->count();
-
+            $numdb = Db::name($table);
+            $w2="%".$w."%";
+            $num =$numdb->where('qy_code','like',$w2);
+            $numdb->where('user_type',2);
+            $num =$numdb->count();
             $num=$num+1;
 
             $num=str_pad($num,5,"0",STR_PAD_LEFT);  
@@ -1832,6 +1835,20 @@ function encode($table,$class,$area){
             return $code;
 
         }elseif ($class = 2) {
+
+            $w=getfield('portal_xzqy',$area,'qybm');
+            $numdb = Db::name($table);
+            $w2="%".$w."%";
+            $num =$numdb->where('qy_code','like',$w2);
+            $numdb->where('user_type',3);
+            $num =$numdb->count();
+            $num=$num+1;
+
+            $num=str_pad($num,5,"0",STR_PAD_LEFT);  
+
+            $code=$w.$num;
+
+            return $code;
             
         }elseif ($class = 3) {
             
@@ -1840,6 +1857,59 @@ function encode($table,$class,$area){
         }
     }
 
-   
+}
 
+/**
+ * 导航
+ */
+
+function navlist(){
+    
+    $nav = Db::name('nav_menu')->where("parent_id",0)->where('status', 1)->order('list_order')->select()->toArray();
+    if (!empty($nav)) {
+        foreach ($nav as $key => $value) {
+            $href    = htmlspecialchars_decode($value['href']);
+            $hrefOld = $href;
+            if (strpos($hrefOld, "{") !== false) {
+                $href = json_decode($value['href'], true);
+                $href = cmf_url($href['action'], $href['param']);
+                $href =substr($href,0,-5);
+            } else {
+                if ($hrefOld == "home") {
+                    $href = Request::instance()->root() . "/";
+                } else {
+                    $href = $hrefOld;
+                }
+            }
+            $nav[$key]['href']=$href;
+            $subnav = Db::name('nav_menu')->where("parent_id",$value['id'])->where('status', 1)->order('list_order')->select()->toArray();
+            if (!empty($subnav)) {
+                foreach ($subnav as $k => $v) {
+                    $h    = htmlspecialchars_decode($v['href']);
+                    $ho = $h;
+
+                    if (strpos($ho, "{") !== false) {
+                        $h = json_decode($v['href'], true);
+
+                        $h = cmf_url($h['action'], $h['param']);
+
+                        $h = substr($h, 0,-5);
+                    } else {
+                        if ($ho == "home") {
+                            $h = Request::instance()->root() . "/";
+                        } else {
+                            $h = $ho;
+                        }
+                    }
+
+                    $subnav[$k]['href']=$h;
+                }
+
+                $nav[$key]['sub']=$subnav;
+            }
+        }
+    }else{
+        $nav='';
+    }
+    return $nav;
 }
