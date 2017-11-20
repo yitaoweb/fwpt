@@ -10,17 +10,15 @@
 // +----------------------------------------------------------------------
 namespace app\portal\controller;
 
-use app\portal\model\PortalFwxqModel;
-use app\portal\model\PortalFwcpModel;
+use app\portal\model\PortalYjModel;
 use cmf\controller\AdminBaseController;
-use app\portal\model\PortalSsfwModel;
 use think\Db;
 
 /**
  * Class AdminTagController 标签管理控制器
  * @package app\portal\controller
  */
-class AdminFwxqController extends AdminBaseController
+class AdminYjController extends AdminBaseController
 {
     /**
      * 文章标签管理
@@ -37,7 +35,7 @@ class AdminFwxqController extends AdminBaseController
      */
     public function index()
     {
-        $portalTagModel = new PortalFwxqModel();
+        $portalTagModel = new PortalYjModel();
         
         $arrData = $this->request->param(); 
         if($arrData){
@@ -48,14 +46,8 @@ class AdminFwxqController extends AdminBaseController
            
         } 
         $tags = $portalTagModel->paginate();    
-        $user = Db::name('user')->select(); 
-        $portal_yj = Db::name('portal_yj')->find(); 
-        $portal_ssfw = Db::name('portal_ssfw')->select();  
         $this->assign("arrStatus", $portalTagModel::$STATUS);
         $this->assign("tags", $tags);
-        $this->assign("user", $user);
-        $this->assign("portal_yj", $portal_yj);
-        $this->assign("portal_ssfw", $portal_ssfw);
         $this->assign('page', $tags->render());
         return $this->fetch();
     }
@@ -75,14 +67,9 @@ class AdminFwxqController extends AdminBaseController
      */
     public function add()
     {
-        $parentId = $this->request->param('parent', 0, 'intval');
-        $portalTagModel = new PortalFwxqModel();
-        $user = Db::name('user')->where('user_type=2')->select(); 
-        $portalCategoryModel = new PortalSsfwModel();
-        $categoriesTree      = $portalCategoryModel->adminCategoryTree($parentId); 
-        $this->assign("categories_tree", $categoriesTree);
-        $this->assign("time", date('y-m-d h:i:s',time())); 
-        $this->assign("user", $user);   
+        $portalTagModel = new PortalYjModel();
+        $this->assign("time", date('y-m-d h:i:s',time()));
+        $this->assign("arrStatus", $portalTagModel::$STATUS);
         return $this->fetch();
     }
 
@@ -103,7 +90,7 @@ class AdminFwxqController extends AdminBaseController
     {
 
         $arrData = $this->request->param();
-        $portalTagModel = new PortalFwxqModel();
+        $portalTagModel = new PortalYjModel();
         $portalTagModel->isUpdate(false)->allowField(true)->save($arrData);
 
         $this->success(lang("SAVE_SUCCESS"));
@@ -126,57 +113,19 @@ class AdminFwxqController extends AdminBaseController
     public function edit()
     {
         $id = $this->request->param('id', 0, 'intval');
-        $portalPostModel = new PortalFwxqModel();
-        $post = $portalPostModel->where('id', $id)->find();
-        $user = Db::name('user')->where('user_type=2')->select();  
-        $ssfw = Db::name('portal_ssfw')->select();  
-        $portalCategoryModel = new PortalSsfwModel();
-        $categoriesTree = $portalCategoryModel->adminCategoryTree();
+        $portalPostModel = new PortalYjModel();
+        $post = $portalPostModel->find();
         $this->assign("time", date('y-m-d h:i:s',time()));
-        $this->assign("user", $user);
-        $this->assign("ssfw", $ssfw);
-        $this->assign('categories_tree', $categoriesTree);
         $this->assign('post', $post);
         return $this->fetch();
     }
     public function editPost(){
         $data = $this->request->param();
-        $portalPostModel = new PortalFwxqModel();
+        $portalPostModel = new PortalYjModel();
         $a = $portalPostModel->where('id',$data['id'])->update(
-                 ['title'=>$data['title'],'ssfw_id'=>$data['ssfw_id'],'user_id'=>$data['user_id'],'img'=>$data['img'],'time'=>$data['time'],'content'=>$data['content']]
+                 ['ts'=>$data['ts']]
             );
         $this->success('保存成功!');
-    }
-    public function sh()
-    {
-        $id = $this->request->param('id', 0, 'intval');
-        $portalPostModel = new PortalFwxqModel();
-        $post = $portalPostModel->where('id', $id)->find();
-        $user = Db::name('user')->where('user_type=2')->select();  
-        $ssfw = Db::name('portal_ssfw')->select();  
-        $portalCategoryModel = new PortalSsfwModel();
-        $categoriesTree = $portalCategoryModel->adminCategoryTree();
-        $this->assign("time", date('y-m-d h:i:s',time()));
-        $this->assign("user", $user);
-        $this->assign("ssfw", $ssfw);
-        $this->assign('categories_tree', $categoriesTree);
-        $this->assign('post', $post);
-        return $this->fetch();
-    }
-    public function shPost(){
-        $data = $this->request->param();
-        $portalPostModel = new PortalFwxqModel();
-       if($data['bh'] == 't'){
-            $a = $portalPostModel->where('id',$data['id'])->update(
-                 ['sh_state'=>1]
-            );
-            $this->success('审核成功!');
-         }
-         if($data['bh'] == 'f'){
-            $a = $portalPostModel->where('id',$data['id'])->update(
-                 ['sh_state'=>2,'bh'=>$data['bh']]);
-                 $this->success('已驳回!');
-         }
     }
     public function upStatus()
     {
@@ -187,7 +136,7 @@ class AdminFwxqController extends AdminBaseController
             $this->error(lang("NO_ID"));
         }
 
-        $portalTagModel = new PortalFwxqModel();
+        $portalTagModel = new PortalYjModel();
         $portalTagModel->isUpdate(true)->save(["status" => $intStatus], ["id" => $intId]);
 
         $this->success(lang("SAVE_SUCCESS"));
@@ -214,39 +163,10 @@ class AdminFwxqController extends AdminBaseController
         if (empty($intId)) {
             $this->error(lang("NO_ID"));
         }
-        $portalTagModel = new PortalFwxqModel();
+        $portalTagModel = new PortalYjModel();
 
         $portalTagModel->where(['id' => $intId])->delete();
         //Db::name('portal_tag_post')->where('tag_id', $intId)->delete();
         $this->success(lang("DELETE_SUCCESS"));
     }
-    public function tui_jian_jg(){
-        $portalTagModel = new PortalFwcpModel();
-        $intId = $this->request->param("id", 0, 'intval');
-        $intFw_id = $this->request->param("fw_id", 0, 'intval');
-        $portalTagModel->where('ssfw_id='.$intFw_id);
-        $tags = $portalTagModel->paginate();    
-        $fwxq = Db::name('portal_fwxq')->where('id='.$intId)->find(); 
-        $arr = 0;
-        if($fwxq['tui_jian_jg']){
-            $arr = explode(',',$fwxq['tui_jian_jg']);
-        }
-        
-        $user = Db::name('user')->select();
-        $portal_ssfw = Db::name('portal_ssfw')->select();
-        $this->assign("portal_ssfw", $portal_ssfw);
-        $this->assign("user", $user);
-        $this->assign("tags", $tags);
-        $this->assign("arr", $arr);
-        $this->assign("intId", $intId);
-        return $this->fetch();
-    }
-    public function tjjgPost(){   
-        $data = $this->request->param();
-        $portalTagModel = new PortalFwxqModel();
-         $a = $portalTagModel->where('id',$data['id'])->update(
-                 ['tui_jian_jg'=>json_encode($data['tui_jian_jg'])]
-            );
-         $this->success(lang("推荐成功"));
-    } 
 }

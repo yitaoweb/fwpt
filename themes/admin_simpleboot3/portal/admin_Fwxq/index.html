@@ -26,6 +26,7 @@
                 <th>服务类型</th>
                 <th>审核状态</th>
                 <th>对接状态</th>
+                <th>是否超出预警时间</th>
                 <th>时间</th>
 
                 <th width="160">操作</th>
@@ -52,6 +53,12 @@
                     <if condition="$vo.sh_state eq 1">
                     <td>已审核</td>
                     <td>{$vo.dj_state}</td>
+                    <?php if(cmf_send_timebj(date('y-m-d h:i:s',time()),$vo['time']) >$portal_yj['ts']){?>
+                    <td style="color: red">已超过预警天数</td>
+                    <?php }?>
+                    <?php if(cmf_send_timebj(date('y-m-d h:i:s',time()),$vo['time']) <$portal_yj['ts']){?>
+                    <td>正常天数</td>
+                    <?php }?>
                     <td>{$vo.time}</td>
 
                     <td>
@@ -73,6 +80,7 @@
                 <th>服务类型</th>
                 <th>审核状态</th>
                 <th>对接状态</th>
+                <th>是否超出预警时间</th>
                 <th>时间</th>
 
                 <th width="160">操作</th>

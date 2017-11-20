@@ -29,7 +29,7 @@ class AdminArticleController extends AdminBaseController
      *     'order'  => 10000s,
      *     'icon'   => '',
      *     'remark' => '文章列表',
-     *     'param'  => ''
+     *     'param'  => ''s
      * )
      */
     public function index()

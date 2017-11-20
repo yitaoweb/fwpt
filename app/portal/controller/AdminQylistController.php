@@ -12,6 +12,7 @@ namespace app\portal\controller;
 
 use app\portal\model\UserModel;
 use app\portal\model\PortalSshyModel;
+use app\portal\model\PortalXzqyModel;
 use cmf\controller\AdminBaseController;
 use think\Db;
 
@@ -36,13 +37,31 @@ class AdminQylistController extends AdminBaseController
      */
     public function index()
     {
-        $portalTagModel = new UserModel();
-        
         $arrData = $this->request->param(); 
+        $portalTagModel = new UserModel();
+        $portalSshyModel = new PortalSshyModel();
+        $portalXzqyModel = new PortalXzqyModel();
+        $categoriesTree = $portalSshyModel->adminCategoryTree();
+        $xzqyTree = $portalXzqyModel->adminCategoryTree();
+        $this->assign("qy_shstatid", 2);
         if($arrData){
             if($arrData['name'] != ''){
                  $portalTagModel->where('user_nickname','like',"%{$arrData['name']}%");
                  $this->assign('name', $arrData['name']);
+            }
+            if($arrData['xyflid'] != ''){
+                 $categoriesTree = $portalSshyModel->adminCategoryTree($arrData['xyflid']);
+                 $portalTagModel->where('qy_sshy',$arrData['xyflid']);
+                 $this->assign("xyflid", $arrData['xyflid']);
+            }
+            if($arrData['xzqyid'] != ''){
+                 $xzqyTree = $portalXzqyModel->adminCategoryTree($arrData['xzqyid']);
+                 $portalTagModel->where('qy_area',$arrData['xzqyid']);
+                 $this->assign("xzqyid", $arrData['xzqyid']);
+            }
+            if($arrData['qy_shstatid'] != ''){
+                 $portalTagModel->where('qy_shstat',$arrData['qy_shstatid']);
+                 $this->assign("qy_shstatid", $arrData['qy_shstatid']);
             }
            
         } 
@@ -51,6 +70,8 @@ class AdminQylistController extends AdminBaseController
         $xzqy = Db::name('portal_xzqy')->select();  
         $this->assign("tags", $tags);
         $this->assign("xzqy", $xzqy);
+        $this->assign("categoriesTree", $categoriesTree);
+        $this->assign("xzqyTree", $xzqyTree);
         $this->assign('page', $tags->render());
         return $this->fetch();
     }

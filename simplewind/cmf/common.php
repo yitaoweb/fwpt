@@ -623,6 +623,12 @@ function cmf_send_email($address, $subject, $message)
     }
 }
 
+
+ function cmf_send_timebj($date1,$date2){
+        $t1 = strtotime($date1);
+        $t2 = strtotime($date2);
+        return ceil(($t1-$t2)/24/60/60);
+    }
 /**
  * 转化数据库保存的文件路径，为可以访问的url
  * @param string $file
@@ -1833,5 +1839,7 @@ function encode($table,$class,$area){
 
         }
     }
+
+   
 
 }

@@ -12,6 +12,7 @@ namespace app\portal\controller;
 
 use app\portal\model\UserModel;
 use app\portal\model\PortalSsfwModel;
+use app\portal\model\PortalXzqyModel;
 use cmf\controller\AdminBaseController;
 use think\Db;
 
@@ -39,10 +40,29 @@ class AdminJglistController extends AdminBaseController
         $portalTagModel = new UserModel();
         
         $arrData = $this->request->param(); 
+        $portalSsfwModel = new PortalSsfwModel();
+        $portalXzqyModel = new PortalXzqyModel();
+        $categoriesTree = $portalSsfwModel->adminCategoryTree();
+        $xzqyTree = $portalXzqyModel->adminCategoryTree();
+        $this->assign("qy_shstatid", 2);
         if($arrData){
             if($arrData['name'] != ''){
                  $portalTagModel->where('user_nickname','like',"%{$arrData['name']}%");
                  $this->assign('name', $arrData['name']);
+            }
+            if($arrData['fwflid'] != ''){
+                 $categoriesTree = $portalSsfwModel->adminCategoryTree($arrData['fwflid']);
+                 $portalTagModel->where('qy_ssfw',$arrData['fwflid']);
+                 $this->assign("fwflid", $arrData['fwflid']);
+            }
+            if($arrData['xzqyid'] != ''){
+                 $xzqyTree = $portalXzqyModel->adminCategoryTree($arrData['xzqyid']);
+                 $portalTagModel->where('qy_area',$arrData['xzqyid']);
+                 $this->assign("xzqyid", $arrData['xzqyid']);
+            }
+            if($arrData['qy_shstatid'] != ''){
+                 $portalTagModel->where('qy_shstat',$arrData['qy_shstatid']);
+                 $this->assign("qy_shstatid", $arrData['qy_shstatid']);
             }
            
         } 
@@ -51,6 +71,8 @@ class AdminJglistController extends AdminBaseController
         $xzqy = Db::name('portal_xzqy')->select();  
         $this->assign("tags", $tags);
         $this->assign("xzqy", $xzqy);
+        $this->assign("categoriesTree", $categoriesTree);
+        $this->assign("xzqyTree", $xzqyTree);
         $this->assign('page', $tags->render());
         return $this->fetch();
     }
@@ -114,7 +136,6 @@ class AdminJglistController extends AdminBaseController
         $subject="用户注册通知";
         $content="尊敬的机构用户".$arrData['user_nickname'].":<br>";
         $content=$content."您已成功注册，账号：".$qy_code."  密码：".$pass."<br>请牢记！";
-
         $result = cmf_send_email($arrData['user_email'], $subject, $content);
         $portalTagModel->isUpdate(false)->allowField(true)->save($arrData);
 

@@ -7,10 +7,32 @@
         <li><a href="{:url('AdminJglist/add')}">添加机构</a></li>
     </ul>
     <form class="well form-inline margin-top-20" method="post" action="{:url('AdminJglist/index')}">
+        服务分类:
+        <select class="form-control" name="fwflid" style="width: 140px;">
+            <option value=''>全部</option>
+            {$categoriesTree|default=''}
+        </select> &nbsp;&nbsp;
+        审核状态:
+        <select class="form-control" name="qy_shstatid" style="width: 140px;">
+                <?php if($qy_shstatid == 1){?>
+                  <option value='1'>审核</option>
+                <?php }?>
+                <?php if($qy_shstatid == 0){?>
+                  <option value='0'>未审核</option>
+                <?php }?>
+                <option value=''>全部</option>
+            <option value='0'>未审核</option>
+            <option value='1'>审核</option>
+        </select> &nbsp;&nbsp;
+        区域分类:
+        <select class="form-control" name="xzqyid" style="width: 140px;">
+            <option value=''>全部</option>
+            {$xzqyTree|default=''}
+        </select> &nbsp;&nbsp;
         关键字:
         <input type="text" class="form-control" name="name" style="width: 200px;"
-               value="{$name|default=''}" placeholder="请输入关键字...">
-        <input type="submit" class="btn btn-primary" value="搜索联系点名称"/>
+               value="{$name|default=''}" placeholder="请输入服务机构名称...">
+        <input type="submit" class="btn btn-primary" value="搜索"/>
         <a class="btn btn-danger" href="{:url('AdminJglist/index')}">清空</a>
     </form>
     <form method="post" class="js-ajax-form margin-top-20">
