@@ -1,0 +1,40 @@
+<br>
+<!-- Footer ================================================== -->
+
+<!--第9楼-->
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 p0">
+        <div class="box-l">
+          <div class="mod">
+              <div class="fly-panel fly-link ">
+                <h3 class="fly-panel-title icon-qy tleft" style="font-size: 18px;padding-bottom: 10px;">友情链接</h3>
+                <links>
+                    <a class="fol" href="{$vo.url|default=''}" target="{$vo.target|default=''}">{$vo.name|default=''}</a><a class="fol">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                </links>                 
+              </div>
+          </div>
+        </div>
+    </div>      
+</div>
+
+
+
+<div id="footer">
+    <hook name="footer_start"/>
+    <p>
+        
+        <br>
+        备案号:
+        <notempty name="site_info.site_icp">
+            <a href="http://www.miitbeian.gov.cn/" target="_blank">{$site_info.site_icp}</a>
+            <else/>
+            请在后台设置"网站信息"设置"备案信息"
+        </notempty>
+
+
+    </p>
+</div>
+<div id="backtotop">
+    <i class="fa fa-arrow-circle-up"></i>
+</div>

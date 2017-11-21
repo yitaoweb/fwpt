@@ -23,21 +23,22 @@
                 <!-- Start Freebie -->
                 <ul class="expmenu">
 
-                    <li>
-                        <div class="header focusnav">
-                            <span class="label">全部分类</span>
-                            <span class="arrow"></span>
-                        </div>
-                    </li>
 
                     <volist name="catall" id="vo">
-                    <li>
+  
+                    <li onclick="location='{:cmf_url('portal/Jglist/index',array('cid'=>$vo.id))}'">
+                    <if condition="$vo.id == $category.id"> 
+                        <div class="header focusnav">
+                    <else /> 
                         <div class="header">
+                    </if>
                             <span class="label">{$vo.name}</span>
                             <span class="arrow up"></span>
                         </div>
                     </li>
+
                     </volist>
+
                 </ul>
                 <!-- End Freebie -->
             </li>
@@ -160,7 +161,7 @@
 </div>
 </div>
 
-
+<include file="public@link"/>
     <include file="public@footer"/>
 
 

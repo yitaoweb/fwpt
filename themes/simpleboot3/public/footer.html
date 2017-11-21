@@ -3,38 +3,37 @@
 
 <!--第9楼-->
 
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 p0">
-        <div class="box-l">
-          <div class="mod">
-              <div class="fly-panel fly-link ">
-                <h3 class="fly-panel-title icon-qy tleft" style="font-size: 18px;padding-bottom: 10px;">友情链接</h3>
-                <links>
-                    <a class="fol" href="{$vo.url|default=''}" target="{$vo.target|default=''}">{$vo.name|default=''}</a><a class="fol">&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                </links>                 
-              </div>
-          </div>
-        </div>
-    </div>      
+
+
+
+
+<div class="footer">
+<div class="footer-nav"><a href="">首页</a>|<a target="_blank" href="">关于我们</a>|<a target="_blank" href="">服务宗旨</a>|<a target="_blank" href="">广告服务</a>|<a target="_blank" href="">免责声明</a>|<a href="">在线咨询</a></div>
+<div class="copyright">
+版权所有 企业公共服务平台 © Copyright 2013- All Rights Reserved.　主办单位：企业公共服务平台<br />
+备案号：{$site_info.site_icp}.　技术支持：山西易淘网络科技有限公司<br />
+</div>
 </div>
 
-
-
-<div id="footer">
-    <hook name="footer_start"/>
-    <p>
-        
-        <br>
-        备案号:
-        <notempty name="site_info.site_icp">
-            <a href="http://www.miitbeian.gov.cn/" target="_blank">{$site_info.site_icp}</a>
-            <else/>
-            请在后台设置"网站信息"设置"备案信息"
-        </notempty>
-
-
-    </p>
+<div class="qqserver">
+  <div class="qqserver_fold">
+    <div></div>
+  </div>
+  <div class="qqserver-body" style="display: block;">
+    <div class="qqserver-header">
+      <div></div>
+      <span class="qqserver_arrow"></span> </div>
+    <ul>
+      <li> <a title="点击这里给我发消息" href="http://wpa.qq.com/msgrd?v=3&amp;uin=123456789&amp;site=qq&amp;menu=yes" target="_blank">
+        <div>客服咨询</div>
+        <span>琳琳</span> </a> </li>
+      <li> <a title="点击这里给我发消息" href="http://wpa.qq.com/msgrd?v=3&amp;uin=123456789&amp;site=qq&amp;menu=yes" target="_blank">
+        <div>客服咨询</div>
+        <span>云云</span> </a> </li>
+      <li> <a title="点击这里给我发消息" href="http://wpa.qq.com/msgrd?v=3&amp;uin=123456789&amp;site=qq&amp;menu=yes" target="_blank">
+        <div>推广合作</div>
+        <span class="qqserver-service-alert">单单</span> </a> </li>
+    </ul>
+  </div>
 </div>
-<div id="backtotop">
-    <i class="fa fa-arrow-circle-up"></i>
-</div>
+<script type="text/javascript" src="__TMPL__/public/assets/js/qqserver.js"></script>
