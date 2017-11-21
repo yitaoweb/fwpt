@@ -20,7 +20,7 @@ class RegisterController extends HomeBaseController
 {
 
     /**
-     * 前台企业用户注册
+     * 前台企业用户注册s
      */
     public function qiye()
     {
@@ -283,6 +283,9 @@ class RegisterController extends HomeBaseController
             if (!$validate->check($data)) {
                 $this->error($validate->getError());
             }
+            if(isset($data['fwqy'])){
+             $data['fwqy'] = json_encode($data['fwqy']);
+            } 
             if (isset($data['captcha'])) {
                 if (!cmf_captcha_check($data['captcha'])) {
                     $this->error('验证码错误');

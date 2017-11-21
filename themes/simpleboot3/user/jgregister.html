@@ -22,7 +22,7 @@
     <script type="text/javascript" src="__TMPL__/public/assets/js/Validform_v5.3.2.js"></script>
     <script type="text/javascript" src="__TMPL__/public/assets/js/layout.js"></script>
     <script type="text/javascript" src="__TMPL__/public/assets/js/custominput.js"></script>    
-    
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DtnvBKcGnc56YxIZf5vZh2gtYQFzqy11"></script>
 </head>
 
 <body class="body-white">
@@ -184,14 +184,18 @@
     </dd>
   </dl>
 
+  <dl style="width:100%; height:30px">
+    <dt>服务区域</dt>&nbsp;&nbsp;&nbsp;&nbsp;
+        <foreach name="area" item="vo">
+            <input type="checkbox" name="fwqy[]" value="{$vo.id}">{$vo.name}&nbsp;&nbsp;&nbsp;
+        </foreach>
+  </dl>
 
-
-
-
- 
- 
-
- 
+  <dl style="width:100%; height:300px">
+    <dt>坐标</dt>&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="text" id='coord' name="coord" class="input large" placeholder="选择坐标"  />
+    <include file="public@dt"/>
+  </dl>
 
   <dl style="width:100%; height:120px">
     <dt>机构简介</dt>
@@ -277,6 +281,5 @@
 
 
 <include file="public@scripts"/>
-
 </body>
 </html>
