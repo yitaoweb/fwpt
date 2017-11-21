@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 namespace app\portal\controller;
 
-use app\portal\model\PortalLxdModel;
+use app\portal\model\UserModel;
 use app\portal\model\PortalLxdwzModel;
 use cmf\controller\AdminBaseController;
 use think\Db;
@@ -19,7 +19,7 @@ use think\Db;
  * Class AdminTagController 标签管理控制器
  * @package app\portal\controller
  */
-class AdminLxdController extends AdminBaseController
+class DtController extends AdminBaseController
 {
     /**
      * 文章标签管理
@@ -36,30 +36,11 @@ class AdminLxdController extends AdminBaseController
      */
     public function index()
     {
-      
-        $portalTagModel = new PortalLxdModel();
-        $arrData = $this->request->param(); 
-        if($arrData){
-            if($arrData['lxd_xzqy'] != ''){
-                 $portalTagModel->where('lxd_xzqy='.$arrData['lxd_xzqy']);
-                 $portalTagModel->order(["list_order" => "ASC"]);
-            }
-            if($arrData['lxd_name'] != ''){
-                 $portalTagModel->where('lxd_name','like',"%{$arrData['lxd_name']}%");
-                 $portalTagModel->order(["list_order" => "ASC"]);
-                 $this->assign('lxd_name', $arrData['lxd_name']);
-            }
-           
-        } 
-        $portalTagModel->order(["list_order" => "ASC"]);
-        $tags = $portalTagModel->paginate();
-        $xzqy = Db::name('portal_xzqy')->select();  
-        $this->assign("arrStatus", $portalTagModel::$STATUS);
-        $this->assign("tags", $tags);
-        $this->assign("xzqy", $xzqy);
-        $this->assign('page', $tags->render());
-
-        return $this->fetch();
+        $id = $this->request->param('id', 0, 'intval');
+        $data['qy'] = Db::name('User')->where('qy_area',$id)->where('user_type',2)->count();
+        $data['jg'] = Db::name('User')->where('qy_area',$id)->where('user_type',3)->count();
+        $data['lxd'] = Db::name('portal_lxd')->where('lxd_xzqy',$id)->count();
+        return $data;
     }
 
     /**
@@ -77,10 +58,13 @@ class AdminLxdController extends AdminBaseController
      */
     public function add()
     {
-        $portalTagModel = new PortalLxdModel();
-                $xzqy = Db::name('portal_xzqy')->select();
-                $this->assign("xzqy", $xzqy);
+        $portalTagModel = new PortalLxdwzModel();
+        $portal_lxd = Db::name('portal_lxd')->select();
+        $portal_lxdfl = Db::name('portal_lxdfl')->select();
+        $this->assign("time", date('y-m-d h:i:s',time()));
         $this->assign("arrStatus", $portalTagModel::$STATUS);
+        $this->assign("portal_lxd", $portal_lxd);
+        $this->assign("portal_lxdfl", $portal_lxdfl);
         return $this->fetch();
     }
 
@@ -97,26 +81,13 @@ class AdminLxdController extends AdminBaseController
      *     'param'  => ''
      * )
      */
-
     public function addPost()
     {
-        $xh = $this->sjs();
-        $portalTagModel = new PortalLxdModel();
-        $arrData = $this->request->param();  
-         if(isset($arrData['fwqy'])){
-             $arrData['fwqy'] = json_encode($arrData['fwqy']);
-        }  
-        $qybm = Db::name('portal_xzqy')->where('id', $arrData['lxd_xzqy'])->find();  
-        $counts = $portalTagModel->where('lxd_xzqy='.$arrData['lxd_xzqy'])->count();
-        $bm = $qybm['qybm'].'B';
-        $bms = $counts+1;
-        $bmss =$bm.$bms;
-        //var_dump($qybm['qybm']);die;  
+
+        $arrData = $this->request->param();
+        $portalTagModel = new PortalLxdwzModel();
         $portalTagModel->isUpdate(false)->allowField(true)->save($arrData);
-        //var_dump($portalTagModel->id);die;
-        $portalTagModel->where('id',$portalTagModel->id)->update(
-                 ['lxd_bm'=>$bmss]
-            );
+
         $this->success(lang("SAVE_SUCCESS"));
 
     }
@@ -137,23 +108,21 @@ class AdminLxdController extends AdminBaseController
     public function edit()
     {
         $id = $this->request->param('id', 0, 'intval');
-        $portalPostModel = new PortalLxdModel();
+        $portalPostModel = new PortalLxdwzModel();
         $post = $portalPostModel->where('id', $id)->find();
+        $portal_lxd = Db::name('portal_lxd')->select();
+        $portal_lxdfl = Db::name('portal_lxdfl')->select();
+        $this->assign("time", date('y-m-d h:i:s',time()));
+        $this->assign("portal_lxd", $portal_lxd);
+        $this->assign("portal_lxdfl", $portal_lxdfl);
         $this->assign('post', $post);
-        if($post['fwqy'] !=''){
-              $this->assign("fwqy", json_decode($post['fwqy'])); 
-        }else{
-              $this->assign("fwqy", 2); 
-        }
-         $xzqy = Db::name('portal_xzqy')->select();
-                $this->assign("xzqy", $xzqy);
         return $this->fetch();
     }
     public function editPost(){
         $data = $this->request->param();
-        $portalPostModel = new PortalLxdModel();
+        $portalPostModel = new PortalLxdwzModel();
         $a = $portalPostModel->where('id',$data['id'])->update(
-                 ['lxd_name'=>$data['lxd_name'],'lxd_wz'=>$data['lxd_wz'],'lxd_dz'=>$data['lxd_dz'],'lxd_qq'=>$data['lxd_qq'],'lxd_dh'=>$data['lxd_dh'],'lxd_jj'=>$data['lxd_jj'],'lxd_logo'=>$data['lxd_logo'],'lxd_yyzz'=>$data['lxd_yyzz'],'list_order'=>$data['list_order'],'fwqy'=>$data['fwqy']]
+                 ['fl_id'=>$data['fl_id'],'lxd_id'=>$data['lxd_id'],'name'=>$data['name'],'lxfs'=>$data['lxfs'],'time'=>$data['time'],'nr'=>$data['nr']]
             );
         $this->success('保存成功!');
     }
@@ -166,7 +135,7 @@ class AdminLxdController extends AdminBaseController
             $this->error(lang("NO_ID"));
         }
 
-        $portalTagModel = new PortalLxdModel();
+        $portalTagModel = new PortalLxdwzModel();
         $portalTagModel->isUpdate(true)->save(["status" => $intStatus], ["id" => $intId]);
 
         $this->success(lang("SAVE_SUCCESS"));
@@ -193,10 +162,9 @@ class AdminLxdController extends AdminBaseController
         if (empty($intId)) {
             $this->error(lang("NO_ID"));
         }
-        $portalTagModel = new PortalLxdModel();
+        $portalTagModel = new PortalLxdwzModel();
+
         $portalTagModel->where(['id' => $intId])->delete();
-        $PortalLxdwzModel = new PortalLxdwzModel();
-        $PortalLxdwzModel->where(['lxd_id' => $intId])->delete();
         //Db::name('portal_tag_post')->where('tag_id', $intId)->delete();
         $this->success(lang("DELETE_SUCCESS"));
     }

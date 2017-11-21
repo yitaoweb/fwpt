@@ -33,6 +33,14 @@
 			</div>
 		</div>
 		<div class="form-group">
+			<label class="col-sm-2 control-label"><span class="form-required">*</span>服务区域:</label>
+			<div class="col-md-6 col-sm-10">
+                <foreach name="xzqy" item="vo">
+                        <input type="checkbox" name="fwqy[]" value="{$vo.id}">{$vo.name}
+				</foreach>   
+			</div>
+		</div>
+		<div class="form-group">
 			<label class="col-sm-2 control-label"><span class="form-required">*</span>地址:</label>
 			<div class="col-md-6 col-sm-10">
 				<input type="text" class="form-control" name="lxd_dz" id="lxd_dz" value="">

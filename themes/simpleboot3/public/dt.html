@@ -1,28 +1,86 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-	<style type="text/css">
-	#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
-	</style>
-	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DtnvBKcGnc56YxIZf5vZh2gtYQFzqy11"></script>
-	<title>地图展示</title>
-</head>
-<body>
-	<div id="allmap"></div>
-</body>
-</html>
-<script type="text/javascript">
-	// 百度地图API功能
-	var map = new BMap.Map("allmap");    // 创建Map实例
-	map.centerAndZoom(new BMap.Point(113.120834,36.200336), 11); // 初始化地图,设置中心点坐标和地图级别
-
-  
-	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
-  	function showInfo(e){
-		//alert(e.point.lng + ", " + e.point.lat);
-		$('#coord').val(e.point.lng + ", " + e.point.lat);
-	}
-	map.addEventListener("click", showInfo);
-</script>
+<style type="text/css">
+  .inhalt { 
+          position:fixed;
+          *position:absolute; 
+          color: #ffffff;
+          width:150px; 
+          height:100px; 
+          top:50%; 
+          left:50%; 
+          margin:-50px 0 0 -50px;
+          background-color:rgba(0,0,0,0.2);
+          text-align: center;
+          } 
+</style>
+<div class='inhalt' id='wxx' style="display:none;">
+      武乡县服务中心<br>
+      注册企业：<b id='qy'></b>个<br>
+      服务机构：<b id='jg'></b>个<br>
+      联系点：<b id='lxd'></b>个<br>
+</div>
+<div class='inhalt' id='lcx' style="display:none;">
+      黎城县服务中心<br>
+      注册企业：<b id='qy1'></b>个<br>
+      服务机构：<b id='jg1'></b>个<br>
+      联系点：<b id='lxd1'></b>个<br>
+</div>
+<div class='inhalt' id="psx" style="display:none;">
+      平顺县服务中心<br>
+      注册企业：<b id='qy2'></b>个<br>
+      服务机构：<b id='jg2'></b>个<br>
+      联系点：<b id='lxd2'></b>个<br>
+</div>
+<div class='inhalt' id="lcs" style="display:none;">
+      潞城市服务中心<br>
+      注册企业：<b id='qy3'></b>个<br>
+      服务机构：<b id='jg3'></b>个<br>
+      联系点：<b id='lxd3'></b>个<br>
+</div>
+<div class='inhalt' id="hgx" style="display:none;">
+      壶关县服务中心<br>
+      注册企业：<b id='qy4'></b>个<br>
+      服务机构：<b id='jg4'></b>个<br>
+      联系点：<b id='lxd4'></b>个<br>
+</div>
+<div class='inhalt' id="czx" style="display:none;">
+      长治县服务中心<br>
+      注册企业：<b id='qy5'></b>个<br>
+      服务机构：<b id='jg5'></b>个<br>
+      联系点：<b id='lxd5'></b>个<br>
+</div>
+<div class='inhalt' id="zzx" style="display:none;">
+      长子县服务中心<br>
+      注册企业：<b id='qy6'></b>个<br>
+      服务机构：<b id='jg6'></b>个<br>
+      联系点：<b id='lxd6'></b>个<br>
+</div>
+<div class='inhalt' id="tlx" style="display:none;">
+      屯留县服务中心<br>
+      注册企业：<b id='qy7'></b>个<br>
+      服务机构：<b id='jg7'></b>个<br>
+      联系点：<b id='lxd7'></b>个<br>
+</div>
+<div class='inhalt' id="xyx" style="display:none;">
+      襄垣县服务中心<br>
+      注册企业：<b id='qy8'></b>个<br>
+      服务机构：<b id='jg8'></b>个<br>
+      联系点：<b id='lxd8'></b>个<br>
+</div>
+<div class='inhalt' id="qyx" style="display:none;">
+      沁源县服务中心<br>
+     注册企业：<b id='qy9'></b>个<br>
+      服务机构：<b id='jg9'></b>个<br>
+      联系点：<b id='lxd9'></b>个<br>
+</div>
+<div class='inhalt' id="qx" style="display:none;">
+      沁县服务中心<br>
+      注册企业：<b id='qy10'></b>个<br>
+      服务机构：<b id='jg10'></b>个<br>
+      联系点：<b id='lxd10'></b>个<br>
+</div>
+<!-- <div class='inhalt' id="czs" style="display:none;">
+      长治市服务中心<br>
+      注册企业：80个<br>
+      服务机构：80个<br>
+      联系点：80个<br>
+</div> -->

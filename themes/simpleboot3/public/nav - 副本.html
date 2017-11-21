@@ -1,0 +1,84 @@
+
+<!--- header begin-->
+<div class="topNav">
+  <div class="topNav-width clearfix">
+    <dl class="tnLeft">
+    <dd class="welcome">您好，欢迎来到<a target="_blank" href="Index.html">{$site_info.site_name|default=''}</a></dd>
+    </dl>
+    <dl class="tnRight">
+      <dd>
+        <h3><a target="_blank" href="">立即登录</a></h3>
+      </dd>
+      <dd>
+        <h3><a target="_blank" href="">免费注册</a></h3>
+      </dd>
+      <dd>
+        <h3><a target="_blank" href="">会员中心<i></i></a></h3>
+        <ul>
+          <li><a href="">已对接需求</a></li>
+          <li><a href="">我的需求</a></li>
+          <li><a href="">我的产品</a></li>
+        </ul>
+      </dd>
+      <dd>
+        <h3><a target="_blank" href="">帮助中心<i></i></a></h3>
+        <ul>
+          <li><a href="">帮助中心</a></li>
+          <li><a href="">操作指南</a></li>
+          <li><a href="">关于我们</a></li>
+        </ul>
+      </dd>
+      <dd>
+        <h3><a target="_blank" href="">设为首页</a></h3>
+      </dd>
+      <dd>
+        <h3><a target="_blank" href="">加入收藏</a></h3>
+      </dd>
+    </dl>
+  </div>
+</div>
+<script type="text/javascript">jQuery(".topNav").slide({ type:"menu",  titCell:"dd", targetCell:"ul", delayTime:0,defaultPlay:false,returnDefault:true  }); </script>
+<!--- header end-->
+<div class="topBanner">
+<div class="topBanner-width">
+<div class="logo"></div>
+<div class="search radius4">
+    <form name="searchform" method="post" action="">
+        <input name='ecmsfrom' type='hidden' value='9'>
+        <input type="hidden" name="show" value="title,newstext">
+        <select name="classid" id="choose">
+            <option value="0">所有栏目</option>
+            <option value="1">公共信息</option>
+            <option value="2">供求信息</option>
+            <option value="3">服务需求</option>
+            <option value="4">专家</option>
+            <option value="5">联系点</option>
+        </select> 
+        <input class="inp_srh" name="keyboard"  placeholder="请输入您要搜索的关键词" >
+        <input class="btn_srh" type="submit" name="submit" value="站内搜索">
+    </form>
+</div>
+<script type="text/javascript" src="__TMPL__/public/assets/js/jquery.select.js"></script>
+</div>
+</div>
+
+<div class="topMenu">
+  <div class="topMenu-width clearfix">
+    <dl class="tnLeft">
+      <volist name="navlist" id="vo">
+          <dd><h3><a href="{$vo.href|cmf_url=''}">{$vo.name}</a></h3>
+          <notempty name="vo.sub">
+          <ul>
+              <volist name="vo.sub" id='sub'>
+                <li><a href="{$sub.href|cmf_url=''}">{$sub.name}</a></li>
+              </volist>
+          </ul>
+          </notempty>
+          </dd>
+      </volist>
+    </dl>
+  </div>
+</div>
+<script type="text/javascript">
+    jQuery(".topMenu").slide({ type:"menu",  titCell:"dd", targetCell:"ul", delayTime:0,defaultPlay:false,returnDefault:true  });    
+</script>
