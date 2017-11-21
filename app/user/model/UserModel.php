@@ -173,7 +173,8 @@ class UserModel extends Model
                 'qy_jianjie'               =>    $user['qy_jianjie'],
                 'qy_anli'                  =>    $user['qy_anli'],
                 'qy_rongyu'                =>    $user['qy_rongyu'],
-
+                'coord'                    =>    $user['coord'],
+                'fwqy'                     =>    json_encode($user['fwqy']),
                 'last_login_time'          =>    time(),
                 'score'                    =>    0,
                 'avatar'                   =>    $user['jgavatar'],
@@ -286,6 +287,7 @@ class UserModel extends Model
                 'qy_sme_class'             =>    $user['qy_sme_class'],
                 'qy_jyfw'                  =>    $user['qy_jyfw'],
                 'qy_jianjie'               =>    $user['qy_jianjie'],
+                'coord'               =>    $user['coord'],
                 'last_login_time'          =>    time(),
                 'score'                    =>    0,
                 'avatar'                   =>    $user['qyavatar'],

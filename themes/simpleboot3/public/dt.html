@@ -21,7 +21,7 @@
   
 	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
   	function showInfo(e){
-		alert(e.point.lng + ", " + e.point.lat);
+		//alert(e.point.lng + ", " + e.point.lat);
 		$('#coord').val(e.point.lng + ", " + e.point.lat);
 	}
 	map.addEventListener("click", showInfo);
