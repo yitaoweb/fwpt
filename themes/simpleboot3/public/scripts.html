@@ -25,14 +25,14 @@
 				}
 
 				$("#main-menu-user span.user-nickname").text(data.data.user.user_nickname?data.data.user.user_nickname:data.data.user.user_login);
-				$("#main-menu-user li.login").show();
-                $("#main-menu-user li.offline").hide();
+				$("#main-menu-user dd.login").show();
+                $("#main-menu-user dd.offline").hide();
 
 			}
 
 			if(data.code==0){
-                $("#main-menu-user li.login").hide();
-				$("#main-menu-user li.offline").show();
+                $("#main-menu-user dd.login").hide();
+				$("#main-menu-user dd.offline").show();
 			}
 
 		});
