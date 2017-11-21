@@ -5,21 +5,21 @@
     <dl class="tnLeft">
     <dd class="welcome">您好，欢迎来到<a target="_blank" href="Index.html">{$site_info.site_name|default=''}</a></dd>
     </dl>
-    <dl class="tnRight">
-      <dd>
-        <h3><a target="_blank" href="">立即登录</a></h3>
-      </dd>
-      <dd>
-        <h3><a target="_blank" href="">免费注册</a></h3>
-      </dd>
-      <dd>
-        <h3><a target="_blank" href="">会员中心<i></i></a></h3>
+    <dl class="tnRight" id="main-menu-user">
+      <dd class="login">
+        <h3><a href=""><span class="user-nickname"></span><i></i></a></h3>
         <ul>
-          <li><a href="">已对接需求</a></li>
-          <li><a href="">我的需求</a></li>
-          <li><a href="">我的产品</a></li>
+          <li><a href="{:cmf_url('user/Profile/center')}">会员中心</a></li>
+          <li><a href="{:cmf_url('user/Index/logout')}">退出</a></li>
         </ul>
+     
       </dd>
+      <dd class="offline">
+        <h3><a target="_blank" href="{:cmf_url('user/Login/index')}">立即登录</a></h3> 
+        <h3><a target="_blank" href="{:cmf_url('user/Register/qiye')}">免费注册</a></h3>
+      </dd>
+      
+
       <dd>
         <h3><a target="_blank" href="">帮助中心<i></i></a></h3>
         <ul>

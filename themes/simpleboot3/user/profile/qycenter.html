@@ -39,15 +39,15 @@
 <div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;企业中心</div>
 <div class="main">
 	<div class="main_l left">
-		<include file="public@usernav" />
+		<include file="public@qiyenav" />
 	</div>
 	
 	<div class="main_r right" style="min-height: 600px;">
 	<div class="center-info">							
-		<img src="images/arch-2.jpg" alt="" title=""/>
-		<div class="linkto"><a target="_blank" class="edit" href="qiye-info.html">编辑信息</a></div>
-		<dl><dt>企业名称：</dt><dd>县电子商务协会</dd><dt>联系电话：</dt><dd>0355-2147484</dd></dl>
-		<dl><dt>邮箱地址：</dt><dd>yitao@163.com</dd><dt>网站网址：</dt><dd>http://www.zdjt.cn</dd></dl>
+		<img src="__ROOT__/upload/{$avatar}" alt="" title=""/>
+		<div class="linkto"><a target="_blank" class="edit" href="{:url('user/profile/edit')}">编辑信息</a></div>
+		<dl><dt>企业名称：</dt><dd>{$user_nickname}</dd><dt>联系电话：</dt><dd>{$tel}</dd></dl>
+		<dl><dt>邮箱地址：</dt><dd>{$user_email}</dd><dt>网站网址：</dt><dd>{$user_url}</dd></dl>
 	</div>
 <div class="tabPanel">
    <div class="tabnav">

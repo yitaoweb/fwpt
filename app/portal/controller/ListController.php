@@ -21,8 +21,10 @@ class ListController extends HomeBaseController
         $portalCategoryModel = new PortalCategoryModel();
 
         $category = $portalCategoryModel->where('id', $id)->where('status', 1)->find();
-       
+        $catlist = $portalCategoryModel->where('parent_id', 8)->where('status', 1)->select()->toArray();
+        //var_dump($catlist);die;
         $this->assign('category', $category);
+        $this->assign('catlist', $catlist);
 
         $listTpl = empty($category['list_tpl']) ? 'list' : $category['list_tpl'];
 

@@ -32,7 +32,21 @@ class ProfileController extends UserBaseController
     {
         $user = cmf_get_current_user();
         $this->assign($user);
-        return $this->fetch();
+        
+        switch ($user['user_type']) {
+            case 2:
+                $listTpl = 'qycenter';
+                break;
+            case 3:
+                $listTpl = 'jgcenter';
+                break;
+            default:
+                $listTpl = 'center';
+                break;
+        }
+        
+
+        return $this->fetch('/profile/' . $listTpl);
     }
 
     /**
