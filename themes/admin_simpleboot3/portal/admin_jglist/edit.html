@@ -34,6 +34,22 @@
             </div>
         </div>
         <div class="form-group">
+          <label class="col-sm-2 control-label"><span class="form-required">*</span>服务区域:</label>
+          <div class="col-md-6 col-sm-10">
+            <foreach name="xzqy" item="vo">
+                  <?php if($fwqy != 2){?>
+                       <?php if(in_array($vo['id'],$fwqy)){?>
+                          <input type="checkbox" checked="checked" name="fwqy[]" value="{$vo.id}">{$vo.name}   
+                       <?php }else{?>
+                           <input type="checkbox" name="fwqy[]" value="{$vo.id}">{$vo.name}
+                       <?php }?>  
+                  <?php }else{ ?>
+                        <input type="checkbox" name="fwqy[]" value="{$vo.id}">{$vo.name}
+                 <?php }?>             
+            </foreach>   
+          </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-2 control-label"><span class="form-required">*</span>注册登记类型:</label>
             <div class="col-md-6 col-sm-10">
                 <select class="form-control" name="qy_class" id="qy_class">

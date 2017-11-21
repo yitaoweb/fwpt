@@ -127,6 +127,9 @@ class AdminJglistController extends AdminBaseController
     {
 
         $arrData = $this->request->param();
+        if(isset($arrData['fwqy'])){
+             $arrData['fwqy'] = json_encode($arrData['fwqy']);
+        }  
         $portalTagModel = new UserModel();
         $pass = rand_number(0,999999);
         $qy_code = encode('user',1,$arrData['qy_area']);
@@ -173,6 +176,12 @@ class AdminJglistController extends AdminBaseController
         $this->assign("lxd", $lxd); 
         $this->assign("djlx", $djlx); 
         $this->assign("ssfw", $ssfw); 
+        if($post['fwqy'] !=''){
+              $this->assign("fwqy", json_decode($post['fwqy'])); 
+        }else{
+              $this->assign("fwqy", 2); 
+        }
+        
         $this->assign("xl", $xl); 
         $this->assign("huafenlx", $huafenlx); 
         $this->assign("time", date('y-m-d h:i:s',time()));
@@ -182,6 +191,9 @@ class AdminJglistController extends AdminBaseController
     }
     public function editPost(){
         $data = $this->request->param();
+        if(isset($data['fwqy'])){
+        $data['fwqy'] = json_encode($data['fwqy']);
+        }
         $portalPostModel = new UserModel();
         $portalPostModel->allowField(true)->save($data,['id' => $data['id']]);    
         $this->success('保存成功!');
