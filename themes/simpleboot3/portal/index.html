@@ -328,24 +328,38 @@
 </div>
 
 <script type="text/javascript" src="__TMPL__/public/assets/js/dt.js"></script>
-
+<script type="text/javascript">
+     function dts(){
+                 $('#lcx').hide();
+                 $('#wxx').hide();
+                 $('#psx').hide();
+                 $('#lcs').hide();
+                 $('#hgx').hide();
+                 $('#czx').hide();
+                 $('#zzx').hide();
+                 $('#tlx').hide();
+                 $('#xyx').hide();
+                 $('#qyx').hide();
+                 $('#qx').hide();
+     }
+</script>
 <div class="left-box">
 <div class="box-title left mt10"><span><a href="fuwu.html" target="_blank">数据分布展示图</a></span></div>
 <div class="ditu">
-   <img src="__TMPL__/public/assets/images/ditu.jpg" usemap="#Map" />
+   <img src="__TMPL__/public/assets/images/ditu.jpg" usemap="#Map" onClick="dts()"/>
    <map name="Map" id="Map">
-    <area onmouseover="wxx(this)" onmouseout="wxxs(this)" id='wxx' shape="poly" coords="501,78,499,95,492,110,485,126,472,135,457,122,437,117,420,120,393,111,383,95,369,68,352,65,334,57,327,19,361,23" href="#" />
-    <area onmouseover="lcx(this)" onmouseout="lcxs(this)" id='lcx' shape="poly" coords="491,122,473,146,467,174,487,181,502,192,528,193,544,189,546,178,545,165,532,143,532,125,528,114,538,114,531,104,501,79" href="#" />
-    <area onmouseover="psx(this)" onmouseout="psxs(this)" id="psx" shape="poly" coords="519,206,550,192,524,195,572,197,573,233,568,249,565,268,562,290,551,313,520,298,509,288,505,279,495,270,492,259" href="#" />
-    <area onmouseover="lcs(this)" onmouseout="lcss(this)" id="lcs" shape="poly" coords="471,235,464,238,454,233,455,225,455,220,455,215,456,210,448,209,446,204,446,200,444,196,441,192,442,189,455,187,461,189,470,189,475,186,487,185,495,190,504,195,508,204,510,211,510,221,504,230,499,240" href="#" />
-    <area onmouseover="hgx(this)" onmouseout="hgxs(this)" id="hgx" shape="poly" coords="462,316,467,323,471,331,478,334,491,336,500,338,515,345,529,343,546,346,562,345,561,334,561,322,554,316,536,313,524,304,508,299,505,289,499,279,487,269,484,262,482,256,475,254,466,258" href="#" />
-    <area onmouseover="czx(this)" onmouseout="czxs(this)" id="czx" shape="poly" coords="427,299,423,313,424,322,426,326,432,329,439,334,451,337,465,334,464,323,461,311,461,299,460,288,461,277,461,271,448,273,440,265,433,265,426,267,422,290,419,298,421,305" href="#" />
-    <area onmouseover="zzx(this)" onmouseout="zzxs(this)" id="zzx" shape="poly" coords="362,305,352,295,345,291,333,295,325,297,321,289,333,280,335,273,337,261,353,258,369,252,379,247,390,242,407,245,421,253,424,264,421,277,421,285,419,297,419,307,419,315,417,321,410,326" href="#"/>
-    <area onmouseover="tlx(this)" onmouseout="tlxs(this)" id="tlx" shape="poly" coords="346,219,324,240,316,235,314,225,314,217,318,209,324,197,336,195,346,195,360,191,362,180,371,183,379,188,389,189,399,194,407,201,417,207,426,207,434,221,433,235,427,246,416,249,383,244,370,249,356,254,344,255,336,247,336,237,330,238" href="#" />
-    <area onmouseover="xyx(this)" onmouseout="xyxs(this)" id="xyx" shape="poly" coords="424,155,464,159,464,151,470,146,467,137,461,131,450,121,438,120,417,122,408,120,404,127,396,134,384,141,382,151,376,165,369,174,378,183,398,188,406,195,411,199,422,199,428,189,442,183,456,183,464,187,475,179,461,167,464,163,455,161" href="#" />
-    <area onmouseover="qyx(this)" onmouseout="qyxs(this)" id="qyx" shape="poly" coords="283,131,316,133,318,123,319,119,323,113,326,109,326,99,326,90,325,83,323,74,319,67,312,65,301,63,287,63,279,59,269,54,258,47,245,54,237,63,232,78,227,81,221,93,218,106,218,121,222,137,226,151,233,159,243,172,254,185,259,196,269,204,277,210,291,217,303,217,315,210,317,193,317,182,319,169,318,155,326,147,325,138,315,135" href="#" />
-    <area onmouseover="qx(this)" onmouseout="qxs(this)" id="qx" shape="poly" coords="350,129,379,138,382,134,389,130,392,126,400,124,400,117,388,115,378,113,377,107,377,99,375,86,367,73,359,69,344,65,332,61,329,62,324,63,324,71,326,87,328,101,322,116,322,129,325,138,326,149,321,161,320,173,319,188,324,191,334,191,340,193,357,187,358,175,365,165,372,159,373,151,377,147,380,142" href="#" />
-    <area onmouseover="czs(this)" onmouseout="czss(this)" id="czs" shape="poly" coords="446,246,455,240,452,234,453,226,453,216,452,210,446,211,441,207,442,202,443,199,437,195,432,199,432,206,436,221,436,230,436,239,433,246,429,253,431,260,437,263,445,263,449,268,455,269,460,269,464,264,464,259,464,256,469,255,470,252,470,247,469,243,467,242,462,238,455,237,450,237" href="#" />
+    <area onClick="wxx()"  id='wxx' shape="poly" coords="501,78,499,95,492,110,485,126,472,135,457,122,437,117,420,120,393,111,383,95,369,68,352,65,334,57,327,19,361,23" href="javascript:void(0);" />
+    <area onClick="lcx()"  id='lcx' shape="poly" coords="491,122,473,146,467,174,487,181,502,192,528,193,544,189,546,178,545,165,532,143,532,125,528,114,538,114,531,104,501,79" href="javascript:void(0);" />
+    <area onClick="psx()"  id="psx" shape="poly" coords="519,206,550,192,524,195,572,197,573,233,568,249,565,268,562,290,551,313,520,298,509,288,505,279,495,270,492,259" href="javascript:void(0);" />
+    <area onClick="lcs()"  id="lcs" shape="poly" coords="471,235,464,238,454,233,455,225,455,220,455,215,456,210,448,209,446,204,446,200,444,196,441,192,442,189,455,187,461,189,470,189,475,186,487,185,495,190,504,195,508,204,510,211,510,221,504,230,499,240" href="javascript:void(0);" />
+    <area onClick="hgx()"  id="hgx" shape="poly" coords="462,316,467,323,471,331,478,334,491,336,500,338,515,345,529,343,546,346,562,345,561,334,561,322,554,316,536,313,524,304,508,299,505,289,499,279,487,269,484,262,482,256,475,254,466,258" href="javascript:void(0);" />
+    <area onClick="czx()"  id="czx" shape="poly" coords="427,299,423,313,424,322,426,326,432,329,439,334,451,337,465,334,464,323,461,311,461,299,460,288,461,277,461,271,448,273,440,265,433,265,426,267,422,290,419,298,421,305" href="javascript:void(0);" />
+    <area onClick="zzx()"  id="zzx" shape="poly" coords="362,305,352,295,345,291,333,295,325,297,321,289,333,280,335,273,337,261,353,258,369,252,379,247,390,242,407,245,421,253,424,264,421,277,421,285,419,297,419,307,419,315,417,321,410,326" href="javascript:void(0);"/>
+    <area onClick="tlx()"  id="tlx" shape="poly" coords="346,219,324,240,316,235,314,225,314,217,318,209,324,197,336,195,346,195,360,191,362,180,371,183,379,188,389,189,399,194,407,201,417,207,426,207,434,221,433,235,427,246,416,249,383,244,370,249,356,254,344,255,336,247,336,237,330,238" href="javascript:void(0);" />
+    <area onClick="xyx()"  id="xyx" shape="poly" coords="424,155,464,159,464,151,470,146,467,137,461,131,450,121,438,120,417,122,408,120,404,127,396,134,384,141,382,151,376,165,369,174,378,183,398,188,406,195,411,199,422,199,428,189,442,183,456,183,464,187,475,179,461,167,464,163,455,161" href="javascript:void(0);" />
+    <area onClick="qyx()"  id="qyx" shape="poly" coords="283,131,316,133,318,123,319,119,323,113,326,109,326,99,326,90,325,83,323,74,319,67,312,65,301,63,287,63,279,59,269,54,258,47,245,54,237,63,232,78,227,81,221,93,218,106,218,121,222,137,226,151,233,159,243,172,254,185,259,196,269,204,277,210,291,217,303,217,315,210,317,193,317,182,319,169,318,155,326,147,325,138,315,135" href="javascript:void(0);" />
+    <area onClick="qx()"  id="qx" shape="poly" coords="350,129,379,138,382,134,389,130,392,126,400,124,400,117,388,115,378,113,377,107,377,99,375,86,367,73,359,69,344,65,332,61,329,62,324,63,324,71,326,87,328,101,322,116,322,129,325,138,326,149,321,161,320,173,319,188,324,191,334,191,340,193,357,187,358,175,365,165,372,159,373,151,377,147,380,142" href="javascript:void(0);" />
+    <area onClick="czs()"  id="czs" shape="poly" coords="446,246,455,240,452,234,453,226,453,216,452,210,446,211,441,207,442,202,443,199,437,195,432,199,432,206,436,221,436,230,436,239,433,246,429,253,431,260,437,263,445,263,449,268,455,269,460,269,464,264,464,259,464,256,469,255,470,252,470,247,469,243,467,242,462,238,455,237,450,237" href="javascript:void(0);" />
   </map>
 
 </div>
@@ -353,30 +367,15 @@
 <div class="right-box">
 <div class="box-title left mt10"><span><a href="zhuanjia.html" target="_blank">专家库</a></span><a href="zhuanjia.html" target="_blank">更多>></a></div>
 <div class="man-list">
-      <dl>
-      <a href="">
-        <dt class="company_img"><img src="__TMPL__/public/assets/images/man1.jpg"/></dt>
-        <dd>葛均波</dd>
-        </a>
-      </dl>
-      <dl>
-      <a href="">
-        <dt class="company_img"><img src="__TMPL__/public/assets/images/man2.jpg"/></dt>
-        <dd>胡大一</dd>
-        </a>
-      </dl>
-      <dl>
-      <a href="">
-        <dt class="company_img"><img src="__TMPL__/public/assets/images/man2.jpg"/></dt>
-        <dd>胡大一</dd>
-        </a>
-      </dl>
-      <dl>
-      <a href="">
-        <dt class="company_img"><img src="__TMPL__/public/assets/images/man1.jpg"/></dt>
-        <dd>葛均波</dd>
-        </a>
-      </dl>
+    <volist name="zjk" id="vo">
+          <dl>
+          <a href="">
+            <dt class="company_img"><img src="{:cmf_get_image_preview_url($vo.tp)}"/></dt>
+            <dd>{$vo.name}</dd>
+            </a>
+          </dl>
+    </volist>
+     
       
     </div>
 </div>
@@ -384,10 +383,9 @@
 <div class="box-title left mt10"><span><a href="qiye.html" target="_blank">知名品牌</a></span><a href="qiye.html" target="_blank">更多>></a></div>
   <div class="piclist">
     <ul class="listul">
-  <li><a href="qiye-detail.html"><img src="__TMPL__/public/assets/images/2.jpg"><p><span>易淘网络科技有限公司</span></p></a></li>
-  <li><a href="qiye-detail.html"><img src="__TMPL__/public/assets/images/3.jpg"><p><span>易淘网络科技有限公司</span></p></a></li>
-  <li><a href="qiye-detail.html"><img src="__TMPL__/public/assets/images/4.jpg"><p><span>易淘网络科技有限公司</span></p></a></li>
-  <li><a href="qiye-detail.html"><img src="__TMPL__/public/assets/images/5.jpg"><p><span>易淘网络科技有限公司</span></p></a></li>
+    <volist name="qyzmpp" id="vo">
+  <li><a href="qiye-detail.html"><img src="{:cmf_get_image_preview_url($vo.daima)}"><p><span>{$vo.user_nickname}</span></p></a></li>
+    </volist>
     </ul>
   <div class="clear"></div>
   </div>
@@ -395,16 +393,9 @@
 <div class="box-title left mt10"><span><a href="javascript:;" target="_blank">企业推广</a></span></div>
 <div id="wrapper">
   <div id="carousel">
-    <div><img src="__TMPL__/public/assets/images/2.jpg"/><span>长治网</span></div>
-    <div><img src="__TMPL__/public/assets/images/3.jpg"/><span>长治网</span></div>
-    <div><img src="__TMPL__/public/assets/images/4.jpg"/><span>长治市中小企业局</span></div>
-    <div><img src="__TMPL__/public/assets/images/5.jpg"/><span>山西经信委</span></div>
-    <div><img src="__TMPL__/public/assets/images/6.jpg"/><span>山西省中心企业局</span></div>
-    <div><img src="__TMPL__/public/assets/images/7.jpg"/><span>长治网</span></div>
-    <div><img src="__TMPL__/public/assets/images/8.jpg"/><span>长治网</span></div>
-    <div><img src="__TMPL__/public/assets/images/9.jpg"/><span>长治市中小企业局</span></div>
-    <div><img src="__TMPL__/public/assets/images/10.jpg"/><span>山西经信委</span></div>
-    <div><img src="__TMPL__/public/assets/images/11.jpg"/><span>山西省中心企业局</span></div>
+      <volist name="qytg" id="vo">
+    <div><img src="{:cmf_get_image_preview_url($vo.daima)}"/><span>{$vo.user_nickname}</span></div>
+     </volist>
   </div>
   <div id="pager"></div>
 </div>

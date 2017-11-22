@@ -86,7 +86,14 @@ class HomeBaseController extends BaseController
         $template = $this->parseTemplate($template);
         $more     = $this->getThemeFileMore($template);
         $ssfw = Db::name('portal_ssfw')->where("parent_id",0)->where('status', 1)->order('list_order')->select()->toArray();
+        $zjk = Db::name('portal_zjk')->select();
+        $qyzmpp = Db::name('user')->where("user_type",2)->where("zmpp",1)->select();
+
+        $qytg = Db::name('user')->where("user_type",2)->where("tg",1)->select();
         $this->assign('ssfw',$ssfw);
+        $this->assign('zjk',$zjk);
+        $this->assign('qyzmpp',$qyzmpp);
+        $this->assign('qytg',$qytg);
         $this->assign('theme_vars', $more['vars']);
         $this->assign('theme_widgets', $more['widgets']);
         $this->assign('navlist', navlist());

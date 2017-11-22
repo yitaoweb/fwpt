@@ -225,6 +225,16 @@
             </div>
         </div>
         <div class="form-group">
+          <label class="col-sm-2 control-label"><span class="form-required">*</span>设置:</label>
+          <div class="col-md-6 col-sm-10">
+             <input type="radio" id="zmpp" name="zmpp" <?php if($post['zmpp'] == 1){?>checked="checked"<?php }?> value="1">&nbsp;设为知名品牌
+             <input type="radio" id="zmpp" name="zmpp" <?php if($post['zmpp'] == 0){?>checked="checked"<?php }?> value="0">&nbsp;不设为知名品牌
+             &nbsp;&nbsp;&nbsp;&nbsp;
+             <input type="radio" id="tg" name="tg" <?php if($post['tg'] == 1){?>checked="checked"<?php }?> value="1">&nbsp;推广
+             <input type="radio" id="tg" name="tg" <?php if($post['tg'] == 0){?>checked="checked"<?php }?> value="0">&nbsp;不推广
+          </div>
+        </div>
+        <div class="form-group">
             <label class="col-md-6 col-sm-10" for="input-description">统一社会信用代码证</label>
             <div >
                 <input type="hidden" name="daima" class="form-control"
@@ -250,7 +260,7 @@
         <div class="col-sm-offset-2 col-sm-10">
         <input type="hidden" name="time" value="{$time}">
         <input type="hidden" name="id" value="{$post.id}">
-            <button type="submit" class="btn btn-primary js-ajax-submit">添加</button>
+            <button type="submit" class="btn btn-primary js-ajax-submit">保存</button>
             <a class="btn btn-default" href="__URL__">返回</a>
         </div>
     </form>
