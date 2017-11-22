@@ -24,43 +24,44 @@
     </style>
 </head>
 <body class="body-white" id="top">
-<include file="public@nav"/>
+<body class="body-white" id="top">
+<include file="public@nav" />
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;企业中心</div>
+<div class="main">
+    <div class="main_l left">
+        <include file="public@qiyenav" />
+    </div>
+    
+    <div class="main_r right" style="min-height: 600px;">
+        <include file="public@qiyetop" />
 
-<div class="container tc-main">
-    <div class="row">
-        <div class="col-md-3">
-            <include file="public@usernav"/>
-        </div>
-        <div class="col-md-9">
-            <div class="tabs">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-user"></i> 修改头像</a></li>
-                </ul>
+            <div class="right_title"><span>设置头像</span></div>
+            <div class="info_form" style="min-height: 300px;">
                 <div class="tab-content">
                     <div class="tab-pane active" id="one">
                         <br>
                         <if condition="empty($avatar)">
-                            <img src="__TMPL__/public/assets/images/headicon_128.png" class="headicon" width="128"/>
+                            <img src="__TMPL__/public/assets/images/headicon_128.png" class="headicon" width="128" style="float: left;" />
                             <else/>
-                            <img src="{:cmf_get_user_avatar_url($avatar)}?t={:time()}" class="headicon" width="128"/>
+                            <img src="__ROOT__/upload/{$avatar}" class="headicon" width="128" style="float: left;" />
                         </if>
-                        <input type="file" onchange="avatar_upload(this)" id="avatar_uploder" name="file"/>
-                        <div class="uploaded_avatar_area">
+                        <input style="margin: 40px 10px;" type="file" class="input large Validform_error" onchange="avatar_upload(this)" id="avatar_uploder" name="file"/>
+                        <div class="uploaded_avatar_area" style="margin-top: 0px;">
                             <div class="uploaded_avatar_btns">
-                                <a class="btn btn-primary confirm_avatar_btn" onclick="update_avatar()">确定</a>
-                                <a class="btn" onclick="reloadPage()">取消</a>
+                                <button class="Btnsty_peyton" style="width:130px;float: left;" onclick="update_avatar()">确定</button>
+                                <button class="Btnsty_peyton" style="width:130px; " onclick="reloadPage()">取消</button>
                             </div>
                         </div>
-                        <p class="help-block">头像支持jpg,png,jpeg格式,文件大小最大不能超过1M</p>
+                       
                     </div>
                 </div>
             </div>
-        </div>
     </div>
-
-    <include file="public@footer"/>
-
 </div>
+<include file="public@link"/>
+<include file="public@footer"/>
+
+
 <!-- /container -->
 
 <include file="public@scripts"/>

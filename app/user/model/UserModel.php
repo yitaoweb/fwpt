@@ -360,13 +360,10 @@ class UserModel extends Model
     public function editData($user)
     {
         $userId           = cmf_get_current_user_id();
-        $data['user_nickname'] = $user['user_nickname'];
-        $data['sex'] = $user['sex'];
-        $data['birthday'] = strtotime($user['birthday']);
-        $data['user_url'] = $user['user_url'];
-        $data['signature'] = $user['signature'];
+     
+
         $userQuery        = Db::name("user");
-        if ($userQuery->where('id', $userId)->update($data)) {
+        if ($userQuery->where('id', $userId)->update($user)) {
             $userInfo = $userQuery->where('id', $userId)->find();
             cmf_update_current_user($userInfo);
             return 1;

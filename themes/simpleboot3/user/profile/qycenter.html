@@ -12,6 +12,31 @@
 	float: left;
 	width: 70px;
 }
+.base-info{
+	border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 4px;
+    min-height: 560px;
+    margin-bottom: 15px;
+    background: #fff;
+    font-size: 14px;
+}
+.base-info dl{
+	float: left;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    color: #666;
+    width: 860px;
+}
+.base-info dl dt{
+	float: left;
+    width: 90px;
+}
+.base-info dl dd{
+	float: left;
+    width: 340px;
+}
 </style>
 <script type="text/javascript">
 		$(document).ready(function(){
@@ -43,123 +68,19 @@
 	</div>
 	
 	<div class="main_r right" style="min-height: 600px;">
-	<div class="center-info">							
-		<img src="__ROOT__/upload/{$avatar}" alt="" title=""/>
-		<div class="linkto"><a target="_blank" class="edit" href="{:url('user/profile/edit')}">编辑信息</a></div>
-		<dl><dt>企业名称：</dt><dd>{$user_nickname}</dd><dt>联系电话：</dt><dd>{$tel}</dd></dl>
-		<dl><dt>邮箱地址：</dt><dd>{$user_email}</dd><dt>网站网址：</dt><dd>{$user_url}</dd></dl>
+		<include file="public@qiyetop" />
+		<div class="right_title"><span>基本信息</span></div>
+		<div class="base-info" style="min-height: 600px;">
+			<dl><dt>企业编号：</dt><dd>{$qy_code}</dd><dt>信用代码：</dt><dd>{$qy_xydm}</dd></dl>
+			<dl><dt>行政区域：</dt><dd>山西-长治-{:getfield('portal_xzqy',$qy_area,'name')}</dd><dt>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</dt><dd>{$qy_address}</dd></dl>
+			<dl><dt>法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人：</dt><dd>{$qy_faren}</dd><dt>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</dt><dd>{$qy_lxname}</dd></dl>
+			<dl><dt>手&nbsp;&nbsp;机&nbsp;&nbsp;号：</dt><dd>{$mobile}</dd><dt>企业类型：</dt><dd>{:getfield('portal_djlx',$qy_class,'name')}</dd></dl>
+			<dl><dt>所属行业：</dt><dd>{:getfield('portal_sshy',$qy_sshy,'name')}</dd><dt>职工人数：</dt><dd>{$qy_zg_num}</dd></dl>
+			<dl style="width: 100%;height: auto;"><dt>经营范围：</dt><dd style="width: 770px;">{$qy_jyfw}</dd></dl>
+			<dl><dt>企业简介：</dt><dd>{$qy_jianjie}</dd></dl>
+			
+		</div>
 	</div>
-<div class="tabPanel">
-   <div class="tabnav">
-	<div class="hit">全部订单</div>
-	<div>已完成</div>
-	<div>进行中</div>
-	<div>待评价</div>
-   </div>
-   <div class="tabpanes">
-	<div class="pane" style="display:block;">
-	<table class="fwtable">
-      <thead>
-        <tr>
-          <th>服务产品</th>
-          <th>服务机构</th>
-		  <th>金额</th>
-		  <th>订单状态</th>
-		  <th>对接时间</th>
-		  <th>操作</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><a href="">宣传推介</a></td>
-		   <td>易淘网络科技有限公司</td>
-		   <td>1000.00</td>
-		   <td>处理中</td>
-           <td>2017-11-18</td>
-		   <td><a href="">查看详情</a></td>
-        </tr>
-        <tr>
-           <td><a href="">刑事诉讼</a></td>
-		    <td>易淘网络科技有限公司</td>
-		   <td>1000.00</td>
-		   <td>处理中</td>
-           <td>2017-11-18</td>
-		    <td><a href="">查看详情</a></td>
-        </tr>
-        <tr>
-           <td><a href="">法律援助</a></td>
-		    <td>易淘网络科技有限公司</td>
-		   <td>1000.00</td>
-		   <td>处理中</td>
-          <td>2017-11-18</td>
-		   <td><a href="">查看详情</a></td>
-        </tr>
-        <tr>
-          <td><a href="">宣传推介</a></td>
-		   <td>易淘网络科技有限公司</td>
-		   <td>1000.00</td>
-		   <td>处理中</td>
-           <td>2017-11-18</td>
-		    <td><a href="">查看详情</a></td>
-        </tr>
-        <tr>
-           <td><a href="">刑事诉讼</a></td>
-		    <td>易淘网络科技有限公司</td>
-		   <td>1000.00</td>
-		   <td>处理中</td>
-           <td>2017-11-18</td>
-		    <td><a href="">查看详情</a></td>
-        </tr>
-        <tr>
-           <td><a href="">法律援助</a></td>
-		    <td>易淘网络科技有限公司</td>
-		   <td>1000.00</td>
-		   <td>处理中</td>
-          <td>2017-11-18</td>
-		   <td><a href="">查看详情</a></td>
-        </tr>
-        <tr>
-          <td><a href="">宣传推介</a></td>
-		   <td>易淘网络科技有限公司</td>
-		   <td>1000.00</td>
-		   <td>处理中</td>
-           <td>2017-11-18</td>
-		    <td><a href="">查看详情</a></td>
-        </tr>
-        <tr>
-           <td><a href="">刑事诉讼</a></td>
-		    <td>易淘网络科技有限公司</td>
-		   <td>1000.00</td>
-		   <td>处理中</td>
-           <td>2017-11-18</td>
-		    <td><a href="">查看详情</a></td>
-        </tr>
-        <tr>
-          <td><a href="">宣传推介</a></td>
-		   <td>易淘网络科技有限公司</td>
-		   <td>1000.00</td>
-		   <td>处理中</td>
-           <td>2017-11-18</td>
-		    <td><a href="">查看详情</a></td>
-        </tr>
-      </tbody>
-    </table>
-	</div>
-	<div class="pane"></div>
-	<div class="pane"></div>
-	<div class="pane"></div>
-   </div>
-<div class="clear"></div>
-</div>
-<script type="text/javascript">
-    $(function () {
-        $('.tabPanel .tabnav div').click(function () {
-            $(this).addClass('hit').siblings().removeClass('hit');
-            $('.tabpanes>div:eq(' + $(this).index() + ')').show().siblings().hide();
-        })
-    })
-</script>
-</div>
 
 	
 </div>

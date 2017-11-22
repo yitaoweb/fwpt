@@ -5,63 +5,158 @@
 <meta name="keywords" content=""/>
 <meta name="description" content="">
 <include file="public@head"/>
+
 </head>
 <body class="body-white" id="top">
-	<include file="public@nav" />
+<script>
+function setlatlng(lng,lat){
+  art.dialog.data('lng', lng);
+  art.dialog.data('lat', lat);
+  // 此时 iframeA.html 页面可以使用 art.dialog.data('test') 获取到数据，如：
+  // document.getElementById('aInput').value = art.dialog.data('test');
+  art.dialog.open("__TMPL__/public/map.html",{lock:false,title:'设置经纬度',width:600,height:400,yesText:'关闭',background: '#000',opacity: 0.87});
+}
+</script>
+<include file="public@nav" />
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;企业中心</div>
+<div class="main">
+    <div class="main_l left">
+        <include file="public@qiyenav" />
+    </div>
+    
+    <div class="main_r right" style="min-height: 600px;">
+        <include file="public@qiyetop" />
+        <div class="right_title"><span>修改资料</span></div>
+          <form class="js-ajax-form" action="{:url('user/profile/editPost')}" method="post" id="register"> 
+            <div class="center_form">
+              
+              <dl>
+                <dt>企业全称</dt>
+                <dd><input type="text" name="user_nickname" class="input large" value="{$user_nickname}"  datatype="*2-100" sucmsg=" "/></dd>
+              </dl>
+              <dl>
+                <dt>社会信用代码</dt>
+                <dd><input type="text" name="qy_xydm" class="input large" value="{$qy_xydm}"  datatype="*2-100" sucmsg=" "/></dd>
+              </dl>
 
-		<div class="container tc-main">
-                <div class="row">
-                    <div class="col-md-3">
-						<include file="public@usernav" />
-                    </div>
-                    <div class="col-md-9">
-                           <div class="tabs">
-                               <ul class="nav nav-tabs">
-                                   <li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-list-alt"></i> 修改资料</a></li>
-                               </ul>
-                               <div class="tab-content">
-                                   <div class="tab-pane active" id="one">
-                                   		<br>
-                                   		<form class="js-ajax-form" action="{:url('user/profile/editPost')}" method="post">
-                                   			<div class="form-group">
-                                   				<label for="input-user_nickname">昵称</label>
-                                   				<input type="text" class="form-control" id="input-user_nickname" placeholder="昵称" name="user_nickname" value="{$user_nickname}">
-                                   			</div>
-                                   			<div class="form-group">
-                                   				<label for="input-sex">性别</label>
-                               					<php>
-                                 					$sexs=array("0"=>"保密","1"=>"程序猿","2"=>"程序媛");
-                                 				</php>
-                               					<select class="form-control" id="input-sex" name="sex">
-                               						<foreach name="sexs" item="vo">
-                               						<php>$sexselected=$key==$sex?"selected":"";</php>
-                               							<option value="{$key}" {$sexselected}>{$vo}</option>
-                               						</foreach>
-                               					</select>
-                                   			</div>
-                                   			<div class="form-group">
-                                   				<label for="input-birthday">生日</label>
-                                   				<input class="form-control js-bootstrap-date" type="text" id="input-birthday" placeholder="2013-01-04" name="birthday" value="{:date('Y-m-d',$birthday)}">
-                                   			</div>
-                                   			<div class="form-group">
-                                   				<label for="input-user_url">个人网址</label>
-                                   				<input class="form-control" type="text" id="input-user_url" placeholder="http://thinkcmf.com" name="user_url" value="{$user_url}">
-                                   			</div>
-                                   			<div class="form-group">
-                                   				<label for="input-signature">个性签名</label>
-                                   				<textarea class="form-control" id="input-signature" placeholder="个性签名" name="signature">{$signature}</textarea>
-                                   			</div>
-                                   			<div class="form-group">
-                                   				<button type="submit" class="btn btn-primary js-ajax-submit">保存</button>
-                                   			</div>
-                                   		</form>
-                                   </div>
-                               </div>							
-                           </div>
-                    </div>
-                </div>
-			<include file="public@footer" />
-		</div>
+              <dl>
+                <dt>地区</dt>
+                <dd>
+                  <select name="qy_area" style="width:326px;"  datatype="*" sucmsg=" ">
+                      <option value="0" selected="selected">请选择地区</option>
+                      <volist name="area" id="vo">
+                          <php>$sexselected=$vo['id']==$qy_area?"selected":"";</php>
+                          <option value="{$vo.id}"  {$sexselected}>{$vo.name}</option>
+                      </volist>
+                  </select>
+                </dd>
+              </dl>
+              <dl>
+                <dt>办公地址</dt>
+                <dd>
+                  <input type="text" name="qy_address" class="input large" value="{$qy_address}"  datatype="*" sucmsg=" " />
+                </dd>
+              </dl>
+
+              <dl>
+                <dt>法人姓名</dt>
+                <dd>
+                  <input type="text" name="qy_faren" class="input large" value="{$qy_faren}" datatype="*2-100" sucmsg=" " />
+                </dd>
+              </dl>
+
+              <dl>
+                <dt>性别</dt>
+                <dd>
+                <php>
+                    $sexs=array("0"=>"保密","1"=>"男","2"=>"女");
+                </php>
+                <select name="sex" style="width:326px;"  datatype="*" sucmsg=" ">
+                    <foreach name="sexs" item="vo">
+                        <php>$sexselected=$key==$sex?"selected":"";</php>
+                        <option value="{$key}" {$sexselected}>{$vo}</option>
+                    </foreach>
+                </select>
+                </dd>
+              </dl>
+
+              <dl>
+                <dt>联系人</dt>
+                <dd>
+                  <input type="text" name="qy_lxname" class="input large" value="{$qy_lxname}"  datatype="*2-100" sucmsg=" " />
+                </dd>
+              </dl>
+              <dl>
+                <dt>电话</dt>
+                <dd>
+                  <input type="text" name="tel" class="input large" value="{$tel}"  datatype="*2-100" sucmsg=" " />
+                </dd>
+              </dl>
+
+              <dl>
+                <dt>手机号</dt>
+                <dd>
+                  <input type="text" name="mobile" id="qymobile" class="input large" value="{$mobile}"  datatype="*2-100" sucmsg=" " />
+                </dd>
+              </dl>
+              <dl>
+                <dt>邮箱</dt>
+                <dd>
+                  <input type="text" name="user_email" id="qyemail" class="input large" value="{$user_email}"  datatype="*2-100" sucmsg=" " />
+                </dd>
+              </dl>
+
+              <dl>
+                <dt>传真</dt>
+                <dd>
+                  <input type="text" name="fax" class="input large" value="{$fax}" datatype="*2-100" sucmsg=" " />
+                </dd>
+              </dl>
+              <dl>
+                <dt>企业官网</dt>
+                <dd>
+                  <input type="text" name="user_url" class="input large" value="{$user_url}"  datatype="*2-100" sucmsg=" " />
+                </dd>
+              </dl>
+
+              <dl>
+                <dt>GPS坐标</dt>
+                <dd>
+                  <INPUT class="input large" id="lng" name="lng" value="{$lng}" style="float:left;width:146px;">
+                  <INPUT class="input large" id="lat" name="lat" value="{$lat}" style="float:left;width:146px;">
+                </dd>
+              </dl>
+
+              <dl>
+                <dt>—————></dt>
+                <dd>
+                  <span style="color:#ff0000;">*<a href="###" onclick="setlatlng($('#lng').val(),$('#lat').val())">在地图中查看/设置</a></span>
+                </dd>
+              </dl>
+
+            
+              <dl style="width:100%; height:120px">
+                <dt>经营范围</dt>
+               <dd><textarea name="qy_jyfw" rows="2" cols="20"  style="height:100px;width:809px;">{$qy_jyfw}</textarea></dd>
+              </dl>
+
+              <dl style="width:100%; height:120px">
+                <dt>企业简介</dt>
+               <dd><textarea name="qy_jianjie" rows="2" cols="20"  style="height:100px;width:809px;">{$qy_jianjie}</textarea></dd>
+              </dl>
+              <dl>
+                <dt></dt>
+                <dd>
+                  <button type="submit" class="btn-block btn-blue js-ajax-submit">确定提交</button>
+                </dd>
+              </dl>
+            </div>
+            </form>
+    </div>
+</div>							
+  <include file="public@link" />
+	<include file="public@footer" />
+
 	<!-- /container -->
 	<include file="public@scripts" />
 </body>
