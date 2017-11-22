@@ -23,7 +23,7 @@ class JglistController extends HomeBaseController
         $cid                  = $this->request->param('cid', 0, 'intval');
         $portalCategoryModel = new PortalSsfwModel();
         $AreaModel = new PortalXzqyModel();
-        $category = $portalCategoryModel->where('id', $cid)->where('status', 1)->find()->toArray();
+        $category = $portalCategoryModel->where('id', $cid)->where('status', 1)->find();
         $catall = $portalCategoryModel->where('parent_id',0)->where('status', 1)->select();
         $cat2 = $portalCategoryModel->where('parent_id', $cid)->where('status', 1)->select();
         $area = $AreaModel->where('parent_id', 8)->where('status', 1)->order('list_order')->select();

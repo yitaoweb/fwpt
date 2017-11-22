@@ -371,6 +371,19 @@ class UserModel extends Model
         return 0;
     }
 
+    public function supplyData($user)
+    {
+        $userId           = cmf_get_current_user_id();
+     
+        $user['user_id'] = $userId;
+        $user['time'] =time();
+        $userQuery        = Db::name("portal_gxfb");
+        if ($userQuery->insertGetId($user)) {
+            return 1;
+        }
+        return 0;
+    }
+
     /**
      * 用户密码修改
      * @param $user

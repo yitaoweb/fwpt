@@ -78,9 +78,46 @@ class ProfileController extends UserBaseController
     {
         $user = cmf_get_current_user();
         $this->assign($user);
+        $fuwu=Db::name('portal_ssfw')->where('1=1')->order('id')->select();
+        $this->assign('fuwu',$fuwu);
         return $this->fetch('supply_add');
     }
 
+    /**
+     * 编辑用户资料提交
+     */
+    public function supplyPost()
+    {
+        if ($this->request->isPost()) {
+            $validate = new Validate([
+                'title' => 'require|max:100',
+                'gx'     => 'number|between:0,2',
+                'nr'   => 'require',
+     
+            ]);
+            $validate->message([
+                'title.require' => '标题不能为空',
+                'title.max' => '标题最大长度为100个字符',
+                'gx.number' => '请选择分类',
+                'gx.between' => '无效的分类选项',
+                'nr.require' => '内容不能为空',
+
+            ]);
+
+            $data = $this->request->post();
+            if (!$validate->check($data)) {
+                $this->error($validate->getError());
+            }
+            $editData = new UserModel();
+            if ($editData->supplyData($data)) {
+                $this->success("发布成功！", "user/profile/center");
+            } else {
+                $this->error("发布失败");
+            }
+        } else {
+            $this->error("请求错误");
+        }
+    }
 
     /**
      * 编辑用户资料提交
