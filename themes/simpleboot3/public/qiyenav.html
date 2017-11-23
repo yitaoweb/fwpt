@@ -1,3 +1,4 @@
+<script type="text/javascript" src="__TMPL__/public/assets/js/jquery.pagination.js"></script>
 <div class="left_nav_title">企业中心</div>
 		<ul id="expmenu-freebie">
 			<li>
@@ -9,8 +10,19 @@
 							<span class="arrow down"></span>
 						</div>
 						<ul class="menu">
-							<li class="selected"><a href="">基本信息</a></li>
+							<li class=""><a href="">基本信息</a></li>
 							<li><a href="{:url('user/profile/avatar')}">修改头像</a></li>
+						</ul>
+					</li>
+					<li>
+						<div class="header focusnav">
+							<span class="label">我的供求</span>
+							<span class="arrow up"></span>
+						</div>
+						<ul class="menu">
+							<li><a href="{:url('user/supply/gong')}">供应信息</a></li>
+							<li><a href="{:url('user/supply/qiu')}">求购信息</a></li>
+							<li><a href="{:url('user/supply/supply_add')}">发布供求</a></li>
 						</ul>
 					</li>
 					<li>
@@ -19,9 +31,9 @@
 							<span class="arrow up"></span>
 						</div>
 						<ul class="menu">
-							<li><a href="{:url('user/profile/supply_add')}">发布供求</a></li>
-							<li><a href="qiye-center.html">需求列表</a></li>
-							<li><a href="xuqiu-add.html">发布需求</a></li>
+							<li><a href="{:url('user/demand/add')}">发布需求</a></li>
+							<li><a href="{:url('user/demand/index')}">需求列表</a></li>
+							
 							<li><a href="">产品管理</a></li>
 						</ul>
 					</li>
@@ -30,3 +42,26 @@
 				<!-- End Freebie -->
 			</li>
 		</ul>
+
+<script type="text/javascript">
+		$(document).ready(function(){
+	        $("#Pagination").pagination("10");
+			$("ul.expmenu li > div.header").click(function()
+			{
+
+				
+				var arrow = $(this).find("span.arrow");
+				if(arrow.hasClass("up"))
+				{
+					arrow.removeClass("up");
+					arrow.addClass("down");
+				}
+				else if(arrow.hasClass("down"))
+				{
+					arrow.removeClass("down");
+					arrow.addClass("up");
+				}
+				$(this).parent().find("ul.menu").slideToggle();
+			});
+		});
+</script>

@@ -1913,3 +1913,34 @@ function navlist(){
     }
     return $nav;
 }
+
+/**
+ * 获取字段值
+ */
+
+function state($num){
+    switch ($num) {
+        case -1:
+            return "审核失败";
+            break;
+        case 0:
+            return "未审核";
+            break;
+        case 1:
+            return "待对接";
+            break;
+        case 2:
+            return "已对接";
+            break;
+        case 3:
+            return "已完成";
+            break;
+        case 4:
+            return "已评价";
+            break;
+        default:
+            return "未知";
+            break;
+    }
+    
+}

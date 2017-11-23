@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$user_login}  - 修改资料</title>
+<meta name="keywords" content=""/>
+<meta name="description" content="">
+<include file="public@head"/>
+
+</head>
+<body class="body-white" id="top">
+
+<include file="public@nav" />
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;企业中心</div>
+<div class="main">
+    <div class="main_l left">
+        <include file="public@qiyenav" />
+    </div>
+    
+    <div class="main_r right" style="min-height: 600px;">
+        <include file="public@qiyetop" />
+        <div class="right_title"><span>发布需求</span></div>
+          <form class="js-ajax-form" action="{:url('user/demand/addPost')}" method="post" id="register"> 
+            <div class="center_form">
+              <dl>
+                <dt>项目名称</dt>
+                <dd><input type="text" name="title" class="input large" value=""  datatype="*2-100" sucmsg=" "/></dd>
+              </dl>
+              <dl>
+                <dt></dt>
+                <dd></dd>
+              </dl>
+             
+
+              <dl>
+                <dt>服务类型</dt>
+                <dd>
+                <select name="ssfw_id" style="width:326px;"  datatype="*" sucmsg=" ">
+                    <option value="0" selected="selected">请选服务类型</option>
+                    <volist name="fuwu" id="vo">
+                        <option value="{$vo.id}">{$vo.name}</option>
+                    </volist>
+                </select>
+                </dd>
+              </dl>
+              <dl>
+                <dt></dt>
+                <dd></dd>
+              </dl>
+
+            
+              <dl style="width:100%; height:120px">
+                <dt>需求内容</dt>
+               <dd><textarea name="content" rows="2" cols="20"  style="height:100px;width:709px;"></textarea></dd>
+              </dl>
+
+             
+              <dl>
+                <dt></dt>
+                <dd>
+                  <button type="submit" class="btn-block btn-blue js-ajax-submit">确定提交</button>
+                </dd>
+              </dl>
+            </div>
+            </form>
+    </div>
+</div>							
+  <include file="public@link" />
+	<include file="public@footer" />
+
+	<!-- /container -->
+	<include file="public@scripts" />
+</body>
+</html>

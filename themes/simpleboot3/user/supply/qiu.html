@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$user_login}  - 求购信息</title>
+<meta name="keywords" content=""/>
+<meta name="description" content="">
+<include file="public@head"/>
+
+</head>
+<body class="body-white" id="top">
+
+<include file="public@nav" />
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;企业中心</div>
+<div class="main">
+    <div class="main_l left">
+        <include file="public@qiyenav" />
+    </div>
+    
+    <div class="main_r right" style="min-height: 600px;">
+        <include file="public@qiyetop" />
+        <div class="right_title"><span>求购信息</span></div>
+        <div class="center_form" style="min-height: 400px;">
+              
+              <table class="fwtable">
+                <thead>
+                  <tr>
+                    <th>序号</th>
+                    <th>内容描述</th>
+                    <th>发布时间</th>
+                  </tr>
+                </thead>
+              <tbody>
+                <foreach name="lists" item="vo">
+                  <tr>
+                    <td>{$key+1}</td>
+                    <td>{$vo.title}</td>
+                    <td>{$vo.time|date='m-d',###}</td>
+                  </tr>
+                  </foreach>
+              </tbody>
+            </table>
+            <div class="clear"></div>
+            
+            <div class="yahoo2">{$page|default=''}</div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>              
+  <include file="public@link" />
+  <include file="public@footer" />
+
+  <!-- /container -->
+  <include file="public@scripts" />
+</body>
+</html>
