@@ -53,8 +53,9 @@
     <hook name="before_head_end"/>
 </head>
 <body class="body-white">
+    
 <include file="public@nav"/>
-<include file="public@dt"/>
+
 <!--第一楼-->
 
 <div class="main">
@@ -346,6 +347,7 @@
 <div class="left-box">
 <div class="box-title left mt10"><span><a href="fuwu.html" target="_blank">数据分布展示图</a></span></div>
 <div class="ditu">
+   <include file="public@dt"/>
    <img src="__TMPL__/public/assets/images/ditu.jpg" usemap="#Map" onClick="dts()"/>
    <map name="Map" id="Map">
     <area onClick="wxx()"  id='wxx' shape="poly" coords="501,78,499,95,492,110,485,126,472,135,457,122,437,117,420,120,393,111,383,95,369,68,352,65,334,57,327,19,361,23" href="javascript:void(0);" />

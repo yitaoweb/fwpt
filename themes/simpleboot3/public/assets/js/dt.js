@@ -329,6 +329,7 @@
                  $('#zzx').hide();
                  $('#tlx').hide();
                  $('#xyx').hide();
+                 $('#qyx').hide();
                  
            })
      }

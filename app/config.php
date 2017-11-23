@@ -9,6 +9,7 @@
 // | Author: Dean <zxxjjforever@163.com>
 // +----------------------------------------------------------------------
 if (file_exists(CMF_ROOT . "data/conf/config.php")) {
+
     $runtimeConfig = include CMF_ROOT . "data/conf/config.php";
 } else {
     $runtimeConfig = [];
