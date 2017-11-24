@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes" />
+<meta name="format-detection" content="telephone=no"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+<title>登录</title>
+<link href="__TMPL__/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__TMPL__/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="__TMPL__/js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="__TMPL__/js/layout.js"></script>	
+    <script type="text/javascript">
+        $(function () {
+            //初始化表单验证
+            $("#reg-form").initValidform();
+        });
+    </script>
+
+</head>
+<body>
+		<header class="nav-bar">
+			<a class="pull-left" href="index.html"></a>
+			<h1 class="nav-title">登录</h1>
+		</header>
+		<div class="header-line"></div>
+		<form id="reg-form" method="post" action="{:url('user/login/doLogin')}" >
+		<div class="rule-multi-radio mt20">
+		<input name="logintype" id="r1" type="radio" value="1" checked="checked"><label for="r1">企业登录</label>
+		<input name="logintype" id="r2" type="radio" value="2"><label for="r2">机构登录</label>
+    	</div>
+		
+		<div class="my-content radius mt10">
+			
+				<div class="input-row">
+					<input id='account' name="username" type="text" class="my-input input" datatype="*5-16" placeholder="请输入用户名" sucmsg=" ">
+				</div>
+				<div class="input-row">
+					<input id='password' name="password" type="password" class="my-input input" datatype="w5-16" placeholder="请输入密码"  sucmsg=" ">
+				</div>
+				<div class="input-row">
+					 <input type="text" name="captcha" class="input" placeholder="请输入验证码" autocomplete="off" /> 
+		             <captcha style="float: left;cursor: pointer;" height="36" width="146" font-size="20"/>
+				</div>
+				<div class="check-rows">
+				    <a id='forgetPassword' href="forget_password.html">忘记密码</a>
+					<div class="link-area"><input name="checkbox" value="jz" type="checkbox" id="jz" class="magic-checkbox" ><label for="jz">记住用户名</label></div>	
+				</div>
+				
+			<div class="btn-rows">
+				<button type="submit" id='login' class="my-btn blue wd100">登录</button>
+			</div>
+			
+			<div class="tip-rows">
+			<fieldset><legend>没有账号？免费注册</legend></fieldset>
+			</div>
+			<div class="btn-rows">
+				<a href="jigou-register.html" class="my-btn orange wd100">马上注册</a>
+			</div>
+		</div>
+		</form>
+	<div class="header-line"></div>
+	<footer class="foot-bar">
+	<ul>
+	<li><a href="../Index.html"><i><img src="./themes/mobile/images/foot01.png" /><i>首页</a></li>
+	<li><a href="../Search.html"><i><img src="./themes/mobile/images/foot02.png" /><i>搜索</a></li>
+	<li><a href=""><i><img src="./themes/mobile/images/foot03.png" /><i>联系</a></li>
+	<li><a href="Index.aspx"><i><img src="./themes/mobile/images/foot04.png" /><i>咨询</a></li>
+	</ul>
+	</footer>
+	</body>
+
+</html>
