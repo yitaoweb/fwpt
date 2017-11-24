@@ -177,21 +177,15 @@
       </thead>
       <tbody>
     <tr>
-          <td><span>内容描述</span></td>
+          <td width="80%"><span>内容描述</span></td>
            <td><span>发布时间</span></td>
         </tr>
+        <volist name="gong" id="vo">
         <tr>
-           <td><a href="">专家谈“江歌案” ：中日两国对该案都有刑事管辖权</a></td>
-           <td>2017-11-18</td>
+           <td><a href="">{$vo.title}</a></td>
+           <td>{$vo.time|date='Y-m-d',###}</td>
         </tr>
-        <tr>
-           <td><a href="">虐童案数量攀升 是否增设“虐待儿童罪”存争议</a></td>
-          <td>2017-11-18</td>
-        </tr>
-          <tr>
-          <td><a href="">公安部交管局：在全国分三批推广新能源汽车专用号牌</a></td>
-           <td>2017-11-18</td>
-        </tr>
+        </volist>
       </tbody>
     </table>
   
@@ -204,21 +198,15 @@
       </thead>
       <tbody>
     <tr>
-          <td><span>内容描述</span></td>
+          <td width="80%"><span>内容描述</span></td>
            <td><span>发布时间</span></td>
         </tr>
+       <volist name="qiu" id="vo">
         <tr>
-          <td><a href="">公安部交管局：在全国分三批推广新能源汽车专用号牌</a></td>
-           <td>2017-11-18</td>
+           <td><a href="">{$vo.title}</a></td>
+           <td>{$vo.time|date='Y-m-d',###}</td>
         </tr>
-        <tr>
-           <td><a href="">专家谈“江歌案” ：中日两国对该案都有刑事管辖权</a></td>
-           <td>2017-11-18</td>
-        </tr>
-        <tr>
-           <td><a href="">虐童案数量攀升 是否增设“虐待儿童罪”存争议</a></td>
-          <td>2017-11-18</td>
-        </tr>
+        </volist>
       </tbody>
     </table>
 </div>
@@ -236,69 +224,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><a href="">公安部交管局：在全国分三批推广新能源汽车专用号牌</a></td>
-       <td>易淘网络科技有限公司</td>
-       <td>信息服务</td>
-       <td>处理中</td>
-           <td>2017-11-18</td>
-        </tr>
-        <tr>
-           <td><a href="">专家谈“江歌案” ：中日两国对该案都有刑事管辖权</a></td>
-        <td>易淘网络科技有限公司</td>
-       <td>信息服务</td>
-       <td>处理中</td>
-           <td>2017-11-18</td>
-        </tr>
-        <tr>
-           <td><a href="">虐童案数量攀升 是否增设“虐待儿童罪”存争议</a></td>
-        <td>易淘网络科技有限公司</td>
-       <td>信息服务</td>
-       <td>处理中</td>
-          <td>2017-11-18</td>
-        </tr>
-        <tr>
-          <td><a href="">公安部交管局：在全国分三批推广新能源汽车专用号牌</a></td>
-       <td>易淘网络科技有限公司</td>
-       <td>信息服务</td>
-       <td>处理中</td>
-           <td>2017-11-18</td>
-        </tr>
-        <tr>
-           <td><a href="">专家谈“江歌案” ：中日两国对该案都有刑事管辖权</a></td>
-        <td>易淘网络科技有限公司</td>
-       <td>信息服务</td>
-       <td>处理中</td>
-           <td>2017-11-18</td>
-        </tr>
-        <tr>
-           <td><a href="">虐童案数量攀升 是否增设“虐待儿童罪”存争议</a></td>
-        <td>易淘网络科技有限公司</td>
-       <td>信息服务</td>
-       <td>处理中</td>
-          <td>2017-11-18</td>
-        </tr>
-        <tr>
-          <td><a href="">公安部交管局：在全国分三批推广新能源汽车专用号牌</a></td>
-       <td>易淘网络科技有限公司</td>
-       <td>信息服务</td>
-       <td>处理中</td>
-           <td>2017-11-18</td>
-        </tr>
-        <tr>
-           <td><a href="">专家谈“江歌案” ：中日两国对该案都有刑事管辖权</a></td>
-        <td>易淘网络科技有限公司</td>
-       <td>信息服务</td>
-       <td>处理中</td>
-           <td>2017-11-18</td>
-        </tr>
-        <tr>
-          <td><a href="">公安部交管局：在全国分三批推广新能源汽车专用号牌</a></td>
-       <td>易淘网络科技有限公司</td>
-       <td>信息服务</td>
-       <td>处理中</td>
-           <td>2017-11-18</td>
-        </tr>
+        <volist name="supply" id="vo">
+          <tr>
+            <td><a href="">{$vo.title}</a></td>
+            <td>{:getfield('user',$user_id,'user_nickname')}</td>
+            <td>{:getfield('portal_ssfw',$qy_ssfw,'name')}</td>
+            <td>{$vo.state|state=###}</td>
+            <td>{$vo.time|date='Y-m-d',###}</td>
+          </tr>
+        </volist>
       </tbody>
     </table>
 </div>

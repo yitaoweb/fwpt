@@ -24,9 +24,8 @@
     </style>
 </head>
 <body class="body-white" id="top">
-<body class="body-white" id="top">
 <include file="public@nav" />
-<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;企业中心</div>
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;<if condition='($user_type == 2)'>企业<else/>机构</if>中心</div>
 <div class="main">
     <div class="main_l left">
         <include file="public@qiyenav" />
@@ -36,7 +35,7 @@
         <include file="public@qiyetop" />
 
             <div class="right_title"><span>设置头像</span></div>
-            <div class="info_form" style="min-height: 300px;">
+            <div class="info_form">
                 <div class="tab-content">
                     <div class="tab-pane active" id="one">
                         <br>

@@ -45,7 +45,7 @@ class ProfileController extends UserBaseController
                 break;
         }
         
-
+        $this->assign("um",1);
         return $this->fetch('/profile/' . $listTpl);
     }
 
@@ -58,6 +58,7 @@ class ProfileController extends UserBaseController
         $area=Db::name('portal_xzqy')->where(array('parent_id' => 8))->order('list_order')->select();
         $this->assign($user);
         $this->assign('area',$area);
+        $this->assign("um",1);
         return $this->fetch('edit');
     }
 
@@ -134,6 +135,7 @@ class ProfileController extends UserBaseController
     {
         $user = cmf_get_current_user();
         $this->assign($user);
+        $this->assign("um",1);
         return $this->fetch();
     }
 
@@ -191,6 +193,7 @@ class ProfileController extends UserBaseController
     {
         $user = cmf_get_current_user();
         $this->assign($user);
+        $this->assign("um",1);
         return $this->fetch();
     }
 

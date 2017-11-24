@@ -10,7 +10,7 @@
 <body class="body-white" id="top">
 
 <include file="public@nav" />
-<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;企业中心</div>
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;<if condition='($user_type == 2)'>企业<else/>机构</if>中心</div>
 <div class="main">
     <div class="main_l left">
         <include file="public@qiyenav" />
@@ -19,7 +19,7 @@
     <div class="main_r right" style="min-height: 600px;">
         <include file="public@qiyetop" />
         <div class="right_title"><span>供应信息</span></div>
-        <div class="center_form" style="min-height: 400px;">
+        <div class="center_form">
               
               <table class="fwtable">
                 <thead>

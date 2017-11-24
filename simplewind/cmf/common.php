@@ -1944,3 +1944,22 @@ function state($num){
     }
     
 }
+
+/**
+ * 性别
+ */
+
+function sex($num){
+    switch ($num) {
+        case 0:
+            return "保密";
+            break;
+        case 1:
+            return "男";
+            break;
+        case 2:
+            return "女";
+            break;
+    }
+    
+}

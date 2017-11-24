@@ -219,3 +219,177 @@ div.yahoo2 a.next{border:#ccdbe4 2px solid;margin:0px 0px 0px 10px;}
 div.yahoo2 a.next:hover{border:#2b55af 2px solid;}
 div.yahoo2 a.prev{border:#ccdbe4 2px solid;margin:0px 10px 0px 0px;}
 div.yahoo2 a.prev:hover{border:#2b55af 2px solid;}
+
+.btn-r { 
+    background-color:#2A82E6; 
+    color: #FFF;
+    text-align: center; 
+    border: none; 
+    width: 65%; 
+    display: inline-block; 
+    font-size: 14px; 
+    height:35px; 
+    line-height:35px;  
+    border-radius: 3px; 
+}
+.btn-r:active { 
+    background-color:#2A82E6; 
+    color: #FFF;
+}
+.btn-r:hover { 
+    background-color:#2A82E6; 
+    color: #FFF;
+}
+
+.center_form{min-height: 450px;clear: both;}
+.info_form{min-height: 410px;clear: both;}
+.tabpanes{min-height: 450px;clear: both;}
+
+
+/** =======================
+ * Contenedor Principal
+ ===========================*/
+.list-title{
+    width: 258px;
+    height: 40px;
+    font-size: 18px;
+    text-indent: 2em;
+    color: #589DEB;
+    font-weight: bold;
+    line-height: 40px;
+}
+h1 {
+    color: #FFF;
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 80px;
+}
+
+h1 a {
+    color: #f39800;
+    font-size: 16px;
+}
+
+.accordion {
+    width: 100%;
+    max-width: 258px;
+    border: solid 1px #ccc;
+    background: #FFF;
+}
+
+.accordion .link {
+    cursor: pointer;
+    display: block;
+    padding: 12px 15px 12px 42px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    border-bottom: 1px solid #CCC;
+    position: relative;
+	background-color:#589DEB;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.accordion li:last-child .link {
+    border-bottom: 0;
+}
+.accordion li{
+    cursor: pointer;
+}
+.accordion li i {
+    position: absolute;
+    top: 16px;
+    left: 12px;
+    font-size: 18px;
+    color: #fff;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.accordion li i.fa-chevron-down {
+    right: 12px;
+    left: auto;
+    font-size: 16px;
+}
+
+.accordion li.open .link {
+    color: #fff;
+}
+
+.accordion li.open i {
+    color: #fff;
+}
+
+.accordion li.open i.fa-chevron-down {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+/**
+ * Submenu
+ -----------------------------*/
+.submenu {
+    display: none;
+    background: #fff;
+    font-size: 14px;
+}
+
+.submenu li {
+    border-bottom: 1px dotted #eee;
+}
+
+.submenu a {
+    display: block;
+    text-decoration: none;
+    color: #666;
+    padding: 12px;
+    padding-left: 42px;
+    -webkit-transition: all 0.25s ease;
+    -o-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+}
+
+.submenu a:hover ,.submenu li.current a{
+    background: #f4f4f4;
+    color: #0089C;
+}
+
+.dis{display: block;}
+
+
+.control-label {
+    font-weight: bold;
+    float: left;
+    width: 70px;
+}
+.base-info{
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 4px;
+    min-height: 560px;
+    margin-bottom: 15px;
+    background: #fff;
+    font-size: 14px;
+}
+.base-info dl{
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    color: #666;
+    width: 860px;
+}
+.base-info dl dt{
+    float: left;
+    width: 90px;
+}
+.base-info dl dd{
+    float: left;
+    width: 340px;
+}

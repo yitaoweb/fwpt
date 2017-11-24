@@ -1,67 +1,89 @@
-<script type="text/javascript" src="__TMPL__/public/assets/js/jquery.pagination.js"></script>
-<div class="left_nav_title">企业中心</div>
-		<ul id="expmenu-freebie">
-			<li>
-				<!-- Start Freebie -->
-				<ul class="expmenu">
-					<li>
-						<div class="header focusnav">
-							<span class="label">账户设置</span>
-							<span class="arrow down"></span>
-						</div>
-						<ul class="menu">
-							<li class=""><a href="">基本信息</a></li>
-							<li><a href="{:url('user/profile/avatar')}">修改头像</a></li>
-						</ul>
-					</li>
-					<li>
-						<div class="header focusnav">
-							<span class="label">我的供求</span>
-							<span class="arrow up"></span>
-						</div>
-						<ul class="menu">
-							<li><a href="{:url('user/supply/gong')}">供应信息</a></li>
-							<li><a href="{:url('user/supply/qiu')}">求购信息</a></li>
-							<li><a href="{:url('user/supply/supply_add')}">发布供求</a></li>
-						</ul>
-					</li>
-					<li>
-						<div class="header focusnav">
-							<span class="label">我的需求</span>
-							<span class="arrow up"></span>
-						</div>
-						<ul class="menu">
-							<li><a href="{:url('user/demand/add')}">发布需求</a></li>
-							<li><a href="{:url('user/demand/index')}">需求列表</a></li>
-							
-							<li><a href="">产品管理</a></li>
-						</ul>
-					</li>
-					
-				</ul>
-				<!-- End Freebie -->
-			</li>
-		</ul>
+
+	<div class="account-l fl">
+		<div class="list-title"><if condition='($user_type == 2)'>企业<else/>机构</if>中心</div>
+        <ul id="accordion" class="accordion">
+            <li>
+                <div class="link">账户设置<i class="fa fa-chevron-down"></i></div>
+                <ul class="submenu <if condition='($um == 1)'>dis</if>" >
+                    <li><a href="{:url('user/profile/center')}">基本信息</a></li>
+				    <li><a href="{:url('user/profile/avatar')}">修改头像</a></li>
+				    <li><a href="{:url('user/profile/password')}">修改密码</a></li>
+					<li><a href="{:url('user/favorite/index')}">我的收藏</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="link">我的供求<i class="fa fa-chevron-down"></i></div>
+                <ul class="submenu <if condition='($um == 2)'>dis</if>">
+                    <li><a href="{:url('user/supply/gong')}">供应信息</a></li>
+					<li><a href="{:url('user/supply/qiu')}">求购信息</a></li>
+					<li><a href="{:url('user/supply/supply_add')}">发布供求</a></li>
+                </ul>
+            </li>
+
+            <if condition='($user_type == 2)'>
+
+            <li>
+                <div class="link">我的需求<i class="fa fa-chevron-down"></i></div>
+                <ul class="submenu <if condition='($um == 3)'>dis</if>">
+                    <li><a href="{:url('user/demand/add')}">发布需求</a></li>
+					<li><a href="{:url('user/demand/index')}">需求列表</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="link">数据上报<i class="fa fa-chevron-down"></i></div>
+                <ul class="submenu <if condition='($um == 4)'>dis</if>">
+                    <li><a href="{:url('user/entdata/index')}">企业数据</a></li>
+					<li><a href="{:url('user/entdata/add')}">企业数据上报</a></li>
+                </ul>
+            </li>
+
+            <else/>
+
+            <li>
+                <div class="link">我的服务产品<i class="fa fa-chevron-down"></i></div>
+                <ul class="submenu <if condition='($um == 5)'>dis</if>">
+                    <li><a href="{:url('user/product/add')}">发布服务产品</a></li>
+					<li><a href="{:url('user/product/index')}">服务产品列表</a></li>
+                </ul>
+            </li>
+
+            </if>
+            
+            
+            
+        </ul>
+    </div>
+
 
 <script type="text/javascript">
-		$(document).ready(function(){
-	        $("#Pagination").pagination("10");
-			$("ul.expmenu li > div.header").click(function()
-			{
+	$(function() {
+		var Accordion = function(el, multiple) {
+			this.el = el || {};
+			this.multiple = multiple || false;
 
-				
-				var arrow = $(this).find("span.arrow");
-				if(arrow.hasClass("up"))
-				{
-					arrow.removeClass("up");
-					arrow.addClass("down");
-				}
-				else if(arrow.hasClass("down"))
-				{
-					arrow.removeClass("down");
-					arrow.addClass("up");
-				}
-				$(this).parent().find("ul.menu").slideToggle();
-			});
+			// Variables privadas
+			var links = this.el.find('.link');
+			// Evento
+			links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
+		};
+
+		Accordion.prototype.dropdown = function(e) {
+			var $el = e.data.el;
+				$this = $(this);
+				$next = $this.next();
+
+			$next.slideToggle();
+			$this.parent().toggleClass('open');
+
+			if (!e.data.multiple) {
+				$el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+			}
+		};
+
+		var accordion = new Accordion($('#accordion'), false);
+		$('.submenu li').click(function () {
+			$(this).addClass('current').siblings('li').removeClass('current');
 		});
+	});
+		
 </script>

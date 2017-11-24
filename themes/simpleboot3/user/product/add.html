@@ -18,19 +18,27 @@
     
     <div class="main_r right" style="min-height: 600px;">
         <include file="public@qiyetop" />
-        <div class="right_title"><span>发布需求</span></div>
-          <form class="js-ajax-form" action="{:url('user/demand/addPost')}" method="post" id="register"> 
+        <div class="right_title"><span>发布服务/产品</span></div>
+          <form class="js-ajax-form" action="{:url('user/product/addPost')}" method="post" id="register"> 
             <div class="center_form">
               <dl>
-                <dt>项目名称</dt>
-                <dd><input type="text" name="title" class="input large" value=""  datatype="*2-100" sucmsg=" "/></dd>
+                <dt>服务名称：</dt>
+                <dd><input type="text" name="title" class="input large" value="" placeholder="请输入服务项目/产品名称"  datatype="*2-100" sucmsg=" "/></dd>
               </dl>
               <dl>
                 <dt></dt>
                 <dd></dd>
               </dl>
              
-
+              <dl>
+                <dt>收费标准：</dt>
+                <dd><input type="text" name="price" class="input large" value="" placeholder="请输入收费标准的单价" datatype="*2-100" sucmsg=" "/></dd>
+              </dl>
+              <dl>
+                <dt>单位：</dt>
+                <dd><input type="text" name="unit" class="input large" value="" placeholder="请输入收费标准的单位"  datatype="*2-100" sucmsg=" "/></dd>
+              </dl>
+             
               <dl>
                 <dt>服务类型</dt>
                 <dd>
@@ -47,12 +55,24 @@
                 <dd></dd>
               </dl>
 
-            
               <dl style="width:100%; height:120px">
-                <dt>需求内容</dt>
-               <dd><textarea name="content" rows="2" cols="20"  style="height:100px;width:709px;"></textarea></dd>
+                <dt>服务介绍</dt>
+               <dd><textarea name="content" rows="2" cols="20"  style="height:100px;width:750px;"></textarea></dd>
               </dl>
 
+
+
+              <dl>
+                <dt>服务图片</dt>
+                <dd>
+                  <input type="text" name="img" style="width: 200px;" id="img" placeholder="上传服务/产品图片" class="input large" datatype="*2-100" sucmsg=" " />
+                  <a class="btn-r" style="width: 108px;cursor: pointer;"  href="javascript:uploadOneImage('图片上传','#img');">上传</a>
+                </dd>
+              </dl>
+              <dl>
+                <dt></dt>
+                <dd></dd>
+              </dl>
              
               <dl>
                 <dt></dt>

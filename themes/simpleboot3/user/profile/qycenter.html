@@ -5,63 +5,11 @@
 <meta name="keywords" content=""/>
 <meta name="description" content="">
 <include file="public@head"/>
-<script type="text/javascript" src="__TMPL__/public/assets/js/jquery.pagination.js"></script>
-<style>
-.control-label {
-	font-weight: bold;
-	float: left;
-	width: 70px;
-}
-.base-info{
-	border: 1px solid #eee;
-    padding: 15px;
-    border-radius: 4px;
-    min-height: 560px;
-    margin-bottom: 15px;
-    background: #fff;
-    font-size: 14px;
-}
-.base-info dl{
-	float: left;
-    height: 30px;
-    line-height: 30px;
-    font-size: 14px;
-    color: #666;
-    width: 860px;
-}
-.base-info dl dt{
-	float: left;
-    width: 90px;
-}
-.base-info dl dd{
-	float: left;
-    width: 340px;
-}
-</style>
-<script type="text/javascript">
-		$(document).ready(function(){
-	        $("#Pagination").pagination("10");
-			$("ul.expmenu li > div.header").click(function()
-			{
-				var arrow = $(this).find("span.arrow");
-				if(arrow.hasClass("up"))
-				{
-					arrow.removeClass("up");
-					arrow.addClass("down");
-				}
-				else if(arrow.hasClass("down"))
-				{
-					arrow.removeClass("down");
-					arrow.addClass("up");
-				}
-				$(this).parent().find("ul.menu").slideToggle();
-			});
-		});
-</script>
+
 </head>
 <body class="body-white" id="top">
 <include file="public@nav" />
-<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;企业中心</div>
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;<if condition='($user_type == 2)'>企业<else/>机构</if>中心</div>
 <div class="main">
 	<div class="main_l left">
 		<include file="public@qiyenav" />
@@ -71,7 +19,9 @@
 		<include file="public@qiyetop" />
 		<div class="right_title"><span>基本信息</span></div>
 		<div class="base-info" style="min-height: 600px;">
-			<dl><dt>企业编号：</dt><dd>{$qy_code}</dd><dt>信用代码：</dt><dd>{$qy_xydm}</dd></dl>
+			<dl><dt>机构编号：</dt><dd>{$qy_code}</dd><dt>信用代码：</dt><dd>{$qy_xydm}</dd></dl>
+			
+			<dl><dt>注册资金：</dt><dd>{$qy_zczj}万元</dd><dt>注册时间：</dt><dd>{$qy_zcsj|date='Y-m-d',###}</dd></dl>
 			<dl><dt>行政区域：</dt><dd>山西-长治-{:getfield('portal_xzqy',$qy_area,'name')}</dd><dt>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</dt><dd>{$qy_address}</dd></dl>
 			<dl><dt>法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人：</dt><dd>{$qy_faren}</dd><dt>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</dt><dd>{$qy_lxname}</dd></dl>
 			<dl><dt>手&nbsp;&nbsp;机&nbsp;&nbsp;号：</dt><dd>{$mobile}</dd><dt>企业类型：</dt><dd>{:getfield('portal_djlx',$qy_class,'name')}</dd></dl>

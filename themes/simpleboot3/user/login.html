@@ -15,10 +15,7 @@
 	<div class="login_logo"></div>
 		<form action="{:url('user/login/doLogin')}" method="post"> 
 		   <div id="view" class="login_type toggle"> 
-		    <input type="radio" name="user_type" id="view-list" value="list" checked="checked" /> 
-		    <label for="view-list">企业登录</label> 
-		    <input type="radio" name="view" id="view-grid" value="grid" /> 
-		    <label for="view-grid">机构登录</label> 
+		    <label for="view-list">用户登录</label> 
 		   </div> 
 		   <div class="login_box radius4 shadow"> 
 		    <div class="login_box_l left"> 
@@ -61,7 +58,7 @@
 		    </div> 
 		    <div class="loginbox_r left"> 
 		     <div class="login_info"> 
-		      <a href="{:cmf_url('user/Register/index')}" class="radius4">企业注册</a> 
+		      <a href="{:cmf_url('user/Register/qiye')}" class="radius4">企业注册</a> 
 		      <ul> 
 		       <li class="login_info_title">企业用户专享特权</li> 
 		       <li>享受各类服务产品</li> 
@@ -70,7 +67,7 @@
 		      </ul> 
 		     </div> 
 		     <div class="login_info"> 
-		      <a href="{:cmf_url('user/Register/index')}" class="radius4">机构注册</a> 
+		      <a href="{:cmf_url('user/Register/jigou')}" class="radius4">机构注册</a> 
 		      <ul> 
 		       <li class="login_info_title">服务机构特色功能</li> 
 		       <li>享受机构的专业店面</li> 

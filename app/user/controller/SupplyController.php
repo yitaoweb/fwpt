@@ -33,6 +33,7 @@ class SupplyController extends UserBaseController
         $this->assign($user);
         $this->assign("page", $gong->render());
         $this->assign("lists", $gong->items());
+        $this->assign("um",2);
         return $this->fetch();
     }
 
@@ -51,6 +52,7 @@ class SupplyController extends UserBaseController
         $this->assign($user);
         $this->assign("page", $qiu->render());
         $this->assign("lists", $qiu->items());
+        $this->assign("um",2);
         return $this->fetch();
     }
 
@@ -64,6 +66,7 @@ class SupplyController extends UserBaseController
         $this->assign($user);
         $fuwu=Db::name('portal_ssfw')->where('1=1')->order('id')->select();
         $this->assign('fuwu',$fuwu);
+        $this->assign("um",2);
         return $this->fetch();
     }
 

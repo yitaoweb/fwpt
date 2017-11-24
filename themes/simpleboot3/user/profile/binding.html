@@ -9,18 +9,17 @@
 <body class="body-white" id="top">
 	<include file="public@nav" />
 
-	<div class="container tc-main">
-		<div class="row">
-			<div class="col-md-3">
-				<include file="public@usernav" />
-			</div>
-			<div class="col-md-9">
-				<div class="tabs">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-exchange"></i> 绑定账号</a></li>
-					</ul>
-					<div class="tab-content">
-						<div class="tab-pane active" id="one">
+	<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;<if condition='($user_type == 2)'>企业<else/>机构</if>中心</div>
+	<div class="main">
+	    <div class="main_l left">
+	        <include file="public@qiyenav" />
+	    </div>
+	    
+	    <div class="main_r right" style="min-height: 600px;">
+	        <include file="public@qiyetop" />
+	        <div class="right_title"><span>绑定账号</span></div>
+			<div class="info_form">
+					<div class="tab-pane active" id="one">
 							<br>
 							<if condition="!$mobile">
 							<form class="js-ajax-form" action="{:url('user/Profile/bindingMobile')}" method="post">
@@ -64,14 +63,13 @@
 									</div>
 								</div>
 							</if>
-
-						</div>
-					</div>
-				</div>
+                    </div>
 			</div>
 		</div>
-		<include file="public@footer" />
 	</div>
+	<include file="public@link" />
+	<include file="public@footer" />
+
 	<!-- /container -->
 	<include file="public@scripts" />
 </body>

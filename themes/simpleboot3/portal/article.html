@@ -89,17 +89,38 @@ $(document).ready(function(){
 
 　　{$article.post_content}
 
-<div class="news_print no-print">
-<a href="{:url('user/favorite/add')}"
-                           class="js-favorite-btn"
-                           data-title="{:base64_encode($article.post_title)}"
-                           data-url="{:cmf_url_encode('portal/Article/index',array('id'=>$article['id']))}"
-                           data-table="portal_post"
-                           data-id="{$article['id']}"
-                        >收藏内容</a><a href="javascript:;" id="printbtn">打印内容</a><a href="javascript:;" id="closebtn">关闭页面</a><a href="javascript:;" id="gotopbtn">返回顶部</a>
+  <div class="news_print no-print">
+  <a href="{:url('user/favorite/add')}"
+                             class="js-favorite-btn"
+                             data-title="{:base64_encode($article.post_title)}"
+                             data-url="{:cmf_url_encode('portal/Article/index',array('id'=>$article['id']))}"
+                             data-table="portal_post"
+                             data-id="{$article['id']}"
+                          >收藏内容</a><a href="javascript:;" id="printbtn">打印内容</a><a href="javascript:;" id="closebtn">关闭页面</a><a href="javascript:;" id="gotopbtn">返回顶部</a>
 
 
-</div>
+  </div>
+                <php>
+                    $after_content_hook_param=[
+                    'object_id'=>$article['id'],
+                    'table_name'=>'portal_post',
+                    'object_title'=>$article['post_title'],
+                    'user_id'=>$article['user_id'],
+                    'url'=>cmf_url_encode('portal/Article/index',array('id'=>$article['id'],'cid'=>$category['id'])),
+                    'object'=>$article
+                    ];
+                </php>
+                <hook name="after_content" param="after_content_hook_param"/>
+
+                <php>
+                    $comment_hook_param=[
+                    'object_id'=>$article['id'],
+                    'table_name'=>'portal_post',
+                    'object_title'=>$article['post_title'],
+                    'url'=>cmf_url_encode('portal/Article/index',array('id'=>$article['id'],'cid'=>$category['id']))
+                    ];
+                    $comment=hook_one('comment',$comment_hook_param);
+                </php>
 </div>
 <script type='text/javascript'>
    $(function() {
@@ -135,5 +156,13 @@ $(document).ready(function(){
 
 
 <hook name="before_body_end"/>
+
+
+  <include file="public@link" />
+  <include file="public@footer" />
+
+  <!-- /container -->
+  <include file="public@scripts" />
+
 </body>
 </html>

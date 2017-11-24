@@ -15,56 +15,31 @@ use app\user\model\UserModel;
 use think\Validate;
 use think\Db;
 
-class DemandController extends UserBaseController
+class ProductController extends UserBaseController
 {
 
     /**
-     * 需求列表
+     * 个人中心我的收藏列表
      */
     public function index()
     {
         $user = cmf_get_current_user();
         $userId               = cmf_get_current_user_id();
-        $gongqiuQuery            = Db::name("portal_fwxq");
+        $productQuery            = Db::name("portal_fwcp");
         $where['user_id']     = $userId;
-        $all           = $gongqiuQuery->where($where)->order('id desc')->paginate(10);
-        $where['state'] = array('egt',2);
-        $ydj           = $gongqiuQuery->where($where)->order('id desc')->paginate(10);
-        $where['state'] = 0;
-        $wsl           = $gongqiuQuery->where($where)->order('id desc')->paginate(10);
+        $product           = $productQuery->where($where)->order('id desc')->paginate(10);
+     
         $this->assign($user);
-        $this->assign("page", $all->render());
-        $this->assign("lists", $all->items());
-        $this->assign("wpage", $wsl->render());
-        $this->assign("wlists", $wsl->items());
-        $this->assign("ypage", $ydj->render());
-        $this->assign("ylists", $ydj->items());
-        $this->assign("um",3);
-        return $this->fetch();
-    }
+        $this->assign("page", $product->render());
+        $this->assign("lists", $product->items());
 
-    /**
-     * 求购列表
-     */
-    public function qiu()
-    {
-        $user = cmf_get_current_user();
-        $userId               = cmf_get_current_user_id();
-        $gongqiuQuery            = Db::name("portal_gxfb");
-        $where['user_id']     = $userId;
-        $where['gx']     = 1;
-        $qiu           = $gongqiuQuery->where($where)->order('id desc')->paginate(10);
-
-        $this->assign($user);
-        $this->assign("page", $qiu->render());
-        $this->assign("lists", $qiu->items());
-
+        $this->assign("um",5);
         return $this->fetch();
     }
 
 
     /**
-     * 企业供求信息
+     * 服务产品发布
      */
     public function add()
     {
@@ -72,25 +47,27 @@ class DemandController extends UserBaseController
         $this->assign($user);
         $fuwu=Db::name('portal_ssfw')->where('1=1')->order('id')->select();
         $this->assign('fuwu',$fuwu);
-        $this->assign("um",3);
+        $this->assign("um",5);
         return $this->fetch();
     }
 
     /**
-     * 供求资料提交
+     * 服务产品提交
      */
     public function addPost()
     {
         if ($this->request->isPost()) {
             $validate = new Validate([
                 'title' => 'require|max:100',
-                'content'   => 'require',
+                'price'     => 'number',
+                'unit'   => 'require',
      
             ]);
             $validate->message([
-                'title.require' => '标题不能为空',
-                'title.max' => '标题最大长度为100个字符',
-                'content.require' => '内容不能为空',
+                'title.require' => '服务名称不能为空',
+                'title.max' => '服务名称最大长度为100个字符',
+                'price.require' => '收费标准必须是数字',
+                'unit.require' => '单位不能为空',
 
             ]);
 
@@ -99,7 +76,7 @@ class DemandController extends UserBaseController
                 $this->error($validate->getError());
             }
             $editData = new UserModel();
-            if ($editData->demandData($data)) {
+            if ($editData->productData($data)) {
                 $this->success("发布成功！", "user/profile/center");
             } else {
                 $this->error("发布失败");
@@ -108,7 +85,6 @@ class DemandController extends UserBaseController
             $this->error("请求错误");
         }
     }
-
 
     /**
      * 用户取消收藏
@@ -125,4 +101,5 @@ class DemandController extends UserBaseController
         }
     }
 
+    
 }

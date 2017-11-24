@@ -28,6 +28,7 @@ class FavoriteController extends UserBaseController
         $this->assign($user);
         $this->assign("page", $data['page']);
         $this->assign("lists", $data['lists']);
+        $this->assign("um",1);
         return $this->fetch();
     }
 

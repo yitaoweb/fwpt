@@ -15,7 +15,7 @@ use app\user\model\UserModel;
 use think\Validate;
 use think\Db;
 
-class DemandController extends UserBaseController
+class EntdataController extends UserBaseController
 {
 
     /**
@@ -39,28 +39,10 @@ class DemandController extends UserBaseController
         $this->assign("wlists", $wsl->items());
         $this->assign("ypage", $ydj->render());
         $this->assign("ylists", $ydj->items());
-        $this->assign("um",3);
+        $this->assign("um",4);
         return $this->fetch();
     }
 
-    /**
-     * 求购列表
-     */
-    public function qiu()
-    {
-        $user = cmf_get_current_user();
-        $userId               = cmf_get_current_user_id();
-        $gongqiuQuery            = Db::name("portal_gxfb");
-        $where['user_id']     = $userId;
-        $where['gx']     = 1;
-        $qiu           = $gongqiuQuery->where($where)->order('id desc')->paginate(10);
-
-        $this->assign($user);
-        $this->assign("page", $qiu->render());
-        $this->assign("lists", $qiu->items());
-
-        return $this->fetch();
-    }
 
 
     /**
@@ -72,7 +54,7 @@ class DemandController extends UserBaseController
         $this->assign($user);
         $fuwu=Db::name('portal_ssfw')->where('1=1')->order('id')->select();
         $this->assign('fuwu',$fuwu);
-        $this->assign("um",3);
+        $this->assign("um",4);
         return $this->fetch();
     }
 

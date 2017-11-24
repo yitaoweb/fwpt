@@ -399,6 +399,20 @@ class UserModel extends Model
         return 0;
     }
 
+    public function productData($user)
+    {
+        $userId           = cmf_get_current_user_id();
+     
+        $user['user_id'] = $userId;
+        $user['sh_state'] = 0;
+        $user['time'] =time();
+        $userQuery        = Db::name("portal_fwcp");
+        if ($userQuery->insertGetId($user)) {
+            return 1;
+        }
+        return 0;
+    }
+
     /**
      * 用户密码修改
      * @param $user

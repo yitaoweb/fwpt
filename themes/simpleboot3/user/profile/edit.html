@@ -18,7 +18,7 @@ function setlatlng(lng,lat){
 }
 </script>
 <include file="public@nav" />
-<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;企业中心</div>
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;<if condition='($user_type == 2)'>企业<else/>机构</if>中心</div>
 <div class="main">
     <div class="main_l left">
         <include file="public@qiyenav" />
@@ -31,7 +31,7 @@ function setlatlng(lng,lat){
             <div class="center_form">
               
               <dl>
-                <dt>企业全称</dt>
+                <dt><if condition='($user_type == 2)'>企业<else/>机构</if>全称：</dt>
                 <dd><input type="text" name="user_nickname" class="input large" value="{$user_nickname}"  datatype="*2-100" sucmsg=" "/></dd>
               </dl>
               <dl>
@@ -113,7 +113,7 @@ function setlatlng(lng,lat){
                 </dd>
               </dl>
               <dl>
-                <dt>企业官网</dt>
+                <dt>网站网址</dt>
                 <dd>
                   <input type="text" name="user_url" class="input large" value="{$user_url}"  datatype="*2-100" sucmsg=" " />
                 </dd>
@@ -133,17 +133,40 @@ function setlatlng(lng,lat){
                   <span style="color:#ff0000;">*<a href="###" onclick="setlatlng($('#lng').val(),$('#lat').val())">在地图中查看/设置</a></span>
                 </dd>
               </dl>
-
+              <if condition='($user_type == 2)'>
             
               <dl style="width:100%; height:120px">
                 <dt>经营范围</dt>
-               <dd><textarea name="qy_jyfw" rows="2" cols="20"  style="height:100px;width:809px;">{$qy_jyfw}</textarea></dd>
+               <dd><textarea name="qy_jyfw" rows="2" cols="20"  style="height:100px;width:750px;">{$qy_jyfw}</textarea></dd>
               </dl>
 
               <dl style="width:100%; height:120px">
                 <dt>企业简介</dt>
-               <dd><textarea name="qy_jianjie" rows="2" cols="20"  style="height:100px;width:809px;">{$qy_jianjie}</textarea></dd>
+               <dd><textarea name="qy_jianjie" rows="2" cols="20"  style="height:100px;width:750px;">{$qy_jianjie}</textarea></dd>
               </dl>
+
+              <else/>
+
+              <dl style="width:100%; height:120px">
+                <dt>机构简介</dt>
+               <dd><textarea name="qy_jianjie" rows="2" cols="20"  style="height:100px;width:750px;">{$qy_jianjie}</textarea></dd>
+              </dl>
+
+              <dl style="width:100%; height:120px">
+                <dt>成功案例</dt>
+               <dd><textarea name="qy_anli" rows="2" cols="20"  style="height:100px;width:750px;">{$qy_jianjie}</textarea></dd>
+              </dl>
+
+              <dl style="width:100%; height:120px">
+                <dt>荣誉资质</dt>
+               <dd><textarea name="qy_rongyu" rows="2" cols="20"  style="height:100px;width:750px;">{$qy_jianjie}</textarea></dd>
+              </dl>
+
+
+              </if>
+
+
+
               <dl>
                 <dt></dt>
                 <dd>
