@@ -41,7 +41,7 @@ class LoginController extends HomeBaseController
      */
     public function doLogin()
     {
-        if ($this->request->isPost()) {
+        if ($this->request->isPost()) {                                  
             $validate = new Validate([
                 'captcha'  => 'require',
                 'username' => 'require',

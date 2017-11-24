@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes" />
+<meta name="format-detection" content="telephone=no"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+<title>企业注册</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.9.1.js" ></script>
+<script type="text/javascript" src="js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="js/layout.js"></script>	
+<link rel="stylesheet" href="css/LArea.css">
+    <script type="text/javascript">
+        $(function () {
+            //初始化表单验证
+            $("#reg-form").initValidform();
+			$("input[type=file]").change(function(){$(this).parents(".uploader").find(".filename").val($(this).val());});
+			$("input[type=file]").each(function(){
+			if($(this).val()==""){$(this).parents(".uploader").find(".filename").val("请上传证件照...");}
+			});
+        });
+    </script>
+</head>
+<body>
+		<header class="nav-bar">
+			<a class="pull-left" href="index.html"></a>
+			<h1 class="nav-title">企业注册</h1>
+		</header>
+		<div class="header-line"></div>
+		<form id="reg-form" action="">
+		<div class="my-tabs mt20">
+			<div class="tabs tabfocus">企业注册</div>
+			<div class="tabs"><a href="jigou-register.html">机构注册</a></div>
+    	</div>
+		
+		<div class="my-content radius mt10">
+			
+				<div class="input-row">
+					<input id='comname' type="text" class="my-input input" datatype="*5-16" placeholder="企业全称" sucmsg=" ">
+				</div>
+				<div class="uploader blue">
+				<input type="text" class="filename" readonly="readonly" placeholder="请上传证件照"/>
+				<input type="button" name="file" class="button" value="浏览..."/>
+				<input type="file" size="30"/>
+				</div>
+				<div class="input-row">
+					<input id="city" type="text" class="my-input input" readonly="readonly" datatype="*" placeholder="所属行政区" sucmsg=" ">
+					<input id="cityvalue" type="hidden" value="">
+				</div>
+				<div class="input-row">
+					<input id='master' type="text" class="my-input input" datatype="z2-4" placeholder="法人代表" sucmsg=" ">
+				</div>
+				<div class="input-row">
+				<select name="type" class="select"  datatype="*" sucmsg=" ">
+  				<option value="" selected="selected">请选择所属行业</option>
+  				<option value="咨询服务">咨询服务</option>
+				</select>
+				</div>
+				<div class="input-row">
+					<input id='master' type="text" class="my-input input" datatype="z2-4" placeholder="法人代表" sucmsg=" ">
+				</div>
+				<div class="input-row">
+					<input id='name' type="text" class="my-input input" datatype="z2-4" placeholder="联系人姓名" sucmsg=" ">
+				</div>
+				<div class="input-row">
+					<input id='tel' type="text" class="my-input input" datatype="*" placeholder="联系电话" sucmsg=" ">
+				</div>
+				<div class="input-row">
+					<input id='account' type="text" class="my-input input" datatype="*5-16" placeholder="请输入登录账号" sucmsg=" ">
+				</div>
+				<div class="input-row">
+					<input id='password' type="password" class="my-input input" datatype="w5-16" placeholder="请输入登录密码"  sucmsg=" ">
+				</div>
+				<div class="check-rows">
+					<div class="link-area"><input name="checkbox" value="jz" type="checkbox" id="jz" class="magic-checkbox" ><label for="jz">已阅读《企业用户注册协议书》</label></div>	
+				</div>
+				
+			<div class="btn-rows">
+				<button type="submit" id='login' class="my-btn blue wd100">提交注册</button>
+			</div>
+			
+			<div class="tip-rows">
+			<fieldset><legend>已有账号？马上登录</legend></fieldset>
+			</div>
+			<div class="btn-rows">
+				<a href="login.html" class="my-btn orange wd100">点击登录</a>
+			</div>
+		</div>
+		</form>
+<script src="js/LAreaData1.js"></script>
+<script src="js/LAreaData2.js"></script>
+<script src="js/LArea.js"></script>
+	<script>
+var area = new LArea();
+area.init({
+	'trigger': '#city', //触发选择控件的文本框，同时选择完毕后name属性输出到该位置
+	'valueTo': '#cityvalue', //选择完毕后id属性输出到该位置
+	'keys': {
+		id: 'id',
+		name: 'name'
+	}, //绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
+	'type': 1, //数据源类型
+	'data': LAreaData //数据源
+});
+area.value=[1,13,3];//控制初始位置，注意：该方法并不会影响到input的value
+</script>
+	<div class="header-line"></div>
+	<footer class="foot-bar">
+	<ul>
+	<li><a href="../Index.html"><i><img src="images/foot01.png" /><i>首页</a></li>
+	<li><a href="../Search.html"><i><img src="images/foot02.png" /><i>搜索</a></li>
+	<li><a href=""><i><img src="images/foot03.png" /><i>联系</a></li>
+	<li><a href="Index.aspx"><i><img src="images/foot04.png" /><i>咨询</a></li>
+	</ul>
+	</footer>
+	</body>
+
+</html>

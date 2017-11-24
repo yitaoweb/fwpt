@@ -18,6 +18,7 @@ class IndexController extends HomeBaseController
 {
     public function index()
     {
+
     	//供应信息
     	$gong = Db::name('portal_gxfb')->where("gx",2)->where('state', 1)->order('time')->limit(2)->select()->toArray();
     	//求购信息
@@ -28,6 +29,7 @@ class IndexController extends HomeBaseController
     	$this->assign('gong', $gong);        //供应信息
     	$this->assign('qiu', $qiu);          //求购信息
     	$this->assign('supply', $supply);	 //需求信息
+
         return $this->fetch(':index');
     }
 }
