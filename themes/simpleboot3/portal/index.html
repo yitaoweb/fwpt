@@ -227,8 +227,8 @@
         <volist name="supply" id="vo">
           <tr>
             <td><a href="">{$vo.title}</a></td>
-            <td>{:getfield('user',$user_id,'user_nickname')}</td>
-            <td>{:getfield('portal_ssfw',$qy_ssfw,'name')}</td>
+            <td>{:getfield('user',$vo.user_id,'user_nickname')}</td>
+            <td>{:getfield('portal_ssfw',$vo.ssfw_id,'name')}</td>
             <td>{$vo.state|state=###}</td>
             <td>{$vo.time|date='Y-m-d',###}</td>
           </tr>

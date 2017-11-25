@@ -369,8 +369,8 @@ a:hover .hot_detail{ background-color:#fafafa;}
 /*列表样式*/
 .list{ width:100%; height:auto; margin-top:20px;}
 .list .list-item{border:1px solid #eee; padding:15px;border-radius:4px; height:110px; margin-bottom:15px;background:#fff; font-size:14px;}
-.list img{height:110px;float:left;font-size:0;border-radius:4px; margin-right:24px;}
-.list .list-item h1{ color:#000; font-size:16px; margin-bottom:10px;}
+.list img{height:110px;width:150px;float:left;font-size:0;border-radius:4px; margin-right:24px;}
+.list .list-item h1{ color:#000; font-size:16px; margin-bottom:10px;margin-top: 0;text-align: left;}
 .list .list-item a h1{ color:#000000}
 .list .list-item a:hover h1{ color:#ff6600}
 .list .list-item p{ line-height:26px; color:#666;}
