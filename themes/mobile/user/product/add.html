@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes" />
+<meta name="format-detection" content="telephone=no"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+<title>服务发布</title>
+<link href="__TMPL__/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__TMPL__/js/jquery-1.9.1.js" ></script>
+<script type="text/javascript" src="__TMPL__/js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="__TMPL__/js/layout.js"></script>	
+    <script type="text/javascript">
+        $(function () {
+            //初始化表单验证
+            $("#reg-form").initValidform();
+        });
+    </script>
+</head>
+<body>
+		<header class="nav-bar">
+			<a class="pull-left" href="qiye-center.html"></a>
+			<h1 class="nav-title">服务发布</h1>
+		</header>
+		<div class="header-line"></div>
+		<div class="line10"></div>
+		<form id="reg-form" action="{:url('user/product/addPost')}" method="post">
+    	<div class="infoinput">
+    	<dl>
+    	<dt>服务名称</dt>
+    	<dd><input id='comname' name="title" type="text" datatype="*5-16"  sucmsg=" "></dd>
+    	</dl>
+    	</div>
+		<div class="infoinput">
+    	<dl>
+    	<dt>服务类型</dt>
+    	<dd>
+		<select name="type" class="select"  datatype="*" sucmsg=" ">
+  		<option value="0" selected="selected">请选服务类型</option>
+                    <volist name="fuwu" id="vo">
+                        <option value="{$vo.id}">{$vo.name}</option>
+                    </volist>
+		</select>
+		</dd>
+    	</dl>
+    	</div>
+		<div class="infoinput">
+    	<dl>
+    	<dt>收费标准</dt>
+    	<dd>
+		<input id='name' name="price" type="text"  datatype="*" sucmsg=" ">
+		</dd>
+    	</dl>
+    	</div>
+		<div class="infoinput">
+    	<dl>
+    	<dt>单位：</dt>
+    	<dd>
+		<input id='name' name="unit" type="text"  datatype="*" sucmsg=" ">
+		</dd>
+    	</dl>
+    	</div>
+		<div class="infotext">
+		<textarea name="content" id="txtContent" placeholder="服务详情"></textarea>
+    	</div>	
+		<div class="btn-rows mt10">
+			<button type="submit" id='login' class="my-btn blue wd50">确定发布</button>
+		</div>
+		<div class="line10"></div>
+		</form>
+
+	<div class="header-line"></div>
+	<footer class="foot-bar">
+	<ul>
+	<li><a href="../Index.html"><i><img src="__TMPL__/images/foot01.png" /><i>首页</a></li>
+	<li><a href="../Search.html"><i><img src="__TMPL__/images/foot02.png" /><i>搜索</a></li>
+	<li><a href=""><i><img src="__TMPL__/images/foot03.png" /><i>联系</a></li>
+	<li><a href="Index.aspx"><i><img src="__TMPL__/images/foot04.png" /><i>咨询</a></li>
+	</ul>
+	</footer>
+</body>
+</html>
+

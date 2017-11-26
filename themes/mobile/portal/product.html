@@ -10,7 +10,7 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="msapplication-tap-highlight" content="no" />
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
-<title>机构列表</title>
+<title>服务产品详情</title>
 <link href="__TMPL__/css/style.css" rel="stylesheet" type="text/css" />
 <link href="__TMPL__/css/swiper-3.2.7.min.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="__TMPL__/js/jquery-1.9.1.js" ></script>
@@ -68,62 +68,31 @@
         	        });
         	    });
 		</script>
-<section class="job-module"> 
-	<dl class="retrie"> 
-		<dt>
-			<a id="area" href="javascript:;" class="wd50">服务区域</a>
-			<a id="wage" href="javascript:;" class="wd50">二级分类</a>
-		</dt> 
-		<dd class="area"> 
-			<ul class="slide downlist"> 
-				<volist name="area" id="vo">
-				<li><a href="{:cmf_url('portal/Jglist/index',array('cid'=>$cat['id'],'fid'=>$vo['id'],'cid2'=>$cid2))}">{$vo.name}</a></li> 
-                </volist>
-			</ul> 
-		</dd>  
-		<dd class="area"> 
-			<ul class="slide downlist"> 
-			    <volist name="cat2" id="vo">
-                    <li><a href="{:cmf_url('portal/Jglist/index',array('cid'=>$cat['id'],'fid'=>$fid,'cid2'=>$vo['id']))}">{$vo.name}</a></li> 
-                </volist>
-			</ul> 
-		</dd> 
-	</dl> 
-</section>
-	<script type="text/javascript">
-	$(function(){ 
-	$('.retrie dt a').click(function(){
-		var $t=$(this);
-		if($t.hasClass('up')){
-			$(".retrie dt a").removeClass('up');
-			$('.downlist').hide();
-			$('.mask').hide();
-		}else{
-			$(".retrie dt a").removeClass('up');
-			$('.downlist').hide();
-			$t.addClass('up');
-			$('.downlist').eq($(".retrie dt a").index($(this)[0])).show();
-			$('.mask').show();
-		}
-	});
-	$(".area ul li a:contains('"+$('#area').text()+"')").addClass('selected');
-	$(".wage ul li a:contains('"+$('#wage').text()+"')").addClass('selected');
-	});
-	</script>
-	
-<div class="list">				
-                        <foreach name="lists" item="vo">		
-							<a href="{:cmf_url('portal/Jghome/index',array('id'=>$vo.id))}"><div class="list-item read">		
-							<img src="__ROOT__/upload/{$vo.avatar}" alt="" title=""/>
-							<h1>{$vo.user_nickname}</h1>
-									<dl>服务地址：山西-长治-{$vo.qy_address}</dl>
-									<dl>服务项目：{:getfield('portal_ssfw',$vo.qy_ssfw,'name')}服务</dl>
-							</div>
-							</a>
-						</foreach>   
-							
-					</div>
-	<div class="loadtip">上拉加载更多</div>
+	<div class="infomain">
+	<img src="__ROOT__/upload/{$avatar}" alt="" title=""/>
+	<h1>{$title}</h1>
+	<p>发布时间：{$time}</p>
+	</div>
+	<div class="infoli">联系人：{$qy_lxname}</div>
+	<div class="infoli">手机：{$mobile}</div>
+	<div class="infoli">网址：{$user_url}</div>
+	<div class="infoli">传真：{$fax}</div>
+	<div class="content">
+	<h1 class="title">服务介绍</h1>
+	{$content}
+	</div>
+	<div class="content">
+	<h1 class="title">服务记录</h1>
+	<ul class="datalist">
+	<li>服务对象<span>服务时间</span></li>
+	<li>大运汽车销售公司<span>2017-6-8</span></li>
+	<li>天使投资有限公司<span>2017-10-24</span></li>
+	<li>易淘网络科技有限公司<span>2017-11-9</span></li>
+	</ul>
+	</div>
+	<div class="btn-rows mt10">
+		<a href="" class="my-btn blue wd40">申请服务</a><a href="" class="my-btn orange wd40">机构咨询</a>
+	</div>
     <div class="weui-footer">
             <p class="footer-links">
                 <a href="login.html" class="weui-footer-link">登录</a>
@@ -144,5 +113,3 @@
 	<script type="text/javascript" src="__TMPL__/js/scrolltop.js"></script>
 </body>
 </html>
-
-
