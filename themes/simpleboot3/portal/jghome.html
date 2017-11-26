@@ -79,13 +79,35 @@
                 </div>
             </div>
             <div class="pane">
-                     1
+                <div class="list">                       
+                    <foreach name="lists" item="vo">
+                        <div class="list-item">                 
+                            <img src="__ROOT__/upload/{$vo.img}" alt="" title=""/>
+                            <div class="linkto"><a href="{:cmf_url('portal/Jghome/product',array('id'=>$id,'pid'=>$vo.id))}">产品详情</a></div>
+                            <h1>产品名称：{$vo.title}</h1>
+                            <p>服务类型：{:getfield('portal_ssfw',$vo.ssfw_id,'name')}</p>
+                            <p>服务范围：长治县、平顺县、城区、郊区、壶关县、长子县</p>
+                            <p>申请次数：<span class="price">23</span></p>
+                        </div>
+                    </foreach>
+                </div>
+                <div class="clear"></div>
+                <div class="yahoo2">{$page|default=''}</div>
             </div>   
             <div class="pane">
-                     12
+                <if condition='($qy_anli neq "")'>
+                {$qy_anli}
+                <else/>
+                暂无
+                </if>
             </div>  
             <div class="pane">
-                     123
+                <if condition='($qy_rongyu neq "")'>
+                {$qy_rongyu}
+                <else/>
+                暂无
+                </if>
+                
             </div>  
             <div class="pane">
                      123

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+    <include file="public@head"/>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/select-script.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/jquery.pagination.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/jquery.tools.min.js"></script>
+    <hook name="before_head_end"/>
+</head>
+<body class="body-white">
+<include file="public@nav"/>
+
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;<a href="#">供求信息</a>&gt;&nbsp;详情</div>
+
+<div class="main">
+<div class="main_l right">
+<div class="left_title">最新供应</div>
+<ul class="tabnews">
+    <volist name="gong" id="vo">
+        <li><a href="{:cmf_url('portal/Supply/view',array('id'=>$vo.id))}" target="_blank">{$vo.title}</a></li>
+    </volist>
+</ul>
+<div class="clearfix"></div>
+
+<div class="left_title">最新求购</div>
+<ul class="tabnews">
+    <volist name="qiu" id="vo">
+        <li><a href="{:cmf_url('portal/Supply/view',array('id'=>$vo.id))}" target="_blank">{$vo.title}</a></li>
+    </volist>
+</ul>
+
+</div>
+<div class="main_r left">
+<div class="right_content">
+<div class="news_title">{$title}</div>
+<div class="news_tags">
+<span>发布时间：{$time|date='Y-m-d',###}</span>
+</div>
+<dl>
+   <dt>供求分类：</dt>
+   <dd class="bold"> <if condition='($gx == 1)'>供应<else/>求购</if></dd>
+ </dl>
+ <dl>
+   <dt>供求类型：</dt>
+   <dd><a href="">{:getfield('portal_ssfw',$gqfl,'name')}</dd>
+  </dl>
+ <dl>
+   <dt>有效期：</dt>
+   <dd>{$time|date='Y-m-d',###}~{$time|date='Y-m-d',###}</dd>
+  </dl>
+ <dl>
+   <dt>联系人：</dt>
+   <dd>{:getfield('user',$user_id,'qy_lxname')}</dd>
+  </dl>
+ <dl>
+   <dt>联系电话：</dt>
+   <dd>{$mobile}</dd>
+  </dl>
+<dl>
+   <dt>『备案信息』</dt>
+   <dd></dd>
+  </dl>
+ <dl>
+   <dt><if condition="($user_type == 2)">企业名称：<else/>机构名称：</if></dt>
+   <dd>{$user_nickname}</dd>
+ </dl>
+ <dl>
+   <dt><if condition="($user_type == 2)">企业地址：<else/>机构地址：</if></dt>
+   <dd>{$qy_address}</dd>
+</dl>
+</div>
+<div class="right_title"><span>详细介绍</span></div>
+<div class="right_content">
+　　{$nr}
+</div>
+    <div class="wrap">
+        <div class="comment">
+            <div class="content">
+                <div class="cont-box">
+                    <textarea class="text" placeholder="请输入..."></textarea>
+                </div>
+                <div class="tools-box">
+                    <div class="operator-box-btn">共有<span class="price">417</span>条评论</div>
+                    <div class="submit-btn"><input type="button" onClick="out()"value="提交评论" /></div>
+                </div>
+            </div>
+        </div>
+        <div id="info-show">
+            <ul>
+                <li>
+                <div class="head-face"><img src="images/1.jpg" / ></div>
+                <div class="reply-cont">
+                <p class="username">易淘网络</p>
+                <p class="comment-body">认真落实抓党建述职评议考核制度，建立党组织书记抓基层党建“三单一账”，推行基层党建工作“四个一”责任落实机制和片区党建“八个一”工作法</p>
+                <p class="comment-footer">2016年10月5日</p>
+                </div>
+                </li>
+                <li>
+                <div class="head-face"><img src="images/1.jpg" / ></div>
+                <div class="reply-cont">
+                <p class="username">科技公司</p>
+                <p class="comment-body">在学习宣传贯彻党的十九大精神文艺宣传活动方面，清水县集思广益制定接地气的方案和活动主题。</p>
+                <p class="comment-footer">2016年10月5日</p>
+                </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+<script type="text/javascript" src="js/sinaFaceAndEffec.js"></script>
+<script type="text/javascript">
+    function out() {
+        var inputText = $('.text').val();
+        $('#info-show ul').append(reply(AnalyticEmotion(inputText)));
+    }
+    var html;
+    function reply(content){
+        html  = '<li>';
+        html += '<div class="head-face">';
+        html += '<img src="images/1.jpg" / >';
+        html += '</div>';
+        html += '<div class="reply-cont">';
+        html += '<p class="username">小小红色飞机</p>';
+        html += '<p class="comment-body">'+content+'</p>';
+        html += '<p class="comment-footer">2016年10月5日</p>';
+        html += '</div>';
+        html += '</li>';
+        return html;
+    }
+</script>
+
+</div>
+</div>
+
+
+
+<include file="public@link"/>
+<include file="public@footer"/>
+
+
+<include file="public@scripts"/>
+<hook name="before_body_end"/>
+</body>
+</html>
