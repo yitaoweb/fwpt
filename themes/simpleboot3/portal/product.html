@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$user_nickname} {$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$user_nickname},{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$user_nickname},{$site_info.site_seo_description|default=''}">
+    <include file="public@head"/>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/select-script.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/jquery.pagination.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/jquery.tools.min.js"></script>
+    <hook name="before_head_end"/>
+</head>
+<body class="body-white">
+<include file="public@nav"/>
+
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;<a href="">服务资源</a> &gt;&nbsp;服务机构</div>
+<div class="banner"><span class="b_title">{$user_nickname}</span></div>
+<div class="main">
+<div class="main_l left">
+<div class="left_title">机构信息</div>
+<div class="hot_list">
+<a href="">
+    <dl class="hot_detail">
+        <dd>
+            <img src="__ROOT__/upload/{$avatar}" alt="" title=""/>
+        </dd>
+        <dd class="title">{$user_nickname}</dd>
+        <dd><span class="star"><i style="width:99%"></i></span><span class="score">9.9分</span></dd>
+        <dd>服务次数：6</dd>
+    </dl>
+</a>
+</div>
+<div class="left_title">联系方式</div>
+<div class="hot_list">
+<a href="">
+    <dl class="hot_detail">
+        <dd class="title">联系人：{$qy_lxname}</dd>
+        <dd class="title">手机：{$mobile}</dd>
+        <dd class="title">网址：{$user_url}</dd>
+        <dd class="title">传真：{$fax}</dd>
+    </dl>
+</a>
+</div>
+</div>
+<div class="main_r right" style="min-height: 800px">
+    <div class="right_title"><span>对接详情</span></div>
+    <div class="list">                      
+        <div class="list-item">                 
+        <img src="__ROOT__/upload/{$img}" alt="" title=""/>
+        <div class="linkto"><a href="">申请服务</a><a href="">机构咨询</a></div>
+        <h1>服务项目：{:getfield('portal_ssfw',$ssfw_id,'name')}（<span class="price">23</span>人申请）</h1>
+        <p>收费标准：<span class="price">{$price}{$unit}</span></p>
+        <p>发布时间：{$time|date='Y-m-d',###}</p>
+        <p><span class="star"><i style="width:99%"></i></span><span class="score">评价：9.9分</span></p>
+        </div>
+    </div>
+    <div class="right_title"><span>服务介绍</span></div>
+
+    <div class="right_content">
+        <if condition='($content neq "")'>
+            {$content}
+        <else/>
+            暂无
+        </if>
+    </div>
+
+    <div class="tabPanel">
+        <div class="tabnav">
+            <div class="hit">服务记录</div>
+            <div>服务评价</div>
+        </div>
+        <div class="tabpanes" style="min-height: 300px">
+            <div class="pane" style="display:block;"></div>
+            <div class="pane"></div>
+        </div>
+    </div>
+
+</div>
+<div class="clear"></div>
+<script type="text/javascript">
+    $(function () {
+        $('.tabPanel .tabnav div').click(function () {
+            $(this).addClass('hit').siblings().removeClass('hit');
+            $('.tabpanes>div:eq(' + $(this).index() + ')').show().siblings().hide();
+        })
+    })
+</script>
+<include file="public@link"/>
+<include file="public@footer"/>
+
+
+<include file="public@scripts"/>
+<hook name="before_body_end"/>
+</body>
+</html>

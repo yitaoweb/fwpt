@@ -159,14 +159,15 @@
 <img src="__TMPL__/public/assets/images/liucheng.jpg" />
 </div>
 
-<div class="box-title left mt10"><span><a href="gongying.html" target="_blank">服务分类</a></span></div>
+<div class="box-title left mt10"><span><a href="#" target="_blank">服务分类</a></span></div>
 <div class="type-box">
   <volist name="ssfw" id="fw" key="k">
     <a href="{:cmf_url('portal/Jglist/index',array('cid'=>$fw.id))}" class="tp0{$k}">{$fw.name}</a>
   </volist>
 </div>
 
-<div class="box-title left mt10"><span><a href="gongying.html" target="_blank">供求信息</a></span><a href="gongying.html" target="_blank">更多>></a></div>
+<div class="box-title left mt10"><span><a href="{:cmf_url('portal/Supply/index')}" target="_blank">供求信息</a></span>
+<a href="{:cmf_url('portal/Supply/index')}" target="_blank">更多>></a></div>
 <div class="infotable">
 <table class="table left" >
       <thead>
@@ -182,7 +183,7 @@
         </tr>
         <volist name="gong" id="vo">
         <tr>
-           <td><a href="">{$vo.title}</a></td>
+           <td><a href="{:cmf_url('portal/Supply/view',array('id'=>$vo.id))}">{$vo.title}</a></td>
            <td>{$vo.time|date='Y-m-d',###}</td>
         </tr>
         </volist>
@@ -203,7 +204,7 @@
         </tr>
        <volist name="qiu" id="vo">
         <tr>
-           <td><a href="">{$vo.title}</a></td>
+           <td><a href="{:cmf_url('portal/Supply/view',array('id'=>$vo.id))}">{$vo.title}</a></td>
            <td>{$vo.time|date='Y-m-d',###}</td>
         </tr>
         </volist>
@@ -218,9 +219,9 @@
         <tr>
           <th>标题</th>
           <th>发布企业</th>
-      <th>需求类型</th>
-      <th>状态</th>
-      <th>更新时间</th>
+          <th>需求类型</th>
+          <th>状态</th>
+          <th>更新时间</th>
         </tr>
       </thead>
       <tbody>

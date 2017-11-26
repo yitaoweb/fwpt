@@ -32,7 +32,9 @@ class ArticleController extends HomeBaseController
             abort(404, '文章不存在!');
         }
 
-
+        $catlist = $portalCategoryModel->where('parent_id', 8)->where('status', 1)->select()->toArray();
+        $this->assign('catlist', $catlist);
+        
         $prevArticle = $postService->publishedPrevArticle($articleId, $categoryId);
         $nextArticle = $postService->publishedNextArticle($articleId, $categoryId);
 

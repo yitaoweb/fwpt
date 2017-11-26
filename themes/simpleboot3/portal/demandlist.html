@@ -14,7 +14,7 @@
 <body class="body-white">
 <include file="public@nav"/>
 
-<div class="local">当前位置：<a href="index.html">首页</a> &gt;<a href="index.html">服务资源</a> &gt;&nbsp;服务机构</div>
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;服务资源</a> &gt;&nbsp;服务需求</div>
 <div class="main">
 <div class="main_l left">
 <div class="left_nav_title">服务分类</div>
@@ -77,7 +77,7 @@
     <div class="list">     
         <foreach name="lists" item="vo">
             <div class="list-item">                 
-                <img src="./__ROOT__/upload/{$vo.avatar}" alt="" title=""/>
+                <img src="__ROOT__/upload/{$vo.avatar}" alt="" title=""/>
                 <div class="linkto">电话<span>{$vo.tel}</span><a href="{:cmf_url('portal/Jghome/index',array('id'=>$vo.id))}">进入机构</a></div>
                 <h1>{$vo.user_nickname}</h1>
                 <p>服务地址：山西-长治-{$vo.qy_address}</p>

@@ -96,7 +96,7 @@ select,textarea{ padding:7px; height:36px; color:#000;border:1px solid #ccc; bor
 .search input.btn_srh{background:#73ACEF;color:#FFF;font-family:"微软雅黑";font-size:15px;width:90px;}
 
 /* 主导航菜单 */
-.topMenu{height:44px;line-height:44px;background-color:#2A82E6;font-family:"Microsoft YaHei",SimSun;font-size:15px}
+.topMenu{height:45px;line-height:45px;background-color:#2A82E6;font-family:"Microsoft YaHei",SimSun;font-size:15px}
 .topMenu-width{width:1200px;margin:0 auto; background-color:#1A77E0}
 .topMenu h3{font-weight:400;font-size:100%}
 .topMenu dl{ zoom:1;}
@@ -344,7 +344,7 @@ a:hover .hot_detail{ background-color:#fafafa;}
 .tabnav div.hit a{color:#fff; font-weight:bold; font-size:16px;}
 .tabpanes{width:878px; height:auto; min-height:100px; position:absolute; left:0px; top:40px;padding:20px 20px; height:auto; min-height:100px; color:#333; font-size:15px; line-height:2.0; border:1px solid #eee; background-color:#fefefe; margin-bottom:20px; overflow-x:hidden;}
 .tabpanes .pane{border-top:0;height:100px;display:none;}
-.tabpanes .pane img{ width:260px;}
+.tabpanes .pane img{ width:200px;}
 .tabpanes .pane .news-title{ display:none;}
 .tabpanes .pane .nor-li{ float:left; width:260px; height:32px; text-indent:1em; line-height:32px;background:url(../images/newsprev.png) left center no-repeat; border-bottom:1px dotted #eee; font-size:14px; color:#666; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:left;}
 .tabpanes .pane .nor-li a{ font-size:14px; color:#666;}

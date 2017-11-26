@@ -21,41 +21,32 @@
 <body class="body-white">
 <include file="public@nav"/>
 
-<div class="local">当前位置：<a href="index.html">首页</a> &gt;<a href="newslist.html">公共信息</a> &gt;&nbsp;通知公告</div>
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;公共信息 &gt;&nbsp;{$category.name}</div>
 
 
 
 <div class="main">
 <div class="main_l left">
-<div class="left_nav_title">资讯分类</div>
-        <ul id="expmenu-freebie">
-            <li>
-                <!-- Start Freebie -->
-                <ul class="expmenu">
+    <div class="left_nav_title">公共信息</div>
+    <ul id="expmenu-freebie">
+        <li>
+            <!-- Start Freebie -->
+            <ul class="expmenu">
+                <volist name="catlist" id="vo">
                     <li>
+                    <if condition="$vo.id == $category.id"> 
                         <div class="header focusnav">
-                            <span class="label"><a href="">通知公告</a></span>
-                        </div>
-                    </li>
-                    <li>
+                    <else /> 
                         <div class="header">
-                            <span class="label"><a href="">最新资讯</a></span>
+                    </if>
+                            <span class="label"><a href="{:cmf_url('portal/list/index',array('id'=>$vo.id))}">{$vo.name}</a></span>
                         </div>
                     </li>
-                    <li>
-                        <div class="header">
-                            <span class="label"><a href="">政策法规</a></span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="header">
-                            <span class="label"><a href="">行业新闻</a></span>
-                        </div>
-                    </li>
-                </ul>
-                <!-- End Freebie -->
-            </li>
-        </ul>
+                 </volist>
+            </ul>
+            <!-- End Freebie -->
+        </li>
+    </ul>
 </div>
 <div class="main_r right">
 <div class="right_content">
