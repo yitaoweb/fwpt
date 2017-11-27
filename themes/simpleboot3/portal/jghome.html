@@ -80,7 +80,7 @@
             </div>
             <div class="pane">
                 <div class="list">                       
-                    <foreach name="lists" item="vo">
+                    <foreach name="lists" item="vo"  empty="$emptylist">
                         <div class="list-item">                 
                             <img src="__ROOT__/upload/{$vo.img}" alt="" title=""/>
                             <div class="linkto"><a href="{:cmf_url('portal/Jghome/product',array('id'=>$id,'pid'=>$vo.id))}">产品详情</a></div>

@@ -26,7 +26,7 @@
 
                     <volist name="catall" id="vo">
   
-                    <li onclick="location='{:cmf_url('portal/Jglist/index',array('cid'=>$vo.id))}'">
+                    <li onclick="location='{:cmf_url('portal/demand/index',array('cid'=>$vo.id))}'">
                     <if condition="$vo.id == $cat.id"> 
                         <div class="header focusnav">
                     <else /> 
@@ -52,7 +52,7 @@
                 <dd class="select-all <if condition='($fid == 0)'>selected</if>"><a href="#">全部</a></dd>
                 <volist name="area" id="vo">
                     <dd class="<if condition='($fid == $vo.id)'>selected</if>">
-                    <a href="{:cmf_url('portal/Jglist/index',array('cid'=>$cat['id'],'fid'=>$vo['id'],'cid2'=>$cid2))}">{$vo.name}</a></dd>
+                    <a href="{:cmf_url('portal/demand/index',array('cid'=>$cat['id'],'fid'=>$vo['id'],'cid2'=>$cid2))}">{$vo.name}</a></dd>
                 </volist>
             </dl>
         </li>
@@ -61,28 +61,25 @@
                 <dt>二级分类：</dt>
                 <dd class="select-all <if condition='($cid2 == 0)'>selected</if>"><a href="#">全部</a></dd>
                 <volist name="cat2" id="vo">
-                    <dd class="<if condition='($cid2 == $vo.id)'>selected</if>"><a href="{:cmf_url('portal/Jglist/index',array('cid'=>$cat['id'],'fid'=>$fid,'cid2'=>$vo['id']))}">{$vo.name}</a></dd>
+                    <dd class="<if condition='($cid2 == $vo.id)'>selected</if>"><a href="{:cmf_url('portal/demand/index',array('cid'=>$cat['id'],'fid'=>$fid,'cid2'=>$vo['id']))}">{$vo.name}</a></dd>
                 </volist>
      
             </dl>
         </li>
-        <li class="select-result" style="display: none;">
-            <dl>
-                <dt>已选条件：</dt>
-                <dd class="select-no">暂时没有选择过滤条件</dd>
-            </dl>
-        </li>
+      
     </ul>
     
     <div class="list">     
-        <foreach name="lists" item="vo">
+        <foreach name="lists" item="vo"  empty="$emptylist">
             <div class="list-item">                 
-                <img src="__ROOT__/upload/{$vo.avatar}" alt="" title=""/>
-                <div class="linkto">电话<span>{$vo.tel}</span><a href="{:cmf_url('portal/Jghome/index',array('id'=>$vo.id))}">进入机构</a></div>
-                <h1>{$vo.user_nickname}</h1>
-                <p>服务地址：山西-长治-{$vo.qy_address}</p>
-                <p>服务范围：长治县、平顺县、城区、郊区、壶关县、长子县</p>
-                <p>服务项目：{:getfield('portal_ssfw',$vo.qy_ssfw,'name')}服务</p>
+                <div class="linkto">
+                    {$vo.time|date='Y-m-d',###}
+                    <a href="{:cmf_url('portal/demand/view',array('id'=>$vo['id']))}">查看详情</a>
+                </div>
+                <h1>{$vo.title}</h1>
+                <p>对接状态：{$vo.state|state=###}</p>
+                <p>服务类型：{:getfield('portal_ssfw',$vo.ssfw_id,'name')}</p>
+                <p>内容摘要：{$vo.content}</p>
             </div>
         </foreach>                 
     </div>

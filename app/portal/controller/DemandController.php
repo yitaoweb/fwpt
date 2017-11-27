@@ -29,31 +29,43 @@ class DemandController extends HomeBaseController
         //当前一级分类
         $cat = $portalSsfwModel->where('id', $cid)->where('status', 1)->find();
         //二级分类
-        $cat2 = $portalSsfwModel->where('parent_id', $cid)->where('status', 1)->select();
+        if ($cid == 0) {
+            $cat2="";
+        }else{
+            $cat2 = $portalSsfwModel->where('parent_id', $cid)->where('status', 1)->select();
+        }
+        
         //所有一级分类
         $catall = $portalSsfwModel->where('parent_id',0)->where('status', 1)->select();
         //服务区域
         $area = $AreaModel->where('parent_id', 8)->where('status', 1)->order('list_order')->select();
 
-        $where['user_type'] = 3; //机构
+        $where = array();
+       
         if ($cid > 0) {
             $arr=Db::name('portal_ssfw')->where('parent_id',$cid)->field('id')->select()->toArray();
              $arr = array_column($arr,'id');
             //var_dump($arr);die;
-            $where['qy_ssfw'] = array('in',$arr);
+            $where['a.ssfw_id'] = array('in',$arr);
         }
 
         if ($cid2 > 0) {
-            $where['qy_ssfw'] = $cid2;
+            $where['a.ssfw_id'] = $cid2;
         }
 
         if ($fid) {
-            $where[$fid] = array('in','fwqy');
+            $where['u.qy_area'] = $fid;
         }
-        $jigou = Db::name('user')->where($where)->order('id')->paginate(10);
 
-        $this->assign("page", $jigou->render());
-        $this->assign("lists", $jigou->items());
+
+        $xuqiu = Db::name('user')
+                        ->alias('u')
+                        ->join('__PORTAL_FWXQ__ a','a.user_id = u.id')
+                        ->where($where)->order('a.id')->paginate(10);
+
+
+        $this->assign("page", $xuqiu->render());
+        $this->assign("lists", $xuqiu->items());
 
 
         
@@ -66,6 +78,28 @@ class DemandController extends HomeBaseController
         $this->assign('catall', $catall);             //所有一级分类详情
 		$this->assign('area', $area);                 //服务区域详情
         $listTpl ='demandlist';
+
+        return $this->fetch('/' . $listTpl);
+    }
+
+    public function view()
+    {
+
+        $id = $this->request->param('id', 0, 'intval');
+       
+        $demand = Db::name('portal_fwxq')->where('id',$id)->find();
+
+        $user = Db::name('user')->where('id',$demand['user_id'])->find();
+
+        //推荐机构
+        $jigou = Db::name('user')->where("user_type",3)->where('user_status', 1)->order('create_time')->limit(10)->select()->toArray();
+      
+        $this->assign('jigou', $jigou);        //推荐机构
+
+
+        $this->assign($demand);                 //机构简介
+        $this->assign($user);   
+        $listTpl ='demandview';
 
         return $this->fetch('/' . $listTpl);
     }
