@@ -132,13 +132,13 @@ class AdminQylistController extends AdminBaseController
         $arrData['qy_code'] = $qy_code;
         $arrData['user_pass'] = cmf_password($pass);
         $arrData['user_type'] = 2;
+
         $subject="用户注册通知";
         $content="尊敬的企业用户".$arrData['user_nickname'].":<br>";
         $content=$content."您已成功注册，账号：".$qy_code."  密码：".$pass."<br>请牢记！";
 
         $result = cmf_send_email($arrData['user_email'], $subject, $content);
         $portalTagModel->isUpdate(false)->allowField(true)->save($arrData);
-
         $this->success(lang("SAVE_SUCCESS"));
 
     }

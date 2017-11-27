@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes" />
+<meta name="format-detection" content="telephone=no"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+<title>关于我们</title>
+<link href="__TMPL__/css/style.css" rel="stylesheet" type="text/css" />
+<link href="__TMPL__/css/swiper-3.2.7.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__TMPL__/js/jquery-1.9.1.js" ></script>
+<script type="text/javascript" src="__TMPL__/js/swiper-3.4.0.jquery.min.js"></script>
+</head>
+<body>
+<div class="aui-header">
+				<div class="aui-header-box clearfix">
+					<div class="aui-header-logo">
+						<a href="index.html">
+							<img src="__TMPL__/images/logo.png"/>
+						</a>
+					</div>
+					<div class="aui-header-sou">
+						<a href="login.html">
+							<span><i class="aui-iconfont aui-icon-search"></i></span>
+						</a>
+					</div>
+				</div>
+				<div class="swiper-container swiperNav b-line">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide"><a href="index.html">首页</a></div>
+						<div class="swiper-slide"><a href="newslist.html">资讯</a></div>
+						<div class="swiper-slide"><a href="fuwu.html">服务</a></div>
+						<div class="swiper-slide"><a href="">专题</a></div>
+						<div class="swiper-slide"><a href="">需求</a></div>
+						<div class="swiper-slide"><a href="jigou.html">机构</a></div>
+						<div class="swiper-slide"><a href="qiye.html">企业</a></div>
+						<div class="swiper-slide"><a href="">供求</a></div>
+						<div class="swiper-slide"><a href="">专家</a></div>
+						<div class="swiper-slide"><a href="lianxidian.html">网点</a></div>
+						<div class="swiper-slide selected"><a href="">关于</a></div>
+					</div>
+                    <div class="more-nav">＋</div>
+				</div>
+			</div>
+            <div class="header-box"></div>
+		<!-- 头部信息 end -->
+        	<script type="text/javascript">
+        	    $(function () {
+        	        function setCurrentSlide(ele, index) {
+        	            $(".swiperNav .swiper-slide").removeClass("selected");
+        	            ele.addClass("selected");
+        	        }
+
+        	        var swiperNav = new Swiper('.swiperNav', {
+        	            slidesPerView: 6.5,
+        	            paginationClickable: true,
+        	            spaceBetween: 1,
+        	            freeMode: true,
+        	            loop: false,
+        	            onTab: function (swiper) {
+        	                var n = swiper1.clickedIndex;
+        	            }
+        	        });
+        	    });
+		</script>
+<section class="job-module"> 
+	<dl class="retrie"> 
+		<dt>
+			<a id="area" href="javascript:;" class="wd100">关于我们</a>
+		</dt> 
+		<dd class="area"> 
+			<ul class="slide downlist"> 
+				<li><a href="#">平台简介</a></li> 
+				<li><a href="#">服务宗旨</a></li> 
+				<li><a href="#">免责声明</a></li> 
+			</ul> 
+		</dd>  
+	</dl> 
+</section>
+	<script type="text/javascript">
+	$(function(){ 
+	$('.retrie dt a').click(function(){
+		var $t=$(this);
+		if($t.hasClass('up')){
+			$(".retrie dt a").removeClass('up');
+			$('.downlist').hide();
+			$('.mask').hide();
+		}else{
+			$(".retrie dt a").removeClass('up');
+			$('.downlist').hide();
+			$t.addClass('up');
+			$('.downlist').eq($(".retrie dt a").index($(this)[0])).show();
+			$('.mask').show();
+		}
+	});
+	$(".area ul li a:contains('"+$('#area').text()+"')").addClass('selected');
+	$(".wage ul li a:contains('"+$('#wage').text()+"')").addClass('selected');
+	});
+	</script>
+	<div class="content">
+	<div class="news-title">{$category.name}</div>
+	国内MPV领域，目前在低端市场销量比较出色的有五菱宏光S和宝骏730等车型。而在高端MPV领域，国产MPV几乎没有拿得出手的车型。而在合资车中，像别克GL8、奥德赛这种高端MPV售价也基本在20万以上，贵是贵了，但买的人并不少。像很多明星大佬，基本都会选择日系高端MPV作为座驾，这也就说明，国内的高端MPV确实有所欠缺。在今年的广州车展上，传祺正式亮相国产首款高端MPV——GM8。新车此前，已经在多个地方出现过，因此也有很多人都看见过GL8的真身。传祺GM8的定位为高端领域的商务车，售价在18万至27万之间，这个售价是目前国产商务车售价最高的。那么，传祺GM8有什么理由定价这么高呢？
+	</div>
+
+    <div class="weui-footer">
+            <p class="footer-links">
+                <a href="login.html" class="weui-footer-link">登录</a>
+                <a href="qiye-register.html" class="weui-footer-link">注册</a>
+				<a href="help.html" class="weui-footer-link">帮助中心</a>
+            </p>
+            <p class="weui-footer-text">Copyright &copy; 2008-2017 www.yuming.com</p>
+    </div>
+	<div class="footer-line"></div>
+	<footer class="foot-bar">
+	<ul>
+	<li><a href="{:url('portal/index/index')}"><i><img src="images/foot01.png" /><i>首页</a></li>
+	<li><a href="../Search.html"><i><img src="images/foot02.png" /><i>搜索</a></li>
+	<li><a href=""><i><img src="images/foot03.png" /><i>联系</a></li>
+	<li><a href="Index.aspx"><i><img src="images/foot04.png" /><i>咨询</a></li>
+	</ul>
+	</footer>
+	<script type="text/javascript" src="js/scrolltop.js"></script>
+</body>
+</html>
+

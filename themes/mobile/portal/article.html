@@ -10,39 +10,41 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="msapplication-tap-highlight" content="no" />
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
-<title>首页</title>
+<title>新闻资讯</title>
 <link href="__TMPL__/css/style.css" rel="stylesheet" type="text/css" />
 <link href="__TMPL__/css/swiper-3.2.7.min.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="__TMPL__/js/jquery-1.9.1.js" ></script>
 <script type="text/javascript" src="__TMPL__/js/swiper-3.4.0.jquery.min.js"></script>
+
 </head>
 <body>
+
 <div class="aui-header">
 				<div class="aui-header-box clearfix">
 					<div class="aui-header-logo">
-						<a href="/user/profile/center.html">
+						<a href="index.html">
 							<img src="__TMPL__/images/logo.png"/>
 						</a>
 					</div>
 					<div class="aui-header-sou">
-						<a href="/user/profile/center.html">
+						<a href="login.html">
 							<span><i class="aui-iconfont aui-icon-search"></i></span>
 						</a>
 					</div>
 				</div>
 				<div class="swiper-container swiperNav b-line">
 					<div class="swiper-wrapper">
-						<div class="swiper-slide selected"><a href="{:url('portal/index/index')}">首页</a></div>
-						<div class="swiper-slide"><a href="">资讯</a></div>
+						<div class="swiper-slide"><a href="index.html">首页</a></div>
+						<div class="swiper-slide"><a href="newslist.html">资讯</a></div>
 						<div class="swiper-slide"><a href="fuwu.html">服务</a></div>
 						<div class="swiper-slide"><a href="">专题</a></div>
-						<div class="swiper-slide"><a href="/portal/demand/index.html">需求</a></div>
-						<div class="swiper-slide"><a href="/portal/jglist/index/id/0.html">机构</a></div>
-						<div class="swiper-slide"><a href="">企业</a></div>
+						<div class="swiper-slide"><a href="">需求</a></div>
+						<div class="swiper-slide"><a href="jigou.html">机构</a></div>
+						<div class="swiper-slide"><a href="qiye.html">企业</a></div>
 						<div class="swiper-slide"><a href="">供求</a></div>
 						<div class="swiper-slide"><a href="">专家</a></div>
 						<div class="swiper-slide"><a href="lianxidian.html">网点</a></div>
-						<div class="swiper-slide"><a href="/Introduction.html">关于</a></div>
+						<div class="swiper-slide selected"><a href="">关于</a></div>
 					</div>
                     <div class="more-nav">＋</div>
 				</div>
@@ -67,31 +69,23 @@
         	            }
         	        });
         	    });
-	</script>
-<div class="bannerbox">
-	<div class="swiper-container">
-		<div class="swiper-wrapper">
-        <div class="swiper-slide"><a href=""><img src="http://d.ifengimg.com/w650_h400/p1.ifengimg.com/a/2017_47/433075bd92f8fec_size31_w570_h332.jpg"/></a><div class="banner-title"><span>权威论坛共同探讨;中国踏上新征程 世界迎…</span></div></div>
-		<div class="swiper-slide"><a href=""><img src="http://d.ifengimg.com/w650_h400/p2.ifengimg.com/a/2017_47/6ddc9522f5bba01_size238_w570_h332.jpg"/></a><div class="banner-title"><span>农业部与世界粮食计划署(WFP)开启合作新…</span></div></div>
-		<div class="swiper-slide"><a href=""><img src="http://d.ifengimg.com/w650_h400/p0.ifengimg.com/a/2017_46/54b1983344536b3_size190_w570_h332.jpg"/></a><div class="banner-title"><span>中国十佳劳伦斯颁奖盛典启动 热门候选人…</span></div></div>
-		<div class="swiper-slide"><a href=""><img src="http://d.ifengimg.com/w650_h400/p1.ifengimg.com/a/2017_47/433075bd92f8fec_size31_w570_h332.jpg"/></a><div class="banner-title"><span>全国首个县级高铁始发站驶出“复兴号”</span></div></div>
-		<div class="swiper-slide"><a href=""><img src="http://d.ifengimg.com/w650_h400/p2.ifengimg.com/a/2017_47/6ddc9522f5bba01_size238_w570_h332.jpg"/></a><div class="banner-title"><span>网络涉军举报平台11月19日上线运行 网友…</span></div></div>
-		<div class="swiper-slide"><a href=""><img src="http://d.ifengimg.com/w650_h400/p0.ifengimg.com/a/2017_46/54b1983344536b3_size190_w570_h332.jpg"/></a><div class="banner-title"><span>公安部交管局：在全国分三批推广新能源汽…</span></div></div>
-		</div>
-		<div class="swiper-pagination"></div>
+		</script>
+    
+	<div class="content">
+	<div class="news-title">{$article.post_title}</div>
+	<div class="news-tags"><span>作者：{$article.user.user_nickname}</span><span>发布时间：{:date('Y-m-d H:i',$article.published_time)}</span></div>
+	{$article.post_content}
 	</div>
-</div>
-<script type="text/javascript">
-var mySwiper = new Swiper('.bannerbox .swiper-container', {
-    pagination: '.bannerbox .swiper-pagination',
-    loop: true,
-    autoplay: 3000,
-    grabCursor: true,
-    paginationClickable: true,
-    autoHeight: true,
-})
-</script>
-	<div class="header-line"></div>
+
+    <div class="weui-footer">
+            <p class="footer-links">
+                <a href="login.html" class="weui-footer-link">登录</a>
+                <a href="qiye-register.html" class="weui-footer-link">注册</a>
+				<a href="help.html" class="weui-footer-link">帮助中心</a>
+            </p>
+            <p class="weui-footer-text">Copyright &copy; 2008-2017 www.yuming.com</p>
+    </div>
+	<div class="footer-line"></div>
 	<footer class="foot-bar">
 	<ul>
 	<li><a href="{:url('portal/index/index')}"><i><img src="__TMPL__/images/foot01.png" /><i>首页</a></li>
@@ -100,5 +94,7 @@ var mySwiper = new Swiper('.bannerbox .swiper-container', {
 	<li><a href="Index.aspx"><i><img src="__TMPL__/images/foot04.png" /><i>咨询</a></li>
 	</ul>
 	</footer>
+	<script type="text/javascript" src="__TMPL__/js/scrolltop.js"></script>
 </body>
 </html>
+
