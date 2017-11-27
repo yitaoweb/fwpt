@@ -14,13 +14,12 @@ use cmf\controller\HomeBaseController;
 use app\portal\model\PortalSsfwModel;
 use app\portal\model\PortalXzqyModel;
 use think\Db;
-class JglistController extends HomeBaseController
+class ExpertsController extends HomeBaseController
 {
     public function index()
     {
 
         $cid                  = $this->request->param('cid', 0, 'intval');
-        $fid                  = $this->request->param('fid', 0, 'intval');
         $cid2                  = $this->request->param('cid2', 0, 'intval');
 
         $portalSsfwModel = new PortalSsfwModel();
@@ -34,43 +33,55 @@ class JglistController extends HomeBaseController
         }else{
             $cat2 = $portalSsfwModel->where('parent_id', $cid)->where('status', 1)->select();
         }
-        
         //所有一级分类
         $catall = $portalSsfwModel->where('parent_id',0)->where('status', 1)->select();
         //服务区域
         $area = $AreaModel->where('parent_id', 8)->where('status', 1)->order('list_order')->select();
 
-        $where['user_type'] = 3; //机构
+        $where = array();
+       
         if ($cid > 0) {
             $arr=Db::name('portal_ssfw')->where('parent_id',$cid)->field('id')->select()->toArray();
              $arr = array_column($arr,'id');
             //var_dump($arr);die;
-            $where['qy_ssfw'] = array('in',$arr);
+            $where['ssfwid'] = array('in',$arr);
         }
 
         if ($cid2 > 0) {
-            $where['qy_ssfw'] = $cid2;
+            $where['ssfwid'] = $cid2;
         }
 
-        if ($fid) {
-            $where[$fid] = array('in','fwqy');
-        }
-        $jigou = Db::name('user')->where($where)->order('id')->paginate(10);
+        $experts = Db::name('portal_zjk')->where($where)->order('time')->paginate(10);
 
-        $this->assign("page", $jigou->render());
-        $this->assign("lists", $jigou->items());
+        $this->assign("page", $experts->render());
+        $this->assign("lists", $experts->items());
 
 
         
         $this->assign('cid', $cid);                   //当前一级分类id
-        $this->assign('fid', $fid);                   //当前服务区域id
+
         $this->assign('cid2', $cid2);                 //当前二级分类id
 
         $this->assign('cat', $cat);                   //当前一级分类详情
         $this->assign('cat2', $cat2);                 //当前二级分类详情
         $this->assign('catall', $catall);             //所有一级分类详情
 		$this->assign('area', $area);                 //服务区域详情
-        $listTpl ='jglist';
+        $listTpl ='expertslist';
+
+        return $this->fetch('/' . $listTpl);
+    }
+
+    public function view()
+    {
+
+        $id = $this->request->param('id', 0, 'intval');
+       
+        $experts = Db::name('portal_zjk')->where('id',$id)->find();
+
+    
+        $this->assign($experts);                 //机构简介
+        
+        $listTpl ='expertsview';
 
         return $this->fetch('/' . $listTpl);
     }

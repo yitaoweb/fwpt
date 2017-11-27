@@ -213,7 +213,7 @@
 </div>
 
 <div class="left-box">
-<div class="box-title left mt10"><span><a href="fuwu.html" target="_blank">服务需求</a></span><a href="fuwu.html" target="_blank">更多>></a></div>
+<div class="box-title left mt10"><span><a href="fuwu.html" target="_blank">服务需求</a></span><a href="{:cmf_url('portal/Demand/index')}" target="_blank">更多>></a></div>
   <table class="fwtable" >
       <thead>
         <tr>
@@ -227,7 +227,7 @@
       <tbody>
         <volist name="supply" id="vo">
           <tr>
-            <td><a href="">{$vo.title}</a></td>
+            <td><a href="{:cmf_url('portal/Demand/view',array('id'=>$vo.id))}">{$vo.title}</a></td>
             <td>{:getfield('user',$vo.user_id,'user_nickname')}</td>
             <td>{:getfield('portal_ssfw',$vo.ssfw_id,'name')}</td>
             <td>{$vo.state|state=###}</td>
@@ -302,18 +302,16 @@
 </div>
 </div>
 <div class="right-box">
-<div class="box-title left mt10"><span><a href="zhuanjia.html" target="_blank">专家库</a></span><a href="zhuanjia.html" target="_blank">更多>></a></div>
+<div class="box-title left mt10"><span><a href="{:cmf_url('portal/Experts/index')}" target="_blank">专家库</a></span><a href="{:cmf_url('portal/Experts/index')}" target="_blank">更多>></a></div>
 <div class="man-list">
     <volist name="zjk" id="vo">
-          <dl>
+        <dl>
           <a href="">
             <dt class="company_img"><img src="{:cmf_get_image_preview_url($vo.tp)}"/></dt>
             <dd>{$vo.name}</dd>
-            </a>
-          </dl>
+          </a>
+        </dl>
     </volist>
-     
-      
     </div>
 </div>
 

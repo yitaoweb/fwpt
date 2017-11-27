@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>联系点 {$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+    <include file="public@head"/>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/select-script.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/jquery.pagination.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/jquery.tools.min.js"></script>
+    <hook name="before_head_end"/>
+</head>
+<body class="body-white">
+<include file="public@nav"/>
+
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;联系点</div>
+
+
+<div class="main">
+
+    <ul class="select" style="width:1179px;">
+        <li class="select-list">
+            <dl id="select1">
+                <dt>区域：</dt>
+                <dd class="select-all <if condition='($id == 0)'>selected</if>">
+                    <a href="{:cmf_url('portal/Contact/index',array('id'=>0))}">全部</a>
+                </dd>
+                <volist name="area" id="vo">
+                <dd class="<if condition='($id == $vo.id)'>selected</if>">
+                    <a href="{:cmf_url('portal/Contact/index',array('id'=>$vo.id))}">{$vo.name}</a>
+                </dd>
+                </volist>
+            </dl>
+        </li>
+    </ul>
+    <div class="right_title" style="margin-bottom:-20px; margin-top:20px;">
+        <span>服务点</span>
+    </div>
+    <div class="list">   
+
+        <foreach name="lists" item="vo" empty="$emptylist">
+            <div class="list-item">     
+                <a href="{:cmf_url('portal/Contact/view',array('id'=>$vo.id))}">
+                    <img src="__ROOT__/upload/{$vo.lxd_logo}" alt="" title=""/> 
+                </a>        
+                <a href="{:cmf_url('portal/Contact/view',array('id'=>$vo.id))}">
+                    <h1>{$vo.lxd_name}</h1>
+                </a>
+                <dl>
+                    <dt>负责人：</dt><dd>{$vo.fzr}</dd>
+                    <dt>联系人：</dt><dd>{$vo.lxr}</dd>
+                </dl>
+                <dl>
+                    <dt>联系电话：</dt><dd>{$vo.lxd_dh}</dd>
+                    <dt>联系地址：</dt><dd>{$vo.lxd_dz}</dd>
+                </dl>
+                <dl>
+                    <dt>联系范围：</dt><dd>{$vo.fwqy}&nbsp;</dd>
+                    <dt>联系点简介：</dt><dd>{$vo.lxd_jj}</dd>
+                </dl>          
+            </div>
+        </foreach>    
+    </div>
+
+    <div class="clear"></div>
+            
+    <div class="yahoo2">{$page|default=''}</div>
+
+</div>
+
+
+
+
+<include file="public@link"/>
+<include file="public@footer"/>
+
+
+<include file="public@scripts"/>
+<hook name="before_body_end"/>
+</body>
+</html>
