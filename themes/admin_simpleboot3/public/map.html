@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> 百度地图拾取器</title>
+<meta http-equiv="MSThemeCompatible" content="Yes" />
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=yarzUUkNb0F0UgHUbSGiHRwQ"></script>
+<script src="assets/js/jquery-1.10.2.min.js"></script>
+<script src="assets/js/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="assets/js/artDialog/plugins/iframeTools.js"></script>
+<style type="text/css">
+body, html {width: 100%;height: 100%;overflow: hidden;margin:0;}
+#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;}
+#l-map{height:100%;width:100%;}
+</style>
+</head>
+<body id="nv_member">
+<input type="hidden" id="lng" value="0" />
+<input type="hidden" id="lat" value="0" />
+
+<div class="ftip" style="margin:0">拖动红色图标到相应位置然后点击右侧链接-> <a id="ok" style="float:none" href="###">已经设定好，关闭该页面</a></div>
+<div id="l-map"></div>
+<script type="text/javascript">
+var lng = art.dialog.data('lng');
+if (lng) {
+  document.getElementById('lng').value = art.dialog.data('lng');// 获取由主页面传递过来的数据
+  document.getElementById('lat').value = art.dialog.data('lat');
+};
+// 关闭并返回数据到主页面
+document.getElementById('ok').onclick = function () {
+  var origin = artDialog.open.origin;
+  var longitudeinput = origin.document.getElementById('lng');
+  var latitudeinput = origin.document.getElementById('lat');
+  longitudeinput.value = $('#lng').attr('value');
+  latitudeinput.value = $('#lat').attr('value');
+  art.dialog.close();
+};
+
+var map = new BMap.Map("l-map");
+var point = new BMap.Point($('#lng').val(),$('#lat').val());
+map.centerAndZoom(point,12);
+map.enableScrollWheelZoom();                            //启用滚轮放大缩小
+function myFun(result){
+
+  var cityName = "长治市";
+  if($('#lng').val()==0||$('#lng').val()==''){
+    map.setCenter(cityName);
+
+    p = new BMap.Point(113.119252,36.188499);
+  }else{
+    p = new BMap.Point($('#lng').val(),$('#lat').val());
+  }
+  var marker = new BMap.Marker(p);
+  marker.enableDragging();
+  map.addOverlay(marker);
+
+  marker.addEventListener("dragend", function(e){
+    $('#lng').attr('value',e.point.lng)
+    $('#lat').attr('value',e.point.lat)
+  })
+}
+
+var myCity = new BMap.LocalCity();
+var p=myCity.get(myFun);
+
+</script>
+</body>
+</html>
