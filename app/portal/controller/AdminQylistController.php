@@ -44,29 +44,30 @@ class AdminQylistController extends AdminBaseController
         $categoriesTree = $portalSshyModel->adminCategoryTree();
         $xzqyTree = $portalXzqyModel->adminCategoryTree();
         $this->assign("qy_shstatid", 2);
+
         if($arrData){
-            if($arrData['name'] != ''){
+            if(isset($arrData['name'])){
                  $portalTagModel->where('user_nickname','like',"%{$arrData['name']}%");
                  $this->assign('name', $arrData['name']);
             }
-            if($arrData['xyflid'] != ''){
+            if(isset($arrData['xyflid'] )){
                  $categoriesTree = $portalSshyModel->adminCategoryTree($arrData['xyflid']);
                  $portalTagModel->where('qy_sshy',$arrData['xyflid']);
                  $this->assign("xyflid", $arrData['xyflid']);
             }
-            if($arrData['xzqyid'] != ''){
+            if(isset($arrData['xzqyid'])){
                  $xzqyTree = $portalXzqyModel->adminCategoryTree($arrData['xzqyid']);
                  $portalTagModel->where('qy_area',$arrData['xzqyid']);
                  $this->assign("xzqyid", $arrData['xzqyid']);
             }
-            if($arrData['qy_shstatid'] != ''){
+            if(isset($arrData['qy_shstatid'])){
                  $portalTagModel->where('qy_shstat',$arrData['qy_shstatid']);
                  $this->assign("qy_shstatid", $arrData['qy_shstatid']);
             }
            
         } 
         $portalTagModel->where('user_type',"2");
-        $tags = $portalTagModel->paginate();    
+        $tags = $portalTagModel->paginate(10);    
         $xzqy = Db::name('portal_xzqy')->select();  
         $this->assign("tags", $tags);
         $this->assign("xzqy", $xzqy);

@@ -10,7 +10,7 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="msapplication-tap-highlight" content="no" />
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
-<title>机构列表</title>
+<title>专家简介</title>
 <link href="__TMPL__/css/style.css" rel="stylesheet" type="text/css" />
 <link href="__TMPL__/css/swiper-3.2.7.min.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="__TMPL__/js/jquery-1.9.1.js" ></script>
@@ -37,11 +37,11 @@
 <!-- 						<div class="swiper-slide"><a href="fuwu.html">服务</a></div> -->
 						<div class="swiper-slide"><a href="">专题</a></div>
 						<div class="swiper-slide"><a href="/portal/demand/index.html">需求</a></div>
-						<div class="swiper-slide selected"><a href="/portal/jglist/index/id/0.html">机构</a></div>
+						<div class="swiper-slide"><a href="/portal/jglist/index/id/0.html">机构</a></div>
 						<div class="swiper-slide"><a href="">企业</a></div>
 						<div class="swiper-slide"><a href="/gyxx.html">供应</a></div>
 						<div class="swiper-slide"><a href="/qgxx.html">求购</a></div>
-						<div class="swiper-slide"><a href="/portal/experts/index.html">专家</a></div>
+						<div class="swiper-slide selected"><a href="/portal/experts/index.html">专家</a></div>
 						<div class="swiper-slide"><a href="/portal/contact/index/id/0.html">网点</a></div>
 						<div class="swiper-slide"><a href="/Introduction.html">关于</a></div>
 					</div>
@@ -69,62 +69,25 @@
         	        });
         	    });
 		</script>
-<section class="job-module"> 
-	<dl class="retrie"> 
-		<dt>
-			<a id="area" href="javascript:;" class="wd50">服务区域</a>
-			<a id="wage" href="javascript:;" class="wd50">二级分类</a>
-		</dt> 
-		<dd class="area"> 
-			<ul class="slide downlist"> 
-				<volist name="area" id="vo">
-				<li><a href="{:cmf_url('portal/Jglist/index',array('cid'=>$cat['id'],'fid'=>$vo['id'],'cid2'=>$cid2))}">{$vo.name}</a></li> 
-                </volist>
-			</ul> 
-		</dd>  
-		<dd class="area"> 
-			<ul class="slide downlist"> 
-			    <volist name="cat2" id="vo">
-                    <li><a href="{:cmf_url('portal/Jglist/index',array('cid'=>$cat['id'],'fid'=>$fid,'cid2'=>$vo['id']))}">{$vo.name}</a></li> 
-                </volist>
-			</ul> 
-		</dd> 
-	</dl> 
-</section>
-	<script type="text/javascript">
-	$(function(){ 
-	$('.retrie dt a').click(function(){
-		var $t=$(this);
-		if($t.hasClass('up')){
-			$(".retrie dt a").removeClass('up');
-			$('.downlist').hide();
-			$('.mask').hide();
-		}else{
-			$(".retrie dt a").removeClass('up');
-			$('.downlist').hide();
-			$t.addClass('up');
-			$('.downlist').eq($(".retrie dt a").index($(this)[0])).show();
-			$('.mask').show();
-		}
-	});
-	$(".area ul li a:contains('"+$('#area').text()+"')").addClass('selected');
-	$(".wage ul li a:contains('"+$('#wage').text()+"')").addClass('selected');
-	});
-	</script>
-	
-<div class="list">				
-                        <foreach name="lists" item="vo">		
-							<a href="{:cmf_url('portal/Jghome/index',array('id'=>$vo.id))}"><div class="list-item read">		
-							<img src="__ROOT__/upload/{$vo.avatar}" alt="" title=""/>
-							<h1>{$vo.user_nickname}</h1>
-									<dl>服务地址：山西-长治-{$vo.qy_address}</dl>
-									<dl>服务项目：{:getfield('portal_ssfw',$vo.qy_ssfw,'name')}服务</dl>
-							</div>
-							</a>
-						</foreach>   
-							
-					</div>
-	<div class="loadtip">上拉加载更多</div>
+	<div class="list">						
+		<div class="list-item">		
+		<img src="__ROOT__/upload/{$tp}" alt="" title=""/>		
+		<h1>{$name}</h1>
+		<dl>工作行业：{$zxhy}</dl>
+        <dl>专家职务：{$zjzw}</dl>
+        <dl>工作单位：{$gzdw}</dl>
+		
+		</div>
+	</div>
+	<div class="infoli">联系电话：{$lxfs}</div>
+	<div class="content">
+	<h1 class="title">个人简介</h1>
+	{$grjj}
+	</div>
+	<div class="content">
+	<h1 class="title">成功案例</h1>
+	{$cgal}
+	</div>
     <div class="weui-footer">
             <p class="footer-links">
                 <a href="login.html" class="weui-footer-link">登录</a>
@@ -136,14 +99,12 @@
 	<div class="footer-line"></div>
 	<footer class="foot-bar">
 	<ul>
-	<li><a href="{:url('portal/index/index')}"><i><img src="__TMPL__/images/foot01.png" /><i>首页</a></li>
-	<li><a href="../Search.html"><i><img src="__TMPL__/images/foot02.png" /><i>搜索</a></li>
-	<li><a href=""><i><img src="__TMPL__/images/foot03.png" /><i>联系</a></li>
-	<li><a href="Index.aspx"><i><img src="__TMPL__/images/foot04.png" /><i>咨询</a></li>
+	<li><a href="{:url('portal/index/index')}"><i><img src="images/foot01.png" /><i>首页</a></li>
+	<li><a href="../Search.html"><i><img src="images/foot02.png" /><i>搜索</a></li>
+	<li><a href=""><i><img src="images/foot03.png" /><i>联系</a></li>
+	<li><a href="Index.aspx"><i><img src="images/foot04.png" /><i>咨询</a></li>
 	</ul>
 	</footer>
 	<script type="text/javascript" src="__TMPL__/js/scrolltop.js"></script>
 </body>
 </html>
-
-

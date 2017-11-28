@@ -10,7 +10,7 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="msapplication-tap-highlight" content="no" />
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
-<title>机构列表</title>
+<title>专家库</title>
 <link href="__TMPL__/css/style.css" rel="stylesheet" type="text/css" />
 <link href="__TMPL__/css/swiper-3.2.7.min.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="__TMPL__/js/jquery-1.9.1.js" ></script>
@@ -37,11 +37,11 @@
 <!-- 						<div class="swiper-slide"><a href="fuwu.html">服务</a></div> -->
 						<div class="swiper-slide"><a href="">专题</a></div>
 						<div class="swiper-slide"><a href="/portal/demand/index.html">需求</a></div>
-						<div class="swiper-slide selected"><a href="/portal/jglist/index/id/0.html">机构</a></div>
+						<div class="swiper-slide"><a href="/portal/jglist/index/id/0.html">机构</a></div>
 						<div class="swiper-slide"><a href="">企业</a></div>
 						<div class="swiper-slide"><a href="/gyxx.html">供应</a></div>
 						<div class="swiper-slide"><a href="/qgxx.html">求购</a></div>
-						<div class="swiper-slide"><a href="/portal/experts/index.html">专家</a></div>
+						<div class="swiper-slide selected"><a href="/portal/experts/index.html">专家</a></div>
 						<div class="swiper-slide"><a href="/portal/contact/index/id/0.html">网点</a></div>
 						<div class="swiper-slide"><a href="/Introduction.html">关于</a></div>
 					</div>
@@ -72,23 +72,23 @@
 <section class="job-module"> 
 	<dl class="retrie"> 
 		<dt>
-			<a id="area" href="javascript:;" class="wd50">服务区域</a>
-			<a id="wage" href="javascript:;" class="wd50">二级分类</a>
+			<a id="area" href="javascript:;" class="wd100">
+			<volist name="catall" id="vo">
+                    <if condition="$vo.id == $cat.id"> 
+                        {$vo.name}
+                    
+                    </if>
+            </volist>
+			</a>
 		</dt> 
 		<dd class="area"> 
 			<ul class="slide downlist"> 
-				<volist name="area" id="vo">
-				<li><a href="{:cmf_url('portal/Jglist/index',array('cid'=>$cat['id'],'fid'=>$vo['id'],'cid2'=>$cid2))}">{$vo.name}</a></li> 
-                </volist>
+			<li onclick="location='{:cmf_url('portal/experts/index',array('cid'=>''))}'"><a href="#">所属服务</a></li>
+			<volist name="catall" id="vo">
+				<li onclick="location='{:cmf_url('portal/experts/index',array('cid'=>$vo.id))}'"><a href="#">{$vo.name}</a></li> 
+			</volist>
 			</ul> 
 		</dd>  
-		<dd class="area"> 
-			<ul class="slide downlist"> 
-			    <volist name="cat2" id="vo">
-                    <li><a href="{:cmf_url('portal/Jglist/index',array('cid'=>$cat['id'],'fid'=>$fid,'cid2'=>$vo['id']))}">{$vo.name}</a></li> 
-                </volist>
-			</ul> 
-		</dd> 
 	</dl> 
 </section>
 	<script type="text/javascript">
@@ -112,17 +112,17 @@
 	});
 	</script>
 	
-<div class="list">				
-                        <foreach name="lists" item="vo">		
-							<a href="{:cmf_url('portal/Jghome/index',array('id'=>$vo.id))}"><div class="list-item read">		
-							<img src="__ROOT__/upload/{$vo.avatar}" alt="" title=""/>
-							<h1>{$vo.user_nickname}</h1>
-									<dl>服务地址：山西-长治-{$vo.qy_address}</dl>
-									<dl>服务项目：{:getfield('portal_ssfw',$vo.qy_ssfw,'name')}服务</dl>
+					<div class="list">	
+					    <foreach name="lists" item="vo"  empty="$emptylist">					
+							<a href="{:cmf_url('portal/experts/view',array('id'=>$vo.id))}"><div class="list-item read rel">		
+							<img src="__ROOT__/upload/{$vo.tp}" alt="" title=""/>
+							<h1>{$vo.name}</h1>
+									<dl>职务：{$vo.zjzw}</dl>
+									<dl>电话：{$vo.lxfs}</dl>
+									<div class="qq"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$vo.qq}&site=qq&menu=yes">QQ</a></div>
 							</div>
 							</a>
-						</foreach>   
-							
+						</foreach>	
 					</div>
 	<div class="loadtip">上拉加载更多</div>
     <div class="weui-footer">
@@ -145,5 +145,6 @@
 	<script type="text/javascript" src="__TMPL__/js/scrolltop.js"></script>
 </body>
 </html>
+
 
 

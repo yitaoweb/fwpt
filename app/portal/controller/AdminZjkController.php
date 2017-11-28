@@ -40,13 +40,13 @@ class AdminZjkController extends AdminBaseController
 
         $arrData = $this->request->param(); 
         if($arrData){
-            if($arrData['name'] != ''){
+            if(isset($arrData['name'])){
                  $portalTagModel->where('name','like',"%{$arrData['name']}%");
                  $this->assign('name', $arrData['name']);
             }
            
         } 
-        $tags = $portalTagModel->paginate();    
+        $tags = $portalTagModel->paginate(10);    
 
         $this->assign("arrStatus", $portalTagModel::$STATUS);
         $this->assign("tags", $tags);

@@ -10,7 +10,7 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="msapplication-tap-highlight" content="no" />
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
-<title>机构列表</title>
+<title>需求列表</title>
 <link href="__TMPL__/css/style.css" rel="stylesheet" type="text/css" />
 <link href="__TMPL__/css/swiper-3.2.7.min.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="__TMPL__/js/jquery-1.9.1.js" ></script>
@@ -33,16 +33,17 @@
 				<div class="swiper-container swiperNav b-line">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide"><a href="{:url('portal/index/index')}">首页</a></div>
-						<div class="swiper-slide"><a href="">资讯</a></div>
-						<div class="swiper-slide"><a href="fuwu.html">服务</a></div>
+						<div class="swiper-slide"><a href="/czx.html">资讯</a></div>
+<!-- 						<div class="swiper-slide"><a href="fuwu.html">服务</a></div> -->
 						<div class="swiper-slide"><a href="">专题</a></div>
 						<div class="swiper-slide selected"><a href="/portal/demand/index.html">需求</a></div>
 						<div class="swiper-slide"><a href="/portal/jglist/index/id/0.html">机构</a></div>
 						<div class="swiper-slide"><a href="">企业</a></div>
-						<div class="swiper-slide"><a href="">供求</a></div>
-						<div class="swiper-slide"><a href="">专家</a></div>
-						<div class="swiper-slide"><a href="lianxidian.html">网点</a></div>
-						<div class="swiper-slide"><a href="">关于</a></div>
+						<div class="swiper-slide"><a href="/gyxx.html">供应</a></div>
+						<div class="swiper-slide"><a href="/qgxx.html">求购</a></div>
+						<div class="swiper-slide"><a href="/portal/experts/index.html">专家</a></div>
+						<div class="swiper-slide"><a href="/portal/contact/index/id/0.html">网点</a></div>
+						<div class="swiper-slide"><a href="/Introduction.html">关于</a></div>
 					</div>
                     <div class="more-nav">＋</div>
 				</div>
@@ -71,23 +72,15 @@
 <section class="job-module"> 
 	<dl class="retrie"> 
 		<dt>
-			<a id="area" href="javascript:;" class="wd50">服务区域</a>
-			<a id="wage" href="javascript:;" class="wd50">二级分类</a>
+			<a id="area" href="javascript:;" class="wd100">服务区域</a>
 		</dt> 
 		<dd class="area"> 
 			<ul class="slide downlist"> 
-				<volist name="area" id="vo">
-				<li><a href="{:cmf_url('portal/Jglist/index',array('cid'=>$cat['id'],'fid'=>$vo['id'],'cid2'=>$cid2))}">{$vo.name}</a></li> 
-                </volist>
+			   <volist name="area" id="vo">
+				<li><a href="{:cmf_url('portal/demand/index',array('cid'=>$cat['id'],'fid'=>$vo['id'],'cid2'=>$cid2))}">{$vo.name}</a></li> 
+			   </volist>
 			</ul> 
 		</dd>  
-		<dd class="area"> 
-			<ul class="slide downlist"> 
-			    <volist name="cat2" id="vo">
-                    <li><a href="{:cmf_url('portal/Jglist/index',array('cid'=>$cat['id'],'fid'=>$fid,'cid2'=>$vo['id']))}">{$vo.name}</a></li> 
-                </volist>
-			</ul> 
-		</dd> 
 	</dl> 
 </section>
 	<script type="text/javascript">
@@ -111,17 +104,16 @@
 	});
 	</script>
 	
-<div class="list">				
-                        <foreach name="lists" item="vo">		
-							<a href="{:cmf_url('portal/Jghome/index',array('id'=>$vo.id))}"><div class="list-item read">		
-							<img src="__ROOT__/upload/{$vo.avatar}" alt="" title=""/>
-							<h1>{$vo.user_nickname}</h1>
-									<dl>服务地址：山西-长治-{$vo.qy_address}</dl>
-									<dl>服务项目：{:getfield('portal_ssfw',$vo.qy_ssfw,'name')}服务</dl>
-							</div>
-							</a>
-						</foreach>   
+					<div class="list">	
+						  <foreach name="lists" item="vo"  empty="$emptylist">					
+							<div class="list-item rel">		
 							
+							<h1><a href="{:cmf_url('portal/demand/view',array('id'=>$vo['id']))}">{$vo.title}</a></h1>
+									<dl>对接状态：{$vo.state|state=###}</dl>
+									<dl>服务类型：{:getfield('portal_ssfw',$vo.ssfw_id,'name')}</dl>
+									<div class="qq"><a target="_blank" href="xuqiu-xiangqing.html">对接</a></div>
+							</div>
+						  </foreach>
 					</div>
 	<div class="loadtip">上拉加载更多</div>
     <div class="weui-footer">
@@ -141,8 +133,10 @@
 	<li><a href="Index.aspx"><i><img src="__TMPL__/images/foot04.png" /><i>咨询</a></li>
 	</ul>
 	</footer>
-	<script type="text/javascript" src="__TMPL__/js/scrolltop.js"></script>
+	<script type="text/javascript" src="js/scrolltop.js"></script>
 </body>
 </html>
+
+
 
 
