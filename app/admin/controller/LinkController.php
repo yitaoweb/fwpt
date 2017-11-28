@@ -12,7 +12,7 @@ namespace app\admin\controller;
 
 use cmf\controller\AdminBaseController;
 use app\admin\model\LinkModel;
-
+use think\Db;
 class LinkController extends AdminBaseController
 {
     protected $targets = ["_blank" => "新标签页打开", "_self" => "本窗口打开"];
@@ -27,7 +27,7 @@ class LinkController extends AdminBaseController
      *     'order'  => 50,
      *     'icon'   => '',
      *     'remark' => '友情链接管理',
-     *     'param'  => ''
+     *     'param'  => s''
      * )
      */
     public function index()
@@ -38,7 +38,13 @@ class LinkController extends AdminBaseController
 
         return $this->fetch();
     }
-
+    
+    public function yb(){
+        $id  = $this->request->param('a', 0, 'a');
+        // $linkModel = new LinkModel();
+        // $links     = $linkModel->select();
+        return $id;
+    }
     /**
      * 添加友情链接
      * @adminMenu(
@@ -55,6 +61,8 @@ class LinkController extends AdminBaseController
     public function add()
     {
         $this->assign('targets', $this->targets);
+        $linkfl = Db::name('portal_linkfl')->select();
+        $this->assign('linkfl', $linkfl);
         return $this->fetch();
     }
 
@@ -100,6 +108,8 @@ class LinkController extends AdminBaseController
     {
         $id        = $this->request->param('id', 0, 'intval');
         $linkModel = LinkModel::get($id);
+        $linkfl = Db::name('portal_linkfl')->select();
+        $this->assign('linkfl', $linkfl);
         $this->assign('targets', $this->targets);
         $this->assign('link', $linkModel);
         return $this->fetch();

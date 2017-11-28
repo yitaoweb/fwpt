@@ -1,10 +1,17 @@
+<script type="text/javascript">
+   function yb(a){
+       $.post('/admin/link/yb',{a:a},function(data){
+               alert(data);
+       })
+   }
+</script>
 <div class="clear"></div>
 <div class="tablink"  style="margin-top: 30px;">
   <ul class="tab_menu">
         <li class="hit firsttab">
         中央部门网站
         </li>
-        <li>国内省市政府网站</li>
+        <li onclick="yb(8)">国内省市政府网站</li>
         <li>省内各市政府网站</li>
         <li>市各政府网站</li>
         <li>新闻媒体</li>
