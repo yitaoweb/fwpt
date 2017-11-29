@@ -1,42 +1,30 @@
 <script type="text/javascript">
    function yb(a){
+$("#pane").find('a').remove();
        $.post('/admin/link/yb',{a:a},function(data){
-               alert(data);
+               $(this).attr('class','hit firsttab');
+               eval("var ret = "+data);
+              for(var i=0;i<ret.length;i++){
+                 var liObj = $('<a target="_blank" href="'+ret[i].url+'">'+ret[i].name+'</a>');
+                 $("#pane").append(liObj);
+               }
        })
    }
 </script>
 <div class="clear"></div>
 <div class="tablink"  style="margin-top: 30px;">
   <ul class="tab_menu">
-        <li class="hit firsttab">
-        中央部门网站
+    <foreach name="linkfl" item="vo">
+        <li class="" onclick="yb({$vo.id})">
+        {$vo.name}
         </li>
-        <li onclick="yb(8)">国内省市政府网站</li>
-        <li>省内各市政府网站</li>
-        <li>市各政府网站</li>
-        <li>新闻媒体</li>
-        <li>企业网站</li>
+    </foreach>
     </ul>
     <div class="panes">
-        <div class="pane" style="display:block;">
-    <a href="http://www.zjw.gov.cn" target="_blank">监察部</a><a href="http://www.mca.gov.cn" target="_blank">民政部</a><a href="http://www.legalinfo.gov.cn" target="_blank">司法部</a><a href="http://www.mof.gov.cn" target="_blank">财政部</a><a href="http://www.mop.gov.cn" target="_blank">人事部</a><a href="http://www.molss.gov.cn" target="_blank">劳保障部</a><a href="http://www.mlr.gov.cn" target="_blank">国土资源部</a><a href="http://www.cin.gov.cn" target="_blank">建设部</a><a href="http://www.chinamor.cn.net" target="_blank">铁道部</a><a href="http://www.moc.gov.cn" target="_blank">交通部</a><a href="http://www.mii.gov.cn" target="_blank">信息产业部</a><a href="http://www.mwr.gov.cn" target="_blank">水利部</a>
-    </div>
-        <div class="pane">
-    <a href="http://www.agri.gov.cn" target="_blank">农业部</a><a href="http://www.mofcom.gov.cn" target="_blank">商务部</a><a href="http://www.ccnt.gov.cn" target="_blank">文化部</a><a href="http://www.pbc.gov.cn" target="_blank">中国人民银行</a><a href="http://www.audit.gov.cn" target="_blank">审计署</a><a href="http://www.customs.gov.cn" target="_blank">海关总署</a><a href="http://www.chinatax.gov.cn" target="_blank">国家税务总局</a><a href="http://www.nepa.unep.net" target="_blank">环境保护总局</a><a href="http://www.caac.cn.net" target="_blank">民用航空总局</a><a href="http://www.sarft.gov.cn" target="_blank">广电总局</a><a href="http://www.sport.gov.cn" target="_blank">国家体育总局</a><a href="http://www.stats.gov.cn" target="_blank">国家统计局</a><a href="http://www.saic.gov.cn" target="_blank">工商行政管理局</a><a href="http://www.ncac.gov.cn" target="_blank">国家版权局</a>
-    </div>
-        <div class="pane">
-    <a href="http://www.taiyuan.gov.cn/" target="_blank">太原市</a><a href="http://www.dt.gov.cn/" target="_blank">大同市</a><a href="http://www.shuozhou.gov.cn/" target="_blank">朔州市</a><a href="http://www.sxxz.gov.cn/" target="_blank">忻州市</a><a href="http://www.yq.gov.cn/" target="_blank">阳泉市</a><a href="http://www.sxjz.gov.cn/" target="_blank">晋中市</a><a href="http://www.lvliang.gov.cn/" target="_blank">吕梁市</a><a href="http://www.linfen.gov.cn/" target="_blank">临汾市</a><a href="http://www.yuncheng.gov.cn/" target="_blank">运城市</a><a href="http://www.changzhi.gov.cn/" target="_blank">长治市</a><a href="http://www.jconline.cn/" target="_blank">晋城市</a>
-    </div>
-        <div class="pane">
-    <a href="http://www.chinagrain.gov.cn" target="_blank">国家粮食局</a><a href="http://www.forestry.gov.cn" target="_blank">国家林业局</a><a href="http://www.aqsiq.gov.cn" target="_blank">质检疫总局</a><a href="http://www.chinasafety.gov.cn" target="_blank">安监管理局</a><a href="http://www.sda.gov.cn" target="_blank">药品监督管理局</a><a href="http://www.cpo.cn.net" target="_blank">国家知识产权局</a><a href="http://www.cnta.com" target="_blank">国家旅游局</a><a href="http://www.sezo.gov.cn" target="_blank">国务院特区办</a><a href="http://www.china.org.cn" target="_blank">国务院新闻办</a><a href="http://www.chinawest.gov.cn" target="_blank">西发领导小组</a><a href="http://www.xinhua.org" target="_blank">新华通讯社</a><a href="http://www.cashq.ac.cn" target="_blank">中国科学院</a><a href="http://www.cass.net.cn" target="_blank">中国社会科学院</a>
-    </div>
-        <div class="pane">
-    <a href="http://www.cae.ac.cn" target="_blank">中国工程院</a><a href="http://ww.csi.ac.cn" target="_blank">中国地震局</a><a href="http://www.csrc.gov.cn" target="_blank">证监管理委员会</a><a href="http://www.circ.gov.cn" target="_blank">保监管理委员会</a><a href="http://www.gjgnmyj.gov.cn" target="_blank">国家国内贸易局</a><a href="http://www.chinacoal.gov.cn" target="_blank">国家煤炭工业局</a><a href="http://www.mei.net.cn" target="_blank">国家机械工业局</a><a href="http://www.mmi.gov.cn" target="_blank">国家冶金工业局</a><a href="http://www.cncic.gov.cn" target="_blank">石油化学工业局</a><a href="http://www.clii.com.cn" target="_blank">国家轻工业局</a><a href=""http://www.ctei.gov.cn "" target="_blank">国家纺织工业局</a>
+        <div class="pane" id="pane" style="display:block;">
 
-    </div>
-        <div class="pane">
-    <a href="http://www.bm.cei.gov.cn" target="_blank">建筑材料工业局</a><a href="http://www.tobacco.gov.cn" target="_blank">国家烟草专卖局</a><a href="http://www.atk.com.cn" target="_blank">有色金属工业局</a><a href="http://www.safea.gov.cn" target="_blank">国家外国专家局</a><a href="http://www.soa.gov.cn" target="_blank">国家海洋局</a><a href="http://www2.sbsm.gov.cn" target="_blank">国家测绘局</a><a href="http://www.chinapost.gov.cn" target="_blank">国家邮政局</a><a href="http://www.nach.gov.cn" target="_blank">国家文物局</a><a href="http://www.satcm.gov.cn" target="_blank">中医药管理局</a><a href="http://www.safe.gov.cn" target="_blank">国家外汇管理局</a><a href="http://www.moe.edu.cn" target="_blank">教育部</a>
-    </div>
+        </div>
+      
     </div>
     <div class="clear"></div>
 </div>

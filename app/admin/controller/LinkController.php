@@ -35,15 +35,15 @@ class LinkController extends AdminBaseController
         $linkModel = new LinkModel();
         $links     = $linkModel->select();
         $this->assign('links', $links);
-
+       
         return $this->fetch();
     }
     
     public function yb(){
-        $id  = $this->request->param('a', 0, 'a');
-        // $linkModel = new LinkModel();
-        // $links     = $linkModel->select();
-        return $id;
+        $id = $_POST['a'];
+        $linkModel = new LinkModel();
+        $links = $linkModel->where('linkfl_id',$id)->select();
+        return json_encode($links);
     }
     /**
      * 添加友情链接

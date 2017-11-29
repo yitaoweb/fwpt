@@ -90,6 +90,8 @@ class HomeBaseController extends BaseController
         $qyzmpp = Db::name('user')->where("user_type",2)->where("zmpp",1)->select();
 
         $qytg = Db::name('user')->where("user_type",2)->where("tg",1)->select();
+        $linkfl = Db::name('portal_linkfl')->select();
+        $this->assign('linkfl', $linkfl);
         $this->assign('ssfw',$ssfw);
         $this->assign('emptylist','<div class="list-item" style="text-align:center;">暂无数据</div>');
         $this->assign('qyzmpp',$qyzmpp);
