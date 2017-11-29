@@ -1,16 +1,3 @@
-<script type="text/javascript">
-   function yb(a){
-$("#pane").find('a').remove();
-       $.post('/admin/link/yb',{a:a},function(data){
-               $(this).attr('class','hit firsttab');
-               eval("var ret = "+data);
-              for(var i=0;i<ret.length;i++){
-                 var liObj = $('<a target="_blank" href="'+ret[i].url+'">'+ret[i].name+'</a>');
-                 $("#pane").append(liObj);
-               }
-       })
-   }
-</script>
 <div class="clear"></div>
 <div class="tablink"  style="margin-top: 30px;">
   <ul class="tab_menu">
@@ -29,6 +16,17 @@ $("#pane").find('a').remove();
     <div class="clear"></div>
 </div>
 <script type="text/javascript">
+    function yb(a){      
+       $.post('/admin/link/yb',{a:a},function(data){
+               $("#pane").find('a').remove();
+               $(this).attr('class','hit firsttab');
+               eval("var ret = "+data);
+              for(var i=0;i<ret.length;i++){
+                 var liObj = $('<a target="_blank" href="'+ret[i].url+'">'+ret[i].name+'</a>');
+                 $("#pane").append(liObj);
+               }
+       })
+    }
     $(function () {
         $('.tablink ul li').click(function () {
             $(this).addClass('hit').siblings().removeClass('hit');
