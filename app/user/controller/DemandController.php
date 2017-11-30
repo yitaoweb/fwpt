@@ -6,7 +6,7 @@
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
-// | Author: Powerless < wzxaini9@gmail.com>
+// | Author: Powerless < wzxaini9@gmail.com>s
 // +----------------------------------------------------------------------
 namespace app\user\controller;
 
@@ -42,6 +42,7 @@ class DemandController extends UserBaseController
         $this->assign("um",3);
         return $this->fetch();
     }
+
 
     /**
      * 求购列表

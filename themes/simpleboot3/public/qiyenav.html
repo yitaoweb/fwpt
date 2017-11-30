@@ -36,6 +36,12 @@
 					<li><a href="{:url('user/entdata/add')}">企业数据上报</a></li>
                 </ul>
             </li>
+            <li>
+                <div class="link">我申请的服务<i class="fa fa-chevron-down"></i></div>
+                <ul class="submenu <if condition='($um == 5)'>dis</if>">
+                    <li><a href="{:url('user/entdata/wdfwList')}">服务列表</a></li>
+                </ul>
+            </li>
 
             <else/>
 
@@ -44,6 +50,13 @@
                 <ul class="submenu <if condition='($um == 5)'>dis</if>">
                     <li><a href="{:url('user/product/add')}">发布服务产品</a></li>
 					<li><a href="{:url('user/product/index')}">服务产品列表</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <div class="link">订单管理<i class="fa fa-chevron-down"></i></div>
+                <ul class="submenu <if condition='($um == 6)'>dis</if>">
+                    <li><a href="{:url('user/product/ddList')}">订单列表</a></li>
                 </ul>
             </li>
 

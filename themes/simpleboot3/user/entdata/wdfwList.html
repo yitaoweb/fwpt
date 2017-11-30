@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$user_login}  - 修改资料</title>
+<meta name="keywords" content=""/>
+<meta name="description" content="">
+<include file="public@head"/>
+
+</head>
+<body class="body-white" id="top">
+
+<include file="public@nav" />
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;<if condition='($user_type == 2)'>企业<else/>机构</if>中心</div>
+<div class="main">
+    <div class="main_l left">
+        <include file="public@qiyenav" />
+    </div>
+    
+    <div class="main_r right" style="min-height: 600px;">
+        <include file="public@qiyetop" />
+        <div class="tabPanel">
+            <div class="tabnav">
+              <div class="hit">全部需求</div>
+              <div>未受理</div>
+              <div>已对接</div>
+            </div>
+           <div class="tabpanes">
+              <div >
+                  <table class="fwtable">
+                    <thead>
+                      <tr>
+                        <th>序号</th>
+                        <th>需求</th>
+                        <th>服务机构</th>
+                        <th>服务产品</th>
+                        <th>时间</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                  <tbody>
+                    <foreach name="lists" item="vo">
+                      <tr>
+                        <td>{$key+1}</td>
+                        <foreach name="fwxq" item="vos">
+                        <if condition='($vo.xq_id == $vos.id)'>
+                        <td>
+                         {$vos.title}
+                        </td>
+                        </if>
+                        </foreach>
+                        <foreach name="jg_user" item="vos">
+                        <if condition='($vo.jg_id == $vos.id)'>
+                        <td>
+                         <a href="{:cmf_url('portal/Jghome/index',array('id'=>$vos.id))}">{$vos.user_nickname}</a>
+                        </td>
+                        </if>
+                        </foreach>
+                        <foreach name="fwcp" item="vos">
+                        <if condition='($vo.cq_id == $vos.id)'>
+                        <td>
+                         <a href="{:cmf_url('portal/Jghome/product',array('id'=>$vo.jg_id,'pid'=>$vos.id))}">{$vos.title}</a>
+                        </td>
+                        </if>
+                        </foreach>
+                        <td>{$vo.time}</td>
+                        <td>
+                        <if condition='($vo.stat == 0)'>
+                          等待受理
+                        </if>
+                        <if condition='($vo.stat == 1)'>
+                          成功受理
+                        </if>
+                        <if condition='($vo.stat == 2)'>
+                          拒绝受理
+                        </if>
+                        <if condition='($vo.jg_sunCon == 1 && $vo.stat == 1)'>
+                          对方已提交确认
+                        </if>
+                        <if condition='($vo.stat == 4)'>
+                          服务对接已完成
+                        </if>
+                        </td>
+                        <td>
+                           <if condition='($vo.jg_sunCon == 1 && $vo.stat == 3)'>
+                              <a href="{:url('user/Entdata/statup',array('id'=>$vo.id,'stat'=>3))}">确认服务完成</a>
+                           </if>
+                           <if condition='($vo.stat == 4)'>
+                             <if condition='($vo.time_pj eq "")'>
+                              <a href="{:url('user/Entdata/pj',array('id'=>$vo.id))}">评价</a>
+                             </if>
+                              <a href="{:url('user/Entdata/statup',array('id'=>$vo.id))}">投诉</a>
+                           </if>
+                        </td>
+                      </tr>
+                      </foreach>
+                  </tbody>
+                </table>
+                <div class="clear"></div>
+                
+                <div class="yahoo2">{$page|default=''}</div>
+              </div>
+           </div>
+        <div class="clear"></div>
+        </div>
+    </div>
+</div>              
+  <include file="public@link" />
+  <include file="public@footer" />
+
+  <!-- /container -->
+  <include file="public@scripts" />
+</body>
+</html>

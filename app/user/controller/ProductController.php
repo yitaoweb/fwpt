@@ -12,6 +12,7 @@ namespace app\user\controller;
 
 use cmf\controller\UserBaseController;
 use app\user\model\UserModel;
+use app\portal\model\PortalDjModel;
 use think\Validate;
 use think\Db;
 
@@ -35,6 +36,38 @@ class ProductController extends UserBaseController
 
         $this->assign("um",5);
         return $this->fetch();
+    }
+
+    public function ddList()
+    {
+        $user = cmf_get_current_user();
+        $userId = cmf_get_current_user_id();
+        $dd=Db::name('portal_dj');
+        $product  = $dd->where('jg_id',$userId)->paginate(10);
+        $fwcp=Db::name('portal_fwcp')->select();
+        $fwxq=Db::name('portal_fwxq')->select();
+
+        $this->assign("page", $product->render());
+        $this->assign("lists", $product->items());
+        $this->assign($user);
+        $this->assign("fwcp",$fwcp);
+        $this->assign("fwxq",$fwxq);
+        $this->assign("um",6);
+        return $this->fetch();
+    }
+
+    public function statup(){
+        $stat = $this->request->param("stat", 0, "intval");
+        $id = $this->request->param("id", 0, "intval");
+        $portalPostModel = new PortalDjModel();
+        $jg_sunCon=0;
+        if($stat == 3){
+            $jg_sunCon=1;
+        }
+        $a = $portalPostModel->where('id',$id)->update(
+                 ['stat'=>$stat,'jg_sunCon'=>$jg_sunCon]
+            );
+        $this->success('操作成功!');
     }
 
 
