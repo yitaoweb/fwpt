@@ -77,6 +77,17 @@ class EntdataController extends UserBaseController
         $this->success('操作成功!');
     }
 
+    public function delects(){
+           $id = $this->request->param("id", 0, "intval");
+           $portalPostModel = new PortalDjModel();
+           $data = $portalPostModel->delete($id);
+        if ($data) {
+            $this->success("成功！");
+        } else {
+            $this->error("失败！");
+        }
+    }
+
     public function pj(){
         $id = $this->request->param("id", 0, "intval");
         $user = cmf_get_current_user();
@@ -100,6 +111,27 @@ class EntdataController extends UserBaseController
                  ['time_pj'=>$data['time_pj'],'c_pj'=>$data['nr']]
             );
         }
+        $this->success('操作成功!');
+    }
+
+    public function ts(){
+        $id = $this->request->param("id", 0, "intval");
+        $user = cmf_get_current_user();
+        $this->assign("time", date('y-m-d h:i:s',time()));
+        $this->assign($user);
+        $this->assign("id", $id);
+        $this->assign("um",5);
+        return $this->fetch();
+    }
+
+    public function tspost(){
+        $data = $this->request->param();
+        $portalPostModel = new PortalDjModel();
+
+            $a = $portalPostModel->where('id',$data['id'])->update(
+                 ['time_pj'=>$data['time_pj'],'ts'=>$data['nr']]
+            );
+
         $this->success('操作成功!');
     }
 

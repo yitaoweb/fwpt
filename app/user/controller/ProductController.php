@@ -70,6 +70,17 @@ class ProductController extends UserBaseController
         $this->success('操作成功!');
     }
 
+    public function delects(){
+           $id = $this->request->param("id", 0, "intval");
+           $portalPostModel = new PortalDjModel();
+           $data = $portalPostModel->delete($id);
+        if ($data) {
+            $this->success("成功！");
+        } else {
+            $this->error("失败！");
+        }
+    }
+
 
     /**
      * 服务产品发布

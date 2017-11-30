@@ -85,11 +85,16 @@
                            <if condition='($vo.jg_sunCon == 1 && $vo.stat == 3)'>
                               <a href="{:url('user/Entdata/statup',array('id'=>$vo.id,'stat'=>3))}">确认服务完成</a>
                            </if>
+                           <if condition='($vo.stat == 2)'>
+                              <a href="{:url('user/Entdata/delects',array('id'=>$vo.id))}">删除</a>
+                           </if>
                            <if condition='($vo.stat == 4)'>
                              <if condition='($vo.time_pj eq "")'>
                               <a href="{:url('user/Entdata/pj',array('id'=>$vo.id))}">评价</a>
                              </if>
-                              <a href="{:url('user/Entdata/statup',array('id'=>$vo.id))}">投诉</a>
+                             <if condition='($vo.ts eq "")'>
+                              <a href="{:url('user/Entdata/ts',array('id'=>$vo.id))}">投诉</a>
+                             </if>
                            </if>
                         </td>
                       </tr>

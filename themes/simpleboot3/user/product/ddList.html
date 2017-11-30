@@ -58,7 +58,7 @@
 							<if condition='($vo.stat == 2)'>
 							  拒绝受理
 							</if>
-							<if condition='($vo.jg_sunCon == 1)'>
+							<if condition='($vo.jg_sunCon == 1 && $vo.stat==3)'>
 							  等待对方确认
 							</if>
 							<if condition='($vo.stat == 4)'>
@@ -70,6 +70,9 @@
 							      <a href="{:url('user/product/statup',array('id'=>$vo.id,'stat'=>1))}">确认受理</a>
 							      <a href="{:url('user/product/statup',array('id'=>$vo.id,'stat'=>2))}">拒绝受理</a>
 							   </if>
+							   <if condition='($vo.stat == 2)'>
+                                   <a href="{:url('user/product/delects',array('id'=>$vo.id))}">删除</a>
+                               </if>
 							   <if condition='($vo.stat == 1)'>
 							      <a href="{:url('user/product/statup',array('id'=>$vo.id,'stat'=>3))}">确认服务完成</a>
 							   </if>
