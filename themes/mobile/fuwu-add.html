@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes" />
+<meta name="format-detection" content="telephone=no"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+<title>服务发布</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.9.1.js" ></script>
+<script type="text/javascript" src="js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="js/layout.js"></script>	
+    <script type="text/javascript">
+        $(function () {
+            //初始化表单验证
+            $("#reg-form").initValidform();
+			$("input[type=file]").change(function(){$(this).parents(".upload").find(".button").val($(this).val());});
+        });
+    </script>
+</head>
+<body>
+		<header class="nav-bar">
+			<a class="pull-left" href="qiye-center.html"></a>
+			<h1 class="nav-title">服务发布</h1>
+		</header>
+		<div class="header-line"></div>
+		<div class="line10"></div>
+		<form id="reg-form" action="">
+    	<div class="infoinput">
+    	<dl>
+    	<dt>服务名称</dt>
+    	<dd><input id='comname' type="text" datatype="*5-16"  sucmsg=" "></dd>
+    	</dl>
+    	</div>
+		<div class="infoinput">
+    	<dl>
+    	<dt>服务图片</dt>
+		<dd>
+		<div class="upload">
+		<input type="button" name="file" class="button" value="浏览..."/>
+		<input type="file" size="30"/>
+		</div>
+		</dd>
+		</dl>
+		</div>
+		<div class="infoinput">
+    	<dl>
+    	<dt>服务类型</dt>
+    	<dd>
+		<select name="type" class="select"  datatype="*" sucmsg=" ">
+  		<option value="" selected="selected">请选择</option>
+  		<option value="咨询服务">咨询服务</option>
+		</select>
+		</dd>
+    	</dl>
+    	</div>
+		<div class="infoinput">
+    	<dl>
+    	<dt>服务范围</dt>
+    	<dd>
+		<select name="type" class="select"  datatype="*" sucmsg=" ">
+  		<option value="" selected="selected">请选择</option>
+  		<option value="">咨询服务</option>
+		</select>
+		</dd>
+    	</dl>
+    	</div>
+		<div class="infoinput">
+    	<dl>
+    	<dt>收费标准</dt>
+    	<dd>
+		<input id='name' type="text"  datatype="*" sucmsg=" ">
+		</dd>
+    	</dl>
+    	</div>
+		<div class="infoinput">
+    	<dl>
+    	<dt>服务地址</dt>
+    	<dd>
+		<input id='name' type="text"  datatype="*" sucmsg=" ">
+		</dd>
+    	</dl>
+    	</div>
+		<div class="infoinput">
+    	<dl>
+    	<dt>联系电话</dt>
+    	<dd>
+		<input id='tel' type="text" datatype="*" sucmsg=" ">
+		</dd>
+    	</dl>
+    	</div>
+		<div class="infotext">
+		<textarea name="txtContent" id="txtContent" placeholder="服务详情"></textarea>
+    	</div>	
+		<div class="btn-rows mt10">
+			<button type="submit" id='login' class="my-btn blue wd50">确定发布</button>
+		</div>
+		<div class="line10"></div>
+		</form>
+
+	<div class="footer-line"></div>
+	<footer class="foot-bar">
+	<ul>
+	<li><a href="../Index.html"><i><img src="images/foot01.png" /><i>首页</a></li>
+	<li><a href="../Search.html"><i><img src="images/foot02.png" /><i>搜索</a></li>
+	<li><a href=""><i><img src="images/foot03.png" /><i>联系</a></li>
+	<li><a href="Index.aspx"><i><img src="images/foot04.png" /><i>咨询</a></li>
+	</ul>
+	</footer>
+</body>
+</html>
+

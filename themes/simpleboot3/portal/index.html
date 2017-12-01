@@ -308,18 +308,18 @@
         <dl>
           <a href="">
             <dt class="company_img"><img src="{:cmf_get_image_preview_url($vo.tp)}"/></dt>
-            <dd>{$vo.name}</dd>
+            <dd><a href="{:cmf_url('portal/experts/view',array('id'=>$vo.id))}">{$vo.name}</a></dd>
           </a>
         </dl>
     </volist>
     </div>
 </div>
 
-<div class="box-title left mt10"><span><a href="qiye.html" target="_blank">知名品牌</a></span><a href="qiye.html" target="_blank">更多>></a></div>
+<div class="box-title left mt10"><span><a href="qiye.html" target="_blank">知名品牌</a></span><a href="{:cmf_url('portal/Qylist/index')}" target="_blank">更多>></a></div>
   <div class="piclist">
     <ul class="listul">
     <volist name="qyzmpp" id="vo">
-  <li><a href="qiye-detail.html"><img src="{:cmf_get_image_preview_url($vo.daima)}"><p><span>{$vo.user_nickname}</span></p></a></li>
+  <li><a href="{:cmf_url('portal/Qyhome/index',array('id'=>$vo.id))}"><img src="{:cmf_get_image_preview_url($vo.daima)}"><p><span>{$vo.user_nickname}</span></p></a></li>
     </volist>
     </ul>
   <div class="clear"></div>
@@ -329,7 +329,7 @@
 <div id="wrapper">
   <div id="carousel">
       <volist name="qytg" id="vo">
-    <div><img src="{:cmf_get_image_preview_url($vo.daima)}"/><span>{$vo.user_nickname}</span></div>
+    <div><img src="{:cmf_get_image_preview_url($vo.daima)}"/><a href="{:cmf_url('portal/Qyhome/index',array('id'=>$vo.id))}"><span>{$vo.user_nickname}</span></a></div>
      </volist>
   </div>
   <div id="pager"></div>

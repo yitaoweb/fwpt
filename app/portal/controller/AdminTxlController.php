@@ -36,7 +36,7 @@ class AdminTxlController extends AdminBaseController
     public function index()
     {
         $portalTagModel = new PortalTxlModel();
-        $tags           = $portalTagModel->paginate();
+        $tags           = $portalTagModel->paginate(10);
 
         $this->assign("arrStatus", $portalTagModel::$STATUS);
         $this->assign("tags", $tags);

@@ -40,13 +40,13 @@ class AdminFwcpController extends AdminBaseController
         
         $arrData = $this->request->param(); 
         if($arrData){
-            if($arrData['name'] != ''){
+            if(isset($arrData['name'])){
                  $portalTagModel->where('title','like',"%{$arrData['name']}%");
                  $this->assign('name', $arrData['name']);
             }
            
         } 
-        $tags = $portalTagModel->paginate();    
+        $tags = $portalTagModel->paginate(10);    
         $user = Db::name('user')->select();  
         $portal_ssfw = Db::name('portal_ssfw')->select();  
         $this->assign("arrStatus", $portalTagModel::$STATUS);
@@ -78,7 +78,8 @@ class AdminFwcpController extends AdminBaseController
         $portalCategoryModel = new PortalSsfwModel();
         $categoriesTree      = $portalCategoryModel->adminCategoryTree($parentId); 
         $this->assign("categories_tree", $categoriesTree);
-        $this->assign("time", date('y-m-d h:i:s',time())); 
+        // $this->assign("time", date('y-m-d h:i:s',time())); 
+        $this->assign("time", time()); 
         $this->assign("user", $user);   
         return $this->fetch();
     }

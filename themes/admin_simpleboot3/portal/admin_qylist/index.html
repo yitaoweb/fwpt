@@ -43,13 +43,11 @@
             <thead>
             <tr>
                 <th width="50">ID</th>
-                <th>企业名称</th>
-                <th>统一社会信用码</th>
-                <th>法人姓名</th>
-                <th>联系人</th>
+                <th width="300">企业名称</th>
+                <th width="300">法人姓名</th>
+                <th width="100">联系人</th>
                 <th>手机号</th>
-                <th>办公地址</th>
-                <th>审核状态</th>
+                <th  width="100">审核状态</th>
                 <th width="160">操作</th>
             </tr>
             </thead>
@@ -57,17 +55,15 @@
             <foreach name="tags" item="vo">
                 <tr>
                     <td>{$vo.id}</td>
-                    <td>{$vo.user_nickname}</td>
-                    <td>{$vo.qy_xydm}</td>
-                    <td>{$vo.qy_faren}</td>
-                    <td>{$vo.qy_lxname}</td>
+                    <td width="300">{$vo.user_nickname}</td>
+                    <td width="300">{$vo.qy_faren}</td>
+                    <td  width="100">{$vo.qy_lxname}</td>
                     <td>{$vo.mobile}</td>
-                    <td>{$vo.qy_address}</td>
                     <if condition="$vo.qy_shstat eq 0">
-                              <td>未审核</td>
+                              <td  width="100">未审核</td>
                     </if>
                     <if condition="$vo.qy_shstat eq 1">
-                              <td>已审核</td>
+                              <td  width="100">已审核</td>
                     </if>
                     <td>
                         <a href="{:url('AdminQylist/edit',array('id'=>$vo['id']))}">编辑</a>
@@ -78,15 +74,12 @@
             </tbody>
             <tfoot>
             <tr>
-               <th width="50">ID</th>
-                <th>企业名称</th>
-                <th>统一社会信用码</th>
-                <th>法人姓名</th>
-                <th>联系人</th>
+                <th width="50">ID</th>
+                <th width="300">企业名称</th>
+                <th width="300">法人姓名</th>
+                <th width="100">联系人</th>
                 <th>手机号</th>
-                <th>办公地址</th>
-                <th>审核状态</th>
-
+                <th  width="100">审核状态</th>
                 <th width="160">操作</th>
             </tr>
             </tfoot>

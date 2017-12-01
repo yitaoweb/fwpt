@@ -40,11 +40,11 @@ class AdminLxdController extends AdminBaseController
         $portalTagModel = new PortalLxdModel();
         $arrData = $this->request->param(); 
         if($arrData){
-            if($arrData['lxd_xzqy'] != ''){
+            if(isset($arrData['lxd_xzqy'])){
                  $portalTagModel->where('lxd_xzqy='.$arrData['lxd_xzqy']);
                  $portalTagModel->order(["list_order" => "ASC"]);
             }
-            if($arrData['lxd_name'] != ''){
+            if(isset($arrData['lxd_name'])){
                  $portalTagModel->where('lxd_name','like',"%{$arrData['lxd_name']}%");
                  $portalTagModel->order(["list_order" => "ASC"]);
                  $this->assign('lxd_name', $arrData['lxd_name']);
@@ -52,7 +52,7 @@ class AdminLxdController extends AdminBaseController
            
         } 
         $portalTagModel->order(["list_order" => "ASC"]);
-        $tags = $portalTagModel->paginate();
+        $tags = $portalTagModel->paginate(10);
         $xzqy = Db::name('portal_xzqy')->select();  
         $this->assign("arrStatus", $portalTagModel::$STATUS);
         $this->assign("tags", $tags);

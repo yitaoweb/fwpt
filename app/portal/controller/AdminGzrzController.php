@@ -36,7 +36,7 @@ class AdminGzrzController extends AdminBaseController
     public function index()
     {
         $portalTagModel = new PortalGzrzModel();
-        $tags = $portalTagModel->paginate();
+        $tags = $portalTagModel->paginate(10);
         $id = cmf_get_current_admin_id();
         $username = Db::name('user')->select();
         $this->assign("arrStatus", $portalTagModel::$STATUS);

@@ -58,14 +58,14 @@ class Bootstrap extends Paginator
     {
 
         if ($this->currentPage() <= 1) {
-            return '<li class="disabled previous"><span>' . $text . '</span></li>';
+            return '<li class="disabled previous" style="display:inline"><span>' . "第一页" . '</span></li>';
         }
 
         $url = $this->url(
             $this->currentPage() - 1
         );
 
-        return '<li class="previous"><a href="' . htmlentities($url) . '">' . $text . '</a></li>';
+        return '<li class="previous" style="display:inline"><a href="' . htmlentities($url) . '">' . "上一页" . '</a></li>';
     }
 
     /**
@@ -76,12 +76,12 @@ class Bootstrap extends Paginator
     protected function getSimpleNextButton($text = '&rarr;')
     {
         if (!$this->hasMore) {
-            return '<li class="disabled next"><span>' . $text . '</span></li>';
+            return '<li class="disabled next" style="display:inline"><span>' . "最后一页" . '</span></li>';
         }
 
         $url = $this->url($this->currentPage() + 1);
 
-        return '<li class="next"><a href="' . htmlentities($url) . '">' . $text . '</a></li>';
+        return '<li class="next" style="display:inline"><a href="' . htmlentities($url) . '">' . "下一页" . '</a></li>';
     }
 
     /**

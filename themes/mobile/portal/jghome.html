@@ -20,29 +20,30 @@
 <div class="aui-header">
 				<div class="aui-header-box clearfix">
 					<div class="aui-header-logo">
-						<a href="Index.aspx">
+						<a href="/user/profile/center.html">
 							<img src="__TMPL__/images/logo.png"/>
 						</a>
 					</div>
 					<div class="aui-header-sou">
-						<a href="login.html">
+						<a href="/user/profile/center.html">
 							<span><i class="aui-iconfont aui-icon-search"></i></span>
 						</a>
 					</div>
 				</div>
 				<div class="swiper-container swiperNav b-line">
 					<div class="swiper-wrapper">
-						<div class="swiper-slide selected"><a href="index.html">首页</a></div>
-						<div class="swiper-slide"><a href="">资讯</a></div>
-						<div class="swiper-slide"><a href="fuwu.html">服务</a></div>
-						<div class="swiper-slide"><a href="">专题</a></div>
-						<div class="swiper-slide"><a href="">需求</a></div>
-						<div class="swiper-slide"><a href="jigou.html">机构</a></div>
-						<div class="swiper-slide"><a href="">企业</a></div>
-						<div class="swiper-slide"><a href="">供求</a></div>
-						<div class="swiper-slide"><a href="">专家</a></div>
-						<div class="swiper-slide"><a href="lianxidian.html">网点</a></div>
-						<div class="swiper-slide"><a href="">关于</a></div>
+						<div class="swiper-slide"><a href="{:url('portal/index/index')}">首页</a></div>
+						<div class="swiper-slide"><a href="/czx.html">资讯</a></div>
+<!-- 						<div class="swiper-slide"><a href="fuwu.html">服务</a></div> -->
+<!-- 						<div class="swiper-slide"><a href="">专题</a></div> -->
+						<div class="swiper-slide"><a href="/portal/demand/index.html">需求</a></div>
+						<div class="swiper-slide selected"><a href="/portal/jglist/index/id/0.html">机构</a></div>
+<!-- 						<div class="swiper-slide"><a href="">企业</a></div> -->
+						<div class="swiper-slide"><a href="/gyxx.html">供应</a></div>
+						<div class="swiper-slide"><a href="/qgxx.html">求购</a></div>
+						<div class="swiper-slide"><a href="/portal/experts/index.html">专家</a></div>
+						<div class="swiper-slide"><a href="/portal/contact/index/id/0.html">网点</a></div>
+						<div class="swiper-slide"><a href="/Introduction.html">关于</a></div>
 					</div>
                     <div class="more-nav">＋</div>
 				</div>
@@ -71,7 +72,7 @@
 
 	<div class="list">						
 		<div class="list-item">		
-		<img src="images/1.jpg" alt="" title=""/>		
+		<img src="__ROOT__/upload/{$avatar}" alt="" title=""/>		
 		<h1>{$user_nickname}</h1>
 		<dl>联系人：{$qy_lxname}</dl>
 		<dl>联系电话：{$mobile}</dl>
@@ -85,45 +86,34 @@
 	<div class="content">
 	<h1 class="title">服务产品</h1>
 	</div>
-	<div class="list">						
-							<a href="fuwu-detail.html"><div class="list-item read rel">		
-							<img src="images/1.jpg" alt="" title=""/>
-							<h1>产品名称：财富咨询</h1>
-									<dl>服务机构：县电子商务协会</dl>
-									<dl>服务项目：商务信息咨询服务</dl>
+	<div class="list">		
+	        <foreach name="lists" item="vo">				
+							<a href="{:cmf_url('portal/Jghome/product',array('id'=>$id,'pid'=>$vo.id))}"><div class="list-item read rel">		
+							<img src="__ROOT__/upload/{$vo.img}" alt="" title=""/>
+							<h1>产品名称：{$vo.title}</h1>
+									<dl>服务类型：{:getfield('portal_ssfw',$vo.ssfw_id,'name')}</dl>
+<!-- 									<dl>服务范围：长治县、平顺县、城区、郊区、壶关县、长子县</dl> -->
 									<div class="num">3次</div>
 							</div>
 							</a>
-							<a href="fuwu-detail.html"><div class="list-item read rel">		
-							<img src="images/2.jpg" alt="" title=""/>
-							<h1>产品名称：财富咨询</h1>
-									<dl>服务机构：县电子商务协会</dl>
-									<dl>服务项目：商务信息咨询服务</dl>
-									<div class="num">8次</div>
-							</div>
-							</a>
-							<a href="fuwu-detail.html"><div class="list-item read rel">		
-							<img src="images/3.jpg" alt="" title=""/>
-							<h1>产品名称：财富咨询</h1>
-									<dl>服务机构：县电子商务协会</dl>
-									<dl>服务项目：商务信息咨询服务</dl>
-									<div class="num">1次</div>
-							</div>
-							</a>
-					</div>
-	<div class="loadtip">上拉加载更多</div>
-    <div class="weui-footer">
+					
+			</foreach>
+	</div>
+	<div class="weui-footer" style="background-color: #ffffff">
+            <ul class="pagination">{$page|default=''}</ul>
+    </div>
+<!--     <div class="weui-footer">
             <p class="footer-links">
                 <a href="login.html" class="weui-footer-link">登录</a>
                 <a href="qiye-register.html" class="weui-footer-link">注册</a>
 				<a href="help.html" class="weui-footer-link">帮助中心</a>
             </p>
             <p class="weui-footer-text">Copyright &copy; 2008-2017 www.yuming.com</p>
-    </div>
+    </div> -->
 	<div class="footer-line"></div>
 	<footer class="foot-bar">
 	<ul>
-	<li><a href="../Index.html"><i><img src="__TMPL__/images/foot01.png" /><i>首页</a></li>
+	<li><a href="{:url('portal/index/index')}"><i><img src="__TMPL__/images/foot01.png" /><i>首页</a></li>
 	<li><a href="../Search.html"><i><img src="__TMPL__/images/foot02.png" /><i>搜索</a></li>
 	<li><a href=""><i><img src="__TMPL__/images/foot03.png" /><i>联系</a></li>
 	<li><a href="Index.aspx"><i><img src="__TMPL__/images/foot04.png" /><i>咨询</a></li>

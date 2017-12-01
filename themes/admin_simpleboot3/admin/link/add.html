@@ -27,6 +27,17 @@
 				</div>
 			</div>
 			<div class="form-group">
+			<label class="col-sm-2 control-label"><span class="form-required">*</span>分类:</label>
+            <div class="col-md-6 col-sm-10">
+                <select class="form-control" name="linkfl_id" id="linkfl_id">
+                  <option value="">请选择</option>
+                  <foreach name="linkfl" item="vo">
+                           <option value="{$vo.id}">{$vo.name}</option>
+                  </foreach>
+                </select>
+            </div>
+            </div>
+			<div class="form-group">
 				<label for="input-target" class="col-sm-2 control-label">打开方式</label>
 				<div class="col-md-6 col-sm-10">
 					<select class="form-control" name="target" id="input-target">

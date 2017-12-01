@@ -41,13 +41,13 @@ class AdminFwxqController extends AdminBaseController
         
         $arrData = $this->request->param(); 
         if($arrData){
-            if($arrData['name'] != ''){
+            if(isset($arrData['name'])){
                  $portalTagModel->where('title','like',"%{$arrData['name']}%");
                  $this->assign('name', $arrData['name']);
             }
            
         } 
-        $tags = $portalTagModel->paginate();    
+        $tags = $portalTagModel->paginate(10);    
         $user = Db::name('user')->select(); 
         $portal_yj = Db::name('portal_yj')->find(); 
         $portal_ssfw = Db::name('portal_ssfw')->select();  

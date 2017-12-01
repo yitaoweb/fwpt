@@ -30,8 +30,7 @@
 		<div class="header-line"></div>
 		<form id="reg-form" method="post" action="{:url('user/login/doLogin')}" >
 		<div class="rule-multi-radio mt20">
-		<input name="logintype" id="r1" type="radio" value="1" checked="checked"><label for="r1">企业登录</label>
-		<input name="logintype" id="r2" type="radio" value="2"><label for="r2">机构登录</label>
+		<input name="logintype" id="r1" type="radio" value="1" checked="checked"><label for="r1">登录</label>
     	</div>
 		
 		<div class="my-content radius mt10">
@@ -66,10 +65,10 @@
 	<div class="header-line"></div>
 	<footer class="foot-bar">
 	<ul>
-	<li><a href="../Index.html"><i><img src="./themes/mobile/images/foot01.png" /><i>首页</a></li>
-	<li><a href="../Search.html"><i><img src="./themes/mobile/images/foot02.png" /><i>搜索</a></li>
-	<li><a href=""><i><img src="./themes/mobile/images/foot03.png" /><i>联系</a></li>
-	<li><a href="Index.aspx"><i><img src="./themes/mobile/images/foot04.png" /><i>咨询</a></li>
+	<li><a href="{:url('portal/index/index')}"><i><img src="__TMPL__/images/foot01.png" /><i>首页</a></li>
+	<li><a href="../Search.html"><i><img src="__TMPL__/images/foot02.png" /><i>搜索</a></li>
+	<li><a href=""><i><img src="__TMPL__/images/foot03.png" /><i>联系</a></li>
+	<li><a href="Index.aspx"><i><img src="__TMPL__/images/foot04.png" /><i>咨询</a></li>
 	</ul>
 	</footer>
 	</body>

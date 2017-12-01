@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{$user_nickname} {$site_info.site_name|default=''}</title>
-    <meta name="keywords" content="{$user_nickname},{$site_info.site_seo_keywords|default=''}"/>
-    <meta name="description" content="{$user_nickname},{$site_info.site_seo_description|default=''}">
+    <title>{$jigou.user_nickname} {$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$jigou.user_nickname},{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$jigou.user_nickname},{$site_info.site_seo_description|default=''}">
     <include file="public@head"/>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
     <script type="text/javascript" src="__TMPL__/public/assets/js/select-script.js"></script>
@@ -15,7 +15,7 @@
 <include file="public@nav"/>
 
 <div class="local">当前位置：<a href="index.html">首页</a> &gt;<a href="">服务资源</a> &gt;&nbsp;服务机构</div>
-<div class="banner"><span class="b_title">{$user_nickname}</span></div>
+<div class="banner"><span class="b_title">{$jigou.user_nickname}</span></div>
 <div class="main">
 <div class="main_l left">
 <div class="left_title">机构信息</div>
@@ -23,9 +23,9 @@
 <a href="">
     <dl class="hot_detail">
         <dd>
-            <img src="__ROOT__/upload/{$avatar}" alt="" title=""/>
+            <img src="__ROOT__/upload/{$jigou.avatar}" alt="" title=""/>
         </dd>
-        <dd class="title">{$user_nickname}</dd>
+        <dd class="title">{$jigou.user_nickname}</dd>
         <dd><span class="star"><i style="width:99%"></i></span><span class="score">9.9分</span></dd>
         <dd>服务次数：6</dd>
     </dl>
@@ -35,10 +35,10 @@
 <div class="hot_list">
 <a href="">
     <dl class="hot_detail">
-        <dd class="title">联系人：{$qy_lxname}</dd>
-        <dd class="title">手机：{$mobile}</dd>
-        <dd class="title">网址：{$user_url}</dd>
-        <dd class="title">传真：{$fax}</dd>
+        <dd class="title">联系人：{$jigou.qy_lxname}</dd>
+        <dd class="title">手机：{$jigou.mobile}</dd>
+        <dd class="title">网址：{$jigou.user_url}</dd>
+        <dd class="title">传真：{$jigou.fax}</dd>
     </dl>
 </a>
 </div>
@@ -47,19 +47,19 @@
     <div class="right_title"><span>对接详情</span></div>
     <div class="list">                      
         <div class="list-item">                 
-        <img src="__ROOT__/upload/{$img}" alt="" title=""/>
-        <div class="linkto"><a href="">申请服务</a><a href="">机构咨询</a></div>
-        <h1>服务项目：{:getfield('portal_ssfw',$ssfw_id,'name')}（<span class="price">23</span>人申请）</h1>
-        <p>收费标准：<span class="price">{$price}{$unit}</span></p>
-        <p>发布时间：{$time|date='Y-m-d',###}</p>
+        <img src="__ROOT__/upload/{$product.img}" alt="" title=""/>
+        <div class="linkto"><a href="{:cmf_url('portal/Jghome/dj',array('id'=>$product.id,'jid'=>$jigou.id))}">申请服务</a><a href="">机构咨询</a></div>
+        <h1>服务项目：{:getfield('portal_ssfw',$product.ssfw_id,'name')}（<span class="price">23</span>人申请）</h1>
+        <p>收费标准：<span class="price">{$product.price}{$product.unit}</span></p>
+        <p>发布时间：{$product.time|date='Y-m-d',###}</p>
         <p><span class="star"><i style="width:99%"></i></span><span class="score">评价：9.9分</span></p>
         </div>
     </div>
     <div class="right_title"><span>服务介绍</span></div>
 
     <div class="right_content">
-        <if condition='($content neq "")'>
-            {$content}
+        <if condition='($product.content neq "")'>
+            {$product.content}
         <else/>
             暂无
         </if>
@@ -71,8 +71,68 @@
             <div>服务评价</div>
         </div>
         <div class="tabpanes" style="min-height: 300px">
-            <div class="pane" style="display:block;"></div>
-            <div class="pane"></div>
+            <div class="pane" style="display:block;">
+                <table class="fwtable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>需求</th>
+                            <th>时间</th>
+                            <th>状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <foreach name="lists" item="vo">
+                        <tr>
+                            <td>{$key+1}</td>
+                            <foreach name="fwxq" item="vos">
+                            <if condition='($vo.xq_id == $vos.id)'>
+                            <td>
+                              <a href="{:cmf_url('portal/Demand/view',array('id'=>$vos.id))}">{$vos.title}</a>
+                            </td>
+                            </if>
+                            </foreach>
+                            <td>{$vo.time}</td>
+                            <td>
+                              服务对接已完成
+                            </td>
+                        </tr>
+                        </foreach>
+                    </tbody>
+                </table>
+                <div class="yahoo2">{$page|default=''}</div>
+            </div>
+            <div class="pane">
+                <table class="fwtable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>需求</th>
+                            <th>好评</th>
+                            <th>差评</th>
+                            <th>时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <foreach name="lists" item="vo">
+                        <tr>
+                            <td>{$key+1}</td>
+                            <foreach name="fwxq" item="vos">
+                            <if condition='($vo.xq_id == $vos.id)'>
+                            <td>
+                              <a href="{:cmf_url('portal/Demand/view',array('id'=>$vos.id))}">{$vos.title}</a>
+                            </td>
+                            </if>
+                            </foreach>
+                            <td>{$vo.h_pj}</td>
+                            <td>{$vo.c_pj}</td>
+                            <td>{$vo.time_pj}</td>
+                        </tr>
+                        </foreach>
+                    </tbody>
+                </table>
+                <div class="yahoo2">{$page|default=''}</div>
+            </div>
         </div>
     </div>
 

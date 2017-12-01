@@ -12,6 +12,7 @@ namespace app\user\controller;
 
 use cmf\controller\UserBaseController;
 use app\user\model\UserModel;
+use app\portal\model\PortalDjModel;
 use think\Validate;
 use think\Db;
 
@@ -43,7 +44,105 @@ class EntdataController extends UserBaseController
         return $this->fetch();
     }
 
+    public function wdfwList(){
+        $user = cmf_get_current_user();
+        $userId  = cmf_get_current_user_id();
+        $stat = $this->request->param("stat", '全部', "intval");
 
+        $dd=Db::name('portal_dj');
+        if($stat == '全部'){
+            $product  = $dd->where('qy_id',$userId)->paginate(10);
+            
+        }else{
+            $product  = $dd->where('qy_id',$userId)->where('stat',$stat)->paginate(10);
+        }
+        
+        $fwcp=Db::name('portal_fwcp')->select();
+        $fwxq=Db::name('portal_fwxq')->select();
+        $jg_user=Db::name('user')->select();
+
+        $this->assign($user);
+        $this->assign("page", $product->render());
+        $this->assign("lists", $product->items());
+        $this->assign("um",5);
+        $this->assign("fwcp", $fwcp);
+        $this->assign("fwxq", $fwxq);
+        $this->assign("stat", $stat);
+        $this->assign("jg_user", $jg_user);
+        return $this->fetch();
+    }
+
+    public function statup(){
+        $stat = $this->request->param("stat", 0, "intval");
+        $id = $this->request->param("id", 0, "intval");
+        $portalPostModel = new PortalDjModel();
+        $qy_sunCon=0;
+        if($stat == 3){
+            $qy_sunCon=1;
+        }
+        $a = $portalPostModel->where('id',$id)->update(
+                 ['qy_sunCon'=>$qy_sunCon,'stat'=>4]
+            );
+        $this->success('操作成功!');
+    }
+
+    public function delects(){
+           $id = $this->request->param("id", 0, "intval");
+           $portalPostModel = new PortalDjModel();
+           $data = $portalPostModel->delete($id);
+        if ($data) {
+            $this->success("成功！");
+        } else {
+            $this->error("失败！");
+        }
+    }
+
+    public function pj(){
+        $id = $this->request->param("id", 0, "intval");
+        $user = cmf_get_current_user();
+        $this->assign("time", date('y-m-d h:i:s',time()));
+        $this->assign($user);
+        $this->assign("id", $id);
+        $this->assign("um",5);
+        return $this->fetch();
+    }
+
+    public function pjpost(){
+        $data = $this->request->param();
+        $portalPostModel = new PortalDjModel();
+        if($data['stat'] == 1){
+            $a = $portalPostModel->where('id',$data['id'])->update(
+                 ['time_pj'=>$data['time_pj'],'h_pj'=>$data['nr']]
+            );
+        }
+        if($data['stat'] == 2){
+            $a = $portalPostModel->where('id',$data['id'])->update(
+                 ['time_pj'=>$data['time_pj'],'c_pj'=>$data['nr']]
+            );
+        }
+        $this->success('操作成功!');
+    }
+
+    public function ts(){
+        $id = $this->request->param("id", 0, "intval");
+        $user = cmf_get_current_user();
+        $this->assign("time", date('y-m-d h:i:s',time()));
+        $this->assign($user);
+        $this->assign("id", $id);
+        $this->assign("um",5);
+        return $this->fetch();
+    }
+
+    public function tspost(){
+        $data = $this->request->param();
+        $portalPostModel = new PortalDjModel();
+
+            $a = $portalPostModel->where('id',$data['id'])->update(
+                 ['time_pj'=>$data['time_pj'],'ts'=>$data['nr']]
+            );
+
+        $this->success('操作成功!');
+    }
 
     /**
      * 企业供求信息

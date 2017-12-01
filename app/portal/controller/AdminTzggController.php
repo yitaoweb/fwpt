@@ -45,7 +45,7 @@ class AdminTzggController extends AdminBaseController
             }
            
         } 
-        $tags = $portalTagModel->paginate();    
+        $tags = $portalTagModel->paginate(10);    
         $this->assign("arrStatus", $portalTagModel::$STATUS);
         $this->assign("tags", $tags);
         $this->assign('page', $tags->render());
