@@ -20,9 +20,12 @@
         <include file="public@qiyetop" />
         <div class="tabPanel">
             <div class="tabnav">
-              <div class="hit">全部需求</div>
-              <div>未受理</div>
-              <div>已对接</div>
+              <div <if condition='($stat == "全部")'>class="hit"</if>>全部</div>
+              <div <if condition='($stat == 0 && $stat != "全部")'>class="hit"</if>><a href="{:url('user/entdata/wdfwList',array('stat'=>0))}">未受理</a></div>
+              <div <if condition='($stat == 1)'>class="hit"</if>><a href="{:url('user/entdata/wdfwList',array('stat'=>1))}">已对接</a></div>
+              <div <if condition='($stat == 2)'>class="hit"</if>><a href="{:url('user/entdata/wdfwList',array('stat'=>2))}">已拒绝</a></div>
+              <div <if condition='($stat == 3)'>class="hit"</if>><a href="{:url('user/entdata/wdfwList',array('stat'=>3))}">对方已提交完成</a></div>
+              <div <if condition='($stat == 4)'>class="hit"</if>><a href="{:url('user/entdata/wdfwList',array('stat'=>4))}">已对接完成</a></div>
             </div>
            <div class="tabpanes">
               <div >
@@ -115,5 +118,6 @@
 
   <!-- /container -->
   <include file="public@scripts" />
+
 </body>
 </html>

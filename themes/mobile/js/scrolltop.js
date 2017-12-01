@@ -2,10 +2,10 @@ var scrolltotop={
 	setting:{
 		startline:100, //起始行
 		scrollto:0, //滚动到指定位置
-		scrollduration:400, //滚动过渡时间s
+		scrollduration:400, //滚动过渡时间
 		fadeduration:[500,100] //淡出淡现消失
 	},
-	controlHTML:'<img src="/themes/mobile/images/topback.gif" style="width:30px; height:30px; border:0; border-radius:100%" />', //返回顶部按钮
+	controlHTML:'<img src="images/topback.gif" style="width:30px; height:30px; border:0; border-radius:100%" />', //返回顶部按钮
 	controlattrs:{offsetx:10,offsety:60},//返回按钮固定位置
 	anchorkeyword:"#top",
 	state:{

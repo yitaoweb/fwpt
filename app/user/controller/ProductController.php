@@ -29,11 +29,11 @@ class ProductController extends UserBaseController
         $productQuery            = Db::name("portal_fwcp");
         $where['user_id']     = $userId;
         $product           = $productQuery->where($where)->order('id desc')->paginate(10);
-     
+        $portal_xzqy=Db::name('portal_xzqy')->select();
         $this->assign($user);
         $this->assign("page", $product->render());
         $this->assign("lists", $product->items());
-
+        $this->assign("area", $portal_xzqy);
         $this->assign("um",5);
         return $this->fetch();
     }

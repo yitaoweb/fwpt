@@ -19,24 +19,11 @@
 <body>
 		<header class="nav-bar">
 <!-- 			<a class="pull-left" href="javascript :history.back(-1)"></a> -->
-			<h1 class="nav-title">我的产品列表</h1>
+			<h1 class="nav-title">我的需求列表</h1>
 		</header>
 		<div class="header-line"></div>
 		<div class="line10"></div>
-<!-- <section class="job-module"> 
-	<dl class="retrie"> 
-		<dt>
-			<a id="area" href="javascript:;" class="wd100">服务区域</a>
-		</dt> 
-		<dd class="area"> 
-			<ul class="slide downlist"> 
-				<volist name="area" id="vo">
-				<li><a href="{:cmf_url('portal/Jglist/index',array('fid'=>$vo['id']))}">{$vo.name}</a></li> 
-                </volist>
-			</ul> 
-		</dd>  
-	</dl> 
-</section> -->
+
 	<script type="text/javascript">
 	$(function(){ 
 	$('.retrie dt a').click(function(){
@@ -63,7 +50,13 @@
 							<div class="list-item rel">		
 							
 							<h1>{$vo.title}</h1>
-									<dl>服务类型：{:getfield('portal_ssfw',$qy_ssfw,'name')}</dl>
+							<php>if($vo['state'] == 1){</php>
+							        <dl>状态：审核</dl>
+							<php>}</php>
+							<php>if($vo['state'] == 0){</php>
+							        <dl>状态：未审核</dl>
+							<php>}</php>
+									<dl>发布时间：{$vo.time}</dl>
 <!-- 									<div class="qq"><a target="_blank" href="xuqiu-add.html">修改</a></div> -->
 							</div>
 						</foreach>

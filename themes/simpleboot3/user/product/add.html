@@ -44,7 +44,7 @@
                 <dd>
                 <select name="ssfw_id" style="width:326px;"  datatype="*" sucmsg=" ">
                     <option value="0" selected="selected">请选服务类型</option>
-                    <volist name="xq" id="vo">
+                    <volist name="fuwu" id="vo">
                         <option value="{$vo.id}">{$vo.name}</option>
                     </volist>
                 </select>
@@ -77,7 +77,6 @@
               <dl>
                 <dt></dt>
                 <dd>
-                  <input type="hidden" name="time" value="{$time}">
                   <button type="submit" class="btn-block btn-blue js-ajax-submit">确定提交</button>
                 </dd>
               </dl>

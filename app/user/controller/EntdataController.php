@@ -47,8 +47,16 @@ class EntdataController extends UserBaseController
     public function wdfwList(){
         $user = cmf_get_current_user();
         $userId  = cmf_get_current_user_id();
+        $stat = $this->request->param("stat", '全部', "intval");
+
         $dd=Db::name('portal_dj');
-        $product  = $dd->where('qy_id',$userId)->paginate(10);
+        if($stat == '全部'){
+            $product  = $dd->where('qy_id',$userId)->paginate(10);
+            
+        }else{
+            $product  = $dd->where('qy_id',$userId)->where('stat',$stat)->paginate(10);
+        }
+        
         $fwcp=Db::name('portal_fwcp')->select();
         $fwxq=Db::name('portal_fwxq')->select();
         $jg_user=Db::name('user')->select();
@@ -59,6 +67,7 @@ class EntdataController extends UserBaseController
         $this->assign("um",5);
         $this->assign("fwcp", $fwcp);
         $this->assign("fwxq", $fwxq);
+        $this->assign("stat", $stat);
         $this->assign("jg_user", $jg_user);
         return $this->fetch();
     }

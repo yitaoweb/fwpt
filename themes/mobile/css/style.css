@@ -240,6 +240,19 @@ a.qq{ width:100px; height:30px; display:inline-block; text-align:left; text-inde
 .newslist li.read{background-size:10px 40%;}
 .newslist li img{ width:20px; float:left; margin-left:10px; margin-top:11px;}
 
+.wrapper-wall{ width:100%; height:auto; clear:both;}
+.wall{display:block;position:relative}
+.wall-column{display:block;position:relative;width:50%;float:left;padding:0 2%;box-sizing:border-box}
+.article{display:block;margin:0 0 8% 0;padding:5%;background:#fff;border-radius:3px;box-shadow:0 1px 2px 0 rgba(0,0,0,.05);transition:all 100;overflow:hidden;position:relative}
+.article:hover{transform:scale(1.01)}
+.article img{display:block;width:100%;margin:0 0 5% 0}
+.article a{color:#666}
+.article p{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:70%;font-size:1.2em;line-height:1.5}
+.article small{font-size:1em;color:red;line-height:1.5}
+.article input{width:20%;padding:.6em;border-radius:.4em;font-size:1.1em;z-index:100;background-color:#f60;border:none;position:absolute;bottom:3%;right:5%;color:#fff;box-shadow:0 0 7px #d7d7d7}
+.wrapper h3{text-align:center;margin:0 20%;white-space:nowrap;text-overflow:ellipsis;font-weight:400;color:#333;overflow:hidden;font-size:1.5em;padding:.7em 0}
+.wrapper h4{width:90%;margin:0 5%;text-align:justify;font-weight:400;color:#999;font-size:1.2em;margin-bottom:3%;line-height:1.5}
+
 .weui-footer{ width:100%; color:#999999; line-height:20px; padding:10px 0px; font-size:14px;  text-align:center;}
 .weui-footer a{color:#586C94;}
 .weui-footer_fixed-bottom{ position:fixed; bottom:.52em; left:0; right:0;}
