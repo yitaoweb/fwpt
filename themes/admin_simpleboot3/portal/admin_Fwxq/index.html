@@ -52,6 +52,7 @@
                     </if>
                     <if condition="$vo.sh_state eq 1">
                     <td>已审核</td>
+                    </if>
                     <td>{$vo.dj_state}</td>
                     <?php if(cmf_send_timebj(date('y-m-d h:i:s',time()),$vo['time']) >$portal_yj['ts']){?>
                     <td style="color: red">已超过预警天数</td>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$user_login}  - 修改资料</title>
+<meta name="keywords" content=""/>
+<meta name="description" content="">
+<include file="public@head"/>
+
+</head>
+<body class="body-white" id="top">
+
+<include file="public@nav" />
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;<if condition='($user_type == 2)'>企业<else/>机构</if>中心</div>
+<div class="main">
+    <div class="main_l left">
+        <include file="public@qiyenav" />
+    </div>
+    
+    <div class="main_r right" style="min-height: 600px;">
+        <include file="public@qiyetop" />
+        <div class="tabPanel">
+            <div class="tabnav">
+              <div class="hit">推荐机构</div>
+            </div>
+           <div class="tabpanes">
+              <div class="pane" style="display:block;">
+                  <table class="fwtable">
+                    <thead>
+                      <tr>
+                        <th>序号</th>
+                        <th>产品名称</th>
+                        <th>费用</th>
+                      </tr>
+                    </thead>
+                  <tbody>
+                    <foreach name="fwcp" item="vo">
+                      <tr>
+                        <td>{$key+1}</td>
+                        <td><a href="{:cmf_url('portal/Jghome/product',array('id'=>$vo.user_id,'pid'=>$vo.id))}">{$vo.title}</a></td>
+                        <td>{$vo.price}{$vo.unit}</td>
+                      </tr>
+                      </foreach>
+                  </tbody>
+                </table>
+                <div class="clear"></div>
+              </div>
+            
+           </div>
+        <div class="clear"></div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('.tabPanel .tabnav div').click(function () {
+                    $(this).addClass('hit').siblings().removeClass('hit');
+                    $('.tabpanes>div:eq(' + $(this).index() + ')').show().siblings().hide();
+                })
+            })
+        </script>
+    </div>
+</div>							
+  <include file="public@link" />
+	<include file="public@footer" />
+
+	<!-- /container -->
+	<include file="public@scripts" />
+</body>
+</html>

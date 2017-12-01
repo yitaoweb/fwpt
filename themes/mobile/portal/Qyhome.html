@@ -10,7 +10,7 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="msapplication-tap-highlight" content="no" />
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
-<title>联系点</title>
+<title>机构详情</title>
 <link href="__TMPL__/css/style.css" rel="stylesheet" type="text/css" />
 <link href="__TMPL__/css/swiper-3.2.7.min.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="__TMPL__/js/jquery-1.9.1.js" ></script>
@@ -32,18 +32,17 @@
 				</div>
 				<div class="swiper-container swiperNav b-line">
 					<div class="swiper-wrapper">
-
 						<div class="swiper-slide"><a href="{:url('portal/index/index')}">首页</a></div>
 						<div class="swiper-slide"><a href="/czx.html">资讯</a></div>
 <!-- 						<div class="swiper-slide"><a href="fuwu.html">服务</a></div> -->
 <!-- 						<div class="swiper-slide"><a href="">专题</a></div> -->
 						<div class="swiper-slide"><a href="/portal/demand/index.html">需求</a></div>
 						<div class="swiper-slide"><a href="/portal/jglist/index/id/0.html">机构</a></div>
-                        <div class="swiper-slide"><a href="{:cmf_url('portal/Qylist/index')}">企业</a></div>
+                        <div class="swiper-slide selected"><a href="{:cmf_url('portal/Qylist/index')}">企业</a></div>
 						<div class="swiper-slide"><a href="/gyxx.html">供应</a></div>
 						<div class="swiper-slide"><a href="/qgxx.html">求购</a></div>
 						<div class="swiper-slide"><a href="/portal/experts/index.html">专家</a></div>
-						<div class="swiper-slide selected"><a href="/portal/contact/index/id/0.html">网点</a></div>
+						<div class="swiper-slide"><a href="/portal/contact/index/id/0.html">网点</a></div>
 						<div class="swiper-slide"><a href="/Introduction.html">关于</a></div>
 					</div>
                     <div class="more-nav">＋</div>
@@ -70,57 +69,40 @@
         	        });
         	    });
 		</script>
-<section class="job-module"> 
-	<dl class="retrie"> 
-		<dt>
-			<a id="area" href="javascript:;" class="wd50">服务区域</a>
-		</dt> 
-		<dd class="area"> 
-			<ul class="slide downlist"> 
-			    <li><a href="{:cmf_url('portal/Contact/index',array('id'=>0))}">全部</a></li>
-			    <volist name="area" id="vo">				 
-				  <li><a href="{:cmf_url('portal/Contact/index',array('id'=>$vo.id))}">{$vo.name}</a></li> 
-				</volist>
-			</ul> 
-		</dd>  
-	</dl> 
-</section>
-	<script type="text/javascript">
-	$(function(){ 
-	$('.retrie dt a').click(function(){
-		var $t=$(this);
-		if($t.hasClass('up')){
-			$(".retrie dt a").removeClass('up');
-			$('.downlist').hide();
-			$('.mask').hide();
-		}else{
-			$(".retrie dt a").removeClass('up');
-			$('.downlist').hide();
-			$t.addClass('up');
-			$('.downlist').eq($(".retrie dt a").index($(this)[0])).show();
-			$('.mask').show();
-		}
-	});
-	$(".area ul li a:contains('"+$('#area').text()+"')").addClass('selected');
-	$(".wage ul li a:contains('"+$('#wage').text()+"')").addClass('selected');
-	});
-	</script>
-	
-                    <div class="list">				
-                     <foreach name="lists" item="vo" empty="$emptylist">		
-							<div class="list-item">		
-							<a href="{:cmf_url('portal/Contact/view',array('id'=>$vo.id))}"><img src="__ROOT__/upload/{$vo.lxd_logo}" alt="" title=""/>	</a>		
-							<a href="{:cmf_url('portal/Contact/view',array('id'=>$vo.id))}"><h1>{$vo.lxd_name}</h1></a>
-									<dl>联系电话：{$vo.lxd_dh}</dl>
-									<dl>联系范围：{$vo.fwqy}</dl>
+
+	<div class="list">						
+		<div class="list-item">		
+		<img src="__ROOT__/upload/{$avatar}" alt="" title=""/>		
+		<h1>{$user_nickname}</h1>
+		<dl>联系人：{$qy_lxname}</dl>
+		<dl>联系电话：{$mobile}</dl>
+		</div>
+	</div>
+	<div class="infoli">联系地址：{$qy_address}</div>
+	<div class="content">
+	<h1 class="title">企业简介</h1>
+	{$qy_jianjie}
+	</div>
+	<div class="content">
+	<h1 class="title">需求</h1>
+	</div>
+	<div class="list">		
+	        <foreach name="lists" item="vo">				
+							<a href="{:cmf_url('portal/demand/view',array('id'=>$vo['id']))}"><div class="list-item read rel">		
+							<img src="__ROOT__/upload/{$vo.img}" alt="" title=""/>
+							<h1>产品名称：{$vo.title}</h1>
+									<dl>服务类型：{:getfield('portal_ssfw',$vo.ssfw_id,'name')}</dl>
+<!-- 									<dl>服务范围：长治县、平顺县、城区、郊区、壶关县、长子县</dl> -->
+						<!-- 			<div class="num">3次</div> -->
 							</div>
-					 </foreach>		
-					</div>
+							</a>
+					
+			</foreach>
+	</div>
 	<div class="weui-footer" style="background-color: #ffffff">
             <ul class="pagination">{$page|default=''}</ul>
     </div>
-	<!-- <div class="loadtip">上拉加载更多</div>
-    <div class="weui-footer">
+<!--     <div class="weui-footer">
             <p class="footer-links">
                 <a href="login.html" class="weui-footer-link">登录</a>
                 <a href="qiye-register.html" class="weui-footer-link">注册</a>
