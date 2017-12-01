@@ -24,6 +24,7 @@
                 <th>企业需求</th>
                 <th>订单时间</th>
                 <th>订单状态</th>
+                <th>投诉</th>
                 <th width="160">操作</th>
             </tr>
             </thead>
@@ -60,6 +61,13 @@
                             </if>
                     </td>
                     <td>
+                        <if condition="$vo.ts !=''">
+                            <b style="color: red">被投诉！请点击详情查看</b>
+                        <else>
+                            0
+                        </if>
+                    </td>
+                    <td>
                         <a href="{:url('AdminDj/edit',array('id'=>$vo['id']))}">查看详情</a>
                         <a class="js-ajax-delete" href="{:url('AdminDj/delete',['id'=>$vo['id']])}">删除</a>
                     </td>
@@ -74,7 +82,7 @@
                 <th>企业需求</th>
                 <th>订单时间</th>
                 <th>订单状态</th>
-
+                <th>投诉</th>
                 <th width="160">操作</th>
             </tr>
             </tfoot>

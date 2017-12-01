@@ -35,10 +35,10 @@
 						<div class="swiper-slide"><a href="{:url('portal/index/index')}">首页</a></div>
 						<div class="swiper-slide"><a href="/czx.html">资讯</a></div>
 <!-- 						<div class="swiper-slide"><a href="fuwu.html">服务</a></div> -->
-						<div class="swiper-slide"><a href="">专题</a></div>
+<!-- 						<div class="swiper-slide"><a href="">专题</a></div> -->
 						<div class="swiper-slide"><a href="/portal/demand/index.html">需求</a></div>
 						<div class="swiper-slide selected"><a href="/portal/jglist/index/id/0.html">机构</a></div>
-						<div class="swiper-slide"><a href="">企业</a></div>
+<!-- 						<div class="swiper-slide"><a href="">企业</a></div> -->
 						<div class="swiper-slide"><a href="/gyxx.html">供应</a></div>
 						<div class="swiper-slide"><a href="/qgxx.html">求购</a></div>
 						<div class="swiper-slide"><a href="/portal/experts/index.html">专家</a></div>
@@ -70,29 +70,35 @@
         	    });
 		</script>
 	<div class="infomain">
-	<img src="__ROOT__/upload/{$avatar}" alt="" title=""/>
-	<h1>{$title}</h1>
-	<p>发布时间：{$time}</p>
+	<img src="__ROOT__/upload/{$product['img']}" alt="" title=""/>
+	<h1>{$product.title}</h1>
+	<p>发布时间：{$product.time}</p>
 	</div>
-	<div class="infoli">联系人：{$qy_lxname}</div>
-	<div class="infoli">手机：{$mobile}</div>
-	<div class="infoli">网址：{$user_url}</div>
-	<div class="infoli">传真：{$fax}</div>
+	<div class="infoli">联系人：{$jigou.qy_lxname}</div>
+	<div class="infoli">手机：{$jigou.mobile}</div>
+	<div class="infoli">网址：{$jigou.user_url}</div>
+	<div class="infoli">传真：{$jigou.fax}</div>
 	<div class="content">
 	<h1 class="title">服务介绍</h1>
-	{$content}
+	{$product.content}
 	</div>
 	<div class="content">
 	<h1 class="title">服务记录</h1>
 	<ul class="datalist">
 	<li>服务对象<span>服务时间</span></li>
-	<li>大运汽车销售公司<span>2017-6-8</span></li>
-	<li>天使投资有限公司<span>2017-10-24</span></li>
-	<li>易淘网络科技有限公司<span>2017-11-9</span></li>
+	<foreach name="lists" item="vo">
+	<foreach name="fwxq" item="vos">
+	<if condition='($vo.xq_id == $vos.id)'>
+	<li><a href="{:cmf_url('portal/Demand/view',array('id'=>$vos.id))}">{$vos.title}</a>
+	<span>{$vo.time}</span>
+	</li>
+	</if>
+    </foreach>
+    </foreach>
 	</ul>
 	</div>
 	<div class="btn-rows mt10">
-		<a href="" class="my-btn blue wd40">申请服务</a><a href="" class="my-btn orange wd40">机构咨询</a>
+		<a href="{:cmf_url('portal/Jghome/dj',array('id'=>$product.id,'jid'=>$jigou.id))}" class="my-btn blue wd40">申请服务</a><a href="" class="my-btn orange wd40">机构咨询</a>
 	</div>
 <!--     <div class="weui-footer">
             <p class="footer-links">
