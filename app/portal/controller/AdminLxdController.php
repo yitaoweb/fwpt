@@ -103,7 +103,6 @@ class AdminLxdController extends AdminBaseController
         $xh = $this->sjs();
         $portalTagModel = new PortalLxdModel();
         $arrData = $this->request->param();  
-        var_dump($arrData);die;
          if(isset($arrData['fwqy'])){
              $arrData['fwqy'] = json_encode($arrData['fwqy']);
         }  
@@ -153,12 +152,18 @@ class AdminLxdController extends AdminBaseController
     public function editPost(){
         $data = $this->request->param();
          if(isset($data['fwqy'])){
-             $data['fwqy'] = json_encode($data['fwqy']);
-        }  
-        $portalPostModel = new PortalLxdModel();
-        $a = $portalPostModel->where('id',$data['id'])->update(
-                 ['lxd_name'=>$data['lxd_name'],'lxd_wz'=>$data['lxd_wz'],'lxd_dz'=>$data['lxd_dz'],'lxd_qq'=>$data['lxd_qq'],'lxd_dh'=>$data['lxd_dh'],'lxd_jj'=>$data['lxd_jj'],'lxd_logo'=>$data['lxd_logo'],'lxd_yyzz'=>$data['lxd_yyzz'],'list_order'=>$data['list_order'],'fwqy'=>$data['fwqy']]
-            );
+            $data['fwqy'] = json_encode($data['fwqy']);
+            $portalPostModel = new PortalLxdModel();
+            $a = $portalPostModel->where('id',$data['id'])->update(
+                     ['lxd_name'=>$data['lxd_name'],'lxd_wz'=>$data['lxd_wz'],'lxd_dz'=>$data['lxd_dz'],'lxd_qq'=>$data['lxd_qq'],'lxd_dh'=>$data['lxd_dh'],'lxd_jj'=>$data['lxd_jj'],'lxd_logo'=>$data['lxd_logo'],'lxd_yyzz'=>$data['lxd_yyzz'],'list_order'=>$data['list_order'],'fwqy'=>$data['fwqy']]
+                );
+        }else{
+           $portalPostModel = new PortalLxdModel();
+           $a = $portalPostModel->where('id',$data['id'])->update(
+                 ['lxd_name'=>$data['lxd_name'],'lxd_wz'=>$data['lxd_wz'],'lxd_dz'=>$data['lxd_dz'],'lxd_qq'=>$data['lxd_qq'],'lxd_dh'=>$data['lxd_dh'],'lxd_jj'=>$data['lxd_jj'],'lxd_logo'=>$data['lxd_logo'],'lxd_yyzz'=>$data['lxd_yyzz'],'list_order'=>$data['list_order']]
+            ); 
+        }
+        
         $this->success('保存成功!');
     }
     public function upStatus()
