@@ -207,7 +207,8 @@ a:hover,a:focus{color:#74777b;}
 
 @media screen and (max-width: 50em) {
 	.jq22-header {
-		padding: 3em 10% 4em;
+		padding: 1em 10% 1em;
+		background-color:#0066ff;
 	}
 	.jq22-header h1 {
         font-size:2em;

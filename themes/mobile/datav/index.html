@@ -1,519 +1,357 @@
-<!-- AUI Framework -->
-<!DOCTYPE html>
-    <html>
-    <head>
-
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>Fides Admin</title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
-        <!-- Favicons -->
-
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="__TMPL__/datav/assets/images/icons/apple-touch-icon-144-precomposed.png" />
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="__TMPL__/datav/assets/images/icons/apple-touch-icon-114-precomposed.png" />
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="__TMPL__/datav/assets/images/icons/apple-touch-icon-72-precomposed.png" />
-        <link rel="apple-touch-icon-precomposed" href="__TMPL__/datav/assets/images/icons/apple-touch-icon-57-precomposed.png" />
-        <link rel="shortcut icon" href="__TMPL__/datav/assets/images/icons/favicon.png" />
-
-        <!--[if lt IE 9]>
-          <script src="__TMPL__/datav/assets/js/minified/core/html5shiv.min.js"></script>
-          <script src="__TMPL__/datav/assets/js/minified/core/respond.min.js"></script>
-        <![endif]-->
-
-        <!-- Fides Admin CSS Core -->
-
-        <link rel="stylesheet" type="text/css" href="__TMPL__/datav/assets/css/minified/aui-production.min.css" />
-
-        <!-- Theme UI -->
-
-        <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/dark.css" />
-
-        <!-- Fides Admin Responsive -->
-
-        <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/common.min.css" />
-        <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/responsive.min.css" />
-
-        <!-- Fides Admin JS -->
-
-        <script type="text/javascript" src="__TMPL__/datav/assets/js/minified/aui-production.min.js"></script>
-        <script type="text/javascript" src="__TMPL__/datav/js/vue.min.js"></script>
-        <script>
-            jQuery(window).load(
-                function(){
-
-                    var wait_loading = window.setTimeout( function(){
-                      $('#loading').slideUp('fast');
-                      jQuery('body').css('overflow','auto');
-                    },1000
-                    );
-
-                });
-
-        </script>
-
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    </head>
-    <body style="overflow: hidden;">
-
-        <div id="loading" class="ui-front loader ui-widget-overlay bg-white opacity-100">
-            <img src="__TMPL__/datav/assets/images/loader-dark.gif" alt="" />
-        </div>
-
-        <div id="page-wrapper" class="demo-example">
-
-
-            <div id="page-header" class="clearfix">
-                    
-                <div id="header-logo">
-
-                    <div id="clock">
-                        <p class="date">{{ date }}</p>
-                        <p class="time">{{ time }}</p>
-                        <a href="javascript:;" class="tooltip-button" data-placement="bottom" title="Close sidebar" id="close-sidebar">
-                            <i class="glyph-icon icon-caret-left"></i>
-                        </a>
-                        <a href="javascript:;" class="tooltip-button hidden" data-placement="bottom" title="Open sidebar" id="rm-close-sidebar">
-                            <i class="glyph-icon icon-caret-right"></i>
-                        </a>
-          
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单的Material Design风格手机App菜单特效</title>
+    <link rel="stylesheet" type="text/css" href="__TMPL__/datav/dh/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="__TMPL__/datav/dh/css/default.css">
+    <link rel="stylesheet" type="text/css" href="__TMPL__/datav/dh/css/styles.css">
+    <!--[if IE]>
+        <script src="http://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="jq22-container">
+        <header class="jq22-header">
+            <h1>数据平台分析</h1>          
+        </header>
+        <div class="phone">
+            <div class="screen">
+                <nav class="nav">
+                    <ul>
+                        <li><a href="http://www.baidu.com">搜　索</a></li>
+                        <li><a href="#">主　页</a></li>
+                        <li><a href="#">HTML5学习</a></li>
+                        <li><a href="#">CSS3学习</a></li>
+                        <li><a href="{:cmf_url('user/Index/logout')}">退出</a></li>
+                    </ul>
+                </nav>
+                <div class="nav-toggle">
+                    <div class="icon"></div>
+                </div>
+                <div class="lower-screen">
+                    <div class="card">
+                        <h2>Material cards</h2>
+                        <br><br>
+                         <div id="main" style="width: 100%;height:300px;"></div>
+                        <p>Created by Lewi Hussey.</p>
                     </div>
 
+                    <div class="card">
+                        <h2>Material cards</h2>
+                        <br><br>
+                         <div id="mains" style="width: 100%;height:350px;"></div>
+                        <p>Created by Lewi Hussey.</p>
+                    </div>
+
+                    <div class="card">
+                        <h2>Material cards</h2>
+                        <br><br>
+                         <div id="mainss" style="width: 100%;height:350px;"></div>
+                        <p>Created by Lewi Hussey.</p>
+                    </div>
+
+                    <div class="card">
+                        <h2>Material cards</h2>
+                        <br><br>
+                         <div id="mainsss" style="width: 100%;height:350px;"></div>
+                        <p>Created by Lewi Hussey.</p>
+                    </div>
+
+                    <div class="card">
+                        <h2>Material cards</h2>
+                        <br><br>
+                         <div id="mainssss" style="width: 100%;height:350px;"></div>
+                        <p>Created by Lewi Hussey.</p>
+                    </div>
+                </div>
+        </div>
+
+
+    </div>
+    
+    <script src="http://www.jq22.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="__TMPL__/datav/dh/js/echarts.min.js"></script>
+    <script>
+    $('.nav-toggle').click(function () {
+        $('body').toggleClass('nav-open');
+    });
+    </script>
+        <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        var myCharts = echarts.init(document.getElementById('mains'));
+        var myChartss = echarts.init(document.getElementById('mainss'));
+        var myChartsss = echarts.init(document.getElementById('mainsss'));
+        var myChartssss = echarts.init(document.getElementById('mainssss'));
+
+        // 指定图表的配置项和数据
+        option = {
+                    title: {
+                        text: '当天流量情况top7'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: null // 默认为直线，可选为：'line' | 'shadow'
+                        },
+                        formatter: '<div style="text-align: center;">当天流量情况top7</div>{b} : {c}'
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        top: '10%',
+                        height: 280, //设置grid高度
+                        containLabel: true
+                    },
+                    xAxis: [{
+                        type: 'value',
+                        axisLabel: {
+                            show: false
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLine: {
+                            show: false
+                        },
+                        splitLine: {
+                            show: false
+                        }
+
+                    }],
+                    yAxis: [{
+                        type: 'category',
+                        boundaryGap: true,
+                        axisTick: {
+                            show: true
+                        },
+                        axisLabel: {
+                            interval: null
+                        },
+                        data: ['北京', '长沙', '天津', '太原', '石家庄', '广州', '重庆'],
+                        splitLine: {
+                            show: false
+                        }
+                    }],
+                    series: [{
+                        name: '流量',
+                        type: 'bar',
+                        barWidth: 25,
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'right'
+                            }
+
+                        },
+                        data: [160, 170, 240, 264, 300, 520, 610]
+                    }]
+                };
+
+        options = {
+                title: {
+                    text: '多雷达图'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                radar: [
+                    {
+                        indicator: [
+                            {text: '品牌', max: 100},
+                            {text: '内容', max: 100},
+                            {text: '可用性', max: 100},
+                            {text: '功能', max: 100}
+                        ],
+                        center: ['50%','40%'],
+                        radius: 80
+                    }
                     
-                </div>
-                
-<script>
-var clock = new Vue({
-    el: '#clock',
-    data: {
-        time: '',
-        date: ''
-    }
-});
-
-var week = ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-var timerID = setInterval(updateTime, 1000);
-updateTime();
-function updateTime() {
-    var cd = new Date();
-    clock.time = zeroPadding(cd.getHours(), 2) + ':' + zeroPadding(cd.getMinutes(), 2) + ':' + zeroPadding(cd.getSeconds(), 2);
-    clock.date = zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth()+1, 2) + '-' + zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()];
-};
-
-function zeroPadding(num, digit) {
-    var zero = '';
-    for(var i = 0; i < digit; i++) {
-        zero += '0';
-    }
-    return (zero + num).slice(-digit);
-}
-</script>
-
-                
-                <div class="user-profile dropdown">
-                    <a href="javascript:;" title="" class="user-ico clearfix" data-toggle="dropdown">
-                        <img width="36" src="__TMPL__/datav/assets/images/gravatar.jpg" alt="" />
-                        <span>Horia Simon</span>
-                        <i class="glyph-icon icon-chevron-down"></i>
-                    </a>
-                    <ul class="dropdown-menu float-right">
-                        <li>
-                            <a href="javascript:;" title="">
-                                <i class="glyph-icon icon-user mrg5R"></i>
-                                Account Details
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" title="">
-                                <i class="glyph-icon icon-cog mrg5R"></i>
-                                Edit Profile
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" title="">
-                                <i class="glyph-icon icon-flag mrg5R"></i>
-                                Notifications
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" title="">
-                                <i class="glyph-icon icon-signout font-size-13 mrg5R"></i>
-                                <span class="font-bold">Logout</span>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li class="dropdown-submenu float-left">
-                            <a href="javascript:;" data-toggle="dropdown" title="">
-                                Dropdown menu
-                            </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="javascript:;" title="">
-                                            Submenu 1
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;" title="">
-                                            Submenu 2
-                                        </a>
-                                    </li>
-                                    <li class="dropdown-submenu">
-                                        <a href="javascript:;" title="">
-                                            Submenu 3
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <a href="javascript:;" title="">
-                                                    Submenu 2-1
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;" title="">
-                                                    Submenu 2-2
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:;" title="">
-                                Another menu item
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
-                
-                <div class="top-icon-bar">
-                  <div class="title-box">
-                      <span class="spanleft">{$title}</span>
-                      <span class="spanright">{$en}</span>
-                  </div>
-                </div>
-
-            </div><!-- #page-header -->
-
-            <div id="page-sidebar" class="scrollable-content">
-
-                <div id="sidebar-menu">
-                    <ul>
-                        <li>
-                            <a href="index.html" title="Dashboard">
-                                <i class="glyph-icon icon-dashboard"></i>
-                                服务数据
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" title="Components">
-                                <i class="glyph-icon icon-code"></i>
-                                服务管理
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="dashboard_panels.html" title="Dashboard panels">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        服务产品
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="social_boxes.html" title="Social boxes">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Social boxes
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="information_boxes.html" title="Information boxes">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        服务对接
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="chat.html" title="Chat">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        供需应需求
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="notifications.html" title="Notifications">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        联系点
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="messaging.html" title="Messaging">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        专家库
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:;" title="Pages">
-                                <i class="glyph-icon icon-folder-open"></i>
-                                用户分析
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="grid.html" title="Grid Layouts">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        页面访问
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="helper_classes.html" title="Helpers">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        用户画像
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="login.html" title="Login">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        使用频率
-                                    </a>
-                                </li>
-                     
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:;" title="Widgets">
-                                <i class="glyph-icon icon-tags"></i>
-                                经济数据
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="tabs.html" title="Tabs">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        经济运行
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="accordions.html" title="Accordions">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        项目分析
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="datepicker.html" title="Datepicker">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        限上企业
-                                    </a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:;" title="Elements">
-                                <i class="glyph-icon icon-laptop"></i>
-                                Elements
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="content_boxes.html" title="Content Boxes">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Content Boxes
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="response_messages.html" title="Response Messages">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Response Messages
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="badges.html" title="Badges &amp; Labels">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Badges &amp; Labels
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="overlays.html" title="Overlays">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Overlays
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="navigation_menus.html" title="Navigation Menus">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Navigation Menus
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="icons.html" title="Icons">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Icons
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="buttons.html" title="Buttons">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Buttons
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="pagination.html" title="Pagination">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Pagination
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="typography.html" title="Typography">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Typography
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="animations.html" title="Animations">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Animations
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:;" title="Charts">
-                                <i class="glyph-icon icon-bar-chart"></i>
-                                Charts
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="charts_piegauges.html" title="Pie Gauges">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Pie Gauges
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="charts_justgage.html" title="JustGage">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        JustGage
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="charts_sparklines.html" title="Sparklines">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Sparklines
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="charts_morris.html" title="Morris Charts">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Morris Charts
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:;" title="Tables">
-                                <i class="glyph-icon icon-table"></i>
-                                Tables
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="tables.html" title="Normal tables">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Normal tables
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="tables_dynamic.html" title="Dynamic tables">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Dynamic tables
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:;" title="Forms">
-                                <i class="glyph-icon icon-reorder"></i>
-                                Forms
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="forms.html" title="Layouts &amp; Elements">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Layouts &amp; Elements
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="forms_validation.html" title="Forms validation">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Forms validation
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="form_wizard.html" title="Form wizard">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Form wizard
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="forms_inline.html" title="Inline editor">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Inline editor
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="image_editor.html" title="Image crop">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Image crop
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="file_upload.html" title="Files uploader">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Files uploader
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="dropzone_uploader.html" title="Dropzone uploader">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Dropzone uploader
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="javascript:;" title="Help &amp; Support">
-                                <i class="glyph-icon icon-book"></i>
-                                Help &amp; Support
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="docs.html" title="Getting started guide">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Getting started guide
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://agileui.com/support-forums" title="Support forums">
-                                        <i class="glyph-icon icon-chevron-right"></i>
-                                        Support forums
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </li>
-                    </ul>
-                    <div class="divider mrg5T mobile-hidden"></div>
-  
-                </div>
-
-          </div><!-- #page-sidebar -->
-
-          <div id="page-content-wrapper">
-           
-              <div id="page-content">
-                  <div class="row">
-                  </div>
-              </div><!-- #page-content -->
-
-          </div><!-- #page-main -->
+                ],
+                series: [
+                    {
+                        type: 'radar',
+                         tooltip: {
+                            trigger: 'item'
+                        },
+                        itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                        data: [
+                            {
+                                value: [60,73,85,40],
+                                name: '某软件'
+                            }
+                        ]
+                    },
+                    
+                ]
+            };
 
 
-  </div><!-- #page-wrapper -->
+            optionss = {
+                    legend: {
+                        data:['高度(km)与气温(°C)变化关系']
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        formatter: "Temperature : <br/>{b}km : {c}°C"
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'value',
+                        axisLabel: {
+                            formatter: '{value} °C'
+                        }
+                    },
+                    yAxis: {
+                        type: 'category',
+                        axisLine: {onZero: false},
+                        axisLabel: {
+                            formatter: '{value} km'
+                        },
+                        boundaryGap: false,
+                        data: ['0', '10', '20', '30', '40', '50', '60', '70', '80']
+                    },
+                    series: [
+                        {
+                            name: '高度(km)与气温(°C)变化关系',
+                            type: 'line',
+                            smooth: true,
+                            lineStyle: {
+                                normal: {
+                                    width: 3,
+                                    shadowColor: 'rgba(0,0,0,0.4)',
+                                    shadowBlur: 10,
+                                    shadowOffsetY: 10
+                                }
+                            },
+                            data:[15, -50, -56.5, -46.5, -22.1, -2.5, -27.7, -55.7, -76.5]
+                        }
+                    ]
+                };
 
-    </body>
+                optionsss = {
+                    title : {
+                        text: '某站点用户访问来源',
+                        subtext: '纯属虚构',
+                        x:'center'
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    series : [
+                        {
+                            name: '访问来源',
+                            type: 'pie',
+                            radius : '40%',
+                            center: ['50%', '50%'],
+                            data:[
+                                {value:335, name:'直接访问'},
+                                {value:310, name:'邮件营销'},
+                                {value:234, name:'联盟广告'},
+                                {value:135, name:'视频广告'},
+                                {value:1548, name:'搜索引擎'}
+                            ],
+                            itemStyle: {
+                                emphasis: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                };
+
+                optionssss = {
+                        title: {
+                            text: '138w+关注者',
+                            subtext: '张佳玮知乎关注者（金字塔图）'
+                            //爬取张佳玮138w+知乎关注者：数据可视化
+                            //https://zhuanlan.zhihu.com/p/28890605?refer=c_122608198
+                            //http://echarts.baidu.com/gallery/editor.html?c=funnel
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b} : {c}%"
+                        },
+                        toolbox: {
+                            feature: {
+                                dataView: {readOnly: false},
+                                restore: {},
+                                saveAsImage: {}
+                            }
+                        },
+      
+                        calculable: true,
+                        series: [
+                            {
+                                name:'漏斗图',
+                                type:'funnel',
+                                left: '10%',
+                                top: 60,
+                                //x2: 80,
+                                bottom: 60,
+                                width: '80%',
+                                // height: {totalHeight} - y - y2,
+                                min:0,
+                                max: 766170,
+                                minSize: '0%',
+                                maxSize: '100%',
+                                sort: 'none',
+                                gap: 2,
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'inside'
+                                    },
+                                    emphasis: {
+                                        textStyle: {
+                                            fontSize: 20
+                                        }
+                                    }
+                                },
+                                labelLine: {
+                                    normal: {
+                                        length: 10,
+                                        lineStyle: {
+                                            width: 1,
+                                            type: 'solid'
+                                        }
+                                    }
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        borderColor: '#fff',
+                                        borderWidth: 1
+                                    }
+                                },
+                                data: [
+                                    {value: 190, name: '10w+'},
+                                    {value: 1380, name: '1w-10w'},
+                                    {value: 6948, name: '1k-1w'},
+                                    {value: 33436, name: '100-1k'},
+                                    {value: 169730, name: '10-100'},
+                                    {value: 766170, name: '1-10'},
+                                    {value: 402817, name: '0'}        
+                                ]
+                            }
+                        ]
+                    };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        myCharts.setOption(options);
+        myChartss.setOption(optionss);
+        myChartsss.setOption(optionsss);
+        myChartssss.setOption(optionssss);
+    </script>
+</body>
 </html>
-

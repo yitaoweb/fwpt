@@ -5,7 +5,6 @@
   font-weight: 300;
 }
 body {
-  background-color: #4A75E6;
   font-family: "Microsoft YaHei", sans-serif;
 }
 body.nav-open .lower-screen {
@@ -38,7 +37,7 @@ body.nav-open .nav-toggle .icon:after {
       -ms-transform: translateY(-9px) rotate(-45deg);
           transform: translateY(-9px) rotate(-45deg);
 }
-.phone {
+/*.phone {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -49,17 +48,15 @@ body.nav-open .nav-toggle .icon:after {
   height: 580px;
   border-radius: 40px;
   background-color: white;
-}
+}*/
 .phone .screen {
-  width: 260px;
-  height: 450px;
+  width: 100%;
   background-color: #ECEBE9;
   display: block;
-  margin: 65px auto;
+  margin: auto;
   overflow: hidden;
   position: relative;
   border-radius: 2px;
-  border: 4px solid #262626;
 }
 .nav-toggle {
   width: 60px;
@@ -127,7 +124,7 @@ body.nav-open .nav-toggle .icon:after {
 .lower-screen {
   padding: 60px 0 20px 0;
   overflow-y: scroll;
-  height: 450px;
+
   -webkit-transition-duration: 0.66s;
           transition-duration: 0.66s;
   -webkit-transition-timing-function: swing;
