@@ -94,9 +94,13 @@ class DemandController extends HomeBaseController
 
         //推荐机构
         $jigou = Db::name('user')->where("user_type",3)->where('user_status', 1)->order('create_time')->limit(10)->select()->toArray();
+
+        $get_ly = Db::name('ly')->where('js_id',$id)->where('qf',2)->select();
+        $fb_user = Db::name('user')->select();
       
         $this->assign('jigou', $jigou);        //推荐机构
-
+        $this->assign('get_ly', $get_ly);
+        $this->assign('fb_user', $fb_user);      
 
         $this->assign($demand);   
         $this->assign('xq_id',$demand['id']);              //机构简介
@@ -131,6 +135,18 @@ class DemandController extends HomeBaseController
         $portalTagModel->isUpdate(false)->allowField(true)->save($arrData);
 
         $this->success("申请已提交");
+    }
+
+    public function ly(){
+        $users = cmf_get_current_user();
+        $ly = Db::name('ly');
+        if(isset($users['id'])){
+            $ret = $ly->insert(['fb_id'=>$users['id'],'js_id'=>$_POST['a'],'qf'=>2,'nr'=>$_POST['nr'],'time'=>date('y-m-dh:i:s',time())]);
+            return $ret;
+        }else{
+            return '2';
+        }
+        
     }
 
 }

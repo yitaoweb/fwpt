@@ -77,45 +77,67 @@
 <div class="right_content">
 　　{$nr}
 </div>
-    <div class="wrap">
-        <div class="comment">
+        <div class="wrap">
+
+          <div class="comment">
             <div class="content">
-                <div class="cont-box">
-                    <textarea class="text" placeholder="请输入..."></textarea>
-                </div>
-                <div class="tools-box">
-                    <div class="operator-box-btn">共有<span class="price">417</span>条评论</div>
-                    <div class="submit-btn"><input type="button" onClick="out()"value="提交评论" /></div>
-                </div>
+              <div class="cont-box">
+                <textarea class="text" id='nr' placeholder="请输入..."></textarea>
+              </div>
+              <div class="tools-box">
+                <input type="hidden" id="xq_id" value="{$xq_id}">
+                <div class="operator-box-btn">共有<span class="price">417</span>条评论</div>
+                <div class="submit-btn"><input type="button" id="out" value="提交评论" /></div>
+              </div>
             </div>
-        </div>
-        <div id="info-show">
+          </div>
+          <div id="info-show">
             <ul>
-                <li>
-                <div class="head-face"><img src="images/1.jpg" / ></div>
-                <div class="reply-cont">
-                <p class="username">易淘网络</p>
-                <p class="comment-body">认真落实抓党建述职评议考核制度，建立党组织书记抓基层党建“三单一账”，推行基层党建工作“四个一”责任落实机制和片区党建“八个一”工作法</p>
-                <p class="comment-footer">2016年10月5日</p>
-                </div>
-                </li>
-                <li>
-                <div class="head-face"><img src="images/1.jpg" / ></div>
-                <div class="reply-cont">
-                <p class="username">科技公司</p>
-                <p class="comment-body">在学习宣传贯彻党的十九大精神文艺宣传活动方面，清水县集思广益制定接地气的方案和活动主题。</p>
-                <p class="comment-footer">2016年10月5日</p>
-                </div>
-                </li>
+            <foreach name="get_ly" item="vo">
+              <foreach name="fb_user" item="vos">
+              <if condition="$vos.id == $vo.fb_id">
+              <li>
+              <div class="head-face"><img src="__ROOT__/upload/{$vos.avatar}" / ></div>
+              <div class="reply-cont">
+              <p class="username">{$vos.user_nickname}</p>
+              <p class="comment-body">{$vo.nr}</p>
+              <p class="comment-footer">{$vo.time}</p>
+              </div>
+              </li>
+              </if>
+              </foreach>
+            </foreach>
             </ul>
+          </div>
         </div>
     </div>
 <script type="text/javascript" src="js/sinaFaceAndEffec.js"></script>
+
+
+</div>
+</div>
+
+
+
+<include file="public@link"/>
+<include file="public@footer"/>
+
+
+<include file="public@scripts"/>
+<hook name="before_body_end"/>
+</body>
 <script type="text/javascript">
-    function out() {
-        var inputText = $('.text').val();
-        $('#info-show ul').append(reply(AnalyticEmotion(inputText)));
-    }
+    $("#out").click(function(){
+       a = $("#xq_id").val();
+       nr = $("#nr").val();
+       $.post('/portal/supply/ly',{a:a,nr:nr},function(data){
+               if(data == 1){
+                      alert("留言成功");
+               }else{
+                      alert("登入后留言");
+               }
+       })
+  })
     var html;
     function reply(content){
         html  = '<li>';
@@ -131,17 +153,4 @@
         return html;
     }
 </script>
-
-</div>
-</div>
-
-
-
-<include file="public@link"/>
-<include file="public@footer"/>
-
-
-<include file="public@scripts"/>
-<hook name="before_body_end"/>
-</body>
 </html>

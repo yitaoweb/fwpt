@@ -86,6 +86,13 @@ class SupplyController extends HomeBaseController
         $gong = Db::name('portal_gxfb')->where("gx",2)->where('state', 1)->order('time')->limit(10)->select()->toArray();
         //求购信息
         $qiu = Db::name('portal_gxfb')->where("gx",1)->where('state', 1)->order('time')->limit(10)->select()->toArray();
+
+         $get_ly = Db::name('ly')->where('js_id',$id)->where('qf',1)->select();
+        $fb_user = Db::name('user')->select();
+
+        $this->assign('get_ly', $get_ly);
+        $this->assign('fb_user', $fb_user);
+        $this->assign('xq_id', $id);      
       
         $this->assign('gong', $gong);        //供应信息
         $this->assign('qiu', $qiu);          //求购信息
@@ -96,6 +103,18 @@ class SupplyController extends HomeBaseController
         $listTpl ='view';
 
         return $this->fetch('/' . $listTpl);
+    }
+
+    public function ly(){
+        $users = cmf_get_current_user();
+        $ly = Db::name('ly');
+        if(isset($users['id'])){
+            $ret = $ly->insert(['fb_id'=>$users['id'],'js_id'=>$_POST['a'],'qf'=>1,'nr'=>$_POST['nr'],'time'=>date('y-m-dh:i:s',time())]);
+            return $ret;
+        }else{
+            return '2';
+        }
+        
     }
 
 }

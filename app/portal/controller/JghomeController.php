@@ -44,6 +44,14 @@ class JghomeController extends HomeBaseController
         $dd=Db::name('portal_dj');
         $portal_dj  = $dd->where('cq_id',$pid)->paginate(10);
         $fwxq=Db::name('portal_fwxq')->select();
+
+        $get_ly = Db::name('ly')->where('js_id',$pid)->where('qf',3)->select();
+        $fb_user = Db::name('user')->select();
+
+        $this->assign('get_ly', $get_ly);
+        $this->assign('fb_user', $fb_user);
+
+
         $this->assign("jigou",$jigou);                 //机构简介
         $this->assign("product",$product);               //产品详情
         $this->assign("fwxq",$fwxq); 
@@ -88,6 +96,18 @@ class JghomeController extends HomeBaseController
         $portalTagModel->isUpdate(false)->allowField(true)->save($arrData);
 
         $this->success("申请已提交");
+    }
+
+    public function ly(){
+        $users = cmf_get_current_user();
+        $ly = Db::name('ly');
+        if(isset($users['id'])){
+            $ret = $ly->insert(['fb_id'=>$users['id'],'js_id'=>$_POST['a'],'qf'=>3,'nr'=>$_POST['nr'],'time'=>date('y-m-dh:i:s',time())]);
+            return $ret;
+        }else{
+            return '2';
+        }
+        
     }
 
 }
