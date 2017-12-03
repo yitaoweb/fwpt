@@ -34,6 +34,12 @@ class QyhomeController extends HomeBaseController
         return $this->fetch('/' . $listTpl);
     }
 
+    public function yb(){
+        $id = $_POST['a'];
+        $links = Db::name('link')->where('linkfl_id',$id)->select();
+        return json_encode($links);
+    }
+
     public function product()
     {
 

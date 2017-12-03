@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes" />
+<meta name="format-detection" content="telephone=no"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+<title>我的对接单</title>
+<link href="__TMPL__/css/style.css" rel="stylesheet" type="text/css" />
+<link href="__TMPL__/css/swiper-3.2.7.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__TMPL__/js/jquery-1.9.1.js" ></script>
+<script type="text/javascript" src="__TMPL__/js/swiper-3.4.0.jquery.min.js"></script>
+</head>
+<body>
+<div class="aui-header">
+				<div class="aui-header-box clearfix">
+					<a class="pull-left" href="qiye-center.html"></a>
+					<h1 class="nav-title">我的对接单</h1>
+				</div>
+				<div class="swiper-container swiperNav b-line">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide selected"><a href="index.html">全部</a></div>
+						<div class="swiper-slide"><a href="{:url('user/entdata/wdfwList',array('stat'=>0))}">待对接</a></div>
+						<div class="swiper-slide"><a href="{:url('user/entdata/wdfwList',array('stat'=>2))}">已取消</a></div>
+						<div class="swiper-slide"><a href="{:url('user/entdata/wdfwList',array('stat'=>1))}">进行中</a></div>
+						<div class="swiper-slide"><a href="{:url('user/entdata/wdfwList',array('stat'=>4))}">已完成</a></div>
+					</div>
+				</div>
+			</div>
+            <div class="header-box"></div>
+		<!-- 头部信息 end -->
+        	<script type="text/javascript">
+        	    $(function () {
+        	        function setCurrentSlide(ele, index) {
+        	            $(".swiperNav .swiper-slide").removeClass("selected");
+        	            ele.addClass("selected");
+        	        }
+
+        	        var swiperNav = new Swiper('.swiperNav', {
+        	            slidesPerView: 5,
+        	            paginationClickable: true,
+        	            spaceBetween: 1,
+        	            freeMode: true,
+        	            loop: false,
+        	            onTab: function (swiper) {
+        	                var n = swiper1.clickedIndex;
+        	            }
+        	        });
+        	    });
+	</script>
+
+<foreach name="lists" item="vo">
+<div class="order-list">
+<div class="order-title">
+      <foreach name="fwxq" item="vos">
+	    <if condition='($vo.xq_id == $vos.id)'>
+
+	     {$vos.title}
+
+	    </if>
+	  </foreach>
+      <span class="order-state">
+           <if condition='($vo.stat == 0)'>
+              等待受理
+            </if>
+            <if condition='($vo.stat == 1)'>
+              成功受理
+            </if>
+            <if condition='($vo.stat == 2)'>
+              拒绝受理
+            </if>
+            <if condition='($vo.jg_sunCon == 1 && $vo.stat == 1)'>
+              对方已提交确认
+            </if>
+            <if condition='($vo.stat == 4)'>
+              服务对接已完成
+            </if>
+      </span>
+</div>
+<div class="order-fuwu">
+<div class="order-img"><img src="__TMPL__/images/1.jpg" alt="" title=""/></div>
+<dl>
+ <foreach name="jg_user" item="vos">
+	<if condition='($vo.jg_id == $vos.id)'>
+
+	 <a href="{:cmf_url('portal/Jghome/index',array('id'=>$vos.id))}">{$vos.user_nickname}</a>
+
+	</if>
+ </foreach>
+</dl>
+      <foreach name="fwcp" item="vos">
+	    <if condition='($vo.cq_id == $vos.id)'>
+        <a href="{:cmf_url('portal/Jghome/product',array('id'=>$vo.jg_id,'pid'=>$vos.id))}">{$vos.title}</a>
+		<dl class="price">￥{$vos.price}{$vos.unit}</dl>
+
+	    </if>
+	  </foreach>
+
+</div>
+<div class="order-link">
+		<if condition='($vo.jg_sunCon == 1 && $vo.stat == 3)'>
+		  <a href="{:url('user/Entdata/statup',array('id'=>$vo.id,'stat'=>3))}">确认服务完成</a>
+		</if>
+		<if condition='($vo.shenQing_qf == 3 && $vo.stat == 0)'>
+		  <a href="{:url('user/product/statup',array('id'=>$vo.id,'stat'=>1))}">确认受理</a>
+		</if>
+		<if condition='($vo.stat == 2)'>
+		  <a href="{:url('user/Entdata/delects',array('id'=>$vo.id))}">删除</a>
+		</if>
+		<if condition='($vo.stat == 4)'>
+		 <if condition='($vo.time_pj eq "")'>
+		  <a href="{:url('user/Entdata/pj',array('id'=>$vo.id))}">评价</a>
+		 </if>
+		 <if condition='($vo.ts eq "")'>
+		  <a href="{:url('user/Entdata/ts',array('id'=>$vo.id))}">投诉</a>
+		 </if>
+		</if>
+</div>
+</div>
+</foreach>
+
+
+	<div class="footer-line"></div>
+	<footer class="foot-bar">
+	<ul>
+	<li><a href="../Index.html"><i><img src="__TMPL__/images/foot01.png" /><i>首页</a></li>
+	<li><a href="../Search.html"><i><img src="__TMPL__/images/foot02.png" /><i>搜索</a></li>
+	<li><a href=""><i><img src="__TMPL__/images/foot03.png" /><i>联系</a></li>
+	<li><a href="Index.aspx"><i><img src="__TMPL__/images/foot04.png" /><i>咨询</a></li>
+	</ul>
+	</footer>
+</body>
+</html>
+
