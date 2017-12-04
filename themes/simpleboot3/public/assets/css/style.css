@@ -79,7 +79,7 @@ select,textarea{ padding:7px; height:36px; color:#000;border:1px solid #ccc; bor
 
 .topBanner{ width:100%; height:165px;background:url(../images/banner1.jpg) no-repeat center center;}
 .topBanner-width{ width:1200px;margin:0 auto; height:140px;}
-.logo{ width:418px; height:78px; margin:50px 0px 0px 0px; float:left; background:url(../images/logo.png) no-repeat left center;}
+.logo{ width:518px; height:78px; margin:50px 0px 0px 0px; float:left; background:url(../images/logo.png) no-repeat left center;}
 /* 搜索样式 */
 .search{border:2px solid #73ACEF; background-color:#fff; height:35px;margin:90px auto 0 auto;width:400px; float:right;}
 .search select{display:none;}

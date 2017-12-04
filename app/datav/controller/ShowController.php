@@ -14,21 +14,41 @@ use cmf\controller\HomeBaseController;
 use app\user\model\UserModel;
 use think\Db;
 
-class IndexController extends HomeBaseController
+class ShowController extends HomeBaseController
 {
+    public function _initialize()
+    {
+        parent::_initialize();
+        $session_admin_id = session('ADMIN_ID');
+
+        if (!empty($session_admin_id)) {
+            $user = Db::name('user')->where(['id' => $session_admin_id])->find();
+
+     
+
+            $this->assign("admin", $user);
+        } else {
+            if ($this->request->isPost()) {
+                $this->error("您还没有登录！", url("datav/show/login"));
+            } else {
+                header("Location:" . url("datav/show/login"));
+                exit();
+            }
+        }
+    }
     public function index()
     {
     	$site_name = cmf_get_site_info('site_info');
     	
         $name=$site_name['site_name'];
   
-        $title='中小商贸流通企业公共服务数据分析平台';
+        $title='长治市中小商贸流通企业公共服务数据分析平台';
         $en = 'changzhi public service platform for SME';
         $this->assign('title',$title);
         $this->assign('en',$en);
         //return $name;
 
-        return $this->fetch(':index');
+        return $this->fetch(':show');
     }
 
     public function login()
