@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>登陆丨Sharelink</title>
+<link rel="stylesheet" href="__TMPL__/datav/dr/css/style.css">
+<body>
+
+<div class="login-container">
+	<h1>数据分析平台</h1>
+	
+	<div class="connect">
+		<p>Data analysis platform</p>
+	</div>
+	
+	<form action="" method="post" id="loginForm">
+		<div>
+			<input type="text" id="username" name="username" class="username" placeholder="用户名" autocomplete="off"/>
+		</div>
+		<div>
+			<input type="password" id="password" name="password" class="password" placeholder="密码" oncontextmenu="return false" onpaste="return false" />
+		</div>
+
+		<button class="login" id="submit" href="javascript:;" type="submit">登录</button>
+	</form>
+
+</div>
+
+</body>
+<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="__TMPL__/datav/dr/js/common.js"></script>
+<!--背景图片自动更换-->
+<script src="__TMPL__/datav/dr/js/supersized.3.2.7.min.js"></script>
+<script src="__TMPL__/datav/js/supersized-init.js"></script>
+<!--表单验证-->
+<script src="__TMPL__/datav/dr/js/jquery.validate.min.js?var1.14.0"></script>
+<script type="text/javascript">
+	$(".login").on("click",function(event){
+	    event.preventDefault();//使a自带的方法失效
+	    var username = $("#username").val();
+	    var password = $("#password").val();
+	    if (username == '') {
+	    	alert("请输入用户名");
+			$("#username").focus();
+			return false;
+	    }
+	    if (password == '') {
+	    	alert("请输入密码");
+			$("#password").focus();
+			return false;
+	    }
+	    $.ajax({
+	           type: "POST",
+	           url: "{:url('datav/index/doLogin')}",
+	           data: {"username":username,"password":password},//参数列表
+	           dataType:"json",
+	           success: function(result){
+	              alert(result.msg);
+	              if (result.code == 0 ) {
+	              	alert(result.msg);
+	              	window.location.href = "{:url('datav/index/index')}";
+	              }else{
+	              	alert(result.msg);
+	              }
+	           },
+	           error: function(result){
+	              //请求失败之后的操作
+	           }
+	    });
+	});
+	$(".reset").on("click",function(event){
+	    event.preventDefault();//使a自带的方法失效
+	    var username = $("#username").val('');
+	    var password = $("#password").val('');
+	});
+</script>
+
+</html>

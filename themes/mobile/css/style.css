@@ -46,7 +46,7 @@ input[type="file"]:focus,input[type="radio"]:focus,input[type="checkbox"]:focus,
 
 .aui-header{display:block;z-index:999;overflow:hidden;position:fixed;top:0;left:0;right:0;width:100%}
 .aui-header-box{background:#4C92E2;height:44px;padding:0 10px}
-.aui-header-logo{width:240px;float:left}
+.aui-header-logo{width:260px;float:left}
 .aui-header-logo a{display:block;padding-top:9px}
 .aui-header-logo img{width:100%;height:100%;display:block;border:none}
 .aui-header-sou{float:right;padding-top:10px}
@@ -120,8 +120,8 @@ input[type="file"]:focus,input[type="radio"]:focus,input[type="checkbox"]:focus,
 
 /*列表样式*/
 .list{ width:100%; height:auto; margin-top:6px;}
-.list .list-item{border:1px solid #eee; padding:12px; height:70px; margin-bottom:6px;background-color:#fff; font-size:14px;}
-.list img{max-height:70px;float:left;font-size:0;border-radius:2px; margin-right:10px; max-width:90px;}
+.list .list-item{border:1px solid #eee; padding:12px; height:auto; min-height:70px; margin-bottom:6px;background-color:#fff; font-size:14px;}
+.list img{max-height:70px;float:left;font-size:0;border-radius:2px; margin-right:10px; max-width:90px; padding-bottom:10px;}
 .list .list-item h1{ float:left; color:#333; font-size:16px; margin-bottom:6px; font-weight:normal; width:68%;}
 .list .list-item a h1{ color:#333}
 .list .list-item a:hover h1{ color:#ff6600}
@@ -137,9 +137,10 @@ a.qq{ width:100px; height:30px; display:inline-block; text-align:left; text-inde
 .infomain h1{ font-size:17px; height:36px; line-height:36px; color:#4C92E2;}
 .infomain img{ margin:0 auto; max-width:100%;border-radius:3px;}
 .infoli{ width:100%; border-bottom:1px solid #eee; background-color:#fff;padding:10px 0px; text-indent:1em; font-size:14px; color:#333;}
-.content{ width:90%; padding:20px 5%; text-align:left; line-height:1.8; font-size:16px; background-color:#fff; margin-top:6px; color:#555;}
+.content{ width:90%; padding:20px 5%; text-align:left; line-height:1.8; font-size:15px; background-color:#fff; margin-top:6px; color:#555;}
 .content img{ width:100%; margin-bottom:10px;}
-.content h1.title{ width:100%; height:30px; font-size:18px; color:#000;}
+.content h1.title{ width:100%; height:40px; font-size:16px; font-weight:normal; color:#000; border-bottom:1px solid #eee; margin-top:-8px; margin-bottom:10px;
+background-image:url(../images/admin07.png); background-repeat:no-repeat; background-position:left 5px; background-size:20px; text-indent:1.5em;}
 .content .news-title{ width:100%; padding:10px 0px; line-height:22px; font-size:18px; font-weight:bold; text-align:center; color:#000;}
 .content .news-tags{ width:100%; height:30px; border-bottom:1px solid #eee; text-align:center; font-size:12px; color:#999; margin-bottom:10px;}
 .content .news-tags span{ margin:0px 10px;}
@@ -227,9 +228,9 @@ a.qq{ width:100px; height:30px; display:inline-block; text-align:left; text-inde
 .infoinput dl dt{ display:block; float:left;width:80px; padding-right:10px; text-align:right; font-size:14px; line-height:44px; color:#666; background-image:url(../images/dlline.png); background-repeat:no-repeat; background-position:right center; background-size:1px;}
 .infoinput dl dd{ margin-left:100px;  text-align:left;font-size:14px; line-height:44px; color:#666;}
 .infoinput dl dd input,.infoinput dl dd select{ width:65%; border:0px; height:44px;border:0px; line-height:44px; background-color:#fff; font-size:15px;}
-.infoinput dl dd input:focus,.infoinput dl dd select:focus,infoinput textarea:focus{outline:none; }
+.infoinput dl dd input:focus,.infoinput dl dd select:focus,.infoinput textarea:focus{outline:none; }
 .infotext{ width:100%; height:120px;}
-.infotext textarea{ border:0px; width:94%; height:100px; max-height:100px; padding:10px 3%; font-size:14px; line-height:20px;}
+.infoinput textarea{ border:0px; width:65%; height:100px; max-height:100px; padding:10px 0px; font-size:14px; line-height:20px;}
 
 .index-partner{background-color:#fff; width:100%; padding:10px 0px;}
 .index-partner .swiper-container img {width: 90%; margin:0px 5%; height:60px;-moz-border-radius:4px; -webkit-border-radius:4px;border-radius:4px;}
@@ -239,6 +240,18 @@ a.qq{ width:100px; height:30px; display:inline-block; text-align:left; text-inde
 .newslist li a{ width:80%; height:42px; font-size:16px; color:#333;  overflow: hidden;white-space: nowrap;text-overflow: ellipsis; display:inline-block; text-indent:0.5em;}
 .newslist li.read{background-size:10px 40%;}
 .newslist li img{ width:20px; float:left; margin-left:10px; margin-top:11px;}
+
+.order-list{ width:100%; height:172px; background-color:#fff; margin-top:10px;}
+.order-title{ width:100%; height:40px; border-bottom:1px solid #eee; line-height:40px; font-size:15px; text-indent:2.5em;background-image:url(../images/admin11.png); background-repeat:no-repeat; background-position:10px center; background-size:24px;}
+.order-title span.order-state{ float:right; margin-right:20px; color:#FF6600; font-size:13px;}
+.order-fuwu{ width:100%; height:70px; padding:10px 0px;}
+.order-img{ float:left; width:110px; height:70px; margin-left:20px;}
+.order-img img{max-height:70px;float:left;font-size:0;border-radius:2px; margin-right:10px; max-width:90px; padding-bottom:10px;}
+.order-fuwu dl{ width:90%; height:23px; line-height:23px; font-size:13px; text-align:left;}
+.order-fuwu dl.price{ font-size:16px; color:#FF6600;height:28px; line-height:28px;}
+.order-fuwu dl.date{ font-size:12px; color:#999;height:16px; line-height:16px;}
+.order-link{ width:100%; height:40px; border-top:1px solid #eee; text-align:right;}
+.order-link a{ display:inline-block; padding:4px 12px; font-size:14px; color:#666; border:1px solid #ddd;-moz-border-radius:16px;-webkit-border-radius:16px;border-radius:16px; margin:5px 10px 5px 0px;}
 
 .wrapper-wall{ width:100%; height:auto; clear:both;}
 .wall{display:block;position:relative}

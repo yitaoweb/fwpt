@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$qy.user_nickname} {$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$qy.user_nickname},{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$qy.user_nickname},{$site_info.site_seo_description|default=''}">
+    <include file="public@head"/>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/select-script.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/jquery.pagination.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/jquery.tools.min.js"></script>
+    <hook name="before_head_end"/>
+</head>
+<body class="body-white">
+<include file="public@nav"/>
+
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;<a href="">服务资源</a> &gt;&nbsp;服务机构</div>
+<div class="banner"><span class="b_title">{$qy.user_nickname}</span></div>
+<div class="main">
+<div class="main_l left">
+<div class="left_title">机构信息</div>
+<div class="hot_list">
+<a href="">
+    <dl class="hot_detail">
+        <dd>
+            <img src="__ROOT__/upload/{$qy.avatar}" alt="" title=""/>
+        </dd>
+        <dd class="title">{$qy.user_nickname}</dd>
+    </dl>
+</a>
+</div>
+<div class="left_title">联系方式</div>
+<div class="hot_list">
+<a href="">
+    <dl class="hot_detail">
+        <dd class="title">联系人：{$qy.qy_lxname}</dd>
+        <dd class="title">手机：{$qy.mobile}</dd>
+        <dd class="title">网址：{$qy.user_url}</dd>
+        <dd class="title">传真：{$qy.fax}</dd>
+    </dl>
+</a>
+</div>
+</div>
+<div class="main_r right" style="min-height: 800px">
+    <div class="right_title"><span>对接表单</span></div>
+    <div class="list">                      
+       <form class="js-ajax-form" action="{:url('portal/Demand/post_dj')}" method="post" id="register"> 
+            <div class="center_form">
+              <dl>
+                <dt>机构名称：</dt>
+                <input type="hidden" name="jg_id" value="{$users.id}">
+                <dd><input type="text"  class="input large" value="{$users.user_nickname}" disabled="disabled" /></dd>
+              </dl>
+              <dl>
+                <dt>企业需求：</dt>
+                <input type="hidden" name="xq_id" value="{$fwxq.id}">
+                <dd><input type="text"  class="input large" value="{$fwxq.title}" disabled="disabled" />
+              </dl>
+             
+              <dl>
+                <dt>企业名称：</dt>
+                <input type="hidden" name="qy_id" value="{$qy.id}">
+                <dd><input type="text" class="input large" value="{$qy.user_nickname}" disabled="disabled" />
+              </dl>
+              <dl>
+                <dt>机构产品</dt>
+                <dd>
+                <select name="cq_id" style="width:326px;"  datatype="*" sucmsg=" ">
+                    <option value="0" selected="selected">请选产品</option>
+                    <volist name="demand" id="vo">
+                        <option value="{$vo.id}">{$vo.title}</option>
+                    </volist>
+                </select>
+                </dd>
+              </dl>
+             
+
+                <dd>
+                  <input type="hidden" name="time" value="{$time}">
+                  <input type="hidden" name="shenQing_qf" value="3">
+                  <button type="submit" class="btn-block btn-blue js-ajax-submit">确定提交</button>
+                </dd>
+              </dl>
+            </div>
+            </form>
+    </div>
+</div>
+<div class="clear"></div>
+<script type="text/javascript">
+    $(function () {
+        $('.tabPanel .tabnav div').click(function () {
+            $(this).addClass('hit').siblings().removeClass('hit');
+            $('.tabpanes>div:eq(' + $(this).index() + ')').show().siblings().hide();
+        })
+    })
+</script>
+<include file="public@link"/>
+<include file="public@footer"/>
+
+
+<include file="public@scripts"/>
+<hook name="before_body_end"/>
+</body>
+</html>

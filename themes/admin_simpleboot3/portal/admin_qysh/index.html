@@ -23,9 +23,9 @@
                 <th>企业名称</th>
                 <th>法人代表</th>
                 <th>办公地址</th>
-                <th>联系人</th>
+                <th width="100">联系人</th>
                 <th>手机号</th>
-                <th>是否审核</th>
+                <th width="100">是否审核</th>
                 <th width="160">操作</th>
             </tr>
             </thead>
@@ -36,13 +36,13 @@
                     <td>{$vo.user_nickname}</td>
                     <td>{$vo.qy_faren}</td>
                     <td>{$vo.qy_address}</td>
-                    <td>{$vo.qy_lxname}</td>
+                    <td width="100">{$vo.qy_lxname}</td>
                     <td>{$vo.mobile}</td>
                     <if condition="$vo.qy_shstat eq 0">
-                    <td>未审核</td>
+                    <td width="100">未审核</td>
                     </if>
                     <if condition="$vo.qy_shstat eq 1">
-                    <td>已审核</td>
+                    <td width="100">已审核</td>
                     </if>
                     <td>
                         <a class="btn btn-primary btn-sm js-ajax-submit" href="{:url('AdminQysh/edit',['id'=>$vo['id'],'xzqy'=>$vo['qy_area']])}">查看详情</a>
@@ -56,9 +56,9 @@
                 <th>企业名称</th>
                 <th>法人代表</th>
                 <th>办公地址</th>
-                <th>联系人</th>
+                <th width="100">联系人</th>
                 <th>手机号</th>
-                <th>是否审核</th>
+                <th width="100">是否审核</th>
                 <th width="160">操作</th>
             </tr>
             </tfoot>

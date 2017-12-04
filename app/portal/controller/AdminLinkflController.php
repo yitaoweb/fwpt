@@ -15,6 +15,7 @@ use cmf\controller\AdminBaseController;
 use app\portal\model\PortalLinkflModel;
 use think\Db;
 use app\admin\model\ThemeModel;
+use app\admin\model\LinkModel;
 
 
 class AdminLinkflController extends AdminBaseController

@@ -13,6 +13,7 @@ namespace app\portal\controller;
 use cmf\controller\HomeBaseController;
 use app\portal\model\PortalSsfwModel;
 use app\portal\model\PortalXzqyModel;
+use app\portal\model\PortalDjModel;
 use think\Db;
 class DemandController extends HomeBaseController
 {
@@ -93,15 +94,59 @@ class DemandController extends HomeBaseController
 
         //推荐机构
         $jigou = Db::name('user')->where("user_type",3)->where('user_status', 1)->order('create_time')->limit(10)->select()->toArray();
+
+        $get_ly = Db::name('ly')->where('js_id',$id)->where('qf',2)->select();
+        $fb_user = Db::name('user')->select();
       
         $this->assign('jigou', $jigou);        //推荐机构
+        $this->assign('get_ly', $get_ly);
+        $this->assign('fb_user', $fb_user);      
 
-
-        $this->assign($demand);                 //机构简介
+        $this->assign($demand);   
+        $this->assign('xq_id',$demand['id']);              //机构简介
         $this->assign($user);   
         $listTpl ='demandview';
 
         return $this->fetch('/' . $listTpl);
+    }
+
+    public function sq_fu(){
+        $xq_id = $this->request->param('id', 0, 'intval');
+        $users = cmf_get_current_user();
+        $demand = Db::name('portal_fwcp')->where('user_id',$users['id'])->select();
+        $fwxq = Db::name('portal_fwxq')->where('id',$xq_id)->find();
+        $qy = Db::name('user')->where('id',$fwxq['user_id'])->find();
+                $listTpl ='jg_sq_dj';
+        $this->assign('demand', $demand); 
+        $this->assign('qy', $qy);
+        $this->assign('fwxq', $fwxq);
+        $this->assign('users', $users); 
+        $this->assign('xq_id', $xq_id); 
+        $this->assign("time", date('y-m-d h:i:s',time()));
+        return $this->fetch('/' . $listTpl);
+
+    }
+
+    public function post_dj()
+    {
+        $arrData = $this->request->param();
+        $arrData['stat'] = 0;
+        $portalTagModel = new PortalDjModel();
+        $portalTagModel->isUpdate(false)->allowField(true)->save($arrData);
+
+        $this->success("申请已提交");
+    }
+
+    public function ly(){
+        $users = cmf_get_current_user();
+        $ly = Db::name('ly');
+        if(isset($users['id'])){
+            $ret = $ly->insert(['fb_id'=>$users['id'],'js_id'=>$_POST['a'],'qf'=>2,'nr'=>$_POST['nr'],'time'=>date('y-m-dh:i:s',time())]);
+            return $ret;
+        }else{
+            return '2';
+        }
+        
     }
 
 }

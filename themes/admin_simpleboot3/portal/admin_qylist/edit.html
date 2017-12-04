@@ -1,4 +1,17 @@
 <include file="public@header"/>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DtnvBKcGnc56YxIZf5vZh2gtYQFzqy11"></script>
+
+    <script src="__TMPL__/public/assets/js/artDialog/jquery.artDialog.js?skin=default"></script>
+    <script src="__TMPL__/public/assets/js/artDialog/plugins/iframeTools.js"></script>
+    <script>
+         function setlatlng(lng,lat){
+        art.dialog.data('lng', lng);
+        art.dialog.data('lat', lat);
+        // 此时 iframeA.html 页面可以使用 art.dialog.data('test') 获取到数据，如：
+        // document.getElementById('aInput').value = art.dialog.data('test');
+        art.dialog.open("__TMPL__/public/map.html",{lock:false,title:'设置经纬度',width:600,height:400,yesText:'关闭',background: '#000',opacity: 0.87});
+      }
+    </script>
 </head>
 <body>
 <div class="wrap js-check-wrap">
@@ -115,6 +128,13 @@
                   </foreach>
                 </select>
             </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label"><span class="form-required">*<a href="###" onclick="setlatlng($('#lng').val(),$('#lat').val())">在地图中查看/设置</a></span></label>
+          <div class="col-md-6 col-sm-10">
+            <INPUT class="input large" id="lng" value="{$post.lng}" name="lng" style="float:left;width:146px;">
+            <INPUT class="input large" value="{$post.lat}" id="lat" name="lat" style="float:left;width:146px;">
+          </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label"><span class="form-required">*</span>联系人:</label>
@@ -235,7 +255,7 @@
           </div>
         </div>
         <div class="form-group">
-            <label class="col-md-6 col-sm-10" for="input-description">统一社会信用代码证</label>
+            <label class="col-sm-2 control-label" for="input-description">统一社会信用代码证</label>
             <div >
                 <input type="hidden" name="daima" class="form-control"
                        id="js-thumbnail-input" value="{$post.daima}">
@@ -266,7 +286,7 @@
     </form>
 
 </div>
-<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<!-- <script type="text/javascript" src="__STATIC__/js/admin.js"></script>
 <script type="text/javascript">
     //编辑器路径定义
     var editorURL = GV.WEB_ROOT;
@@ -311,6 +331,6 @@
             }
         });
     }
-</script>
+</script> -->
 </body>
 </html>

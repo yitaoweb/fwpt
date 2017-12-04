@@ -206,4 +206,22 @@ class EntdataController extends UserBaseController
         }
     }
 
+    public function tj_jg(){
+        $arr_jg=array();
+        $user = cmf_get_current_user();
+        $id = $this->request->param("id", 0, "intval");
+        $portal_fwxq = Db::name("portal_fwxq");
+        $portal_fwcp = Db::name("portal_fwcp");
+        $fwxq = $portal_fwxq->where('id',$id)->find();
+        $a=0;
+        foreach(json_decode($fwxq['tui_jian_jg']) as $arr){         
+               $fwcp[$a] = $portal_fwcp->where('id',$arr)->find();
+                $a=$a+1;
+        }
+        $this->assign($user);
+        $this->assign("fwcp",$fwcp);
+        $this->assign("um",3);
+        return $this->fetch();
+    }
+
 }

@@ -46,9 +46,10 @@ class ProductController extends UserBaseController
         $product  = $dd->where('jg_id',$userId)->paginate(10);
         $fwcp=Db::name('portal_fwcp')->select();
         $fwxq=Db::name('portal_fwxq')->select();
-
+        $qy_user=Db::name('user')->select();
         $this->assign("page", $product->render());
         $this->assign("lists", $product->items());
+        $this->assign("qy_user",$qy_user);
         $this->assign($user);
         $this->assign("fwcp",$fwcp);
         $this->assign("fwxq",$fwxq);

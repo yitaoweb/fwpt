@@ -40,6 +40,7 @@ class LinkController extends AdminBaseController
     }
     
     public function yb(){
+                var_dump("ss");die;
         $id = $_POST['a'];
         $linkModel = new LinkModel();
         $links = $linkModel->where('linkfl_id',$id)->select();

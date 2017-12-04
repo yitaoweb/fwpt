@@ -40,13 +40,16 @@
 <div class="main_r left">
 <div class="right_title"><span>需求基本信息</span></div>
 <div class="right_content">
-<dl>
+ <dl>
    <dt>需求名称：</dt>
    <dd class="bold">{$title}</dd>
+   <dd style="background-color: #0099cc;margin-left: 100px;width: 150px;text-align: center;">
+   <a href="{:cmf_url('portal/Demand/sq_fu',array('id'=>$xq_id))}" style="color: #ffffff">申请服务</a>
+   </dd>
  </dl>
  <dl>
    <dt>服务类型：</dt>
-   <dd><a href="">{:getfield('portal_ssfw',$ssfw_id,'name')}</dd>
+   <dd>{:getfield('portal_ssfw',$ssfw_id,'name')}</dd>
   </dl>
  <dl>
    <dt>申请时间：</dt>
@@ -77,20 +80,59 @@
 <div class="right_content">
 　　{$content}
 </div>
+
+  <div class="wrap">
+
+    <div class="comment">
+      <div class="content">
+        <div class="cont-box">
+          <textarea class="text" id='nr' placeholder="请输入..."></textarea>
+        </div>
+        <div class="tools-box">
+          <input type="hidden" id="xq_id" value="{$xq_id}">
+          <div class="operator-box-btn">共有<span class="price">417</span>条评论</div>
+          <div class="submit-btn"><input type="button" id="out" value="提交评论" /></div>
+        </div>
+      </div>
+    </div>
+    <div id="info-show">
+      <ul>
+      <foreach name="get_ly" item="vo">
+        <foreach name="fb_user" item="vos">
+        <if condition="$vos.id == $vo.fb_id">
+        <li>
+        <div class="head-face"><img src="__ROOT__/upload/{$vos.avatar}" / ></div>
+        <div class="reply-cont">
+        <p class="username">{$vos.user_nickname}</p>
+        <p class="comment-body">{$vo.nr}</p>
+        <p class="comment-footer">{$vo.time}</p>
+        </div>
+        </li>
+        </if>
+        </foreach>
+      </foreach>
+      </ul>
+    </div>
+  </div>
 </div>
 </div>
-
-
-
-
-
-
 
 <include file="public@link"/>
 <include file="public@footer"/>
-
-
 <include file="public@scripts"/>
 <hook name="before_body_end"/>
 </body>
+<script type="text/javascript">
+  $("#out").click(function(){
+       a = $("#xq_id").val();
+       nr = $("#nr").val();
+       $.post('/portal/Demand/ly',{a:a,nr:nr},function(data){
+               if(data == 1){
+                      alert("留言成功");
+               }else{
+                      alert("登入后留言");
+               }
+       })
+  })
+</script>
 </html>
