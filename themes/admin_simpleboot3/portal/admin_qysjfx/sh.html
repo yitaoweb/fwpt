@@ -14,7 +14,7 @@
             <div class="col-md-6 col-sm-10">
             <select class="form-control" name="user_id" id="user_id">
             <foreach name="user" item="vo">
-                <option value="{$vo.id}" <if condition="$vo.id eq $post.fl">selected = "selected"</if>>
+                <option value="{$vo.id}" <if condition="$vo.id eq $post.user_id">selected = "selected"</if>>
                            {$vo.user_nickname}
                 </option>
             </foreach>
