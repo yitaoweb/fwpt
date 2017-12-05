@@ -15,7 +15,7 @@ use app\user\model\UserModel;
 use think\Validate;
 use think\Db;
 
-class SjsbController extends UserBaseController
+class XmController extends UserBaseController
 {
 
     /**
@@ -23,15 +23,21 @@ class SjsbController extends UserBaseController
      */
     public function index()
     {
+        $id = $this->request->param("id", 0, "intval");
         $user = cmf_get_current_user();
         $userId               = cmf_get_current_user_id();
-        $gongqiuQuery            = Db::name("qysjfx");
+        $gongqiuQuery            = Db::name("xm");
+        if($id != 0){
+          $gongqiuQuery->where('xm_qf',$id);
+        }
         $all           = $gongqiuQuery->order('id desc')->paginate(10);
-
+        $sshy=Db::name('portal_xzqy')->where('1=1')->order('id')->select();
         $this->assign($user);
         $this->assign("page", $all->render());
         $this->assign("lists", $all->items());
+        $this->assign("id", $id);
         $this->assign("um",4);
+        $this->assign("fuwu",$sshy);
         return $this->fetch();
     }
 
@@ -61,11 +67,13 @@ class SjsbController extends UserBaseController
      */
     public function add()
     {
+        $id = $this->request->param("id", 0, "intval");
         $user = cmf_get_current_user();
         $this->assign($user);
-        $sshy=Db::name('portal_sshy')->where('1=1')->order('id')->select();
+        $sshy=Db::name('portal_xzqy')->where('1=1')->order('id')->select();
         $this->assign('fuwu',$sshy);
         $this->assign("um",4);
+        $this->assign("id",$id);
         return $this->fetch();
     }
 
@@ -81,7 +89,7 @@ class SjsbController extends UserBaseController
         $user = cmf_get_current_user();
         $data['user_id']=$user['id'];
         $data['stat']=0;
-        $qysjfx=Db::name('qysjfx');
+        $qysjfx=Db::name('xm');
         $ret = $qysjfx->insert($data);
         if($ret == 1){
             $this->success("上报成功！");
@@ -99,7 +107,7 @@ class SjsbController extends UserBaseController
     public function delete()
     {
         $id                = $this->request->param("id", 0, "intval");
-        $portalPostModel=Db::name('qysjfx');
+        $portalPostModel=Db::name('xm');
         $data              = $portalPostModel->delete($id);
         if ($data) {
             $this->success("删除成功！");
@@ -113,11 +121,11 @@ class SjsbController extends UserBaseController
         $id = $this->request->param("id", 0, "intval");
          $user = cmf_get_current_user();
         $this->assign($user);
-        $qysjfx=Db::name('qysjfx')->where('id',$id)->order('id')->find();
-         $sshy=Db::name('portal_sshy')->where('1=1')->order('id')->select();
+        $xm=Db::name('xm')->where('id',$id)->order('id')->find();
+         $sshy=Db::name('portal_xzqy')->where('1=1')->order('id')->select();
 
          $this->assign('fuwu',$sshy);
-        $this->assign('qysjfx',$qysjfx);
+        $this->assign('xm',$xm);
         $this->assign("um",4);
         return $this->fetch();
 
@@ -125,7 +133,7 @@ class SjsbController extends UserBaseController
     }
     public function editpost(){
         $data = $this->request->post();
-        $portalPostModel=Db::name('qysjfx');
+        $portalPostModel=Db::name('xm');
         $ret = $portalPostModel->update($data,['id' => $data['id']]);    
         if($ret == 1){
             $this->success("修改成功！");

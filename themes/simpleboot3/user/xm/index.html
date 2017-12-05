@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$user_login}  - 修改资料</title>
+<meta name="keywords" content=""/>
+<meta name="description" content="">
+<include file="public@head"/>
+
+</head>
+<body class="body-white" id="top">
+
+<include file="public@nav" />
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;<if condition='($user_type == 2)'>企业<else/>机构</if>中心</div>
+<div class="main">
+    <div class="main_l left">
+        <include file="public@qiyenav" />
+    </div>
+    
+    <div class="main_r right" style="min-height: 600px;">
+        <include file="public@qiyetop" />
+        <div class="tabPanel">
+            <div class="tabnav">
+              <div class="hit">全部需求</div>
+              <div>未受理</div>
+              <div>已对接</div>
+              <div>
+                  <select name="pageselect" onchange="window.open(options[selectedIndex].value,'_self')">
+                       <option value="{:url('user/xm/index',array('id'=>0))}" <if condition="$id eq 0">selected = "selected"</if>>请选择</option>
+                        <option value="{:url('user/xm/index',array('id'=>1))}" <if condition="$id eq 1">selected = "selected"</if>>在谈项目表</option>
+                         <option value="{:url('user/xm/index',array('id'=>2))}" <if condition="$id eq 2">selected = "selected"</if>>新签约项目明细表</option>
+                          <option value="{:url('user/xm/index',array('id'=>3))}" <if condition="$id eq 3">selected = "selected"</if>>拟开工项目表</option>
+                           <option value="{:url('user/xm/index',array('id'=>4))}" <if condition="$id eq 4">selected = "selected"</if>>新开工项目明细表</option>
+                            <option value="{:url('user/xm/index',array('id'=>5))}" <if condition="$id eq 5">selected = "selected"</if>>在建项目明细表</option>
+                             <option value="{:url('user/xm/index',array('id'=>6))}" <if condition="$id eq 6">selected = "selected"</if>>2016年前重点投产项目明细表</option>
+                              <option value="{:url('user/xm/index',array('id'=>7))}" <if condition="$id eq 7">selected = "selected"</if>>新投产项目明细表</option>
+                  </select>
+              </div>
+            </div>
+           <div class="tabpanes">
+              <div class="pane" style="display:block;">
+                  <table class="fwtable">
+                    <thead>
+                      <tr>
+                        <th>序号</th>
+                        <th>开发区</th>
+                        <th>项目名称</th>
+                        <th>投资总额（亿元）</th>
+                        <th>投资方名称</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                  <tbody>
+                    <foreach name="lists" item="vo">
+                      <tr>
+                        <td>{$key+1}</td>
+                        <td>
+                        <volist name="fuwu" id="vos">
+                            <if condition="$vos.id eq $vo.kfq">
+                                {$vos.name}
+                            </if>
+                        </volist>
+                        </td>
+                        <td>{$vo.xmname}</td>
+                        <td>{$vo.tzze}</td>
+                        <td>{$vo.tzfname}</td>
+                        <td>
+                            <if condition="$vo.stat eq 0">
+                                  未审核
+                            </if>
+                            <if condition="$vo.stat eq 1">
+                                  审核
+                            </if>
+                             <if condition="$vo.stat eq 2">
+                                  驳回
+                            </if>
+                        </td>
+                        <td>
+                            <if condition="$vo.stat eq 0 || $vo.stat eq 2">
+                                 <a href="{:url('user/xm/edit',array('id'=>$vo['id']))}">修改</a>
+                                  <a href="{:url('user/xm/delete',array('id'=>$vo['id']))}">删除</a>
+                            </if>
+                        </td>
+                      </tr>
+                      </foreach>
+                  </tbody>
+                </table>
+                <div class="clear"></div>
+                
+                <div class="yahoo2">{$page|default=''}</div>
+              </div>
+
+           </div>
+        <div class="clear"></div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('.tabPanel .tabnav div').click(function () {
+                    $(this).addClass('hit').siblings().removeClass('hit');
+                    $('.tabpanes>div:eq(' + $(this).index() + ')').show().siblings().hide();
+                })
+            })
+        </script>
+    </div>
+</div>							
+  <include file="public@link" />
+	<include file="public@footer" />
+
+	<!-- /container -->
+	<include file="public@scripts" />
+</body>
+</html>

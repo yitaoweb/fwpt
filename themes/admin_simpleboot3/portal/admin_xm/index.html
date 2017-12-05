@@ -1,0 +1,91 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('AdminJjyxqk/index')}">上限企业数据分析</a></li>
+    </ul>
+<form class="well form-inline margin-top-20" method="post" action="{:url('AdminXm/sh')}">
+                 <select class="form-control" name="pageselect" onchange="window.open(options[selectedIndex].value,'_self')">
+                       <option value="{:url('AdminXm/index',array('id'=>0))}" <if condition="$id eq 0">selected = "selected"</if>>请选择</option>
+                        <option value="{:url('AdminXm/index',array('id'=>1))}" <if condition="$id eq 1">selected = "selected"</if>>在谈项目表</option>
+                         <option value="{:url('AdminXm/index',array('id'=>2))}" <if condition="$id eq 2">selected = "selected"</if>>新签约项目明细表</option>
+                          <option value="{:url('AdminXm/index',array('id'=>3))}" <if condition="$id eq 3">selected = "selected"</if>>拟开工项目表</option>
+                           <option value="{:url('AdminXm/index',array('id'=>4))}" <if condition="$id eq 4">selected = "selected"</if>>新开工项目明细表</option>
+                            <option value="{:url('AdminXm/index',array('id'=>5))}" <if condition="$id eq 5">selected = "selected"</if>>在建项目明细表</option>
+                             <option value="{:url('AdminXm/index',array('id'=>6))}" <if condition="$id eq 6">selected = "selected"</if>>2016年前重点投产项目明细表</option>
+                              <option value="{:url('AdminXm/index',array('id'=>7))}" <if condition="$id eq 7">selected = "selected"</if>>新投产项目明细表</option>
+                  </select>
+    </form>
+
+
+    <form method="post" class="js-ajax-form margin-top-20">
+        <div class="table-actions">
+            <!--<button type="submit" class="btn btn-primary btn-sm js-ajax-submit">{:lang('SORT')}</button>-->
+        </div>
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th width="50">ID</th>
+                        <th>开发区</th>
+                        <th>项目名称</th>
+                        <th>投资总额（亿元）</th>
+                        <th>投资方名称</th>
+                        <th>状态</th>
+                        <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach name="tags" item="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>
+                        <volist name="fuwu" id="vos">
+                            <if condition="$vos.id eq $vo.kfq">
+                                {$vos.name}
+                            </if>
+                        </volist>
+                        </td>
+                        <td>{$vo.xmname}</td>
+                        <td>{$vo.tzze}</td>
+                        <td>{$vo.tzfname}</td>
+                        <td>
+                            <if condition="$vo.stat eq 0">
+                                  未审核
+                            </if>
+                            <if condition="$vo.stat eq 1">
+                                  审核
+                            </if>
+                             <if condition="$vo.stat eq 2">
+                                  驳回
+                            </if>
+                        </td>
+                    <td>
+                    <if condition="$vo.stat eq 0">
+                        <a href="{:url('AdminXm/sh',array('id'=>$vo['id']))}">审核/驳回</a>
+                    </if>
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th width="50">ID</th>
+                        <th>开发区</th>
+                        <th>项目名称</th>
+                        <th>投资总额（亿元）</th>
+                        <th>投资方名称</th>
+                        <th>状态</th>
+                        <th>操作</th>
+            </tr>
+            </tfoot>
+        </table>
+        <div class="table-actions">
+            <!--<button type="submit" class="btn btn-primary btn-sm js-ajax-submit">{:lang('SORT')}</button>-->
+        </div>
+    </form>
+    <ul class="pagination">{$page|default=''}</ul>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
