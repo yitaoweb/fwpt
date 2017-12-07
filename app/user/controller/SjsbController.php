@@ -23,12 +23,15 @@ class SjsbController extends UserBaseController
      */
     public function index()
     {
+        $stat = $this->request->param("stat", 0, "intval");
         $user = cmf_get_current_user();
         $userId               = cmf_get_current_user_id();
         $gongqiuQuery            = Db::name("qysjfx");
+        $gongqiuQuery->where('stat',$stat);
         $all           = $gongqiuQuery->order('id desc')->paginate(10);
 
         $this->assign($user);
+        $this->assign('stat',$stat);
         $this->assign("page", $all->render());
         $this->assign("lists", $all->items());
         $this->assign("um",4);
@@ -125,6 +128,8 @@ class SjsbController extends UserBaseController
     }
     public function editpost(){
         $data = $this->request->post();
+        $data['bh']='';
+        $data['stat']=0;
         $portalPostModel=Db::name('qysjfx');
         $ret = $portalPostModel->update($data,['id' => $data['id']]);    
         if($ret == 1){

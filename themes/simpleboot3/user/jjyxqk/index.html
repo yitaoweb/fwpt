@@ -20,9 +20,9 @@
         <include file="public@qiyetop" />
         <div class="tabPanel">
             <div class="tabnav">
-              <div class="hit">全部需求</div>
-              <div>未受理</div>
-              <div>已对接</div>
+              <div <if condition='($stat == 0)'>class="hit"</if>><a href="{:url('user/Jjyxqk/index',array('stat'=>0))}">未审核</a></div>
+              <div <if condition='($stat == 1)'>class="hit"</if>><a href="{:url('user/Jjyxqk/index',array('stat'=>1))}">已审核</a></div>
+              <div <if condition='($stat == 2)'>class="hit"</if>><a href="{:url('user/Jjyxqk/index',array('stat'=>2))}">驳回</a></div>
             </div>
            <div class="tabpanes">
               <div class="pane" style="display:block;">

@@ -100,10 +100,11 @@ class DemandController extends HomeBaseController
             $get_ly[$i]['replyBody'] = Db::query('select a.id as pid,b.avatar as pb_img,b.user_nickname as pb_name,a.nr as pa_nr,a.time as pa_time from pt_ly as a left join pt_user as b on a.user_id = b.id where pid='.$s['id']);
             $i=$i+1;
         }
+        $users = cmf_get_current_user();
         $this->assign('jigou', $jigou);        //推荐机构
         $this->assign('get_ly', $get_ly);
         // $this->assign('fb_user', $fb_user);      
-
+        $this->assign('user_type', $users['user_type']);
         $this->assign($demand);   
         $this->assign('xq_id',$demand['id']);              //机构简介
         $this->assign($user);   

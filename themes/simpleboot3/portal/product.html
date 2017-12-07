@@ -43,12 +43,14 @@
 </a>
 </div>
 </div>
-<div class="main_r right">
+<div class="main_r right" style="min-height: 1000px">
     <div class="right_title"><span>对接详情</span></div>
     <div class="list">                      
         <div class="list-item">                 
         <img src="__ROOT__/upload/{$product.img}" alt="" title=""/>
+        <if condition="$user_type != 3">
         <div class="linkto"><a href="{:cmf_url('portal/Jghome/dj',array('id'=>$product.id,'jid'=>$jigou.id))}">申请服务</a><a href="">机构咨询</a></div>
+        </if>
         <h1>服务项目：{:getfield('portal_ssfw',$product.ssfw_id,'name')}（<span class="price">23</span>人申请）</h1>
         <p>收费标准：<span class="price">{$product.price}{$product.unit}</span></p>
         <p>发布时间：{$product.time|date='Y-m-d',###}</p>
@@ -133,21 +135,19 @@
                 </table>
                 <div class="yahoo2">{$page|default=''}</div>
             </div>
-
-                
-                <div class="comment-container">
-                  <div class="commentbox">
-                      <textarea cols="80" rows="50" placeholder="来说几句吧......" class="mytextarea" id="content"></textarea>
-                      <div class="btn-info pull-right" id="comment">评论</div>
-                    </div>
-                    <div class="comment-list">
-
-                      </div>
-                    </div>
-                </div>
-
         </div>
     </div>
+
+      <div class="comment-container" >
+            <div class="commentbox">
+              <textarea cols="80" rows="50" placeholder="来说几句吧......" class="mytextarea" id="content"></textarea>
+              <div class="btn-info pull-right" id="comment">评论</div>
+            </div>
+            <div class="comment-list">
+
+              </div>
+            </div>
+      </div>
 </div>
 <div class="clear"></div>
 

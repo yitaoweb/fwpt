@@ -20,19 +20,19 @@
         <include file="public@qiyetop" />
         <div class="tabPanel">
             <div class="tabnav">
-              <div class="hit">全部需求</div>
-              <div>未受理</div>
-              <div>已对接</div>
+              <div <if condition='($stat == 0)'>class="hit"</if>><a href="{:url('user/xm/index',array('stat'=>0,'id'=>$id))}">未审核</a></div>
+              <div <if condition='($stat == 1)'>class="hit"</if>><a href="{:url('user/xm/index',array('stat'=>1,'id'=>$id))}">已审核</a></div>
+              <div <if condition='($stat == 2)'>class="hit"</if>><a href="{:url('user/xm/index',array('stat'=>2,'id'=>$id))}">驳回</a></div>
               <div>
                   <select name="pageselect" onchange="window.open(options[selectedIndex].value,'_self')">
-                       <option value="{:url('user/xm/index',array('id'=>0))}" <if condition="$id eq 0">selected = "selected"</if>>请选择</option>
-                        <option value="{:url('user/xm/index',array('id'=>1))}" <if condition="$id eq 1">selected = "selected"</if>>在谈项目表</option>
-                         <option value="{:url('user/xm/index',array('id'=>2))}" <if condition="$id eq 2">selected = "selected"</if>>新签约项目明细表</option>
-                          <option value="{:url('user/xm/index',array('id'=>3))}" <if condition="$id eq 3">selected = "selected"</if>>拟开工项目表</option>
-                           <option value="{:url('user/xm/index',array('id'=>4))}" <if condition="$id eq 4">selected = "selected"</if>>新开工项目明细表</option>
-                            <option value="{:url('user/xm/index',array('id'=>5))}" <if condition="$id eq 5">selected = "selected"</if>>在建项目明细表</option>
-                             <option value="{:url('user/xm/index',array('id'=>6))}" <if condition="$id eq 6">selected = "selected"</if>>2016年前重点投产项目明细表</option>
-                              <option value="{:url('user/xm/index',array('id'=>7))}" <if condition="$id eq 7">selected = "selected"</if>>新投产项目明细表</option>
+                       <option value="{:url('user/xm/index',array('id'=>0,'stat'=>$stat))}" <if condition="$id eq 0">selected = "selected"</if>>请选择</option>
+                        <option value="{:url('user/xm/index',array('id'=>1,'stat'=>$stat))}" <if condition="$id eq 1">selected = "selected"</if>>在谈项目表</option>
+                         <option value="{:url('user/xm/index',array('id'=>2,'stat'=>$stat))}" <if condition="$id eq 2">selected = "selected"</if>>新签约项目明细表</option>
+                          <option value="{:url('user/xm/index',array('id'=>3,'stat'=>$stat))}" <if condition="$id eq 3">selected = "selected"</if>>拟开工项目表</option>
+                           <option value="{:url('user/xm/index',array('id'=>4,'stat'=>$stat))}" <if condition="$id eq 4">selected = "selected"</if>>新开工项目明细表</option>
+                            <option value="{:url('user/xm/index',array('id'=>5,'stat'=>$stat))}" <if condition="$id eq 5">selected = "selected"</if>>在建项目明细表</option>
+                             <option value="{:url('user/xm/index',array('id'=>6,'stat'=>$stat))}" <if condition="$id eq 6">selected = "selected"</if>>2016年前重点投产项目明细表</option>
+                              <option value="{:url('user/xm/index',array('id'=>7,'stat'=>$stat))}" <if condition="$id eq 7">selected = "selected"</if>>新投产项目明细表</option>
                   </select>
               </div>
             </div>

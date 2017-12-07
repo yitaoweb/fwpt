@@ -24,18 +24,23 @@ class XmController extends UserBaseController
     public function index()
     {
         $id = $this->request->param("id", 0, "intval");
+        $stat = $this->request->param("stat", 0, "intval");
         $user = cmf_get_current_user();
         $userId               = cmf_get_current_user_id();
         $gongqiuQuery            = Db::name("xm");
         if($id != 0){
           $gongqiuQuery->where('xm_qf',$id);
         }
+
+          $gongqiuQuery->where('stat',$stat);
+
         $all           = $gongqiuQuery->order('id desc')->paginate(10);
         $sshy=Db::name('portal_xzqy')->where('1=1')->order('id')->select();
         $this->assign($user);
         $this->assign("page", $all->render());
         $this->assign("lists", $all->items());
         $this->assign("id", $id);
+        $this->assign("stat", $stat);
         $this->assign("um",4);
         $this->assign("fuwu",$sshy);
         return $this->fetch();
