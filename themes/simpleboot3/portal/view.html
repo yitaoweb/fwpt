@@ -46,7 +46,7 @@
  </dl>
  <dl>
    <dt>供求类型：</dt>
-   <dd><a href="">{:getfield('portal_ssfw',$gqfl,'name')}</dd>
+   <dd><a href="">{:getfield('portal_ssfw',$gqfl,'name')}</a></dd>
   </dl>
  <dl>
    <dt>有效期：</dt>
@@ -77,38 +77,15 @@
 <div class="right_content">
 　　{$nr}
 </div>
-        <div class="wrap">
+        <div class="comment-container">
+          <div class="commentbox">
+              <textarea cols="80" rows="50" placeholder="来说几句吧......" class="mytextarea" id="content"></textarea>
+              <div class="btn-info pull-right" id="comment">评论</div>
+            </div>
+            <div class="comment-list">
 
-          <div class="comment">
-            <div class="content">
-              <div class="cont-box">
-                <textarea class="text" id='nr' placeholder="请输入..."></textarea>
-              </div>
-              <div class="tools-box">
-                <input type="hidden" id="xq_id" value="{$xq_id}">
-                <div class="operator-box-btn">共有<span class="price">417</span>条评论</div>
-                <div class="submit-btn"><input type="button" id="out" value="提交评论" /></div>
               </div>
             </div>
-          </div>
-          <div id="info-show">
-            <ul>
-            <foreach name="get_ly" item="vo">
-              <foreach name="fb_user" item="vos">
-              <if condition="$vos.id == $vo.fb_id">
-              <li>
-              <div class="head-face"><img src="__ROOT__/upload/{$vos.avatar}" / ></div>
-              <div class="reply-cont">
-              <p class="username">{$vos.user_nickname}</p>
-              <p class="comment-body">{$vo.nr}</p>
-              <p class="comment-footer">{$vo.time}</p>
-              </div>
-              </li>
-              </if>
-              </foreach>
-            </foreach>
-            </ul>
-          </div>
         </div>
     </div>
 <script type="text/javascript" src="js/sinaFaceAndEffec.js"></script>
@@ -127,17 +104,35 @@
 <hook name="before_body_end"/>
 </body>
 <script type="text/javascript">
-    $("#out").click(function(){
-       a = $("#xq_id").val();
-       nr = $("#nr").val();
-       $.post('/portal/supply/ly',{a:a,nr:nr},function(data){
-               if(data == 1){
-                      alert("留言成功");
-               }else{
-                      alert("登入后留言");
-               }
-       })
+    var arr = [
+    <?php echo json_encode($get_ly);?>
+  ];
+  $(function(){
+    $(".comment-list").addCommentList({data:arr,add:""});
+    $("#comment").click(function(){
+      var obj = new Object();
+      obj.img="./images/1.jpg";
+      obj.replyName="匿名";
+      obj.content=$("#comment-content").val();
+      obj.browse="深圳";
+      obj.osname="win10";
+      obj.replyBody="";
+      $(".comment-list").addCommentList({data:[],add:obj});
+    });
+    $('#comment').click(function(){
+        var a = $("#content").val();
+        $.post('/portal/Demand/yb',{a:a,qf:1},function(data){
+                if(data == 1){
+                     alert("评论成功");
+                     window.location.reload()
+                }else{
+                     alert("评论失败");
+                }
+        })
+    })
   })
+</script>
+<script type="text/javascript">
     var html;
     function reply(content){
         html  = '<li>';
