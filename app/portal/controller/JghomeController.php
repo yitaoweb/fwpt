@@ -45,7 +45,7 @@ class JghomeController extends HomeBaseController
         $portal_dj  = $dd->where('cq_id',$pid)->paginate(10);
         $fwxq=Db::name('portal_fwxq')->select();
 
-        $get_ly = Db::query('select a.id as id,b.avatar as b_img,b.user_nickname as b_name,a.nr as a_nr,a.time as a_time from pt_ly as a left join pt_user as b on a.user_id = b.id where pid=0 and qf=3');
+        $get_ly = Db::query('select a.id as id,b.avatar as b_img,b.user_nickname as b_name,a.nr as a_nr,a.time as a_time from pt_ly as a left join pt_user as b on a.user_id = b.id where pid=0 and qf=3 and cp_id='.$pid);
         $i = 0;
         foreach ($get_ly as $s) {          
             $get_ly[$i]['replyBody'] = Db::query('select a.id as pid,b.avatar as pb_img,b.user_nickname as pb_name,a.nr as pa_nr,a.time as pa_time from pt_ly as a left join pt_user as b on a.user_id = b.id where pid='.$s['id']);

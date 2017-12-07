@@ -86,7 +86,7 @@
   <div class="comment-container">
   <div class="commentbox">
       <textarea cols="80" rows="50" placeholder="来说几句吧......" class="mytextarea" id="content"></textarea>
-      <div class="btn-info pull-right" id="comment">评论</div>
+      <div class="btn-info pull-right" id="comment" xq_id="{$xq_id}">评论</div>
     </div>
     <div class="comment-list">
 
@@ -119,7 +119,8 @@
     });
     $('#comment').click(function(){
         var a = $("#content").val();
-        $.post('/portal/Demand/yb',{a:a,qf:2},function(data){
+        var xq_id = $(this).attr('xq_id');
+        $.post('/portal/Demand/yb',{a:a,qf:2,xq_id:xq_id},function(data){
                 if(data == 1){
                      alert("评论成功");
                      window.location.reload()

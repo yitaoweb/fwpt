@@ -87,7 +87,7 @@ class SupplyController extends HomeBaseController
         //求购信息
         $qiu = Db::name('portal_gxfb')->where("gx",1)->where('state', 1)->order('time')->limit(10)->select()->toArray();
 
-        $get_ly = Db::query('select a.id as id,b.avatar as b_img,b.user_nickname as b_name,a.nr as a_nr,a.time as a_time from pt_ly as a left join pt_user as b on a.user_id = b.id where pid=0 and qf=1');
+        $get_ly = Db::query('select a.id as id,b.avatar as b_img,b.user_nickname as b_name,a.nr as a_nr,a.time as a_time from pt_ly as a left join pt_user as b on a.user_id = b.id where pid=0 and qf=1 and cp_id='.$id);
         $i = 0;
         foreach ($get_ly as $s) {          
             $get_ly[$i]['replyBody'] = Db::query('select a.id as pid,b.avatar as pb_img,b.user_nickname as pb_name,a.nr as pa_nr,a.time as pa_time from pt_ly as a left join pt_user as b on a.user_id = b.id where pid='.$s['id']);
@@ -101,6 +101,7 @@ class SupplyController extends HomeBaseController
 
 
         $this->assign($supply);                 //机构简介
+        $this->assign('xq_id',$supply['id']);
         $this->assign($user);   
         $listTpl ='view';
 
