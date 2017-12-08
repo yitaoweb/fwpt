@@ -73,12 +73,12 @@
 <div class="bannerbox">
 	<div class="swiper-container">
 		<div class="swiper-wrapper">
-        <div class="swiper-slide"><a href=""><img src="http://d.ifengimg.com/w650_h400/p1.ifengimg.com/a/2017_47/433075bd92f8fec_size31_w570_h332.jpg"/></a><div class="banner-title"><span>权威论坛共同探讨;中国踏上新征程 世界迎…</span></div></div>
-		<div class="swiper-slide"><a href=""><img src="http://d.ifengimg.com/w650_h400/p2.ifengimg.com/a/2017_47/6ddc9522f5bba01_size238_w570_h332.jpg"/></a><div class="banner-title"><span>农业部与世界粮食计划署(WFP)开启合作新…</span></div></div>
-		<div class="swiper-slide"><a href=""><img src="http://d.ifengimg.com/w650_h400/p0.ifengimg.com/a/2017_46/54b1983344536b3_size190_w570_h332.jpg"/></a><div class="banner-title"><span>中国十佳劳伦斯颁奖盛典启动 热门候选人…</span></div></div>
-		<div class="swiper-slide"><a href=""><img src="http://d.ifengimg.com/w650_h400/p1.ifengimg.com/a/2017_47/433075bd92f8fec_size31_w570_h332.jpg"/></a><div class="banner-title"><span>全国首个县级高铁始发站驶出“复兴号”</span></div></div>
-		<div class="swiper-slide"><a href=""><img src="http://d.ifengimg.com/w650_h400/p2.ifengimg.com/a/2017_47/6ddc9522f5bba01_size238_w570_h332.jpg"/></a><div class="banner-title"><span>网络涉军举报平台11月19日上线运行 网友…</span></div></div>
-		<div class="swiper-slide"><a href=""><img src="http://d.ifengimg.com/w650_h400/p0.ifengimg.com/a/2017_46/54b1983344536b3_size190_w570_h332.jpg"/></a><div class="banner-title"><span>公安部交管局：在全国分三批推广新能源汽…</span></div></div>
+		<php>
+            $top_slide_id=empty($theme_vars['top_slide'])?1:$theme_vars['top_slide'];
+        </php>
+        <slides id="$top_slide_id">
+        <div class="swiper-slide"><a href=""><img src="{:cmf_get_image_url($vo.image)}"/></a><div class="banner-title"><span>{$vo.title|default=''}</span></div></div>
+        </slides>           
 		</div>
 		<div class="swiper-pagination"></div>
 	</div>
@@ -115,7 +115,13 @@ var mySwiper = new Swiper('.bannerbox .swiper-container', {
 						<dt>{$vo.post_title|mb_substr=0,30,'utf-8'}...</dt>
 					</dl>
 				</div>
-				<span class="list_s list_sg">2017-11-26</span>
+				<span class="list_s list_sg">
+                       <php>
+
+                       echo date('y-m-d h:i:s',$vo['create_time'])
+
+                       </php>
+				</span>
 			</a>
 					</div>
         </portal:articles>
@@ -128,7 +134,7 @@ var mySwiper = new Swiper('.bannerbox .swiper-container', {
 	</ul>
 	<ul class="newslist">
 	<portal:articles limit="7" order="post.published_time DESC" categoryIds="$category_ids">
-	<li class="read"><img src="images/center08.png" /><a href="{:cmf_url('portal/Article/index',array('id'=>$vo.id,'cid'=>$vo.category_id))}">{$vo.post_title|mb_substr=0,30,'utf-8'}...</a></li>
+	<li class="read"><img src="__TMPL__/images/center08.png" /><a href="{:cmf_url('portal/Article/index',array('id'=>$vo.id,'cid'=>$vo.category_id))}">{$vo.post_title|mb_substr=0,30,'utf-8'}...</a></li>
 	</portal:articles>
 	</ul>
 	<div class="loadtip"><a href="{:cmf_url('portal/List/index',array('id'=>11))}">查看更多&gt;&gt;</a></div>
