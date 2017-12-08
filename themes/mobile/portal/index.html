@@ -15,6 +15,7 @@
 <link href="__TMPL__/css/swiper-3.2.7.min.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="__TMPL__/js/jquery-1.9.1.js" ></script>
 <script type="text/javascript" src="__TMPL__/js/swiper-3.4.0.jquery.min.js"></script>
+    <include file="public@head"/>
 </head>
 <body>
 <div class="aui-header">
@@ -92,6 +93,66 @@ var mySwiper = new Swiper('.bannerbox .swiper-container', {
     autoHeight: true,
 })
 </script>
+<div class="type-box">
+  <volist name="ssfw" id="fw" key="k">
+    <a href="{:cmf_url('portal/Jglist/index',array('cid'=>$fw.id))}" class="tp0{$k}"><i></i>{$fw.name}</a>
+  </volist>
+</div>
+
+	<ul class="infolist">
+	<li class="title">最新资讯</li>
+	  <php>
+    $category_ids=9;
+  </php>
+	</ul>
+
+        <portal:articles limit="7" order="post.published_time DESC" categoryIds="$category_ids">
+			<div class="list_index">
+			<a class="list_dd bor_b" href="{:cmf_url('portal/Article/index',array('id'=>$vo.id,'cid'=>$vo.category_id))}" >
+				<div class="list_l"><img src="images/2.jpg" /></div>
+				<div class="list_lt">
+					<dl class="list_ld">
+						<dt>{$vo.post_title|mb_substr=0,30,'utf-8'}...</dt>
+					</dl>
+				</div>
+				<span class="list_s list_sg">2017-11-26</span>
+			</a>
+					</div>
+        </portal:articles>
+	<div class="loadtip"><a href="{:cmf_url('portal/List/index',array('id'=>9))}">查看更多&gt;&gt;</a></div>
+	<ul class="infolist">
+	  <php>
+    $category_ids=11;
+  </php>
+	<li class="title">通知公告</li>
+	</ul>
+	<ul class="newslist">
+	<portal:articles limit="7" order="post.published_time DESC" categoryIds="$category_ids">
+	<li class="read"><img src="images/center08.png" /><a href="{:cmf_url('portal/Article/index',array('id'=>$vo.id,'cid'=>$vo.category_id))}">{$vo.post_title|mb_substr=0,30,'utf-8'}...</a></li>
+	</portal:articles>
+	</ul>
+	<div class="loadtip"><a href="{:cmf_url('portal/List/index',array('id'=>11))}">查看更多&gt;&gt;</a></div>
+	
+<ul class="infolist">
+<li class="title">企业推广</li>
+<div class="index-partner">
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+    <volist name="qytg" id="vo">
+      <div class="swiper-slide"><img src="{:cmf_get_image_preview_url($vo.daima)}"/></div>
+    </volist>
+    </div>
+  </div>
+</div>
+</ul>
+
+<script type="text/javascript">
+var mypartner = new Swiper('.index-partner .swiper-container',{
+    paginationClickable: true,
+    slidesPerView: 4
+})
+</script>
+
 	<div class="header-line"></div>
 	<footer class="foot-bar">
 	<ul>
