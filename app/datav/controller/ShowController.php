@@ -14,30 +14,39 @@ use cmf\controller\HomeBaseController;
 use app\user\model\UserModel;
 use think\Db;
 
+ 
 class ShowController extends HomeBaseController
 {
     public function _initialize()
     {
         parent::_initialize();
-        $session_admin_id = session('ADMIN_ID');
-
+ 
+        $session_admin_id = cmf_get_current_admin_id();
         if (!empty($session_admin_id)) {
             $user = Db::name('user')->where(['id' => $session_admin_id])->find();
-
-     
-
+            $role_user = Db::name('role_user')->where(['user_id' => $session_admin_id])->find();
+            if ($role_user['id'] >= 1) {
+               $role = Db::name('role')->where(['id' => $role_user['role_id']])->find();
+            }else{
+                $role = Db::name('role')->where(['id' => 1])->find();
+            }
+            $this->assign("role", $role);
             $this->assign("admin", $user);
         } else {
-            if ($this->request->isPost()) {
-                $this->error("您还没有登录！", url("datav/show/login"));
-            } else {
-                header("Location:" . url("datav/show/login"));
-                exit();
-            }
+            $this->error("您还没有登录！", url("datav/public/login"));
+            exit();
         }
     }
+
     public function index()
     {
+        //header('Access-Control-Allow-Origin:*'); 
+        //header('Access-Control-Allow-Origin:http://127.0.0.1'); 
+        header('Access-Control-Allow-Origin:*');//允许所有来源访问
+        header('Access-Control-Allow-Method:POST,GET');//允许访问的方式
+
+        header('Access-Control-Allow-Origin: *');
+
     	$site_name = cmf_get_site_info('site_info');
     	
         $name=$site_name['site_name'];
@@ -46,63 +55,16 @@ class ShowController extends HomeBaseController
         $en = 'changzhi public service platform for SME';
         $this->assign('title',$title);
         $this->assign('en',$en);
+
+        
+        $token = '224b02e8ae9c56f367c0aa71610c3d18' . '&';
+        $strs = 'GET&%2Fctr_active_anal%2Fget_offline_data&app_id%500554165%26end_date%3D2017-12-06%26idx%3D10201%2C10202%2C10203%26start_date%3D2017-11-01';
+        $sign = sign($token, $strs);
+
+        $this->assign('sign',$sign);
+        //var_dump($sign);
         //return $name;
 
         return $this->fetch(':show');
-    }
-
-    public function login()
-    {
-        $title='中小商贸流通企业公共服务数据分析平台';
-        $this->assign('title',$title);
-        return $this->fetch(':login');
-    }
-
-    public function dologin()
-    {
-        if ($this->request->isPost()) {                                  
-           
-            $data = $this->request->post();
-        
-            $userModel         = new UserModel();
-            $user['user_pass'] = $data['password'];
-            $user['user_login'] = $data['username'];
-            $log                = $userModel->doName($user);
-
-            $session_login_http_referer = session('login_http_referer');
-            $redirect                   = empty($session_login_http_referer) ? $this->request->root() : $session_login_http_referer;
-            $ret = array();
-            switch ($log) {
-                case 0:
-                    cmf_user_action('login');
-                    $ret['code'] = 0;
-                    $ret['msg'] = '登录成功';
-                    return $ret;
-                    break;
-                case 1:
-                    $ret['code'] = 1;
-                    $ret['msg'] = '登录密码错误';
-                    return $ret;
-                    break;
-                case 2:
-                    $ret['code'] = 2;
-                    $ret['msg'] = '账户不存在';
-                    return $ret;
-                    break;
-                case 3:
-                    $ret['code'] = 3;
-                    $ret['msg'] = '账号被禁止访问系统';
-                    return $ret;
-                    break;
-                default :
-                    $ret['msg'] = '未受理的请求';
-                    return $ret;
-            }
-        } else {
-            $ret['msg'] = '请求错误';
-            return $ret;
-        }
-
-      
     }
 }

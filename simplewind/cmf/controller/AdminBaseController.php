@@ -94,7 +94,7 @@ class AdminBaseController extends BaseController
         $controller = $this->request->controller();
         $action     = $this->request->action();
         $rule       = $module . $controller . $action;
-        var_dump($rule);die;
+
         $notRequire = ["adminIndexindex", "adminMainindex"];
         if (!in_array($rule, $notRequire)) {
             return cmf_auth_check($userId);
