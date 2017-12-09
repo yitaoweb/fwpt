@@ -102,6 +102,7 @@ class AdminFwcpController extends AdminBaseController
 
         $arrData = $this->request->param();
         $portalTagModel = new PortalFwcpModel();
+        $arrData['content'] = htmlspecialchars_decode($arrData['content']);
         $portalTagModel->isUpdate(false)->allowField(true)->save($arrData);
 
         $this->success(lang("SAVE_SUCCESS"));
@@ -141,7 +142,7 @@ class AdminFwcpController extends AdminBaseController
         $data = $this->request->param();
         $portalPostModel = new PortalFwcpModel();
         $a = $portalPostModel->where('id',$data['id'])->update(
-                 ['title'=>$data['title'],'ssfw_id'=>$data['ssfw_id'],'user_id'=>$data['user_id'],'img'=>$data['img'],'time'=>$data['time'],'content'=>$data['content']]
+                 ['title'=>$data['title'],'ssfw_id'=>$data['ssfw_id'],'user_id'=>$data['user_id'],'img'=>$data['img'],'time'=>$data['time'],'content'=>htmlspecialchars_decode($data['content'])]
             );
         $this->success('保存成功!');
     }

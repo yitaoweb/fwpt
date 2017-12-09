@@ -1,0 +1,75 @@
+.comment-container{ width:918px; height:auto; padding:20px 0px; border:1px solid #eee; text-align:center;}
+.commentbox{width: 850px;margin:10px auto;}
+.mytextarea {
+	    width: 100%;
+	    overflow: auto;
+	    word-break: break-all;
+	    height:90px;
+	    color: #000;
+	    font-size:14px;
+	    resize: none;
+		padding:9px;
+		border-radius:4px 4px 0px 0px;
+	}
+	.replybox{ width:100%; height:140px;}
+	.replybox .mytextarea { width:96%; padding:10px 2%;}
+	.comment-list{
+		width:850px;
+		margin: 20px auto;
+		clear: both;
+		text-align:left;
+		padding-top: 20px;
+	}
+	.comment-list .comment-info{
+		position: relative;
+		margin-bottom: 20px;
+		margin-bottom: 20px;
+		border-bottom: 1px solid #eee;
+	}
+	.comment-list .comment-info header{
+		width: 10%;
+		position: absolute;
+	}
+	.comment-list .comment-info header img{
+		width: 60%;
+		border-radius: 50%;
+		padding: 5px;
+	}
+	.comment-list .comment-info .comment-right{
+		padding:5px 0px 5px 11%; 
+	}
+	.comment-list .comment-info .comment-right h3{
+		margin: 5px 0px;
+	}
+	.comment-list .comment-info .comment-right .comment-content-header{
+		height: 25px;
+	}
+	
+	.comment-list .comment-info .comment-right .comment-content-header span,.comment-list .comment-info .comment-right .comment-content-footer span{
+		font-size:12px;
+	}
+	.btn-info{ width:100%; height:24px; padding:10px 0px;background-color:#6699FF; color:#fff; display:inline-block; text-align:center;border-radius:0px 0px 4px 4px;}
+	.send{ width:40px; height:24px; line-height:24px; font-size:14px; color:#fff; background-color:#6699FF; display:inline-block; text-align:center;border-radius:0px 0px 4px 4px;}
+	.comment-list .comment-info .comment-right .comment-content-header span,.comment-list .comment-info .comment-right .comment-content-footer span.reply-btn,.send,.reply-list-btn{
+		cursor: pointer;
+	}
+	.comment-content{ font-size:14px; color:#666; line-height:1.6; padding:0px 0px 10px 0px;}
+	.comment-list .comment-info .comment-right .reply-list {
+	background-color:#f9f9f9;
+	padding:0px 15px;
+	}
+	.comment-list .comment-info .comment-right .reply-list .reply{
+		border-bottom: 1px dotted #ccc;
+		width:100%;
+		padding:10px 0px;
+	}
+	.comment-list .comment-info .comment-right .reply-list .reply div span{
+		padding-left: 10px;
+		font-size:13px;
+		line-height:1.8;
+	}
+	.comment-list .comment-info .comment-right .reply-list .reply p span{
+		padding-right: 2em;
+		font-size:12px;
+		color: #aaa;
+	}

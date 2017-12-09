@@ -86,7 +86,7 @@
                 <else/>
                 <p>所属类型：{:getfield('portal_ssfw',$vo.gqfl,'name')}</p>
                 </if>
-                <p>内容摘要：{$vo.nr}</p>
+                <p style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">内容摘要：{$vo.nr}</p>
             </div>
         </foreach>                                     
     </div>

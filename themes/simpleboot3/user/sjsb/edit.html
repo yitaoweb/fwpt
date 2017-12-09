@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$user_login}  - 修改资料</title>
+<meta name="keywords" content=""/>
+<meta name="description" content="">
+<include file="public@head"/>
+
+</head>
+<body class="body-white" id="top">
+
+<include file="public@nav" />
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;<if condition='($user_type == 2)'>企业<else/>机构</if>中心</div>
+<div class="main">
+    <div class="main_l left">
+        <include file="public@qiyenav" />
+    </div>
+    
+    <div class="main_r right" style="min-height: 600px;">
+        <include file="public@qiyetop" />
+        <div class="right_title"><span>限上企业数据上报</span></div>
+          <form class="js-ajax-form" action="{:url('user/sjsb/editPost')}" method="post" id="register"> 
+            <div class="center_form">
+              <dl>
+                <dt>上报日期</dt>
+                <dd><input type="text" name="date" value="{$qysjfx.date}" placeholder="1994-6-7" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt></dt>
+                <dd></dd>
+              </dl>
+             
+
+              <dl>
+                <dt>行业类型</dt>
+                <dd>
+                <select name="fl" style="width:326px;"  datatype="*" sucmsg=" ">
+                    <volist name="fuwu" id="vo">
+                        <option value="{$vo.id}" <if condition="$vo.id eq $qysjfx.fl">selected = "selected"</if>>
+                           {$vo.name}
+                        </option>
+                    </volist>
+                </select>
+                </dd>
+              </dl>
+              <dl>
+                <dt></dt>
+                <dd></dd>
+              </dl>
+
+              <dl>
+                <dt>当月销售额</dt>
+                <dd><input type="text" value="{$qysjfx.xse}" name="xse" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt></dt>
+                <dd></dd>
+              </dl>
+
+              <dl>
+                <dt>同期</dt>
+                <dd><input type="text" value="{$qysjfx.tq}" name="tq" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt></dt>
+                <dd></dd>
+              </dl>
+
+              <dl>
+                <dt>同比</dt>
+                <dd><input type="text" value="{$qysjfx.tb}" name="tb" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt></dt>
+                <dd></dd>
+              </dl>
+
+              <dl>
+                <dt>环比</dt>
+                <dd><input type="text" value="{$qysjfx.hb}" name="hb" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt></dt>
+                <dd></dd>
+              </dl>
+
+
+            
+              <dl style="width:100%; height:120px">
+                <dt>备注</dt>
+               <dd><textarea name="bz" rows="2" cols="20"  style="height:100px;width:709px;">{$qysjfx.bz}</textarea></dd>
+              </dl>
+
+              <dl style="width:100%; height:120px">
+                <dt>数据异常情况说明</dt>
+               <dd><textarea name="errosm" rows="2" cols="20"  style="height:100px;width:709px;">{$qysjfx.errosm}</textarea></dd>
+              </dl>
+
+             
+              <dl>
+                <dt></dt>
+                <dd>
+                  <input type="hidden" name="id" value="{$qysjfx.id}">
+                  <button type="submit" class="btn-block btn-blue js-ajax-submit">确定提交</button>
+                </dd>
+              </dl>
+            </div>
+            </form>
+    </div>
+</div>							
+  <include file="public@link" />
+	<include file="public@footer" />
+
+	<!-- /container -->
+	<include file="public@scripts" />
+</body>
+</html>

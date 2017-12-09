@@ -1,0 +1,93 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('AdminLxd/index')}">上限企业数据分析</a></li>
+        <li class="active"><a href="{:url('AdminLxd/edit')}">编辑</a></li>
+        <!--<li><a  href="{:url('nav/edit')}" >{:lang('ADMIN_NAV_EDIT')}</a></li>-->
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('AdminQysjfx/shPost')}">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>企业名称:</label>
+            <div class="col-md-6 col-sm-10">
+            <select class="form-control" name="user_id" id="user_id">
+            <foreach name="user" item="vo">
+                <option value="{$vo.id}" <if condition="$vo.id eq $post.user_id">selected = "selected"</if>>
+                           {$vo.user_nickname}
+                </option>
+            </foreach>
+            </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>行业分类:</label>
+            <div class="col-md-6 col-sm-10">
+                <select class="form-control" name="fl" id="input-parent">
+                    {$categories_tree}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>上报时间:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="date" id="date" value="{$post.date}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>当月销售额:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="xse" id="xse" value="{$post.xse}">
+            </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label"><span class="form-required">*</span>同期:</label>
+          <div class="col-md-6 col-sm-10">
+            <input type="text" class="form-control" name="tq" id="tq" value="{$post.tq}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label"><span class="form-required">*</span>同比:</label>
+          <div class="col-md-6 col-sm-10">
+            <input type="text" class="form-control" name="tb" id="tb" value="{$post.tb}">
+          </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>环比:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="hb" id="hb" value="{$post.hb}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>备注:</label>
+            <div class="col-md-6 col-sm-10">
+                <textarea class="form-control" name="bz" id="bz">{$post.bz}</textarea> 
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>数据异常情况说明:</label>
+            <div class="col-md-6 col-sm-10">
+                <textarea class="form-control" name="errosm" id="errosm">{$post.errosm}</textarea> 
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>驳回意见:</label>
+            <div class="col-md-6 col-sm-10">
+                <textarea class="form-control" name="bh" id="bh"></textarea> 
+            </div>
+        </div>
+    
+        <div class="col-sm-offset-2 col-sm-10">
+        <input type="hidden" name="id" value="{$post.id}">
+            <button type="submit" class="btn btn-primary js-ajax-submit" name="s" value="sh">审核</button>
+            <button type="submit" class="btn btn-primary js-ajax-submit" name="s" value="bh">驳回</button>
+            <a class="btn btn-default" href="__URL__">返回</a>
+        </div>
+    </form>
+
+</div>
+
+</body>
+</html>

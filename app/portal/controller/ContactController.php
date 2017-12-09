@@ -29,6 +29,8 @@ class ContactController extends HomeBaseController
             $Contact = Db::name('portal_lxd')->order('list_order')->paginate(10);
         }
 
+        $xzqys = Db::name('portal_xzqy')->select();
+
         //服务区域
         $area = $AreaModel->where('parent_id', 8)->where('status', 1)->order('list_order')->select();
 
@@ -36,7 +38,7 @@ class ContactController extends HomeBaseController
         $this->assign("lists", $Contact->items());
 
 
-        
+        $this->assign('xzqys', $xzqys);
         $this->assign('id', $id);                   //当前一级分类id
 
 		$this->assign('area', $area);                 //服务区域详情
@@ -52,7 +54,8 @@ class ContactController extends HomeBaseController
        
         $contact = Db::name('portal_lxd')->where('id',$id)->find();
 
-    
+    $xzqys = Db::name('portal_xzqy')->select();
+    $this->assign('xzqys', $xzqys);
         $this->assign($contact);                 //机构简介
         
         $listTpl ='contactview';

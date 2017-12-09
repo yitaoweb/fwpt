@@ -56,7 +56,19 @@
                     <dt>联系地址：</dt><dd>{$vo.lxd_dz}</dd>
                 </dl>
                 <dl>
-                    <dt>联系范围：</dt><dd>{$vo.fwqy}&nbsp;</dd>
+                    <dt>联系范围：</dt>
+                    <dd>
+                     <php>
+                         foreach (json_decode($vo['fwqy']) as $s) {
+                            foreach ($xzqys as $ss) {
+                                 if($s == $ss['id']){
+                                    echo $ss['name'].',';
+                                 }
+                            } 
+                         }
+                     </php>
+
+                    </dd>
                     <dt>联系点简介：</dt><dd>{$vo.lxd_jj}</dd>
                 </dl>          
             </div>

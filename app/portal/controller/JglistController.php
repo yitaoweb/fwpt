@@ -56,7 +56,8 @@ class JglistController extends HomeBaseController
             $where[$fid] = array('in','fwqy');
         }
         $jigou = Db::name('user')->where($where)->order('id')->paginate(10);
-
+        $xzqys = Db::name('portal_xzqy')->select();
+         $this->assign('xzqys', $xzqys);
         $this->assign("page", $jigou->render());
         $this->assign("lists", $jigou->items());
 

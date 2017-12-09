@@ -91,17 +91,20 @@ class DemandController extends HomeBaseController
         $demand = Db::name('portal_fwxq')->where('id',$id)->find();
 
         $user = Db::name('user')->where('id',$demand['user_id'])->find();
-
+        $arr = array();
         //推荐机构
         $jigou = Db::name('user')->where("user_type",3)->where('user_status', 1)->order('create_time')->limit(10)->select()->toArray();
-
-        $get_ly = Db::name('ly')->where('js_id',$id)->where('qf',2)->select();
-        $fb_user = Db::name('user')->select();
-      
+        $get_ly = Db::query('select a.id as id,b.avatar as b_img,b.user_nickname as b_name,a.nr as a_nr,a.time as a_time from pt_ly as a left join pt_user as b on a.user_id = b.id where pid=0 and qf=2 and cp_id='.$id);
+        $i = 0;
+        foreach ($get_ly as $s) {          
+            $get_ly[$i]['replyBody'] = Db::query('select a.id as pid,b.avatar as pb_img,b.user_nickname as pb_name,a.nr as pa_nr,a.time as pa_time from pt_ly as a left join pt_user as b on a.user_id = b.id where pid='.$s['id']);
+            $i=$i+1;
+        }
+        $users = cmf_get_current_user();
         $this->assign('jigou', $jigou);        //推荐机构
         $this->assign('get_ly', $get_ly);
-        $this->assign('fb_user', $fb_user);      
-
+        // $this->assign('fb_user', $fb_user);      
+        $this->assign('user_type', $users['user_type']);
         $this->assign($demand);   
         $this->assign('xq_id',$demand['id']);              //机构简介
         $this->assign($user);   
@@ -137,11 +140,23 @@ class DemandController extends HomeBaseController
         $this->success("申请已提交");
     }
 
-    public function ly(){
+    public function yb(){
         $users = cmf_get_current_user();
         $ly = Db::name('ly');
         if(isset($users['id'])){
-            $ret = $ly->insert(['fb_id'=>$users['id'],'js_id'=>$_POST['a'],'qf'=>2,'nr'=>$_POST['nr'],'time'=>date('y-m-dh:i:s',time())]);
+            $ret = $ly->insert(['user_id'=>$users['id'],'cp_id'=>$_POST['xq_id'],'pid'=>0,'qf'=>$_POST['qf'],'nr'=>$_POST['a'],'time'=>date('y-m-d h:i:s',time())]);
+            return $ret;
+        }else{
+            return '2';
+        }
+        
+    }
+
+    public function pyb(){
+        $users = cmf_get_current_user();
+        $ly = Db::name('ly');
+        if(isset($users['id'])){
+            $ret = $ly->insert(['user_id'=>$users['id'],'pid'=>$_POST['pid'],'qf'=>$_POST['qf'],'nr'=>$_POST['content'],'time'=>date('y-m-d h:i:s',time())]);
             return $ret;
         }else{
             return '2';

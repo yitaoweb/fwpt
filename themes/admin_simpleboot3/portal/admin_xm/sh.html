@@ -1,0 +1,186 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('adminXm/index')}">上限企业数据分析</a></li>
+        <!--<li><a  href="{:url('nav/edit')}" >{:lang('ADMIN_NAV_EDIT')}</a></li>-->
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('adminXm/shPost')}">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>企业名称:</label>
+            <div class="col-md-6 col-sm-10">
+            <select class="form-control" name="user_id" id="user_id">
+            <foreach name="user" item="vo">
+                <option value="{$vo.id}" <if condition="$vo.id eq $post.user_id">selected = "selected"</if>>
+                           {$vo.user_nickname}
+                </option>
+            </foreach>
+            </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>开发区:</label>
+            <div class="col-md-6 col-sm-10">
+                <select class="form-control" name="kfq" id="input-parent">
+                    {$categories_tree}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>项目名称</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="xmname" id="xmname" value="{$post.xmname}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>投资总额（亿元）</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="tzze" id="tzze" value="{$post.tzze}">
+            </div>
+        </div>
+        <if condition="$post.xm_qf neq 6">
+           <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>引资总额（亿元）</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="yzze" id="yzze" value="{$post.yzze}">
+            </div>
+           </div>
+
+           <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>引资方名称</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="yzfname" id="yzfname" value="{$post.yzfname}">
+            </div>
+           </div>
+        </if>
+           <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>投资方名称</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="tzfname" id="tzfname" value="{$post.tzfname}">
+            </div>
+           </div>
+        <if condition="$post.xm_qf eq 1">
+           <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>预计签约时间</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="yjqytime" id="yjqytime" value="{$post.yjqytime}">
+            </div>
+           </div>
+        </if>
+        <if condition="$post.xm_qf eq 2 || $post.xm_qf eq 4 || $post.xm_qf eq 7">
+           <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>签约时间</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="qytime" id="qytime" value="{$post.qytime}">
+            </div>
+           </div>
+
+           <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>开工时间</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="kgtime" id="kgtime" value="{$post.kgtime}">
+            </div>
+           </div>
+
+           <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>投产时间</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="tctime" id="tctime" value="{$post.tctime}">
+            </div>
+           </div>
+
+           <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>到位资金（亿元）</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="dwzj" id="dwzj" value="{$post.dwzj}">
+            </div>
+           </div>
+        </if>
+        <if condition="$post.xm_qf eq 3">
+           <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>签约时间</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="qytime" id="qytime" value="{$post.qytime}">
+            </div>
+           </div>
+
+           <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>拟开工时间</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="nkgtime" id="nkgtime" value="{$post.nkgtime}">
+            </div>
+           </div>
+        </if>
+        <if condition="$post.xm_qf eq 5">
+           <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>签约时间</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="qytime" id="qytime" value="{$post.qytime}">
+            </div>
+           </div>
+
+           <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>开工时间</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="kgtime" id="kgtime" value="{$post.kgtime}">
+            </div>
+           </div>
+
+           <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>到位资金（亿元）</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="dwzj" id="dwzj" value="{$post.dwzj}">
+            </div>
+           </div>
+        </if>
+        <if condition="$post.xm_qf eq 6">
+           <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>主要产品</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="zycp" id="zycp" value="{$post.zycp}">
+            </div>
+           </div>
+
+           <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>投产时间</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="tctime" id="tctime" value="{$post.tctime}">
+            </div>
+           </div>
+
+           <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>2016年产值（亿元）</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="ncz" id="ncz" value="{$post.ncz}">
+            </div>
+           </div>
+
+           <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>2016年税收（亿元）</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="nss" id="nss" value="{$post.nss}">
+            </div>
+           </div>
+        </if>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>驳回意见:</label>
+            <div class="col-md-6 col-sm-10">
+                <textarea class="form-control" name="bh" id="bh"></textarea> 
+            </div>
+        </div>
+    
+        <div class="col-sm-offset-2 col-sm-10">
+        <input type="hidden" name="id" value="{$post.id}">
+            <button type="submit" class="btn btn-primary js-ajax-submit" name="s" value="sh">审核</button>
+            <button type="submit" class="btn btn-primary js-ajax-submit" name="s" value="bh">驳回</button>
+            <a class="btn btn-default" href="__URL__">返回</a>
+        </div>
+    </form>
+
+</div>
+
+</body>
+</html>

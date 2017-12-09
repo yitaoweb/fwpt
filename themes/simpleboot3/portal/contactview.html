@@ -51,7 +51,17 @@
         </dl>
         <dl>
           <dt>联系范围：</dt>
-          <dd>{$fwqy}</dd>
+          <dd>
+               <php>
+                         foreach (json_decode($fwqy) as $s){
+                            foreach ($xzqys as $ss) {
+                                 if($s == $ss['id']){
+                                    echo $ss['name'].',';
+                                 }
+                            } 
+                         }
+                </php>
+          </dd>
         </dl>
         <dl>
           <dt>联系点地址：</dt>

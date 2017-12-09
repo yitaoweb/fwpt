@@ -48,10 +48,12 @@
     <div class="list">                      
         <div class="list-item">                 
         <img src="__ROOT__/upload/{$product.img}" alt="" title=""/>
+        <if condition="$user_type != 3">
         <div class="linkto"><a href="{:cmf_url('portal/Jghome/dj',array('id'=>$product.id,'jid'=>$jigou.id))}">申请服务</a><a href="">机构咨询</a></div>
+        </if>
         <h1>服务项目：{:getfield('portal_ssfw',$product.ssfw_id,'name')}（<span class="price">23</span>人申请）</h1>
         <p>收费标准：<span class="price">{$product.price}{$product.unit}</span></p>
-        <p>发布时间：{$product.time|date='Y-m-d',###}</p>
+        <p>发布时间：{$product.time}</p>
         <p><span class="star"><i style="width:99%"></i></span><span class="score">评价：9.9分</span></p>
         </div>
     </div>
@@ -133,45 +135,20 @@
                 </table>
                 <div class="yahoo2">{$page|default=''}</div>
             </div>
-
-                
-                <div class="wrap">
-
-                <div class="comment">
-                  <div class="content">
-                    <div class="cont-box">
-                      <textarea class="text" id='nr' placeholder="请输入..."></textarea>
-                    </div>
-                    <div class="tools-box">
-                      <input type="hidden" id="xq_id" value="{$product.id}">
-                      <div class="operator-box-btn">共有<span class="price">417</span>条评论</div>
-                      <div class="submit-btn"><input type="button" id="out" value="提交评论" /></div>
-                    </div>
-                  </div>
-                </div>
-                <div id="info-show">
-                  <ul>
-                  <foreach name="get_ly" item="vo">
-                    <foreach name="fb_user" item="vos">
-                    <if condition="$vos.id == $vo.fb_id">
-                    <li>
-                    <div class="head-face"><img src="__ROOT__/upload/{$vos.avatar}" / ></div>
-                    <div class="reply-cont">
-                    <p class="username">{$vos.user_nickname}</p>
-                    <p class="comment-body">{$vo.nr}</p>
-                    <p class="comment-footer">{$vo.time}</p>
-                    </div>
-                    </li>
-                    </if>
-                    </foreach>
-                  </foreach>
-                  </ul>
-                </div>
-              </div>
-
         </div>
     </div>
+
 </div>
+      <div class="comment-container" style="float: right;">
+            <div class="commentbox">
+              <textarea cols="80" rows="50" placeholder="来说几句吧......" class="mytextarea" id="content"></textarea>
+              <div class="btn-info pull-right" id="comment" xq_id="{$product.id}">评论</div>
+            </div>
+            <div class="comment-list">
+
+              </div>
+            </div>
+      </div>
 <div class="clear"></div>
 
 <include file="public@link"/>
@@ -182,23 +159,41 @@
 <hook name="before_body_end"/>
 </body>
 <script type="text/javascript">
+    var arr = [
+    <?php echo json_encode($get_ly);?>
+  ];
+  $(function(){
+    $(".comment-list").addCommentList({data:arr,add:""});
+    $("#comment").click(function(){
+      var obj = new Object();
+      obj.img="./images/1.jpg";
+      obj.replyName="匿名";
+      obj.content=$("#comment-content").val();
+      obj.browse="深圳";
+      obj.osname="win10";
+      obj.replyBody="";
+      $(".comment-list").addCommentList({data:[],add:obj});
+    });
+    $('#comment').click(function(){
+        var a = $("#content").val();
+        var xq_id = $(this).attr('xq_id');
+        $.post('/portal/Demand/yb',{a:a,qf:3,xq_id:xq_id},function(data){
+                if(data == 1){
+                     alert("评论成功");
+                     window.location.reload()
+                }else{
+                     alert("评论失败");
+                }
+        })
+    })
+  })
+</script>
+<script type="text/javascript">
     $(function () {
         $('.tabPanel .tabnav div').click(function () {
             $(this).addClass('hit').siblings().removeClass('hit');
             $('.tabpanes>div:eq(' + $(this).index() + ')').show().siblings().hide();
         })
     })
-
-     $("#out").click(function(){
-       a = $("#xq_id").val();
-       nr = $("#nr").val();
-       $.post('/portal/jghome/ly',{a:a,nr:nr},function(data){
-               if(data == 1){
-                      alert("留言成功");
-               }else{
-                      alert("登入后留言");
-               }
-       })
-  })
 </script>
 </html>

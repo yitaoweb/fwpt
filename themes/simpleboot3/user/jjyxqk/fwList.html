@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$user_login}  - 修改资料</title>
+<meta name="keywords" content=""/>
+<meta name="description" content="">
+<include file="public@head"/>
+
+</head>
+<body class="body-white" id="top">
+
+<include file="public@nav" />
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;<if condition='($user_type == 2)'>企业<else/>机构</if>中心</div>
+<div class="main">
+    <div class="main_l left">
+        <include file="public@qiyenav" />
+    </div>
+    
+    <div class="main_r right" style="min-height: 600px;">
+        <include file="public@qiyetop" />
+        <div class="tabPanel">
+            <div class="tabnav">
+              <div class="hit">全部需求</div>
+              <div>未受理</div>
+              <div>已对接</div>
+            </div>
+           <div class="tabpanes">
+              <div class="pane" style="display:block;">
+                  <table class="fwtable">
+                    <thead>
+                      <tr>
+                        <th>序号</th>
+                        <th>需求</th>
+                        <th>状态</th>
+                        <th>发布时间</th>
+                      </tr>
+                    </thead>
+                  <tbody>
+                    <foreach name="lists" item="vo">
+                      <tr>
+                        <td>{$key+1}</td>
+                        <td>{$vo.title}</td>
+                        <td>{$vo.state|state=###}</td>
+                        <td>{$vo.time|date='m-d',###}</td>
+                      </tr>
+                      </foreach>
+                  </tbody>
+                </table>
+                <div class="clear"></div>
+                
+                <div class="yahoo2">{$page|default=''}</div>
+              </div>
+              <div class="pane">
+                  <table class="fwtable">
+                    <thead>
+                      <tr>
+                        <th>序号</th>
+                        <th>需求</th>
+                        <th>状态</th>
+                        <th>发布时间</th>
+                      </tr>
+                    </thead>
+                  <tbody>
+                    <foreach name="wlists" item="vo">
+                      <tr>
+                        <td>{$key+1}</td>
+                        <td>{$vo.title}</td>
+                        <td>{$vo.state|state=###}</td>
+                        <td>{$vo.time|date='m-d',###}</td>
+                      </tr>
+                      </foreach>
+                  </tbody>
+                </table>
+                <div class="clear"></div>
+                
+                <div class="yahoo2">{$wpage|default=''}</div>
+              </div>
+              <div class="pane">
+                  <table class="fwtable">
+                    <thead>
+                      <tr>
+                        <th>序号</th>
+                        <th>需求</th>
+                        <th>状态</th>
+                        <th>发布时间</th>
+                      </tr>
+                    </thead>
+                  <tbody>
+                    <foreach name="ylists" item="vo">
+                      <tr>
+                        <td>{$key+1}</td>
+                        <td>{$vo.title}</td>
+                        <td>{$vo.state|state=###}</td>
+                        <td>{$vo.time|date='m-d',###}</td>
+                      </tr>
+                      </foreach>
+                  </tbody>
+                </table>
+                <div class="clear"></div>
+                
+                <div class="yahoo2">{$ypage|default=''}</div>
+              </div>
+           </div>
+        <div class="clear"></div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('.tabPanel .tabnav div').click(function () {
+                    $(this).addClass('hit').siblings().removeClass('hit');
+                    $('.tabpanes>div:eq(' + $(this).index() + ')').show().siblings().hide();
+                })
+            })
+        </script>
+    </div>
+</div>							
+  <include file="public@link" />
+	<include file="public@footer" />
+
+	<!-- /container -->
+	<include file="public@scripts" />
+</body>
+</html>

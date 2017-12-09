@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$user_login}  - 修改资料</title>
+<meta name="keywords" content=""/>
+<meta name="description" content="">
+<include file="public@head"/>
+
+</head>
+<body class="body-white" id="top">
+
+<include file="public@nav" />
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;<if condition='($user_type == 2)'>企业<else/>机构</if>中心</div>
+<div class="main">
+    <div class="main_l left">
+        <include file="public@qiyenav" />
+    </div>
+    
+    <div class="main_r right" style="min-height: 600px;">
+        <include file="public@qiyetop" />
+        <div class="right_title"><span>限上企业数据上报</span></div>
+          <form class="js-ajax-form" action="{:url('user/Jjyxqk/editPost')}" method="post" id="register"> 
+            <div class="center_form">
+              <dl>
+                <dt>上报日期</dt>
+                <dd><input type="text" name="date" value="{$qysjfx.date}" placeholder="1994-6-7" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt>是否四上企业</dt>
+                <dd>
+                    <select name="is_ssqy" style="width:326px;"  datatype="*" sucmsg=" ">
+                    <if condition="1 eq $qysjfx.is_ssqy">
+                        <option value="1" >是</option>
+                    </if>
+                    <if condition="0 eq $qysjfx.is_ssqy">
+                        <option value="0" >否</option>
+                    </if>
+                        <option value="0">否</option>
+                        <option value="1" >是</option>
+                    </select>
+                </dd>
+              </dl>
+             
+
+              <dl>
+                <dt>行业类型</dt>
+                <dd>
+                <select name="fl" style="width:326px;"  datatype="*" sucmsg=" ">
+                    <volist name="fuwu" id="vo">
+                        <option value="{$vo.id}" <if condition="$vo.id eq $qysjfx.fl">selected = "selected"</if>>
+                           {$vo.name}
+                        </option>
+                    </volist>
+                </select>
+                </dd>
+              </dl>
+              <dl>
+                <dt>生产规模</dt>
+                <dd><input type="text" value="{$qysjfx.scgm}" name="scgm" class="input large"/></dd>
+              </dl>
+
+
+              <dl>
+                <dt>主要产品</dt>
+                <dd><input type="text" value="{$qysjfx.zycp}" name="zycp" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt>规模以上工业总产值（亿元）</dt>
+                <dd><input type="text" value="{$qysjfx.gmzcz}" name="gmzcz" class="input large"/></dd>
+              </dl>
+
+              <dl>
+                <dt>经营收入（亿元）</dt>
+                <dd><input type="text" value="{$qysjfx.jysr}" name="jysr" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt>利润总额（亿元）</dt>
+                <dd><input type="text" value="{$qysjfx.lrze}" name="lrze" class="input large"/></dd>
+              </dl>
+
+              <dl>
+                <dt>税收收入（亿元）</dt>
+                <dd><input type="text" value="{$qysjfx.shsr}" name="shsr" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt>招商引资到位额（亿元）</dt>
+                <dd><input type="text" value="{$qysjfx.zsyzdwe}" name="zsyzdwe" class="input large"/></dd>
+              </dl>
+
+              <dl>
+                <dt>实际利用省外直接投资额（亿元）</dt>
+                <dd><input type="text" value="{$qysjfx.sjlyswzjtze}" name="sjlyswzjtze" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt>固定资产投资额（亿元）</dt>
+                <dd><input type="text" value="{$qysjfx.gdzctze}" name="gdzctze" class="input large"/></dd>
+              </dl>
+
+              <dl>
+                <dt>进出口额（亿元）</dt>
+                <dd><input type="text" value="{$qysjfx.jcke}" name="jcke" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt>研究与试验发展经费（亿元）</dt>
+                <dd><input type="text" value="{$qysjfx.yjysyfzjf}" name="yjysyfzjf" class="input large"/></dd>
+              </dl>
+
+             
+              <dl>
+                <dt></dt>
+                <dd>
+                  <input type="hidden" name="id" value="{$qysjfx.id}">
+                  <button type="submit" class="btn-block btn-blue js-ajax-submit">确定提交</button>
+                </dd>
+              </dl>
+            </div>
+            </form>
+    </div>
+</div>							
+  <include file="public@link" />
+	<include file="public@footer" />
+
+	<!-- /container -->
+	<include file="public@scripts" />
+</body>
+</html>

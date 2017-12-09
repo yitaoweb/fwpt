@@ -73,13 +73,13 @@
         <foreach name="lists" item="vo"  empty="$emptylist">
             <div class="list-item">                 
                 <div class="linkto">
-                    {$vo.time|date='Y-m-d',###}
+                    {$vo.time}
                     <a href="{:cmf_url('portal/demand/view',array('id'=>$vo['id']))}">查看详情</a>
                 </div>
                 <h1>{$vo.title}</h1>
                 <p>对接状态：{$vo.state|state=###}</p>
                 <p>服务类型：{:getfield('portal_ssfw',$vo.ssfw_id,'name')}</p>
-                <p>内容摘要：{$vo.content}</p>
+                <p style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">内容摘要：{$vo.content}</p>
             </div>
         </foreach>                 
     </div>

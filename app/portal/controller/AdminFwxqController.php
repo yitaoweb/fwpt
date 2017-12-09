@@ -139,7 +139,7 @@ class AdminFwxqController extends AdminBaseController
         $this->assign('post', $post);
         return $this->fetch();
     }
-    public function editPost(){
+    public function editPost(){        
         $data = $this->request->param();
         $portalPostModel = new PortalFwxqModel();
         $a = $portalPostModel->where('id',$data['id'])->update(

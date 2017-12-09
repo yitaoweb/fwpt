@@ -75,7 +75,7 @@ class AdminGxfbController extends AdminBaseController
         $portalTagModel = new PortalGxfbModel();
         $portalSsfwModel = new PortalSsfwModel();
         $categoriesTree  = $portalSsfwModel->adminCategoryTree();
-        $this->assign("time", date('y-m-d h:i:s',time()));
+        $this->assign(time());
         $this->assign("arrStatus", $portalTagModel::$STATUS);
         $this->assign("categories_tree", $categoriesTree);
         return $this->fetch();
@@ -99,6 +99,7 @@ class AdminGxfbController extends AdminBaseController
 
         $arrData = $this->request->param();
         $portalTagModel = new PortalGxfbModel();
+        $arrData['nr'] = htmlspecialchars_decode($arrData['nr']);
         $portalTagModel->isUpdate(false)->allowField(true)->save($arrData);
 
         $this->success(lang("SAVE_SUCCESS"));
@@ -126,7 +127,7 @@ class AdminGxfbController extends AdminBaseController
         $user = Db::name('user')->select();
         $post = $portalPostModel->where('id', $id)->find();
         $categoriesTree  = $portalSsfwModel->adminCategoryTree($post['gqfl']);
-        $this->assign("time", date('y-m-d h:i:s',time()));
+        $this->assign("time",time());
         $this->assign("categories_tree", $categoriesTree);
         $this->assign('post', $post);
         $this->assign('user', $user);
@@ -135,6 +136,7 @@ class AdminGxfbController extends AdminBaseController
     public function editPost(){
         $data = $this->request->param();
         $portalPostModel = new PortalGxfbModel();
+        $data['nr'] = htmlspecialchars_decode($data['nr']);
         $portalPostModel->allowField(true)->save($data,['id' => $data['id']]);
         $this->success('保存成功!');
     }
