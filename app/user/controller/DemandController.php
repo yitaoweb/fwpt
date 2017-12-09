@@ -74,6 +74,7 @@ class DemandController extends UserBaseController
         $fuwu=Db::name('portal_ssfw')->where('1=1')->order('id')->select();
         $this->assign('fuwu',$fuwu);
         $this->assign("um",3);
+        $this->assign("time", date('y-m-d h:i:s',time()));
         return $this->fetch();
     }
 
@@ -86,7 +87,7 @@ class DemandController extends UserBaseController
             $validate = new Validate([
                 'title' => 'require|max:100',
                 'content'   => 'require',
-     
+    
             ]);
             $validate->message([
                 'title.require' => '标题不能为空',
