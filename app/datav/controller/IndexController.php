@@ -12,7 +12,6 @@ namespace app\datav\controller;
 
 use cmf\controller\HomeBaseController;
 use app\user\model\UserModel;
-use app\admin\model\AdminMenuModel;
 use think\Db;
 
 class IndexController extends HomeBaseController
@@ -27,14 +26,6 @@ class IndexController extends HomeBaseController
         $en = 'changzhi public service platform for SME';
         $this->assign('title',$title);
         $this->assign('en',$en);
-
-        $adminMenuModel = new AdminMenuModel();
-        $menus          = $adminMenuModel->menuTree();
-
-        $this->assign("menus", $menus);
-
-        $admin = Db::name("user")->where('id', cmf_get_current_admin_id())->find();
-        $this->assign('admin', $admin);
         //return $name;
 
         return $this->fetch(':index');

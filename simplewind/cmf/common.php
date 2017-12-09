@@ -1963,3 +1963,14 @@ function sex($num){
     }
     
 }
+
+/**
+ * openapi.mta.qq.com签名生成
+ * php版本
+ */
+function sign($token, $soucr_str){
+    $soucr_str = str_replace('~', '%7E', $soucr_str);
+    $my_sign = hash_hmac("sha1", $soucr_str, strtr($token, '-_', '+/'));
+    $my_sign = md5($my_sign);
+    return $my_sign;
+}
