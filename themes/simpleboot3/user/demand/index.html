@@ -42,7 +42,7 @@
                         <td>{$key+1}</td>
                         <td>{$vo.title}</td>
                         <td>{$vo.state|state=###}</td>
-                        <td>{$vo.time|date='m-d',###}</td>
+                        <td>{$vo.time}</td>
                         <td>
                             <if condition="$vo.tui_jian_jg neq ''">
                                  <a href="{:url('user/entdata/tj_jg',array('id'=>$vo['id']))}">平台管理员为您推荐了服务机构</a>
@@ -72,7 +72,7 @@
                         <td>{$key+1}</td>
                         <td>{$vo.title}</td>
                         <td>{$vo.state|state=###}</td>
-                        <td>{$vo.time|date='m-d',###}</td>
+                        <td>{$vo.time}</td>
                       </tr>
                       </foreach>
                   </tbody>
@@ -97,7 +97,7 @@
                         <td>{$key+1}</td>
                         <td>{$vo.title}</td>
                         <td>{$vo.state|state=###}</td>
-                        <td>{$vo.time|date='m-d',###}</td>
+                        <td>{$vo.time}</td>
                       </tr>
                       </foreach>
                   </tbody>

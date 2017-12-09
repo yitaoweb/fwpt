@@ -93,6 +93,7 @@ class ProductController extends UserBaseController
         $fuwu=Db::name('portal_ssfw')->where('1=1')->order('id')->select();
         $this->assign('fuwu',$fuwu);
         $this->assign("um",5);
+        $this->assign("time", date('y-m-d h:i:s',time()));
         return $this->fetch();
     }
 

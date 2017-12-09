@@ -389,7 +389,7 @@ class UserModel extends Model
         $userId           = cmf_get_current_user_id();
      
         $user['user_id'] = $userId;
-        $user['time'] =time();
+        // $user['time'] =time();
         $user['sh_state'] =0;
         $user['dj_state'] =0;
         $userQuery        = Db::name("portal_fwxq");
@@ -405,7 +405,7 @@ class UserModel extends Model
      
         $user['user_id'] = $userId;
         $user['sh_state'] = 0;
-        $user['time'] =time();
+        // $user['time'] =time();
         $userQuery        = Db::name("portal_fwcp");
         if ($userQuery->insertGetId($user)) {
             return 1;
