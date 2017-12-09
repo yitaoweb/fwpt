@@ -258,19 +258,19 @@
             <label class="col-sm-2 control-label" for="input-description">统一社会信用代码证</label>
             <div >
                 <input type="hidden" name="daima" class="form-control"
-                       id="js-thumbnail-input" value="{$post.daima}">
+                       id="js-daima-input" value="{$post.daima}">
                 <div >
 
                     <if condition="empty($post.daima)">
-                       <a href="javascript:uploadOneImage('图片上传','#js-thumbnaillogo-input');">
+                       <a href="javascript:uploadOneImage('图片上传','#js-daima-input');">
                         <img src="__TMPL__/public/assets/images/default-thumbnail.png"
-                             id="js-thumbnaillogo-input-preview"
+                             id="js-daima-input-preview"
                              width="135" style="cursor: pointer"/>
                         </a>
                             <else/>
-                        <a href="javascript:uploadOneImage('图片上传','#js-thumbnaillogo-input');">
+                        <a href="javascript:uploadOneImage('图片上传','#js-daima-input');">
                             <img src="{:cmf_get_image_preview_url($post.daima)}"
-                                 id="js-thumbnaillogo-input-preview"
+                                 id="js-daima-input-preview"
                                  width="135" style="cursor: pointer"/>
                         </a>
                     </if>
@@ -286,7 +286,7 @@
     </form>
 
 </div>
-<!-- <script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<!-- <script type="text/javascript" src="__STATIC__/js/admin.js"></script> -->
 <script type="text/javascript">
     //编辑器路径定义
     var editorURL = GV.WEB_ROOT;
@@ -331,6 +331,6 @@
             }
         });
     }
-</script> -->
+</script>
 </body>
 </html>
