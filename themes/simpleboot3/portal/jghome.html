@@ -66,7 +66,17 @@
                       </dl>
                      <dl>
                        <dt>服务范围：</dt>
-                       <dd>长治县、平顺县、城区、郊区、壶关县、长子县</dd>
+                       <dd>
+                            <php>
+                                    foreach (json_decode($fwqy) as $s){
+                                        foreach ($xzqys as $ss) {
+                                             if($s == $ss['id']){
+                                                echo $ss['name'].',';
+                                             }
+                                        } 
+                                     }
+                            </php>
+                       </dd>
                      </dl>
                      <dl>
                        <dt>联系地址：</dt>

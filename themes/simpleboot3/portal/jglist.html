@@ -81,7 +81,18 @@
                 <div class="linkto">电话<span>{$vo.tel}</span><a href="{:cmf_url('portal/Jghome/index',array('id'=>$vo.id))}">进入机构</a></div>
                 <h1>{$vo.user_nickname}</h1>
                 <p>服务地址：山西-长治-{$vo.qy_address}</p>
-                <p>服务范围：长治县、平顺县、城区、郊区、壶关县、长子县</p>
+                <p>
+                服务区域：
+                   <php>
+                                    foreach (json_decode($vo['fwqy']) as $s){
+                                        foreach ($xzqys as $ss) {
+                                             if($s == $ss['id']){
+                                                echo $ss['name'].',';
+                                             }
+                                        } 
+                                     }
+                            </php>
+                </p>
                 <p>服务项目：{:getfield('portal_ssfw',$vo.qy_ssfw,'name')}服务</p>
             </div>
         </foreach>                 

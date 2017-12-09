@@ -24,7 +24,8 @@ class JghomeController extends HomeBaseController
       
         $jigou = Db::name('user')->where('id',$id)->find();
         $product = Db::name('portal_fwcp')->where('user_id',$id)->order('time desc')->paginate(10);
-
+         $xzqys = Db::name('portal_xzqy')->select();
+         $this->assign('xzqys', $xzqys);
 		$this->assign($jigou);                 //机构简介
         $this->assign("page", $product->render());
         $this->assign("lists", $product->items());

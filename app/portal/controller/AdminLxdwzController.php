@@ -97,6 +97,7 @@ class AdminLxdwzController extends AdminBaseController
 
         $arrData = $this->request->param();
         $portalTagModel = new PortalLxdwzModel();
+        $arrData['nr'] = htmlspecialchars_decode($arrData['nr']);
         $portalTagModel->isUpdate(false)->allowField(true)->save($arrData);
 
         $this->success(lang("SAVE_SUCCESS"));
@@ -133,7 +134,7 @@ class AdminLxdwzController extends AdminBaseController
         $data = $this->request->param();
         $portalPostModel = new PortalLxdwzModel();
         $a = $portalPostModel->where('id',$data['id'])->update(
-                 ['fl_id'=>$data['fl_id'],'lxd_id'=>$data['lxd_id'],'name'=>$data['name'],'lxfs'=>$data['lxfs'],'time'=>$data['time'],'nr'=>$data['nr']]
+                 ['fl_id'=>$data['fl_id'],'lxd_id'=>$data['lxd_id'],'name'=>$data['name'],'lxfs'=>$data['lxfs'],'time'=>$data['time'],'nr'=>htmlspecialchars_decode($data['nr'])]
             );
         $this->success('保存成功!');
     }

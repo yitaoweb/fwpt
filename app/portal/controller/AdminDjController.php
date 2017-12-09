@@ -36,7 +36,6 @@ class AdminDjController extends AdminBaseController
     public function index()
     {
         $portalTagModel = new PortalDjModel();
-        
         $arrData = $this->request->param(); 
         if($arrData){
             if($arrData['name'] != ''){

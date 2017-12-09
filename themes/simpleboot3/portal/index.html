@@ -184,7 +184,7 @@
         <volist name="gong" id="vo">
         <tr>
            <td><a href="{:cmf_url('portal/Supply/view',array('id'=>$vo.id))}">{$vo.title}</a></td>
-           <td>{$vo.time|date='Y-m-d',###}</td>
+           <td>{$vo.time}</td>
         </tr>
         </volist>
       </tbody>
@@ -205,7 +205,7 @@
        <volist name="qiu" id="vo">
         <tr>
            <td><a href="{:cmf_url('portal/Supply/view',array('id'=>$vo.id))}">{$vo.title}</a></td>
-           <td>{$vo.time|date='Y-m-d',###}</td>
+           <td>{$vo.time}</td>
         </tr>
         </volist>
       </tbody>
@@ -231,7 +231,7 @@
             <td>{:getfield('user',$vo.user_id,'user_nickname')}</td>
             <td>{:getfield('portal_ssfw',$vo.ssfw_id,'name')}</td>
             <td>{$vo.state|state=###}</td>
-            <td>{$vo.time|date='Y-m-d',###}</td>
+            <td>{$vo.time}</td>
           </tr>
         </volist>
       </tbody>
