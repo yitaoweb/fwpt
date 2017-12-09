@@ -136,9 +136,12 @@ class AdminGxfbController extends AdminBaseController
     public function editPost(){
         $data = $this->request->param();
         $portalPostModel = new PortalGxfbModel();
-        $data['nr'] = htmlspecialchars_decode($data['nr']);
+        $data['nr'] = $data['nr'];
+        if($data['st'] == 'sh'){
+                $data['state']=1;
+                }
         $portalPostModel->allowField(true)->save($data,['id' => $data['id']]);
-        $this->success('保存成功!');
+        $this->success('操作成功!');
     }
     public function upStatus()
     {
