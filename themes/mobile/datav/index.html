@@ -21,10 +21,10 @@
             <div class="screen">
                 <nav class="nav">
                     <ul>
-                        <li><a href="http://www.baidu.com">搜　索</a></li>
+<!--                         <li><a href="http://www.baidu.com">搜　索</a></li>
                         <li><a href="#">主　页</a></li>
                         <li><a href="#">HTML5学习</a></li>
-                        <li><a href="#">CSS3学习</a></li>
+                        <li><a href="#">CSS3学习</a></li> -->
                         <li><a href="{:cmf_url('user/Index/logout')}">退出</a></li>
                     </ul>
                 </nav>
@@ -33,38 +33,52 @@
                 </div>
                 <div class="lower-screen">
                     <div class="card">
-                        <h2>Material cards</h2>
+                        <h2>企业需求数据</h2>
                         <br><br>
-                         <div id="main" style="width: 100%;height:300px;"></div>
-                        <p>Created by Lewi Hussey.</p>
+                         <div id="main3" style="width: 100%;height:350px;"></div>
+<!--                         <p>Created by Lewi Hussey.</p> -->
                     </div>
 
                     <div class="card">
-                        <h2>Material cards</h2>
+                        <h2>平台当日流量数据</h2>
                         <br><br>
-                         <div id="mains" style="width: 100%;height:350px;"></div>
-                        <p>Created by Lewi Hussey.</p>
+                         <div id="main2" style="width: 100%;height:350px;"></div>
+<!--                         <p>Created by Lewi Hussey.</p> -->
                     </div>
 
                     <div class="card">
-                        <h2>Material cards</h2>
+                        <h2>机构产品数据</h2>
                         <br><br>
-                         <div id="mainss" style="width: 100%;height:350px;"></div>
-                        <p>Created by Lewi Hussey.</p>
+                         <div id="main4" style="width: 100%;height:350px;"></div>
+<!--                         <p>Created by Lewi Hussey.</p> -->
                     </div>
 
                     <div class="card">
-                        <h2>Material cards</h2>
+                        <h2>服务对接数据</h2>
                         <br><br>
-                         <div id="mainsss" style="width: 100%;height:350px;"></div>
-                        <p>Created by Lewi Hussey.</p>
+                         <div id="main5" style="width: 100%;height:350px;"></div>
+<!--                         <p>服务对接数据</p> -->
                     </div>
 
                     <div class="card">
-                        <h2>Material cards</h2>
+                        <h2>高新区经济数据</h2>
                         <br><br>
-                         <div id="mainssss" style="width: 100%;height:350px;"></div>
-                        <p>Created by Lewi Hussey.</p>
+                         <div id="main6" style="width: 100%;height:350px;"></div>
+<!--                         <p>Created by Lewi Hussey.</p> -->
+                    </div>
+
+                    <div class="card">
+                        <h2>高新区项目数据</h2>
+                        <br><br>
+                         <div id="main7" style="width: 100%;height:350px;"></div>
+<!--                         <p>Created by Lewi Hussey.</p> -->
+                    </div>
+
+                    <div class="card">
+                        <h2>限额以上企业数据</h2>
+                        <br><br>
+                         <div id="main8" style="width: 100%;height:350px;"></div>
+<!--                         <p>Created by Lewi Hussey.</p> -->
                     </div>
                 </div>
         </div>
@@ -79,279 +93,717 @@
         $('body').toggleClass('nav-open');
     });
     </script>
-        <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
-        var myCharts = echarts.init(document.getElementById('mains'));
-        var myChartss = echarts.init(document.getElementById('mainss'));
-        var myChartsss = echarts.init(document.getElementById('mainsss'));
-        var myChartssss = echarts.init(document.getElementById('mainssss'));
+    <script type="text/javascript">
+        var myChart3 = echarts.init(document.getElementById('main3'));
+        var fwxqname = new Array();
+        var ddcoun = new Array();
+        var zzcoun = new Array();
+        var wccoun = new Array();
+        $.ajax({
+            type: "POST",
+            url: '/datav/Api/xq',
+            async: false,
+            cache: false,
+            success: function(data) {
+                for (var i = 0; i < data.length; i++) {
+                    fwxqname[i] = data[i].fwxqname;
 
-        // 指定图表的配置项和数据
-        option = {
-                    title: {
-                        text: '当天流量情况top7'
-                    },
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {
-                            type: null // 默认为直线，可选为：'line' | 'shadow'
-                        },
-                        formatter: '<div style="text-align: center;">当天流量情况top7</div>{b} : {c}'
-                    },
-                    grid: {
-                        left: '3%',
-                        right: '4%',
-                        top: '10%',
-                        height: 280, //设置grid高度
-                        containLabel: true
-                    },
-                    xAxis: [{
-                        type: 'value',
-                        axisLabel: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
-                        axisLine: {
-                            show: false
-                        },
-                        splitLine: {
-                            show: false
-                        }
+                    ddcoun[i] = data[i].ddcoun;
 
-                    }],
-                    yAxis: [{
-                        type: 'category',
-                        boundaryGap: true,
-                        axisTick: {
-                            show: true
-                        },
-                        axisLabel: {
-                            interval: null
-                        },
-                        data: ['北京', '长沙', '天津', '太原', '石家庄', '广州', '重庆'],
-                        splitLine: {
-                            show: false
-                        }
-                    }],
-                    series: [{
-                        name: '流量',
-                        type: 'bar',
-                        barWidth: 25,
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'right'
-                            }
+                    zzcoun[i] = data[i].zzcoun;
 
-                        },
-                        data: [160, 170, 240, 264, 300, 520, 610]
-                    }]
-                };
+                    wccoun[i] = data[i].wccoun;
 
-        options = {
-                title: {
-                    text: '多雷达图'
-                },
-                tooltip: {
-                    trigger: 'axis'
-                },
-                radar: [
-                    {
-                        indicator: [
-                            {text: '品牌', max: 100},
-                            {text: '内容', max: 100},
-                            {text: '可用性', max: 100},
-                            {text: '功能', max: 100}
-                        ],
-                        center: ['50%','40%'],
-                        radius: 80
+                }
+            }
+        })
+
+        var option3 = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    lineStyle: {
+                        color: '#57617B'
                     }
-                    
-                ],
-                series: [
-                    {
-                        type: 'radar',
-                         tooltip: {
-                            trigger: 'item'
-                        },
-                        itemStyle: {normal: {areaStyle: {type: 'default'}}},
-                        data: [
-                            {
-                                value: [60,73,85,40],
-                                name: '某软件'
-                            }
-                        ]
-                    },
-                    
-                ]
-            };
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                top: '20%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                boundaryGap: false,
+                axisLine: {
+                    lineStyle: {
+                        color: '#57617B'
+                    }
+                },
+                data: fwxqname
+            },
+            {
+                axisPointer: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#57617B'
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
 
-
-            optionss = {
-                    legend: {
-                        data:['高度(km)与气温(°C)变化关系']
-                    },
-                    tooltip: {
-                        trigger: 'axis',
-                        formatter: "Temperature : <br/>{b}km : {c}°C"
-                    },
-                    grid: {
-                        left: '3%',
-                        right: '4%',
-                        bottom: '3%',
-                        containLabel: true
-                    },
-                    xAxis: {
-                        type: 'value',
-                        axisLabel: {
-                            formatter: '{value} °C'
-                        }
-                    },
-                    yAxis: {
-                        type: 'category',
-                        axisLine: {onZero: false},
-                        axisLabel: {
-                            formatter: '{value} km'
+                position: 'bottom',
+                offset: 20
+            }],
+            yAxis: [{
+                type: 'value',
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#57617B'
+                    }
+                },
+                axisLabel: {
+                    margin: 8,
+                    textStyle: {
+                        fontSize: 16
+                    }
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#57617B'
+                    }
+                },
+                splitNumber: 3,
+                max: '10',
+                min: '1'
+            }],
+            series: [{
+                name: '等待对接',
+                type: 'line',
+                smooth: true,
+                symbol: 'circle',
+                symbolSize: 5,
+                showSymbol: false,
+                lineStyle: {
+                    normal: {
+                        width: 1
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(137, 189, 27, 0.3)'
                         },
-                        boundaryGap: false,
-                        data: ['0', '10', '20', '30', '40', '50', '60', '70', '80']
-                    },
-                    series: [
                         {
-                            name: '高度(km)与气温(°C)变化关系',
-                            type: 'line',
-                            smooth: true,
-                            lineStyle: {
-                                normal: {
-                                    width: 3,
-                                    shadowColor: 'rgba(0,0,0,0.4)',
-                                    shadowBlur: 10,
-                                    shadowOffsetY: 10
-                                }
-                            },
-                            data:[15, -50, -56.5, -46.5, -22.1, -2.5, -27.7, -55.7, -76.5]
-                        }
-                    ]
-                };
+                            offset: 0.8,
+                            color: 'rgba(137, 189, 27, 0)'
+                        }], false),
+                        shadowColor: 'rgba(0, 0, 0, 0.1)',
+                        shadowBlur: 10
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: 'rgb(137,189,27)',
+                        borderColor: 'rgba(137,189,2,0.27)',
+                        borderWidth: 12
 
-                optionsss = {
-                    title : {
-                        text: '某站点用户访问来源',
-                        subtext: '纯属虚构',
-                        x:'center'
-                    },
+                    }
+                },
+                data: ddcoun
+            },
+            {
+                name: '正在对接',
+                type: 'line',
+                smooth: true,
+                symbol: 'circle',
+                symbolSize: 5,
+                showSymbol: false,
+                lineStyle: {
+                    normal: {
+                        width: 1
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(0, 136, 212, 0.3)'
+                        },
+                        {
+                            offset: 0.8,
+                            color: 'rgba(0, 136, 212, 0)'
+                        }], false),
+                        shadowColor: 'rgba(0, 0, 0, 0.1)',
+                        shadowBlur: 10
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: 'rgb(0,136,212)',
+                        borderColor: 'rgba(0,136,212,0.2)',
+                        borderWidth: 12
+
+                    }
+                },
+                data: zzcoun
+            },
+            {
+                name: '对接完成',
+                type: 'line',
+                smooth: true,
+                symbol: 'circle',
+                symbolSize: 5,
+                showSymbol: false,
+                lineStyle: {
+                    normal: {
+                        width: 1
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(219, 50, 51, 0.3)'
+                        },
+                        {
+                            offset: 0.8,
+                            color: 'rgba(219, 50, 51, 0)'
+                        }], false),
+                        shadowColor: 'rgba(0, 0, 0, 0.1)',
+                        shadowBlur: 10
+                    }
+                },
+                itemStyle: {
+                    normal: {
+
+                        color: 'rgb(219,50,51)',
+                        borderColor: 'rgba(219,50,51,0.2)',
+                        borderWidth: 12
+                    }
+                },
+                data: wccoun
+            },
+            ]
+        };
+         myChart3.setOption(option3);
+
+
+         $.ajax({
+            type: "POST",
+            url: "{:url('datav/api/tongji',array('type'=>5))}",
+            dataType:"json",
+            success: function(result){
+                var myChart2 = echarts.init(document.getElementById('main2'));
+                var tongji = result['body']['data'][0]['result']['pageSum'][0];
+
+                var option = {
                     tooltip : {
                         trigger: 'item',
-                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                        confine: true,
+                        formatter: "{b} : {c} ({d}%)"
                     },
-                    series : [
-                        {
-                            name: '访问来源',
-                            type: 'pie',
-                            radius : '40%',
-                            center: ['50%', '50%'],
-                            data:[
-                                {value:335, name:'直接访问'},
-                                {value:310, name:'邮件营销'},
-                                {value:234, name:'联盟广告'},
-                                {value:135, name:'视频广告'},
-                                {value:1548, name:'搜索引擎'}
-                            ],
-                            itemStyle: {
-                                emphasis: {
-                                    shadowBlur: 10,
-                                    shadowOffsetX: 0,
-                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-                                }
+                    series: {
+                        type: 'pie',
+                        radius: '55%',
+                        data: [
+                            {value:tongji[0], name:'浏览量(PV)'},
+                            {value:tongji[1], name:'访问次数'},
+                            {value:tongji[2], name:'访客数(UV)'},
+                            {value:tongji[3], name:'IP数'}
+                        ],
+                        roseType: 'angle',
+                        itemStyle: {
+                            normal: {
+                                shadowBlur: 200,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
                             }
                         }
-                    ]
+                    }
                 };
 
-                optionssss = {
-                        title: {
-                            text: '138w+关注者',
-                            subtext: '张佳玮知乎关注者（金字塔图）'
-                            //爬取张佳玮138w+知乎关注者：数据可视化
-                            //https://zhuanlan.zhihu.com/p/28890605?refer=c_122608198
-                            //http://echarts.baidu.com/gallery/editor.html?c=funnel
-                        },
-                        tooltip: {
-                            trigger: 'item',
-                            formatter: "{a} <br/>{b} : {c}%"
-                        },
-                        toolbox: {
-                            feature: {
-                                dataView: {readOnly: false},
-                                restore: {},
-                                saveAsImage: {}
+                myChart2.setOption(option);
+            },
+            error:function(result){
+                alert('获取平台流量失败！请重试！')
+            }
+        });
+
+
+        var fwname = new Array();
+        var cpcoun = new Array();
+            $.ajax({
+                type: "POST",
+                url:'/datav/Api/cp',
+                async: false,
+                cache: false,
+                success: function (data) {               
+                  for (var i = 0; i < data.length; i++) {
+                      fwname[i]=data[i].fwname;
+                      cpcoun[i]=data[i].cpcoun;                   
+                  }
+                }
+        })
+        var myChart4 = echarts.init(document.getElementById('main4'));
+         //data
+        var data = cpcoun;
+        var markLineData = [];
+        for (var i = 1; i < data.length; i++) {
+            markLineData.push([{
+                xAxis: i - 1,
+                yAxis: data[i - 1],
+                value: (data[i] + data[i-1]).toFixed(2)
+            }, {
+                xAxis: i,
+                yAxis: data[i]
+            }]);
+        }
+            
+        //option
+        var option4 = {
+   
+            tooltip : {
+                trigger: 'axis'
+            }, 
+            grid: {
+                left: '3%',
+                right: '4%',
+                top:'20%',
+                bottom: '3%',
+                containLabel: true
+            },   
+            xAxis: {
+                data: fwname
+            },
+            yAxis: {
+                splitNumber : 3,
+                max : '50',
+                min : '1'
+            },
+            series: [{
+                type: 'line',
+                data:data,
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    smooth: true,
+                            effect: {
+                                show: true
+                            },
+                            distance: 10,
+                    label: {
+                        normal: {
+                            position: 'middle'
+                        }
+                    },
+                    symbol: ['none', 'none'],
+                    data: markLineData
+                }
+            }]
+        };
+         myChart4.setOption(option4);
+
+
+
+         var myChart5 = echarts.init(document.getElementById('main5'));
+
+         var time = new Array();
+            var cgcoundj = new Array();
+            var jjcoundj = new Array();
+            var wccoundj = new Array();
+            $.ajax({
+                type: "POST",
+                url:'/datav/Api/dj',
+                async: false,
+                cache: false,
+                success: function (data) {            
+                  for (var i = 0; i < data.length; i++) {
+                            time[i]=data[i].time;
+                            cgcoundj.push({
+                                name : '',
+                                value : data[i].cgcoundj
+                            })
+                            jjcoundj.push({
+                                name : '',
+                                value : data[i].jjcoundj
+                            })
+                            wccoundj.push({
+                                name : '',
+                                value : data[i].wccoundj
+                            })
+                   
+                  }
+                }
+            })
+        var color = '#189cbb';
+        var lineColor = '#0a324b'
+        var xAxisData = time;
+        // var seriesData = [45, 55, 70, 95, 55, 70, 85];
+        var scale = 1;
+
+        var maxData = '55%';
+
+        var option5 = {
+            tooltip: {
+                show: true, //去除面板显示
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#185164'
+                    }
+                }
+            },
+            legend: {
+                show: true,
+                itemGap:20,
+                data: ['成功受理', '拒绝受理','对接完成'],
+                icon: 'circle',
+                textStyle: {
+                    color: '#3dd3f8',
+                    fontSize:10*scale
+                },
+            },
+          
+            color: ['#295beb', '#eb297d','#ffc72b'], //3dd3f8
+            grid: {
+                left: '3%',
+                right: '10%',
+                top:'30%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                axisLabel: {
+                    textStyle: {
+                        color: color,
+                        fontSize: 16*scale,
+                    }
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: lineColor,
+                    }
+                },
+            
+                data: xAxisData
+            },
+            yAxis: {
+                type: 'value',
+                max: 10,
+                axisLabel: {
+                    padding: [0, 15, 0, 0],
+                    textStyle: {
+                        color: color,
+                        fontSize: 16*scale,
+                    }
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: lineColor,
+                    }
+                },
+                splitLine: {
+                    show: false
+                },
+               
+         
+            },
+            series: [{
+                name: '成功受理',
+                type: 'line',
+                stack: '总量',
+                smooth: true, //这句就是让曲线变平滑的
+                data: cgcoundj,
+                symbol: 'none', //拐点样式
+             
+            }, {
+                name: '拒绝受理',
+                type: 'line',
+                smooth: true, //这句就是让曲线变平滑的
+                data: jjcoundj,
+                symbol: 'none', //拐点样式
+            
+            },
+            {
+                name: '对接完成',
+                type: 'line',
+                smooth: true, //这句就是让曲线变平滑的
+                data: wccoundj,
+                symbol: 'none', //拐点样式
+            
+            }]
+        };
+
+         myChart5.setOption(option5);
+
+
+
+         var myChart6 = echarts.init(document.getElementById('main6'));
+
+         var fl = new Array();
+            var gmzcz = new Array();
+            $.ajax({
+                type: "POST",
+                url:'/datav/Api/jjyxqk',
+                async: false,
+                cache: false,
+                success: function (data) {            
+                  for (var i = 0; i < data.length; i++) {
+                            fl[i]=data[i].fl;
+                            if(data[i].fl == 1){
+                                 fl[i]='工业';
                             }
-                        },
-      
-                        calculable: true,
-                        series: [
-                            {
-                                name:'漏斗图',
-                                type:'funnel',
-                                left: '10%',
-                                top: 60,
-                                //x2: 80,
-                                bottom: 60,
-                                width: '80%',
-                                // height: {totalHeight} - y - y2,
-                                min:0,
-                                max: 766170,
-                                minSize: '0%',
-                                maxSize: '100%',
-                                sort: 'none',
-                                gap: 2,
-                                label: {
-                                    normal: {
-                                        show: true,
-                                        position: 'inside'
+                            if(data[i].fl == 2){
+                                 fl[i]='建筑业';
+                            }
+                            if(data[i].fl == 3){
+                                 fl[i]='批零住餐';
+                            }
+                            if(data[i].fl == 4){
+                                 fl[i]='服务业';
+                            }
+                            gmzcz[i]=data[i].gmzcz;                  
+                  }
+                }
+            })
+        var option6 = {
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '10%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : fl,
+                    axisTick: {
+                        show:false,
+                        alignWithLabel: false
+                    },
+                    axisLabel:{
+                        show:false,
+                    },
+                     axisLine: {
+                        show:false,
+                    },
+                    
+                }
+            ],
+            yAxis : [
+                {
+                    show:false,
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'规模以上工业总产值',
+                    type:'bar',
+                    barWidth: '30%',
+                    label:{
+                      normal:{
+                          show:true,
+                          position:'bottom',
+                          formatter:'{c}亿元 \n{b}',
+                          textStyle:{
+                              color:'#666'
+                          }
+                      }  
+                    },
+                    itemStyle:{
+                      normal:{
+                          barBorderRadius:100,
+                          color:function(idx) {
+                              console.log(idx)
+                              var color = ['#dc4e54','#db8258','#eda350','#a6a34b','#84aa6d','#84abab']
+                              return color[idx.dataIndex % color.length]
+                          }
+                      }  
+                    },
+                    data:gmzcz
+                }
+            ]
+        };
+
+
+         myChart6.setOption(option6);
+
+
+
+         $.ajax({
+                type: "POST",
+                url: "{:url('datav/api/xm')}",
+                dataType:"json",
+                success: function(result){
+
+                    var myChart7 = echarts.init(document.getElementById('main7'));
+                    var xm = result[0];
+                    var option = {
+                                tooltip: {
+                                    trigger: 'axis',
+                                    axisPointer: {
+                                        type: 'none'
                                     },
-                                    emphasis: {
+                                    formatter: function (params) {
+                                        return params[0].name + ': ' + params[0].value;
+                                    }
+                                },
+                                xAxis: {
+                                    data: ['在谈', '新签约', '拟开工', '新开工', '在建', '重点', '新投产'],
+
+                                    axisTick: {show: false},
+                                    axisLine: {show: false},
+                                    axisLabel: {
+                                        interval: 0,
                                         textStyle: {
-                                            fontSize: 20
+                                            color: '#e54027'
                                         }
                                     }
                                 },
-                                labelLine: {
-                                    normal: {
-                                        length: 10,
-                                        lineStyle: {
-                                            width: 1,
-                                            type: 'solid'
+                                yAxis: {
+                                    splitNumber : 5,
+                                    max : 'dataMax',
+                                    min : '0',
+                                    splitLine: {show: false},
+                                    axisTick: {show: false},
+                                    axisLine: {show: false},
+                                    axisLabel: {show: false}
+                                },
+
+
+                                grid: {
+                                    left: '3%',
+                                    right: '4%',
+                                    top:'20%',
+                                    bottom: '3%',
+                                    containLabel: true
+                                },   
+
+                                color: ['#e54027'],
+                                series: [{
+                                    name: 'hill',
+                                    type: 'pictorialBar',
+                                    barCategoryGap: '-130%',
+                                    //symbol: 'path://M0,5 L10,0 L5,10 L0,10 z',
+                                    symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
+                                    itemStyle: {
+                                        normal: {
+                                            opacity: 0.5
+                                        },
+                                        emphasis: {
+                                            opacity: 1
                                         }
-                                    }
-                                },
-                                itemStyle: {
-                                    normal: {
-                                        borderColor: '#fff',
-                                        borderWidth: 1
-                                    }
-                                },
-                                data: [
-                                    {value: 190, name: '10w+'},
-                                    {value: 1380, name: '1w-10w'},
-                                    {value: 6948, name: '1k-1w'},
-                                    {value: 33436, name: '100-1k'},
-                                    {value: 169730, name: '10-100'},
-                                    {value: 766170, name: '1-10'},
-                                    {value: 402817, name: '0'}        
-                                ]
-                            }
-                        ]
+                                    },
+                                    data: [xm.zt, xm.xq, xm.nkg, xm.xkg, xm.zj, xm.zd, xm.tc],
+                                    z: 10
+                                }, {
+                                    name: 'glyph',
+                                    type: 'pictorialBar',
+                                    barGap: '-100%',
+                                    symbolPosition: 'end',
+                                    symbolSize: 10,
+                                    symbolOffset: [0, '-120%'],
+                                    data: [xm.zt, xm.xq, xm.nkg, xm.xkg, xm.zj, xm.zd, xm.tc],
+                                }]
                     };
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-        myCharts.setOption(options);
-        myChartss.setOption(optionss);
-        myChartsss.setOption(optionsss);
-        myChartssss.setOption(optionssss);
+
+                    myChart7.setOption(option);
+                },
+                error:function(result){
+                    alert('获取平台流量失败！请重试！')
+                }
+            });
+
+
+
+            $.ajax({
+                    type: "POST",
+                    url: "{:url('datav/api/xsqy')}",
+                    dataType:"json",
+                    success: function(result){
+                        var xsqy = result[0];
+                        var myChart8 = echarts.init(document.getElementById('main8'));
+                        var option8 = {
+                                      
+                                         
+                            tooltip : {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                            },
+                            legend: {
+                                show : false,
+                                orient : 'vertical',
+                                x : 'left',
+                                data:['零售企业','批发企业','住宿企业','餐饮企业']
+                            },
+                            toolbox: {
+                                show : false,
+                                feature : {
+                                    mark : {show: false},
+                                    dataView : {show: true, readOnly: false},
+
+                                    restore : {show: true},
+                                    saveAsImage : {show: true}
+                                }
+                            },
+                            calculable : false,
+                            series : [
+                                {
+                                    name:'销售额占比',
+                                    selectedMode: 'single',
+                                    type:'pie',
+                                    radius : [49, 35],
+                                    label: {
+                                        normal: {
+                                            formatter:"{b}:({d}%)",
+                                        }
+                                    },
+                                    // for funnel
+                                    x: '50%',
+                                    width: '35%',
+                                    funnelAlign: 'left',
+
+                                    data:[
+                                        {value:xsqy.ls, name:'零售企业'},
+                                        {value:xsqy.pf, name:'批发企业'},
+                                        {value:xsqy.zs, name:'住宿企业'},
+                                        {value:xsqy.cy, name:'餐饮企业'}
+                                    ]
+                                }
+                            ]
+                        };
+                        
+
+                        myChart8.setOption(option8);
+
+                    },
+                    error:function(result){
+                        alert('获取平台流量失败！请重试！')
+                    }
+                });
     </script>
 </body>
 </html>
