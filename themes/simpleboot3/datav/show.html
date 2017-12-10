@@ -310,7 +310,6 @@ $.ajax({
         var myChart5 = echarts.init(document.getElementById('main5'));
         var myChart6 = echarts.init(document.getElementById('main6'));
         var myChart7 = echarts.init(document.getElementById('main7'));
-        var myChart8 = echarts.init(document.getElementById('main8'));
 
 
         var fwxqname = new Array();
@@ -724,6 +723,32 @@ $.ajax({
         };
 
 
+        var fl = new Array();
+            var gmzcz = new Array();
+            $.ajax({
+                type: "POST",
+                url:'/datav/Api/jjyxqk',
+                async: false,
+                cache: false,
+                success: function (data) {            
+                  for (var i = 0; i < data.length; i++) {
+                            fl[i]=data[i].fl;
+                            if(data[i].fl == 1){
+                                 fl[i]='工业';
+                            }
+                            if(data[i].fl == 2){
+                                 fl[i]='建筑业';
+                            }
+                            if(data[i].fl == 3){
+                                 fl[i]='批零住餐';
+                            }
+                            if(data[i].fl == 4){
+                                 fl[i]='服务业';
+                            }
+                            gmzcz[i]=data[i].gmzcz;                  
+                  }
+                }
+            })
         var option6 = {
             tooltip : {
                 trigger: 'axis',
@@ -734,13 +759,13 @@ $.ajax({
             grid: {
                 left: '3%',
                 right: '4%',
-                bottom: '5%',
+                bottom: '10%',
                 containLabel: true
             },
             xAxis : [
                 {
                     type : 'category',
-                    data : ['1月', '2月', '3月', '4月', '5月','6月' ],
+                    data : fl,
                     axisTick: {
                         show:false,
                         alignWithLabel: false
@@ -762,14 +787,14 @@ $.ajax({
             ],
             series : [
                 {
-                    name:'直接访问',
+                    name:'规模以上工业总产值',
                     type:'bar',
                     barWidth: '30%',
                     label:{
                       normal:{
                           show:true,
                           position:'bottom',
-                          formatter:'{c}% \n{b}',
+                          formatter:'{c}亿元 \n{b}',
                           textStyle:{
                               color:'#666'
                           }
@@ -785,7 +810,7 @@ $.ajax({
                           }
                       }  
                     },
-                    data:[31, 28, 28, 26, 21,25]
+                    data:gmzcz
                 }
             ]
         };
@@ -877,56 +902,72 @@ $.ajax({
 });
 
 
-
-
+$.ajax({
+    type: "POST",
+    url: "{:url('datav/api/xsqy')}",
+    dataType:"json",
+    success: function(result){
+        var xsqy = result[0];
+        var myChart8 = echarts.init(document.getElementById('main8'));
         var option8 = {
                       
                          
-                            tooltip : {
-                                trigger: 'item',
-                                formatter: "{a} <br/>{b} : {c} ({d}%)"
-                            },
-                            legend: {
-                                show : false,
-                                orient : 'vertical',
-                                x : 'left',
-                                data:['准会员','普通会员','高级会员','VIP会员','超级VIP会员']
-                            },
-                            toolbox: {
-                                show : false,
-                                feature : {
-                                    mark : {show: false},
-                                    dataView : {show: true, readOnly: false},
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                show : false,
+                orient : 'vertical',
+                x : 'left',
+                data:['零售企业','批发企业','住宿企业','餐饮企业']
+            },
+            toolbox: {
+                show : false,
+                feature : {
+                    mark : {show: false},
+                    dataView : {show: true, readOnly: false},
 
-                                    restore : {show: true},
-                                    saveAsImage : {show: true}
-                                }
-                            },
-                            calculable : false,
-                            series : [
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : false,
+            series : [
+                {
+                    name:'销售额占比',
+                    selectedMode: 'single',
+                    type:'pie',
+                    radius : [49, 35],
+                    label: {
+                        normal: {
+                            formatter:"{b}:({d}%)",
+                        }
+                    },
+                    // for funnel
+                    x: '50%',
+                    width: '35%',
+                    funnelAlign: 'left',
 
-                                {
-                                    name:'级别占比',
-                                    selectedMode: 'single',
-                                    type:'pie',
-                                    radius : [50, 35],
-
-                                    // for funnel
-                                    x: '50%',
-                                    width: '35%',
-                                    funnelAlign: 'left',
-
-                                    data:[
-                                        {value:335, name:'准会员'},
-                                        {value:310, name:'普通会员'},
-                                        {value:234, name:'高级会员'},
-                                        {value:234, name:'VIP会员'},
-                                        {value:234, name:'超级VIP会员'}
-                                    ]
-                                }
-                            ]
-                        };
+                    data:[
+                        {value:xsqy.ls, name:'零售企业'},
+                        {value:xsqy.pf, name:'批发企业'},
+                        {value:xsqy.zs, name:'住宿企业'},
+                        {value:xsqy.cy, name:'餐饮企业'}
+                    ]
+                }
+            ]
+        };
         
+
+        myChart8.setOption(option8);
+
+    },
+    error:function(result){
+        alert('获取平台流量失败！请重试！')
+    }
+});
+   
 
 
         var option9 = {
@@ -994,8 +1035,7 @@ $.ajax({
         myChart4.setOption(option4);
         myChart5.setOption(option5);
         myChart6.setOption(option6);
-        myChart8.setOption(option8);
-        //myChart8.setOption(option9);
+
         
 
         
