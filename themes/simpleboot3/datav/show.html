@@ -74,7 +74,7 @@
             <div class="box vw25">
                 <div class="title">
                     <div class="icon" width="18px" height="18px" ></div>
-                    <span class="text" >平台流量数据</span>
+                    <span class="text" >企业需求数据</span>
                 </div>
                 <div id="main3" class="my_main" style="float:left;width: 24vw; height: 10vw;"></div>
               
@@ -125,7 +125,7 @@
             <div class="box vw25_mid">
                 <div class="title">
                     <div class="icon" width="18px" height="18px" ></div>
-                    <span class="text" >平台流量数据s</span>
+                    <span class="text" >机构产品数据</span>
                 </div>
                 <div id="main4" class="my_main" style="float:left;width: 24vw; height: 10vw;"></div>
             </div>
@@ -133,7 +133,7 @@
             <div class="box vw25_mid">
                 <div class="title">
                     <div class="icon" width="18px" height="18px" ></div>
-                    <span class="text" >平台流量数据</span>
+                    <span class="text" >服务对接数据</span>
                 </div>
                 <div id="main5" class="my_main" style="float:left;width: 24vw; height: 10vw;"></div> 
             </div>
@@ -146,7 +146,7 @@
             <div class="box vw25_right">
                 <div class="title">
                     <div class="icon" width="18px" height="18px" ></div>
-                    <span class="text" >平台流量数据</span>
+                    <span class="text" >高新区经济数据</span>
                 </div>
                 <div id="main6" class="my_main" style="float:left;width: 24vw; height: 10vw;"></div>
               
@@ -155,7 +155,7 @@
             <div class="box vw25_right">
                 <div class="title">
                     <div class="icon" width="18px" height="18px" ></div>
-                    <span class="text" >平台流量数据</span>
+                    <span class="text" >高新区项目数据</span>
                 </div>
                 <div id="main7" class="my_main" style="float:left;width: 24vw; height: 10vw;"></div>
               
@@ -164,7 +164,7 @@
             <div class="box vw25_right">
                 <div class="title">
                     <div class="icon" width="18px" height="18px" ></div>
-                    <span class="text" >高新区项目数据</span>
+                    <span class="text" >限额以上企业数据</span>
                 </div>
                 <div id="main8" class="my_main" style="float:left;width: 24vw; height: 10vw;"></div>
               
@@ -591,73 +591,6 @@ $.ajax({
             }]
         };
 
-
-        var option5 = {
-            tooltip : {
-                trigger: 'axis',
-                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                }
-            },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '5%',
-                containLabel: true
-            },
-            xAxis : [
-                {
-                    type : 'category',
-                    data : ['1月', '2月', '3月', '4月', '5月','6月' ],
-                    axisTick: {
-                        show:false,
-                        alignWithLabel: false
-                    },
-                    axisLabel:{
-                        show:false,
-                    },
-                     axisLine: {
-                        show:false,
-                    },
-                    
-                }
-            ],
-            yAxis : [
-                {
-                    show:false,
-                    type : 'value'
-                }
-            ],
-            series : [
-                {
-                    name:'直接访问',
-                    type:'bar',
-                    barWidth: '30%',
-                    label:{
-                      normal:{
-                          show:true,
-                          position:'bottom',
-                          formatter:'{c}% \n{b}',
-                          textStyle:{
-                              color:'#666'
-                          }
-                      }  
-                    },
-                    itemStyle:{
-                      normal:{
-                          barBorderRadius:100,
-                          color:function(idx) {
-                              console.log(idx)
-                              var color = ['#dc4e54','#db8258','#eda350','#a6a34b','#84aa6d','#84abab']
-                              return color[idx.dataIndex % color.length]
-                          }
-                      }  
-                    },
-                    data:[31, 28, 28, 26, 21,25]
-                }
-            ]
-        };
-
         
 
         var time = new Array();
@@ -696,7 +629,7 @@ $.ajax({
 
         var maxData = '55%';
 
-        var option6 = {
+        var option5 = {
             tooltip: {
                 show: true, //去除面板显示
                 trigger: 'axis',
@@ -790,113 +723,73 @@ $.ajax({
             }]
         };
 
-        var option7 = {
-                      
-                         
-                            tooltip : {
-                                trigger: 'item',
-                                formatter: "{a} <br/>{b} : {c} ({d}%)"
-                            },
-                            legend: {
-                                show : false,
-                                orient : 'vertical',
-                                x : 'left',
-                                data:['准会员','普通会员','高级会员','VIP会员','超级VIP会员']
-                            },
-                            toolbox: {
-                                show : false,
-                                feature : {
-                                    mark : {show: false},
-                                    dataView : {show: true, readOnly: false},
 
-                                    restore : {show: true},
-                                    saveAsImage : {show: true}
-                                }
-                            },
-                            calculable : false,
-                            series : [
-
-                                {
-                                    name:'级别占比',
-                                    selectedMode: 'single',
-                                    type:'pie',
-                                    radius : [50, 35],
-
-                                    // for funnel
-                                    x: '50%',
-                                    width: '35%',
-                                    funnelAlign: 'left',
-
-                                    data:[
-                                        {value:335, name:'准会员'},
-                                        {value:310, name:'普通会员'},
-                                        {value:234, name:'高级会员'},
-                                        {value:234, name:'VIP会员'},
-                                        {value:234, name:'超级VIP会员'}
-                                    ]
-                                }
-                            ]
-                        };
-        
-
-
-        var option8 = {
-                   
-                    title: {
-                        text: '多雷达图'
-                    },
-                    tooltip: {
-                        trigger: 'axis'
-                    },
-                    legend: {
-                        x: 'center',
-                        data: ['某软件', '某主食手机', '某水果手机', '降水量', '蒸发量']
-                    },
-                    radar: [
-
-                        {
-                            indicator: [{
-                                text: '外观',
-                                max: 100
-                            }, {
-                                text: '拍照',
-                                max: 100
-                            }, {
-                                text: '系统',
-                                max: 100
-                            }, {
-                                text: '性能',
-                                max: 100
-                            }, {
-                                text: '屏幕',
-                                max: 100
-                            }],
-                            radius: 40,
-                            center: ['50%', '60%'],
-                        }
-                    ],
-                    series: [
-
-                        {
-                            type: 'radar',
-                            radarIndex: 0,
-                            symbol: 'arrow',
-                            label: {
-                                normal: {
-                                    show: true,
-                                    formatter: function(params) {
-                                        console.log(params);
-                                    }
-                                }
-                            },
-                            data: [
-                                [0, 12, 34, 55],
-                                [1, 45, 56, 66, 78]
-                            ]
-
-                        }
-                    ]
+        var option6 = {
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                 }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '5%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ['1月', '2月', '3月', '4月', '5月','6月' ],
+                    axisTick: {
+                        show:false,
+                        alignWithLabel: false
+                    },
+                    axisLabel:{
+                        show:false,
+                    },
+                     axisLine: {
+                        show:false,
+                    },
+                    
+                }
+            ],
+            yAxis : [
+                {
+                    show:false,
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'直接访问',
+                    type:'bar',
+                    barWidth: '30%',
+                    label:{
+                      normal:{
+                          show:true,
+                          position:'bottom',
+                          formatter:'{c}% \n{b}',
+                          textStyle:{
+                              color:'#666'
+                          }
+                      }  
+                    },
+                    itemStyle:{
+                      normal:{
+                          barBorderRadius:100,
+                          color:function(idx) {
+                              console.log(idx)
+                              var color = ['#dc4e54','#db8258','#eda350','#a6a34b','#84aa6d','#84abab']
+                              return color[idx.dataIndex % color.length]
+                          }
+                      }  
+                    },
+                    data:[31, 28, 28, 26, 21,25]
+                }
+            ]
+        };
+
 
 
 $.ajax({
@@ -905,7 +798,7 @@ $.ajax({
     dataType:"json",
     success: function(result){
 
-        var myChart8 = echarts.init(document.getElementById('main8'));
+        var myChart7 = echarts.init(document.getElementById('main7'));
         var xm = result[0];
         var option = {
                     tooltip: {
@@ -976,12 +869,123 @@ $.ajax({
                     }]
         };
 
-        myChart8.setOption(option);
+        myChart7.setOption(option);
     },
     error:function(result){
         alert('获取平台流量失败！请重试！')
     }
 });
+
+
+
+
+        var option8 = {
+                      
+                         
+                            tooltip : {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                            },
+                            legend: {
+                                show : false,
+                                orient : 'vertical',
+                                x : 'left',
+                                data:['准会员','普通会员','高级会员','VIP会员','超级VIP会员']
+                            },
+                            toolbox: {
+                                show : false,
+                                feature : {
+                                    mark : {show: false},
+                                    dataView : {show: true, readOnly: false},
+
+                                    restore : {show: true},
+                                    saveAsImage : {show: true}
+                                }
+                            },
+                            calculable : false,
+                            series : [
+
+                                {
+                                    name:'级别占比',
+                                    selectedMode: 'single',
+                                    type:'pie',
+                                    radius : [50, 35],
+
+                                    // for funnel
+                                    x: '50%',
+                                    width: '35%',
+                                    funnelAlign: 'left',
+
+                                    data:[
+                                        {value:335, name:'准会员'},
+                                        {value:310, name:'普通会员'},
+                                        {value:234, name:'高级会员'},
+                                        {value:234, name:'VIP会员'},
+                                        {value:234, name:'超级VIP会员'}
+                                    ]
+                                }
+                            ]
+                        };
+        
+
+
+        var option9 = {
+                   
+                    title: {
+                        text: '多雷达图'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        x: 'center',
+                        data: ['某软件', '某主食手机', '某水果手机', '降水量', '蒸发量']
+                    },
+                    radar: [
+
+                        {
+                            indicator: [{
+                                text: '外观',
+                                max: 100
+                            }, {
+                                text: '拍照',
+                                max: 100
+                            }, {
+                                text: '系统',
+                                max: 100
+                            }, {
+                                text: '性能',
+                                max: 100
+                            }, {
+                                text: '屏幕',
+                                max: 100
+                            }],
+                            radius: 40,
+                            center: ['50%', '60%'],
+                        }
+                    ],
+                    series: [
+
+                        {
+                            type: 'radar',
+                            radarIndex: 0,
+                            symbol: 'arrow',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    formatter: function(params) {
+                                        console.log(params);
+                                    }
+                                }
+                            },
+                            data: [
+                                [0, 12, 34, 55],
+                                [1, 45, 56, 66, 78]
+                            ]
+
+                        }
+                    ]
+                }
 
 
         
@@ -990,7 +994,7 @@ $.ajax({
         myChart4.setOption(option4);
         myChart5.setOption(option5);
         myChart6.setOption(option6);
-        myChart7.setOption(option7);
+        myChart8.setOption(option8);
         //myChart8.setOption(option9);
         
 
