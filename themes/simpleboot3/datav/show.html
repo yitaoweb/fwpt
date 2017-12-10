@@ -65,6 +65,7 @@
                 <div class="title">
                     <div class="icon" width="18px" height="18px" ></div>
                     <span class="text" >平台当日流量数据</span>
+
                 </div>
                 <div id="main2" class="my_main" style="float:left;width: 24vw; height: 10vw;"></div>
               
@@ -124,7 +125,7 @@
             <div class="box vw25_mid">
                 <div class="title">
                     <div class="icon" width="18px" height="18px" ></div>
-                    <span class="text" >平台流量数据</span>
+                    <span class="text" >平台流量数据s</span>
                 </div>
                 <div id="main4" class="my_main" style="float:left;width: 24vw; height: 10vw;"></div>
             </div>
@@ -310,6 +311,7 @@ $.ajax({
         var myChart6 = echarts.init(document.getElementById('main6'));
         var myChart7 = echarts.init(document.getElementById('main7'));
         var myChart8 = echarts.init(document.getElementById('main8'));
+
 
         var fwxqname = new Array();
         var ddcoun = new Array();
@@ -1012,6 +1014,7 @@ $.ajax({
 
 
 <script type="text/javascript">
+
 $.ajax({
     type: "POST",
     url: "{:url('datav/api/sdmap')}",
