@@ -58,7 +58,7 @@ class ApiController extends HomeBaseController
     }
 
     public function dj(){
-        $get_dj = Db::query('select DATE_FORMAT(a.time,"%m") as time,count(case when a.stat=1 then 1 end)cgcoundj,count(case when a.stat=2 then 1 end)jjcoundj,count(case when a.stat=4 then 1 end)wccoundj from pt_portal_dj as a group by a.time,a.stat');
+        $get_dj = Db::query('select DATE_FORMAT(a.time,"%m") as time,count(case when a.stat=1 then 1 end)cgcoundj,count(case when a.stat=2 then 1 end)jjcoundj,count(case when a.stat=4 then 1 end)wccoundj from pt_portal_dj as a group by DATE_FORMAT(a.time,"%m")');
         return $get_dj;
     }
 
@@ -71,6 +71,17 @@ class ApiController extends HomeBaseController
         $get_cp = Db::query('select b.name as fwname,count(a.id) as cpcoun from pt_portal_fwcp as a left join pt_portal_ssfw as b on a.ssfw_id = b.id group by b.name');
         return $get_cp;
     }
+
+    public function xsqy(){
+        $get_xsqy = Db::query('select cast(sum(case when fl = 1 then xse end) as signed )as ls ,cast(sum(case when fl = 2 then xse end) as signed ) as pf, cast(sum(case when fl = 3 then xse end ) as signed ) as zs, cast(sum(case when fl = 4 then xse end ) as signed ) as cy from pt_qysjfx');
+        return $get_xsqy;
+    }
+
+    public function jjyxqk(){
+        $jjyxqk = Db::query('select a.fl as fl,sum(a.gmzcz) as gmzcz from pt_jjyxqk as a group by a.fl');
+        return $jjyxqk;
+    }
+
 
 
 }
