@@ -58,7 +58,7 @@ class ApiController extends HomeBaseController
     }
 
     public function dj(){
-        $get_dj = Db::query('select DATE_FORMAT(a.time,"%d") as time,count(case when a.stat=1 then 1 end)cgcoundj,count(case when a.stat=2 then 1 end)jjcoundj,count(case when a.stat=4 then 1 end)wccoundj from pt_portal_dj as a group by a.time,a.stat');
+        $get_dj = Db::query('select DATE_FORMAT(a.time,"%m") as time,count(case when a.stat=1 then 1 end)cgcoundj,count(case when a.stat=2 then 1 end)jjcoundj,count(case when a.stat=4 then 1 end)wccoundj from pt_portal_dj as a group by a.time,a.stat');
         return $get_dj;
     }
 
