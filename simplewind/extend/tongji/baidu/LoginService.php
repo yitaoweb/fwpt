@@ -1,12 +1,10 @@
 <?php
 /**
- * class LoginService, provide PreLogin, DoLogin, DoLogout methods
- */
-require_once('LoginConnection.php');
-
-/**
  * LoginService
  */
+
+namespace tongji\baidu;
+
 class LoginService {
     /**
      * @var string
@@ -34,7 +32,7 @@ class LoginService {
      * @param string $token
      * @return boolean 
      */
-    public function preLogin($userName, $token,$path) {
+    public function preLogin($userName, $token) {
         //echo '----------------------preLogin----------------------' . PHP_EOL;
         //echo '[notice] start preLogin!' . PHP_EOL;
 
@@ -51,14 +49,14 @@ class LoginService {
                 'clientVersion' => '1.0',
             ),
         );
-        $preLogin->POST($preLoginData,$path);
+        $preLogin->POST($preLoginData);
 
         if ($preLogin->returnCode === 0) {
-            $retData = gzdecode($preLogin->retData, strlen($preLogin->retData));
+            $retData = gzdecode($preLogin->retData);
             $retArray = json_decode($retData, true);
             if (!isset($retArray['needAuthCode']) || $retArray['needAuthCode'] === true) {
                 //echo "[error] preLogin return data format error: {$retData}" . PHP_EOL;
-               // echo '--------------------preLogin End--------------------'. PHP_EOL;
+                //echo '--------------------preLogin End--------------------'. PHP_EOL;
                 return false;
             }
             else if ($retArray['needAuthCode'] === false) {
@@ -67,8 +65,8 @@ class LoginService {
                 return true;
             }
             else {
-                echo "[error] unexpected preLogin return data: {$retData}" . PHP_EOL;
-                echo '--------------------preLogin End--------------------' . PHP_EOL;
+                //echo "[error] unexpected preLogin return data: {$retData}" . PHP_EOL;
+                //echo '--------------------preLogin End--------------------' . PHP_EOL;
                 return false;
             }
         }
@@ -86,7 +84,7 @@ class LoginService {
      * @param string $token
      * @return array
      */
-    public function doLogin($userName, $password, $token,$path) {
+    public function doLogin($userName, $password, $token) {
         //echo '----------------------doLogin----------------------' . PHP_EOL;
         //echo '[notice] start doLogin!' . PHP_EOL;
 
@@ -101,14 +99,14 @@ class LoginService {
                 'password' => $password,
             ),
         );
-        $doLogin->POST($doLoginData,$path);
+        $doLogin->POST($doLoginData);
 
         if ($doLogin->returnCode === 0) {
-            $retData =gzinflate(substr($doLogin->retData,10,-8)); ;//gzdecode($doLogin->retData, strlen($doLogin->retData));
+            $retData = gzdecode($doLogin->retData);
             $retArray = json_decode($retData, true);
             if (!isset($retArray['retcode']) || !isset($retArray['ucid']) || !isset($retArray['st'])) {
-                echo "[error] doLogin return data format error: {$retData}" . PHP_EOL;
-                echo '--------------------doLogin End--------------------' . PHP_EOL;
+                //echo "[error] doLogin return data format error: {$retData}" . PHP_EOL;
+                //echo '--------------------doLogin End--------------------' . PHP_EOL;
                 return null;
             }
             else if ($retArray['retcode'] === 0) {
@@ -120,14 +118,14 @@ class LoginService {
                 );
             }
             else {
-                echo "[error] doLogin unsuccessfully with retcode: {$retArray['retcode']}" . PHP_EOL;
-                echo '--------------------doLogin End--------------------' . PHP_EOL;
+                //echo "[error] doLogin unsuccessfully with retcode: {$retArray['retcode']}" . PHP_EOL;
+                //echo '--------------------doLogin End--------------------' . PHP_EOL;
                 return null;
             }
         }
         else {
-            echo "[error] doLogin unsuccessfully with return code: {$doLogin->returnCode}" . PHP_EOL;
-            echo '--------------------doLogin End--------------------' . PHP_EOL;
+            //echo "[error] doLogin unsuccessfully with return code: {$doLogin->returnCode}" . PHP_EOL;
+            //echo '--------------------doLogin End--------------------' . PHP_EOL;
             return null;
         }
     }
@@ -140,7 +138,7 @@ class LoginService {
      * @param string $st
      * @return boolean
      */
-    public function doLogout($userName, $token, $ucid, $st,$path) {
+    public function doLogout($userName, $token, $ucid, $st) {
         //echo '----------------------doLogout----------------------' . PHP_EOL;
         //echo '[notice] start doLogout!' . PHP_EOL;
 
@@ -156,14 +154,14 @@ class LoginService {
                 'st' => $st,
             ),
         );
-        $doLogout->POST($doLogoutData,$path);
+        $doLogout->POST($doLogoutData);
 
         if ($doLogout->returnCode === 0) {
-            $retData = gzdecode($doLogout->retData, strlen($doLogout->retData));
+            $retData = gzdecode($doLogout->retData);
             $retArray = json_decode($retData, true);
             if (!isset($retArray['retcode'])) {
-                echo "[error] doLogout return data format error: {$retData}" . PHP_EOL;
-                echo '--------------------doLogout End--------------------' . PHP_EOL;
+                //echo "[error] doLogout return data format error: {$retData}" . PHP_EOL;
+                //echo '--------------------doLogout End--------------------' . PHP_EOL;
                 return false;
             }
             else if ($retArray['retcode'] === 0 ) {
@@ -178,8 +176,8 @@ class LoginService {
             }
         }
         else {
-            echo "[error] doLogout unsuccessfully with return code: {$doLogout->returnCode}" . PHP_EOL;
-            echo '--------------------doLogout End--------------------' . PHP_EOL;
+            //echo "[error] doLogout unsuccessfully with return code: {$doLogout->returnCode}" . PHP_EOL;
+            //echo '--------------------doLogout End--------------------' . PHP_EOL;
             return false;
         }
     }

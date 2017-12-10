@@ -40,23 +40,23 @@
             <div class="box vw25">
                 <div class="title">
                     <div class="icon" width="18px" height="18px" ></div>
-                    <span class="text" >平台流量数据</span>
+                    <span class="text" >平台整体流量数据</span>
                 </div>
                 <div class="ll_box color_1">
-                    <div class="num">58,372</div>
-                    <span class="text" >平台流量数据</span>
+                    <div class="num" id="pv">58,372</div>
+                    <span class="text" >平台浏览量(PV)</span>
                 </div>
                 <div class="ll_box color_2">
-                    <div class="num">58,372</div>
-                    <span class="text" >平台流量数据</span>
+                    <div class="num" id="cv">58,372</div>
+                    <span class="text" >平台访问次数</span>
                 </div>
                 <div class="ll_box color_3">
-                    <div class="num">58,372</div>
-                    <span class="text" >平台流量数据</span>
+                    <div class="num" id="uv">58,372</div>
+                    <span class="text" >平台访客数(UV)</span>
                 </div>
                 <div class="ll_box color_4">
-                    <div class="num">58,372</div>
-                    <span class="text" >平台流量数据</span>
+                    <div class="num" id="ip">58,372</div>
+                    <span class="text" >平台IP 数</span>
                 </div>
             </div>
 
@@ -64,7 +64,7 @@
             <div class="box vw25">
                 <div class="title">
                     <div class="icon" width="18px" height="18px" ></div>
-                    <span class="text" >平台流量数据</span>
+                    <span class="text" >平台当日流量数据</span>
                 </div>
                 <div id="main2" class="my_main" style="float:left;width: 24vw; height: 10vw;"></div>
               
@@ -86,48 +86,37 @@
             <div class="box vw50">
                 <div id="allmap" class="vw50_full"></div>
                 <div class="maptip2">
-                    <div class="total-mn">
-                        <span class="live-box-font1">
-                            <span>52</span> 家
-                        </span>
-                        <div class="txt">服&nbsp;务&nbsp;机&nbsp;构&nbsp;数</div>
-    
+                    <div class="m_box color_5">
+                        <div class="num">全市：</div>
+                        <span class="text" ></span>
                     </div>
-                    <div class="total-mn">
-                        <div class="txt">企&nbsp;&nbsp;业&nbsp;&nbsp;数：</div>
-                        <span class="live-box-font1">
-                            <span>52</span> 家
-                        </span>
+                    <div class="m_box color_1">
+                        <div class="num">{$jg_num}</div>
+                        <span class="text" >服务机构数</span>
                     </div>
-                    <div class="total-mn">
-                        <div class="txt">服&nbsp;务&nbsp;/&nbsp;产&nbsp;品&nbsp;数：</div>
-                        <span class="live-box-font1">
-                            <span>52</span> 家
-                        </span>
+                    <div class="m_box color_1">
+                        <div class="num">{$cp_num}</div>
+                        <span class="text" >服务产品数</span>
                     </div>
-                    <div class="total-mn">
-                        <div class="txt">服&nbsp;务&nbsp;对&nbsp;接&nbsp;数：</div>
-                        <span class="live-box-font1">
-                            <span>52</span> 家
-                        </span>
+                    <div class="m_box color_2">
+                        <div class="num">{$qy_num}</div>
+                        <span class="text" >注册企业数</span>
                     </div>
-                    <div class="total-mn">
-                        <div class="txt">联&nbsp;&nbsp;系&nbsp;&nbsp;点：</div>
-                        <span class="live-box-font1">
-                            <span>52</span> 家
-                        </span>
+                    <div class="m_box color_2">
+                        <div class="num">{$fw_num}</div>
+                        <span class="text" >企业需求数</span>
                     </div>
-                    <div class="total-mn">
-                        <div class="txt">专&nbsp;&nbsp;&nbsp;&nbsp;家：</div>
-                        <span class="live-box-font1">
-                            <span>52</span> 家
-                        </span>
+                    <div class="m_box color_2">
+                        <div class="num">{$dj_num}</div>
+                        <span class="text" >需求对接数</span>
                     </div>
-                    <div class="total-mn">
-                        <div class="txt">服&nbsp;务&nbsp;机&nbsp;构&nbsp;数：</div>
-                        <span class="live-box-font1">
-                            <span>52</span> 家
-                        </span>
+                    <div class="m_box color_3">
+                        <div class="num">{$lxd_num}</div>
+                        <span class="text" >联系点</span>
+                    </div>
+                    <div class="m_box color_4">
+                        <div class="num">{$zj_num}</div>
+                        <span class="text" >专家</span>
                     </div>
                 </div>
             </div>
@@ -174,7 +163,7 @@
             <div class="box vw25_right">
                 <div class="title">
                     <div class="icon" width="18px" height="18px" ></div>
-                    <span class="text" >平台流量数据</span>
+                    <span class="text" >高新区项目数据</span>
                 </div>
                 <div id="main8" class="my_main" style="float:left;width: 24vw; height: 10vw;"></div>
               
@@ -272,18 +261,30 @@
 
 <script type="text/javascript">
 
-        // 基于准备好的dom，初始化echarts实例
-        echarts.init(document.getElementById('main2')).setOption({
 
+
+$.ajax({
+    type: "POST",
+    url: "{:url('datav/api/tongji',array('type'=>5))}",
+    dataType:"json",
+    success: function(result){
+        var myChart2 = echarts.init(document.getElementById('main2'));
+        var tongji = result['body']['data'][0]['result']['pageSum'][0];
+
+        var option = {
+            tooltip : {
+                trigger: 'item',
+                confine: true,
+                formatter: "{b} : {c} ({d}%)"
+            },
             series: {
                 type: 'pie',
-                radius: '50%',
+                radius: '55%',
                 data: [
-                    {value:235, name:'视频广告'},
-                    {value:274, name:'联盟广告'},
-                    {value:310, name:'邮件营销'},
-                    {value:335, name:'直接访问'},
-                    {value:400, name:'搜索引擎'}
+                    {value:tongji[0], name:'浏览量(PV)'},
+                    {value:tongji[1], name:'访问次数'},
+                    {value:tongji[2], name:'访客数(UV)'},
+                    {value:tongji[3], name:'IP数'}
                 ],
                 roseType: 'angle',
                 itemStyle: {
@@ -293,7 +294,14 @@
                     }
                 }
             }
-        });
+        };
+
+        myChart2.setOption(option);
+    },
+    error:function(result){
+        alert('获取平台流量失败！请重试！')
+    }
+});
 
 
         var myChart3 = echarts.init(document.getElementById('main3'));
@@ -303,182 +311,225 @@
         var myChart7 = echarts.init(document.getElementById('main7'));
         var myChart8 = echarts.init(document.getElementById('main8'));
 
-        var option3 = {      
-                        tooltip: {
-                            trigger: 'axis',
-                            axisPointer: {
-                                lineStyle: {
-                                    color: '#57617B'
-                                }
-                            }
+        var fwxqname = new Array();
+        var ddcoun = new Array();
+        var zzcoun = new Array();
+        var wccoun = new Array();
+        $.ajax({
+            type: "POST",
+            url: '/datav/Api/xq',
+            async: false,
+            cache: false,
+            success: function(data) {
+                for (var i = 0; i < data.length; i++) {
+                    fwxqname[i] = data[i].fwxqname;
+
+                    ddcoun[i] = data[i].ddcoun;
+
+                    zzcoun[i] = data[i].zzcoun;
+
+                    wccoun[i] = data[i].wccoun;
+
+                }
+            }
+        })
+
+        var option3 = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    lineStyle: {
+                        color: '#57617B'
+                    }
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                top: '20%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                boundaryGap: false,
+                axisLine: {
+                    lineStyle: {
+                        color: '#57617B'
+                    }
+                },
+                data: fwxqname
+            },
+            {
+                axisPointer: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#57617B'
+                    }
+                },
+                axisTick: {
+                    show: false
+                },
+
+                position: 'bottom',
+                offset: 20
+            }],
+            yAxis: [{
+                type: 'value',
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#57617B'
+                    }
+                },
+                axisLabel: {
+                    margin: 8,
+                    textStyle: {
+                        fontSize: 16
+                    }
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#57617B'
+                    }
+                },
+                splitNumber: 3,
+                max: '10',
+                min: '1'
+            }],
+            series: [{
+                name: '等待对接',
+                type: 'line',
+                smooth: true,
+                symbol: 'circle',
+                symbolSize: 5,
+                showSymbol: false,
+                lineStyle: {
+                    normal: {
+                        width: 1
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(137, 189, 27, 0.3)'
                         },
-                        grid: {
-                            left: '3%',
-                            right: '4%',
-                            top:'20%',
-                            bottom: '3%',
-                            containLabel: true
+                        {
+                            offset: 0.8,
+                            color: 'rgba(137, 189, 27, 0)'
+                        }], false),
+                        shadowColor: 'rgba(0, 0, 0, 0.1)',
+                        shadowBlur: 10
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: 'rgb(137,189,27)',
+                        borderColor: 'rgba(137,189,2,0.27)',
+                        borderWidth: 12
+
+                    }
+                },
+                data: ddcoun
+            },
+            {
+                name: '正在对接',
+                type: 'line',
+                smooth: true,
+                symbol: 'circle',
+                symbolSize: 5,
+                showSymbol: false,
+                lineStyle: {
+                    normal: {
+                        width: 1
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(0, 136, 212, 0.3)'
                         },
-                        xAxis: [{
-                            type: 'category',
-                            boundaryGap: false,
-                            axisLine: {
-                                lineStyle: {
-                                    color: '#57617B'
-                                }
-                            },
-                            data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
-                        }, {
-                            axisPointer: {
-                                show: false
-                            },
-                            axisLine: {
-                                lineStyle: {
-                                    color: '#57617B'
-                                }
-                            },
-                            axisTick: {
-                                show: false
-                            },
+                        {
+                            offset: 0.8,
+                            color: 'rgba(0, 136, 212, 0)'
+                        }], false),
+                        shadowColor: 'rgba(0, 0, 0, 0.1)',
+                        shadowBlur: 10
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: 'rgb(0,136,212)',
+                        borderColor: 'rgba(0,136,212,0.2)',
+                        borderWidth: 12
 
-                            position: 'bottom',
-                            offset: 20
-                        }],
-                        yAxis: [{
-                            type: 'value',
-                            axisTick: {
-                                show: false
-                            },
-                            axisLine: {
-                                lineStyle: {
-                                    color: '#57617B'
-                                }
-                            },
-                            axisLabel: {
-                                margin: 8,
-                                textStyle: {
-                                    fontSize: 16
-                                }
-                            },
-                            splitLine: {
-                                lineStyle: {
-                                    color: '#57617B'
-                                }
-                            },
-                            splitNumber : 3,
-                            max : '200',
-                            min : '50'
-                        }],
-                        series: [{
-                            name: '移动',
-                            type: 'line',
-                            smooth: true,
-                            symbol: 'circle',
-                            symbolSize: 5,
-                            showSymbol: false,
-                            lineStyle: {
-                                normal: {
-                                    width: 1
-                                }
-                            },
-                            areaStyle: {
-                                normal: {
-                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                        offset: 0,
-                                        color: 'rgba(137, 189, 27, 0.3)'
-                                    }, {
-                                        offset: 0.8,
-                                        color: 'rgba(137, 189, 27, 0)'
-                                    }], false),
-                                    shadowColor: 'rgba(0, 0, 0, 0.1)',
-                                    shadowBlur: 10
-                                }
-                            },
-                            itemStyle: {
-                                normal: {
-                                    color: 'rgb(137,189,27)',
-                                    borderColor: 'rgba(137,189,2,0.27)',
-                                    borderWidth: 12
+                    }
+                },
+                data: zzcoun
+            },
+            {
+                name: '对接完成',
+                type: 'line',
+                smooth: true,
+                symbol: 'circle',
+                symbolSize: 5,
+                showSymbol: false,
+                lineStyle: {
+                    normal: {
+                        width: 1
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(219, 50, 51, 0.3)'
+                        },
+                        {
+                            offset: 0.8,
+                            color: 'rgba(219, 50, 51, 0)'
+                        }], false),
+                        shadowColor: 'rgba(0, 0, 0, 0.1)',
+                        shadowBlur: 10
+                    }
+                },
+                itemStyle: {
+                    normal: {
 
-                                }
-                            },
-                            data: [125, 111, 121, 134, 110, 120, 110, 125, 145, 122, 125, 122]
-                        }, {
-                            name: '电信',
-                            type: 'line',
-                            smooth: true,
-                            symbol: 'circle',
-                            symbolSize: 5,
-                            showSymbol: false,
-                            lineStyle: {
-                                normal: {
-                                    width: 1
-                                }
-                            },
-                            areaStyle: {
-                                normal: {
-                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                        offset: 0,
-                                        color: 'rgba(0, 136, 212, 0.3)'
-                                    }, {
-                                        offset: 0.8,
-                                        color: 'rgba(0, 136, 212, 0)'
-                                    }], false),
-                                    shadowColor: 'rgba(0, 0, 0, 0.1)',
-                                    shadowBlur: 10
-                                }
-                            },
-                            itemStyle: {
-                                normal: {
-                                    color: 'rgb(0,136,212)',
-                                    borderColor: 'rgba(0,136,212,0.2)',
-                                    borderWidth: 12
-
-                                }
-                            },
-                            data: [120, 110, 125, 145, 122, 165, 122, 130, 182, 191, 134, 150]
-                        }, {
-                            name: '联通',
-                            type: 'line',
-                            smooth: true,
-                            symbol: 'circle',
-                            symbolSize: 5,
-                            showSymbol: false,
-                            lineStyle: {
-                                normal: {
-                                    width: 1
-                                }
-                            },
-                            areaStyle: {
-                                normal: {
-                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                        offset: 0,
-                                        color: 'rgba(219, 50, 51, 0.3)'
-                                    }, {
-                                        offset: 0.8,
-                                        color: 'rgba(219, 50, 51, 0)'
-                                    }], false),
-                                    shadowColor: 'rgba(0, 0, 0, 0.1)',
-                                    shadowBlur: 10
-                                }
-                            },
-                            itemStyle: {
-                                normal: {
-
-                                    color: 'rgb(219,50,51)',
-                                    borderColor: 'rgba(219,50,51,0.2)',
-                                    borderWidth: 12
-                                }
-                            },
-                            data: [150, 160, 125, 145, 122, 155, 134, 150, 120, 110, 165, 122]
-                        }, ]
-                    };
+                        color: 'rgb(219,50,51)',
+                        borderColor: 'rgba(219,50,51,0.2)',
+                        borderWidth: 12
+                    }
+                },
+                data: wccoun
+            },
+            ]
+        };
 
 
-
+        var fwname = new Array();
+        var cpcoun = new Array();
+            $.ajax({
+                type: "POST",
+                url:'/datav/Api/cp',
+                async: false,
+                cache: false,
+                success: function (data) {               
+                  for (var i = 0; i < data.length; i++) {
+                      fwname[i]=data[i].fwname;
+                      cpcoun[i]=data[i].cpcoun;                   
+                  }
+                }
+            })
 
         //data
-        var data = [220, 182, 191, 234, 190, 330, 310,50,200];
+        var data = cpcoun;
         var markLineData = [];
         for (var i = 1; i < data.length; i++) {
             markLineData.push([{
@@ -490,7 +541,7 @@
                 yAxis: data[i]
             }]);
         }
-
+            
         //option
         var option4 = {
    
@@ -505,12 +556,12 @@
                 containLabel: true
             },   
             xAxis: {
-                data: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+                data: fwname
             },
             yAxis: {
                 splitNumber : 3,
-                max : '500',
-                min : '100'
+                max : '50',
+                min : '1'
             },
             series: [{
                 type: 'line',
@@ -607,83 +658,45 @@
 
         
 
+        var time = new Array();
+            var cgcoundj = new Array();
+            var jjcoundj = new Array();
+            var wccoundj = new Array();
+            $.ajax({
+                type: "POST",
+                url:'/datav/Api/dj',
+                async: false,
+                cache: false,
+                success: function (data) {            
+                  for (var i = 0; i < data.length; i++) {
+                            time[i]=data[i].time;
+                            cgcoundj.push({
+                                name : '',
+                                value : data[i].cgcoundj
+                            })
+                            jjcoundj.push({
+                                name : '',
+                                value : data[i].jjcoundj
+                            })
+                            wccoundj.push({
+                                name : '',
+                                value : data[i].wccoundj
+                            })
+                   
+                  }
+                }
+            })
         var color = '#189cbb';
         var lineColor = '#0a324b'
-        var xAxisData = [1, 2, 3, 4, 5, 6, 7];
+        var xAxisData = time;
         // var seriesData = [45, 55, 70, 95, 55, 70, 85];
         var scale = 1;
-        var echartData = {
-            data1: [{
-                name: '',
-                value: 75
-            }, {
-                name: '',
-                value: 95
-            }, {
-                name: '',
-                value: 70
-            }, {
-                name: '',
-                value: 95
-            }, {
-                name: '',
-                value: 65
-            }, {
-                name: '',
-                value: 70
-            }, {
-                name: '',
-                value: 80
-            }],
-            data2: [{
-                name: '',
-                value: 85
-            }, {
-                name: '',
-                value: 75
-            }, {
-                name: '',
-                value: 80
-            }, {
-                name: '',
-                value: 85
-            }, {
-                name: '',
-                value: 55
-            }, {
-                name: '',
-                value: 83
-            }, {
-                name: '',
-                value: 85
-            }],
-            data3: [{
-                name: '',
-                value: 35
-            }, {
-                name: '',
-                value: 55
-            }, {
-                name: '',
-                value: 70
-            }, {
-                name: '',
-                value: 90
-            }, {
-                name: '',
-                value: 55
-            }, {
-                name: '',
-                value: 70
-            }, {
-                name: '',
-                value: 85
-            }]
-        }
+
         var maxData = '55%';
+
         var option6 = {
             tooltip: {
-                show: false, //去除面板显示
+                show: true, //去除面板显示
                 trigger: 'axis',
                 axisPointer: {
                     type: 'cross',
@@ -695,7 +708,7 @@
             legend: {
                 show: true,
                 itemGap:20,
-                data: ['综合学科', '高等教育心理学','高等教育学'],
+                data: ['成功受理', '拒绝受理','对接完成'],
                 icon: 'circle',
                 textStyle: {
                     color: '#3dd3f8',
@@ -730,7 +743,7 @@
             },
             yAxis: {
                 type: 'value',
-                max: 100,
+                max: 10,
                 axisLabel: {
                     padding: [0, 15, 0, 0],
                     textStyle: {
@@ -750,31 +763,30 @@
          
             },
             series: [{
-                name: '综合学科',
+                name: '成功受理',
                 type: 'line',
                 stack: '总量',
                 smooth: true, //这句就是让曲线变平滑的
-                data: echartData.data1,
+                data: cgcoundj,
                 symbol: 'none', //拐点样式
              
             }, {
-                name: '高等教育心理学',
+                name: '拒绝受理',
                 type: 'line',
                 smooth: true, //这句就是让曲线变平滑的
-                data: echartData.data2,
+                data: jjcoundj,
                 symbol: 'none', //拐点样式
             
             },
             {
-                name: '高等教育学',
+                name: '对接完成',
                 type: 'line',
                 smooth: true, //这句就是让曲线变平滑的
-                data: echartData.data3,
+                data: wccoundj,
                 symbol: 'none', //拐点样式
             
             }]
-        };        
-
+        };
 
         var option7 = {
                       
@@ -884,7 +896,16 @@
                     ]
                 }
 
-        var option9 = {
+
+$.ajax({
+    type: "POST",
+    url: "{:url('datav/api/xm')}",
+    dataType:"json",
+    success: function(result){
+
+        var myChart8 = echarts.init(document.getElementById('main8'));
+        var xm = result[0];
+        var option = {
                     tooltip: {
                         trigger: 'axis',
                         axisPointer: {
@@ -895,19 +916,21 @@
                         }
                     },
                     xAxis: {
-                        data: ['驯鹿', '火箭', '飞机', '高铁', '轮船', '汽车', '跑步', '步行', ],
+                        data: ['在谈', '新签约', '拟开工', '新开工', '在建', '重点', '新投产'],
+
                         axisTick: {show: false},
                         axisLine: {show: false},
                         axisLabel: {
+                            interval: 0,
                             textStyle: {
                                 color: '#e54027'
                             }
                         }
                     },
                     yAxis: {
-                        splitNumber : 3,
-                        max : '100',
-                        min : '30',
+                        splitNumber : 5,
+                        max : 'dataMax',
+                        min : '0',
                         splitLine: {show: false},
                         axisTick: {show: false},
                         axisLine: {show: false},
@@ -938,7 +961,7 @@
                                 opacity: 1
                             }
                         },
-                        data: [70, 60, 65, 48, 42, 90, 52, 61],
+                        data: [xm.zt, xm.xq, xm.nkg, xm.xkg, xm.zj, xm.zd, xm.tc],
                         z: 10
                     }, {
                         name: 'glyph',
@@ -947,16 +970,26 @@
                         symbolPosition: 'end',
                         symbolSize: 10,
                         symbolOffset: [0, '-120%'],
-                        data: [70, 60, 65, 48, 42, 90, 52, 61],
+                        data: [xm.zt, xm.xq, xm.nkg, xm.xkg, xm.zj, xm.zd, xm.tc],
                     }]
-                };
+        };
+
+        myChart8.setOption(option);
+    },
+    error:function(result){
+        alert('获取平台流量失败！请重试！')
+    }
+});
+
+
+        
 
         myChart3.setOption(option3);
         myChart4.setOption(option4);
         myChart5.setOption(option5);
         myChart6.setOption(option6);
         myChart7.setOption(option7);
-        myChart8.setOption(option9);
+        //myChart8.setOption(option9);
         
 
         
@@ -979,305 +1012,425 @@
 
 
 <script type="text/javascript">
-    var myChart = echarts.init(document.getElementById('allmap'));
-    var uploadedDataURL = "__TMPL__/datav/js/czs.json";
-    myChart.showLoading();
-    $.getJSON(uploadedDataURL, function(geoJson) {
-        echarts.registerMap('changzhi', geoJson);
-        myChart.hideLoading();
-        var geoCoordMap = {
-            "城区": [113.123088, 36.20353],
-            "长治县": [113.051407, 36.052858],
-            "襄垣县": [113.051491, 36.535817],
-            "屯留县": [112.891998, 36.315663],
-            "郊区": [113.101211, 36.218388],
-            "平顺县": [113.435961, 36.200179],
-            "黎城县": [113.387155, 36.502328],
-            "长子县": [112.8779, 36.122334],
-            "壶关县": [113.207049, 36.115448],
-            "武乡县": [112.864561, 36.837625],
-            "沁县": [112.699226, 36.756063],
-            "沁源县": [112.337446, 36.5002],
-            "潞城市": [113.228852, 36.334104],
-        }
-        var data = [
-            {name: '城区', value: 199},
-            {name: '长治县', value: 39},
-            {name: '襄垣县', value: 12},
-            {name: '屯留县', value: 29},
-            {name: '郊区', value: 89},
-            {name: '平顺县', value: 52},
-            {name: '黎城县', value: 9},
-            {name: '长子县', value: 32},
-            {name: '壶关县', value: 99},
-            {name: '武乡县', value: 39},
-            {name: '沁县', value: 80},
-            {name: '沁源县', value: 20},
-            {name: '潞城市', value: 80},
-        ];
-        var max = 199, min = 9; // todo 
-        var maxSize4Pin = 100, minSize4Pin = 20;
+$.ajax({
+    type: "POST",
+    url: "{:url('datav/api/sdmap')}",
+    dataType:"json",
+    success: function(result){
+        if (result) {
+            
+            var myChart = echarts.init(document.getElementById('allmap'));
+            var uploadedDataURL = "__TMPL__/datav/js/czs.json";
+            myChart.showLoading();
+            $.getJSON(uploadedDataURL, function(geoJson) {
+                echarts.registerMap('changzhi', geoJson);
+                myChart.hideLoading();
 
-      var convertData = function (data) {
-        var res = [];
-        for (var i = 0; i < data.length; i++) {
-            var geoCoord = geoCoordMap[data[i].name];
-            if (geoCoord) {
-                res.push({
-                    name: data[i].name,
-                    value: geoCoord.concat(data[i].value)
-                });
-            }
-        }
-        return res;
-    };
-
-
-        var option_map = {
-            title: {
-                text: '“公共服务数据”',
-                subtext: '',
-                x: 'center',
-                textStyle: {
-                    color: '#ccc'
+                var geoCoordMap = {
+                    "城区": [113.123088, 36.20353],
+                    "长治县": [113.051407, 36.052858],
+                    "襄垣县": [113.051491, 36.535817],
+                    "屯留县": [112.891998, 36.315663],
+                    "郊区": [113.101211, 36.218388],
+                    "平顺县": [113.435961, 36.200179],
+                    "黎城县": [113.387155, 36.502328],
+                    "长子县": [112.8779, 36.122334],
+                    "壶关县": [113.207049, 36.115448],
+                    "武乡县": [112.864561, 36.837625],
+                    "沁县": [112.699226, 36.756063],
+                    "沁源县": [112.337446, 36.5002],
+                    "潞城市": [113.228852, 36.334104],
                 }
-            },
-            tooltip: {
-                trigger: 'item',
-                alwaysShowContent:true,
-                backgroundColor:"",
-                borderColor:"",
-                position: [10, 10],
+                
 
-                extraCssText: 'width:100%;height:90%;',
+                var data = result;
 
-                formatter: function (params) {
-                    var hstr="";
-                  if(typeof(params.value)[2] == "undefined"){
-                    //return params.name + ' : ' + params.value;
-                    hstr +='<div class="maptip">';
+        
 
-                    hstr +='<div class="map_span">';
-                    hstr +='<div class="txt">服务机构数</div>';
-                    hstr +='<div class="unit">单位：家</div>';
-                    hstr +='<div class="map_num">5000</div>';
-                    hstr +='</div>';
+                
+                var max = 199, min = 9; // todo 
+                var maxSize4Pin = 100, minSize4Pin = 20;
 
-                    hstr +='<div class="map_span">';
-                    hstr +='<div class="txt">服务机构数</div>';
-                    hstr +='<div class="unit">单位：家</div>';
-                    hstr +='<div class="map_num">5000</div>';
-                    hstr +='</div>';
+                var convertData = function (data) {
 
-                    hstr +='<div class="map_span">';
-                    hstr +='<div class="txt">服务机构数</div>';
-                    hstr +='<div class="unit">单位：家</div>';
-                    hstr +='<div class="map_num">5000</div>';
-                    hstr +='</div>';
-
-                    hstr +='</div>';
-
-                    hstr +='</div>';
-
-                    return hstr;
-                   // return '<div class="box maptip">'+params.name + ' : ' + params.value+'</div>'+'<div class="box maptip2 ">'+params.name + ' : ' + params.value+'</div>';
-                  }else{
-                    return params.name + ' : ' + params.value[2];
-                  }
-                },
-
-    //             position: function (point, params, dom, rect, size) {
-    //     $(dom).html('<div class="box maptip ">'+params.name + ' : ' + params.value+'</div>')
-    // }
-            },
-            legend: {
-                orient: 'vertical',
-                y: 'bottom',
-                x: 'right',
-                data: ['credit_pm2.5'],
-                textStyle: {
-                    color: '#fff'
-                }
-            },
-            visualMap: {
-                show: false,
-                min: 0,
-                max: 500,
-                left: 'left',
-                top: 'bottom',
-                text: ['高', '低'], // 文本，默认为数值文本
-                calculable: true,
-                seriesIndex: [1],
-                inRange: {
-                    // color: ['#3B5077', '#031525'] // 蓝黑
-                    // color: ['#ffc0cb', '#800080'] // 红紫
-                    // color: ['#3C3B3F', '#605C3C'] // 黑绿
-                    color: ['#0f0c29', '#302b63', '#24243e'] // 黑紫黑
-                    // color: ['#23074d', '#cc5333'] // 紫红
-                    // color: ['#00467F', '#A5CC82'] // 蓝绿
-                    // color: ['#1488CC', '#2B32B2'] // 浅蓝
-                    // color: ['#00467F', '#A5CC82'] // 蓝绿
-                    // color: ['#00467F', '#A5CC82'] // 蓝绿
-                    // color: ['#00467F', '#A5CC82'] // 蓝绿
-                    // color: ['#00467F', '#A5CC82'] // 蓝绿
-
-                }
-            },
-            // toolbox: {
-            //     show: true,
-            //     orient: 'vertical',
-            //     left: 'right',
-            //     top: 'center',
-            //     feature: {
-            //             dataView: {readOnly: false},
-            //             restore: {},
-            //             saveAsImage: {}
-            //             }
-            // },
-            geo: {
-                show: true,
-                map: 'changzhi',
-                label: {
-                    normal: {
-                        show: false
-                    },
-                    emphasis: {
-                        show: false,
+                    var res = [];
+                    for (var i = 0; i < data.length; i++) {
+                        var geoCoord = geoCoordMap[data[i].name];
+                        if (geoCoord) {
+                            res.push({
+                                name: data[i].name,
+                                value: geoCoord.concat(data[i]['value']),
+                            });
+                        }
                     }
-                },
-                roam: false,
-                itemStyle: {
-                    normal: {
-                        areaColor: '#031525',
-                        borderColor: '#3B5077',
-                    },
-                    emphasis: {
-                        areaColor: '#2B91B7',
+                    return res;
+                };
+
+                var convertData2 = function (data) {
+
+                    var res = [];
+                    for (var i = 0; i < data.length; i++) {
+                        var geoCoord = geoCoordMap[data[i].name];
+                        if (geoCoord) {
+                            res.push({
+                                name:  geoCoord.concat(data[i]['value']),
+                                value: geoCoord.concat(data[i]['value'].qynum+data[i]['value'].jgnum+data[i]['value'].lxdnum+data[i]['value'].fwnum+data[i]['value'].cpnum),
+                            });
+                        }
                     }
-                }
-            },
-            series : [
-          {
-                name: 'credit_pm2.5',
-                type: 'scatter',
-                coordinateSystem: 'geo',
-                data: convertData(data),
-                symbolSize: function (val) {
-                    return val[2] / 10;
-                },
-                label: {
-                    normal: {
-                        formatter: '{b}',
-                        position: 'right',
-                        show: true
+                    return res;
+                };
+
+                var option_map = {
+                    title: {
+                        text: '“公共服务数据”',
+                        subtext: '',
+                        x: 'center',
+                        textStyle: {
+                            color: '#ccc'
+                        }
                     },
-                    emphasis: {
-                        show: true
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: '#05C3F9'
-                    }
-                }
-            },
-             {
-                type: 'map',
-                map: 'jiangxi',
-                geoIndex: 0,
-                aspectScale: 0.75, //长宽比
-                showLegendSymbol: false, // 存在legend时显示
-                label: {
-                    normal: {
-                        show: false
+                    tooltip: {
+                        trigger: 'item',
+                        alwaysShowContent:true,
+                        backgroundColor:"",
+                        borderColor:"",
+                        position: [10, 10],
+
+                        extraCssText: 'width:100%;height:90%;',
+
+                        formatter: function (params) {
+                            var data = params['data']['value'];
+                            var hstr="";
+                          if(typeof(data.name) != "undefined"){
+                            hstr +='<div class="maptip">';
+
+                            hstr +='<div class="sm_box color_5">';
+                            hstr +='<div class="num">'+data.name + '：</div>';
+                            hstr +='<span class="text" ></span>';
+                            hstr +='</div>';
+
+                            hstr +='<div class="sm_box color_1">';
+                            hstr +='    <div class="num">'+data.jgnum + '</div>';
+                            hstr +='    <span class="text" >服务机构数</span>';
+                            hstr +='</div>';
+
+                            hstr +='<div class="sm_box color_1">';
+                            hstr +='    <div class="num">'+data.cpnum + '</div>';
+                            hstr +='    <span class="text" >服务产品数</span>';
+                            hstr +='</div>';
+                            
+                            hstr +='<div class="sm_box color_2">';
+                            hstr +='    <div class="num">'+data.qynum + '</div>';
+                            hstr +='    <span class="text" >注册企业数</span>';
+                            hstr +='</div>';
+
+                            hstr +='<div class="sm_box color_2">';
+                            hstr +='    <div class="num">'+data.fwnum + '</div>';
+                            hstr +='    <span class="text" >企业需求数</span>';
+                            hstr +='</div>';
+                            
+
+                            
+                            hstr +='<div class="sm_box color_3">';
+                            hstr +='    <div class="num">'+data.lxdnum + '</div>';
+                            hstr +='    <span class="text" >联系点</span>';
+                            hstr +='</div>';
+
+                            hstr +='</div>';
+
+                            return hstr;
+                          }else{
+                       
+                            var data = params['data']['name'][2];
+
+                            if(typeof(data.name) != "undefined"){
+                                hstr +='<div class="maptip">';
+
+                                hstr +='<div class="sm_box color_5">';
+                                hstr +='<div class="num">'+data.name + '：</div>';
+                                hstr +='<span class="text" ></span>';
+                                hstr +='</div>';
+
+                                hstr +='<div class="sm_box color_1">';
+                                hstr +='    <div class="num">'+data.jgnum + '</div>';
+                                hstr +='    <span class="text" >服务机构数</span>';
+                                hstr +='</div>';
+
+                                hstr +='<div class="sm_box color_1">';
+                                hstr +='    <div class="num">'+data.cpnum + '</div>';
+                                hstr +='    <span class="text" >服务产品数</span>';
+                                hstr +='</div>';
+                                
+                                hstr +='<div class="sm_box color_2">';
+                                hstr +='    <div class="num">'+data.qynum + '</div>';
+                                hstr +='    <span class="text" >注册企业数</span>';
+                                hstr +='</div>';
+
+                                hstr +='<div class="sm_box color_2">';
+                                hstr +='    <div class="num">'+data.fwnum + '</div>';
+                                hstr +='    <span class="text" >企业需求数</span>';
+                                hstr +='</div>';
+                                
+
+                                
+                                hstr +='<div class="sm_box color_3">';
+                                hstr +='    <div class="num">'+data.lxdnum + '</div>';
+                                hstr +='    <span class="text" >联系点</span>';
+                                hstr +='</div>';
+
+                                hstr +='</div>';
+
+                                return hstr;
+                            }else{
+                                var data = params['value'][2];
+                                hstr +='<div class="maptip">';
+
+                                hstr +='<div class="sm_box color_5">';
+                                hstr +='<div class="num">'+data.name + '：</div>';
+                                hstr +='<span class="text" ></span>';
+                                hstr +='</div>';
+
+                                hstr +='<div class="sm_box color_1">';
+                                hstr +='    <div class="num">'+data.jgnum + '</div>';
+                                hstr +='    <span class="text" >服务机构数</span>';
+                                hstr +='</div>';
+
+                                hstr +='<div class="sm_box color_1">';
+                                hstr +='    <div class="num">'+data.cpnum + '</div>';
+                                hstr +='    <span class="text" >服务产品数</span>';
+                                hstr +='</div>';
+                                
+                                hstr +='<div class="sm_box color_2">';
+                                hstr +='    <div class="num">'+data.qynum + '</div>';
+                                hstr +='    <span class="text" >注册企业数</span>';
+                                hstr +='</div>';
+
+                                hstr +='<div class="sm_box color_2">';
+                                hstr +='    <div class="num">'+data.fwnum + '</div>';
+                                hstr +='    <span class="text" >企业需求数</span>';
+                                hstr +='</div>';
+                                
+
+                                
+                                hstr +='<div class="sm_box color_3">';
+                                hstr +='    <div class="num">'+data.lxdnum + '</div>';
+                                hstr +='    <span class="text" >联系点</span>';
+                                hstr +='</div>';
+
+                                hstr +='</div>';
+
+                                return hstr;
+                            }
+                          }
+                        },
+
                     },
-                    emphasis: {
-                        show: false,
+
+                    legend: {
+                        orient: 'vertical',
+                        y: 'bottom',
+                        x: 'right',
+                        data: ['credit_pm2.5'],
                         textStyle: {
                             color: '#fff'
                         }
-                    }
-                },
-                roam: true,
-                itemStyle: {
-                    normal: {
-                        areaColor: '#031525',
-                        borderColor: '#3B5077',
                     },
-                    emphasis: {
-                        areaColor: '#2B91B7'
-                    }
-                },
-                animation: false,
-                data: data
-            },
-            {
-                name: '点',
-                type: 'scatter',
-                coordinateSystem: 'geo',
-                symbol: 'pin',
-                symbolSize: function (val) {
-                    var a = (maxSize4Pin - minSize4Pin) / (max - min);
-                    var b = minSize4Pin - a*min;
-                    b = maxSize4Pin - a*max;
-                    return a*val[2]+b;
-                },
-                label: {
-                    normal: {
-                        show: true,
-                        textStyle: {
-                            color: '#fff',
-                            fontSize: 9,
-                        }
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: '#F62157', //标志颜色
-                    }
-                },
-                zlevel: 6,
-                data: convertData(data),
-            },
-            {
-                name: 'Top 5',
-                type: 'effectScatter',
-                coordinateSystem: 'geo',
-                data: convertData(data.sort(function (a, b) {
-                    return b.value - a.value;
-                }).slice(0, 5)),
-                symbolSize: function (val) {
-                    return val[2] / 10;
-                },
-                showEffectOn: 'render',
-                rippleEffect: {
-                    brushType: 'stroke'
-                },
-                hoverAnimation: true,
-                label: {
-                    normal: {
-                        formatter: '{b}',
-                        position: 'right',
-                        show: true
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: '#05C3F9',
-                        shadowBlur: 10,
-                        shadowColor: '#05C3F9'
-                    }
-                },
-                zlevel: 1
-            },
-             
-        ]
-        };
 
-        myChart.setOption(option_map);
-    });
+                    visualMap: {
+                        show: false,
+                        min: 0,
+                        max: 500,
+                        left: 'left',
+                        top: 'bottom',
+                        text: ['高', '低'], // 文本，默认为数值文本
+                        calculable: true,
+                        seriesIndex: [1],
+                        inRange: {
+                            // color: ['#3B5077', '#031525'] // 蓝黑
+                            // color: ['#ffc0cb', '#800080'] // 红紫
+                            // color: ['#3C3B3F', '#605C3C'] // 黑绿
+                            color: ['#0f0c29', '#302b63', '#24243e'] // 黑紫黑
+                            // color: ['#23074d', '#cc5333'] // 紫红
+                            // color: ['#00467F', '#A5CC82'] // 蓝绿
+                            // color: ['#1488CC', '#2B32B2'] // 浅蓝
+                            // color: ['#00467F', '#A5CC82'] // 蓝绿
+                            // color: ['#00467F', '#A5CC82'] // 蓝绿
+                            // color: ['#00467F', '#A5CC82'] // 蓝绿
+                            // color: ['#00467F', '#A5CC82'] // 蓝绿
+
+                        }
+                    },
+
+                    geo: {
+                        show: true,
+                        map: 'changzhi',
+                        label: {
+                            normal: {
+                                show: false
+                            },
+                            emphasis: {
+                                show: false,
+                            }
+                        },
+                        roam: false,
+                        itemStyle: {
+                            normal: {
+                                areaColor: '#031525',
+                                borderColor: '#3B5077',
+                            },
+                            emphasis: {
+                                areaColor: '#2B91B7',
+                            }
+                        }
+                    },
+                    series : [
+                    {
+                            name: 'TOP5',
+                            type: 'scatter',
+                            coordinateSystem: 'geo',
+                            data: convertData(data),
+                            symbolSize: function (val) {
+                                return (val[2].qynum+val[2].jgnum+val[2].lxdnum+val[2].fwnum+val[2].cpnum) * 1;
+                            },
+                            label: {
+                                normal: {
+                                    formatter: '{b}',
+                                    position: 'right',
+                                    show: true
+                                },
+                                emphasis: {
+                                    show: true
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: '#05C3F9'
+                                }
+                            }
+                        },
+                         {
+                            type: 'map',
+                            map: 'jiangxi',
+                            geoIndex: 0,
+                            aspectScale: 0.75, //长宽比
+                            showLegendSymbol: false, // 存在legend时显示
+                            label: {
+                                normal: {
+                                    show: false
+                                },
+                                emphasis: {
+                                    show: false,
+                                    textStyle: {
+                                        color: '#fff'
+                                    }
+                                }
+                            },
+                            roam: true,
+                            itemStyle: {
+                                normal: {
+                                    areaColor: '#031525',
+                                    borderColor: '#3B5077',
+                                },
+                                emphasis: {
+                                    areaColor: '#2B91B7'
+                                }
+                            },
+                            animation: false,
+                            data: data
+                        },
+                        {
+                            name: '点',
+                            type: 'scatter',
+                            coordinateSystem: 'geo',
+                            symbol: 'pin',
+                            symbolSize: function (val) {
+                                var a = (maxSize4Pin - minSize4Pin) / (max - min);
+                                var b = minSize4Pin - a*min;
+                                b = maxSize4Pin - a*max;
+                                return 10*a*val[2]+b;
+                            },
+                            label: {
+                                normal: {
+                                    show: true,
+                                    textStyle: {
+                                        color: '#fff',
+                                        fontSize: 9,
+                                    }
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: '#F62157', //标志颜色
+                                }
+                            },
+                            zlevel: 6,
+                            data: convertData2(data),
+                        },
+                        {
+                            name: 'Top 5',
+                            type: 'effectScatter',
+                            coordinateSystem: 'geo',
+                            data: convertData(data.sort(function (a, b) {
+                                return b.value - a.value;
+                            }).slice(0, 5)),
+                            symbolSize: function (val) {
+                                return (val[2].qynum+val[2].jgnum+val[2].lxdnum+val[2].fwnum+val[2].cpnum) * 10;
+                            },
+                            showEffectOn: 'render',
+                            rippleEffect: {
+                                brushType: 'stroke'
+                            },
+                            hoverAnimation: true,
+                            label: {
+                                normal: {
+                                    formatter: '{b}',
+                                    position: 'right',
+                                    show: true
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: '#05C3F9',
+                                    shadowBlur: 10,
+                                    shadowColor: '#05C3F9'
+                                }
+                            },
+                            zlevel: 1
+                        },
+                    ]
+                };
+
+                myChart.setOption(option_map);
+            });  
+               
+        }
+    },
+    error: function(result){
+        alert('图表数据请求失败啦！')
+    }
+});  
+      
+   
 </script>
 
+<script type="text/javascript">
+$.ajax({
+    type: "POST",
+    url: "{:url('datav/api/tongji')}",
+    dataType:"json",
+    success: function(result){
+        var tongji = result['body']['data'][0]['result']['pageSum'][0];
+        $('#pv').html(tongji[0]);
+        $('#cv').html(tongji[1]);
+        $('#uv').html(tongji[2]);
+        $('#ip').html(tongji[3]);
+    },
+    error:function(result){
+        alert('获取平台流量失败！请重试！')
+    }
+});
+</script>
 
 
 

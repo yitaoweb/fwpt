@@ -2,6 +2,9 @@
 /**
  * class DataApiConnection, provide POST method: send POST request to DataApi URL
  */
+
+namespace tongji\baidu;
+
 class DataApiConnection {
     /**
      * @var string
@@ -60,8 +63,8 @@ class DataApiConnection {
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $this->url);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
         curl_setopt($curl, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($curl, CURLOPT_AUTOREFERER, 1);
@@ -73,6 +76,7 @@ class DataApiConnection {
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
         $tmpRet = curl_exec($curl);
+
         if (curl_errno($curl)) {
             echo '[error] CURL ERROR: ' . curl_error($curl) . PHP_EOL;
         }

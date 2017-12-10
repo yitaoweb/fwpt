@@ -1,12 +1,9 @@
 <?php
 /**
- * class ReportService
- */
-require_once('DataApiConnection.php');
-
-/**
  * ReportService
  */
+namespace tongji\baidu;
+
 class ReportService {
     private $apiUrl;
     private $userName;
@@ -35,7 +32,7 @@ class ReportService {
      * @return array
      */
     public function getSiteList() {
-        echo '----------------------get site list----------------------' . PHP_EOL;
+        //echo '----------------------get site list----------------------' . PHP_EOL;
         $apiConnection = new DataApiConnection();
         $apiConnection->init($this->apiUrl . '/getSiteList', $this->ucid);
 

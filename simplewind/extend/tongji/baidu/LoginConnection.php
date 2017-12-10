@@ -1,12 +1,10 @@
 <?php
 /**
- * class LoginConnection, provide POST method: send POST request to Login URL
- */
-require_once('Utility.php');
-
-/**
  * LoginConnection
  */
+
+namespace tongji\baidu;
+
 class LoginConnection{
     /**
      * @var string
@@ -46,15 +44,13 @@ class LoginConnection{
      * generate post data
      * @param array $data
      */
-    public function genPostData($data,$path) {
+    public function genPostData($data) {
         $gzData = gzencode(json_encode($data), 9);
-
-        $rsa = new RsaPublicEncrypt($path);
+        $rsa = new RsaPublicEncrypt('./');
         for ($index = 0, $enData = ''; $index < strlen($gzData); $index += 117) {
             $gzPackData = substr($gzData, $index, 117);
             $enData .= $rsa->pubEncrypt($gzPackData);
         }
-
         $this->postData = $enData;
     }
 
@@ -62,13 +58,13 @@ class LoginConnection{
      * post
      * @param array $data
      */
-    public function POST($data,$path='./') {
-        $this->genPostData($data,$path);
+    public function POST($data) {
+        $this->genPostData($data);
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $this->url);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
         curl_setopt($curl, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($curl, CURLOPT_AUTOREFERER, 1);

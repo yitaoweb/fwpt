@@ -17,6 +17,9 @@ use think\Loader;
 use think\Request;
 use cmf\lib\Storage;
 
+use tongji\baidu\LoginService;
+use tongji\baidu\ReportService;
+
 // 应用公共文件
 
 //设置插件入口路由
@@ -1973,4 +1976,92 @@ function sign($token, $soucr_str){
     $my_sign = hash_hmac("sha1", $soucr_str, strtr($token, '-_', '+/'));
     $my_sign = md5($my_sign);
     return $my_sign;
+}
+
+
+/**
+ * 获取统计时间
+ * @param $type
+ * 1 上月
+ * 2 本月
+ * 3 近15天
+ * 4 近30天
+ * @return array
+ */
+function getDateInfo($type)
+{
+  $data = array(
+    array(
+      'firstday' => date('Ym01', strtotime('-1 month')),
+      'lastday' => date('Ymt', strtotime('-1 month')),
+    ),
+    array(
+      'firstday' => date('Ym01', strtotime(date("Y-m-d"))),
+      'lastday' => date('Ymd', strtotime((date('Ym01', strtotime(date("Y-m-d")))) . " +1 month -1 day")),
+    ),
+    array(
+      'firstday' => date('Ymd', strtotime("-15 day")),
+      'lastday' => date('Ymd', strtotime('-1 day')),
+    ),
+    array(
+      'firstday' => date('Ymd', strtotime("-30 day")),
+      'lastday' => date('Ymd', strtotime('-1 day')),
+    ),
+    array(
+      'firstday' => date('Ymd', strtotime("now")),
+      'lastday' => date('Ymd', strtotime("now")),
+    ),
+  );
+  return is_null($type) ? $data : $data[$type-1];
+}
+
+function tongji($type = '4'){
+
+        $loginService = new LoginService(LOGIN_URL, UUID);
+
+        // preLogin
+        if (!$loginService->preLogin(USERNAME, TOKEN)) {
+            exit();
+        }
+
+        // doLogin
+        $ret = $loginService->doLogin(USERNAME, PASSWORD, TOKEN);
+        if ($ret) {
+            $ucid = $ret['ucid'];
+            $st = $ret['st'];
+        }
+        else {
+            exit();
+        }
+        $date =getDateInfo($type);//1 上月 2 本月 3 近15天 4 近30天 5 当天
+
+        $date1 = $date['firstday'];
+        $date2 = $date['lastday'];
+
+
+        $reportService = new ReportService(API_URL, USERNAME, TOKEN, $ucid, $st);
+
+        // get site list
+        $ret = $reportService->getSiteList();
+        //echo $ret['raw'] . PHP_EOL;
+
+        $siteList = $ret['body']['data'][0]['list'];
+        if (count($siteList) > 0) {
+            $siteId = $siteList[0]['site_id'];
+            // get report data of the first site
+            $ret = $reportService->getData(array(
+                'site_id' => $siteId,                   //站点ID
+                'method' => 'visit/district/a',             //趋势分析报告
+                'start_date' => $date1,             //所查询数据的起始日期
+                'end_date' => $date2,               //所查询数据的结束日期
+                'metrics' => 'pv_count,visit_count,visitor_count,ip_count',  //所查询指标为PV和UV
+                'max_results' => 0,                     //返回所有条数
+                'gran' => 'day',                        //按天粒度
+            ));
+            echo $ret['raw'] . PHP_EOL;
+        }
+
+        // doLogout
+        $loginService->doLogout(USERNAME, TOKEN, $ucid, $st);
+
 }

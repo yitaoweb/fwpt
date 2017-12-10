@@ -10,7 +10,7 @@
 // [ 入口文件 ]
 
 // 调试模式开关
-define("APP_DEBUG", 1);
+define("APP_DEBUG", 0);
 
 // 定义CMF根目录,可更改此目录
 define('CMF_ROOT', __DIR__ . '/');
@@ -33,6 +33,29 @@ define('RUNTIME_PATH', CMF_ROOT . 'data/runtime/');
 
 // 定义CMF 版本号
 define('THINKCMF_VERSION', '5.0.170927');
+
+
+define('LOGIN_URL', 'https://api.baidu.com/sem/common/HolmesLoginService');
+
+//Tongji API URL
+define('API_URL', 'https://api.baidu.com/json/tongji/v1/ReportService');
+
+//USERNAME
+define('USERNAME', 'zxsmltpt');
+
+//PASSWORD
+define('PASSWORD', 'FWpt2017');
+
+//TOKEN
+define('TOKEN', '46b0e6150899ec21179985290c6928fd');
+
+//UUID, used to identify your device, for instance: MAC address
+define('UUID', '11495003');
+
+//ACCOUNT_TYPE
+define('ACCOUNT_TYPE', 1); //ZhanZhang:1,FengChao:2,Union:3,Columbus:4
+
+
 
 // 加载框架基础文件
 require CMF_ROOT . 'simplewind/thinkphp/base.php';

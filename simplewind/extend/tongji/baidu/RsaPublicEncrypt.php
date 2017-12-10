@@ -2,7 +2,10 @@
 /**
  * Utility, provide RSA public encrypt method and gzdecode function
  */
-class RsaPublicEncrypt {
+
+namespace tongji\baidu;
+
+class RsaPublicEncrypt{
     /**
      * @var string
      */
@@ -37,9 +40,7 @@ class RsaPublicEncrypt {
             return true;
         }
         $file = $this->path . DIRECTORY_SEPARATOR .  'api_pub.key';
-
         $puk = file_get_contents($file);
-
         $this->publicKey = openssl_pkey_get_public($puk);
         return true;
     }
