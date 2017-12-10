@@ -46,11 +46,15 @@
                 <dt>行业类型</dt>
                 <dd>
                 <select name="fl" style="width:326px;"  datatype="*" sucmsg=" ">
-                    <volist name="fuwu" id="vo">
+<!--                     <volist name="fuwu" id="vo">
                         <option value="{$vo.id}" <if condition="$vo.id eq $qysjfx.fl">selected = "selected"</if>>
                            {$vo.name}
                         </option>
-                    </volist>
+                    </volist> -->
+                    <option value="1" <if condition="1 eq $qysjfx.fl">selected = "selected"</if> >工业</option>
+                    <option value="2" <if condition="2 eq $qysjfx.fl">selected = "selected"</if> >建筑业</option>
+                    <option value="3" <if condition="3 eq $qysjfx.fl">selected = "selected"</if> >批零住餐</option>
+                    <option value="4" <if condition="4 eq $qysjfx.fl">selected = "selected"</if> >服务业</option>
                 </select>
                 </dd>
               </dl>
