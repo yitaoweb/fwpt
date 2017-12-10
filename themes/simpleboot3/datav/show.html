@@ -64,7 +64,7 @@
             <div class="box vw25">
                 <div class="title">
                     <div class="icon" width="18px" height="18px" ></div>
-                    <span class="text" >平台流量数据</span>
+                    <span class="text" >平台流量数据a</span>
                 </div>
                 <div id="main2" class="my_main" style="float:left;width: 24vw; height: 10vw;"></div>
               
@@ -73,7 +73,7 @@
             <div class="box vw25">
                 <div class="title">
                     <div class="icon" width="18px" height="18px" ></div>
-                    <span class="text" >平台流量数据</span>
+                    <span class="text" >平台流量数据b</span>
                 </div>
                 <div id="main3" class="my_main" style="float:left;width: 24vw; height: 10vw;"></div>
               
@@ -135,7 +135,7 @@
             <div class="box vw25_mid">
                 <div class="title">
                     <div class="icon" width="18px" height="18px" ></div>
-                    <span class="text" >平台流量数据</span>
+                    <span class="text" >平台流量数据s</span>
                 </div>
                 <div id="main4" class="my_main" style="float:left;width: 24vw; height: 10vw;"></div>
             </div>
@@ -302,7 +302,30 @@
         var myChart6 = echarts.init(document.getElementById('main6'));
         var myChart7 = echarts.init(document.getElementById('main7'));
         var myChart8 = echarts.init(document.getElementById('main8'));
-
+            var qyname = new Array();
+            var ddcoun = new Array();
+            var zzcoun = new Array();
+            var wccoun = new Array();
+            $.ajax({
+                type: "POST",
+                url:'/datav/Api/xq',
+                async: false,
+                cache: false,
+                success: function (data) {               
+                  for (var i = 0; i < data.length; i++) {
+                      qyname[i]=data[i].xzname;
+                      if(data[i].djsta == 0){
+                            ddcoun[i]=data[i].coun;
+                      }  
+                      if(data[i].djsta == 1){
+                            zzcoun[i]=data[i].coun;
+                      }  
+                      if(data[i].djsta == 2){
+                            wccoun[i]=data[i].coun;
+                      }                     
+                  }
+                }
+            })
         var option3 = {      
                         tooltip: {
                             trigger: 'axis',
@@ -327,7 +350,7 @@
                                     color: '#57617B'
                                 }
                             },
-                            data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
+                            data: qyname
                         }, {
                             axisPointer: {
                                 show: false
@@ -370,7 +393,7 @@
                             min : '50'
                         }],
                         series: [{
-                            name: '移动',
+                            name: '等待对接',
                             type: 'line',
                             smooth: true,
                             symbol: 'circle',
@@ -402,9 +425,9 @@
 
                                 }
                             },
-                            data: [125, 111, 121, 134, 110, 120, 110, 125, 145, 122, 125, 122]
+                            data: ddcoun
                         }, {
-                            name: '电信',
+                            name: '正在对接',
                             type: 'line',
                             smooth: true,
                             symbol: 'circle',
@@ -436,9 +459,9 @@
 
                                 }
                             },
-                            data: [120, 110, 125, 145, 122, 165, 122, 130, 182, 191, 134, 150]
+                            data: zzcoun
                         }, {
-                            name: '联通',
+                            name: '对接完成',
                             type: 'line',
                             smooth: true,
                             symbol: 'circle',
@@ -470,7 +493,7 @@
                                     borderWidth: 12
                                 }
                             },
-                            data: [150, 160, 125, 145, 122, 155, 134, 150, 120, 110, 165, 122]
+                            data: wccoun
                         }, ]
                     };
 
@@ -1019,7 +1042,6 @@
         var maxSize4Pin = 100, minSize4Pin = 20;
 
       var convertData = function (data) {
-        var res = [];
         for (var i = 0; i < data.length; i++) {
             var geoCoord = geoCoordMap[data[i].name];
             if (geoCoord) {

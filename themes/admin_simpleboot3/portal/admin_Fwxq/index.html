@@ -57,7 +57,7 @@
                     <?php if(cmf_send_timebj(date('y-m-d h:i:s',time()),$vo['time']) >$portal_yj['ts']){?>
                     <td style="color: red">已超过预警天数</td>
                     <?php }?>
-                    <?php if(cmf_send_timebj(date('y-m-d h:i:s',time()),$vo['time']) <$portal_yj['ts']){?>
+                    <?php if(cmf_send_timebj(date('y-m-d h:i:s',time()),$vo['time']) <=$portal_yj['ts']){?>
                     <td>正常天数</td>
                     <?php }?>
                     <td>{$vo.time}</td>

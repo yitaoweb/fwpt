@@ -28,4 +28,10 @@ class ApiController extends HomeBaseController
         return json_encode($ret);
       
     }
+
+    public function xq(){
+        $get_ly = Db::query('select c.name as xzname,count(a.id) as coun,a.dj_state as djsta from pt_portal_fwxq as a left join pt_user as b on a.user_id = b.id LEFT JOIN pt_portal_xzqy as c on b.qy_area = c.id group by c.name,a.dj_state');
+        return $get_ly;
+    }
+
 }
