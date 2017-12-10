@@ -101,10 +101,11 @@ class DemandController extends HomeBaseController
             $i=$i+1;
         }
         $users = cmf_get_current_user();
+
         $this->assign('jigou', $jigou);        //推荐机构
         $this->assign('get_ly', $get_ly);
         // $this->assign('fb_user', $fb_user);      
-        $this->assign('user_type', $users['user_type']);
+        $this->assign('user_types', $users['user_type']);
         $this->assign($demand);   
         $this->assign('xq_id',$demand['id']);              //机构简介
         $this->assign($user);   
@@ -136,7 +137,6 @@ class DemandController extends HomeBaseController
         $arrData['stat'] = 0;
         $portalTagModel = new PortalDjModel();
         $portalTagModel->isUpdate(false)->allowField(true)->save($arrData);
-
         $this->success("申请已提交");
     }
 

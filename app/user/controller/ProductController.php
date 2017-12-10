@@ -60,10 +60,25 @@ class ProductController extends UserBaseController
     public function statup(){
         $stat = $this->request->param("stat", 0, "intval");
         $id = $this->request->param("id", 0, "intval");
+        $xq_id = $this->request->param("xq_id", 0, "intval");
         $portalPostModel = new PortalDjModel();
         $jg_sunCon=0;
+        $fwxq=Db::name('portal_fwxq');
         if($stat == 3){
             $jg_sunCon=1;
+             $fwxq->where('id',$xq_id)->update(
+                 ['dj_state'=>2]
+            );
+        }
+        if($stat == 1){
+            $fwxq->where('id',$xq_id)->update(
+                 ['dj_state'=>1]
+            );
+        }
+        if($stat == 2){
+           $fwxq->where('id',$xq_id)->update(
+                 ['dj_state'=>0]
+            );
         }
         $a = $portalPostModel->where('id',$id)->update(
                  ['stat'=>$stat,'jg_sunCon'=>$jg_sunCon]

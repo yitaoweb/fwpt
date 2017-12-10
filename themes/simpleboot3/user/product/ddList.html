@@ -67,14 +67,14 @@
 							</td>
 							<td>
                                <if condition='($vo.stat == 0 && $vo.shenQing_qf == 2)'>
-							      <a href="{:url('user/product/statup',array('id'=>$vo.id,'stat'=>1))}">确认受理</a>
-							      <a href="{:url('user/product/statup',array('id'=>$vo.id,'stat'=>2))}">拒绝受理</a>
+							      <a href="{:url('user/product/statup',array('xq_id'=>$vo.xq_id,'id'=>$vo.id,'stat'=>1))}">确认受理</a>
+							      <a href="{:url('user/product/statup',array('xq_id'=>$vo.xq_id,'id'=>$vo.id,'stat'=>2))}">拒绝受理</a>
 							   </if>
 							   <if condition='($vo.stat == 2)'>
                                    <a href="{:url('user/product/delects',array('id'=>$vo.id))}">删除</a>
                                </if>
 							   <if condition='($vo.stat == 1)'>
-							      <a href="{:url('user/product/statup',array('id'=>$vo.id,'stat'=>3))}">确认服务完成</a>
+							      <a href="{:url('user/product/statup',array('xq_id'=>$vo.xq_id,'id'=>$vo.id,'stat'=>3))}">确认服务完成</a>
 							   </if>
 							</td>
 						</tr>

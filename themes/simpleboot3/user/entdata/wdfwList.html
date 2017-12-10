@@ -89,7 +89,8 @@
                               <a href="{:url('user/Entdata/statup',array('id'=>$vo.id,'stat'=>3))}">确认服务完成</a>
                            </if>
                            <if condition='($vo.shenQing_qf == 3 && $vo.stat == 0)'>
-                              <a href="{:url('user/product/statup',array('id'=>$vo.id,'stat'=>1))}">确认受理</a>
+                              <a href="{:url('user/product/statup',array('xq_id'=>$vo.xq_id,'id'=>$vo.id,'stat'=>1))}">确认受理</a>
+                              <a href="{:url('user/product/statup',array('xq_id'=>$vo.xq_id,'id'=>$vo.id,'stat'=>2))}">拒绝受理</a>
                            </if>
                            <if condition='($vo.stat == 2)'>
                               <a href="{:url('user/Entdata/delects',array('id'=>$vo.id))}">删除</a>
