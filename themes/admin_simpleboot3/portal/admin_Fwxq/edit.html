@@ -50,28 +50,25 @@
             </div>
         </div>
          <div class="form-group">
-            <label class="col-sm-2 control-label"><span class="form-required">*</span>图片:</label>
-            <div>
+            <label class="col-sm-2 control-label" for="input-description">图片</label>
+            <div >
                 <input type="hidden" name="img" class="form-control"
-                       id="js-thumbnailyyzz-input">
-                <div>
-                     <input type="hidden" name="img" class="form-control"
-                       id="js-thumbnailyyzz-input" value="{$post.img|default=''}">
-                        <div>
-                            <if condition="empty($post.img)">
-                                <a href="javascript:uploadOneImage('图片上传','#js-thumbnailyyzz-input');">
-                                     <img src="__TMPL__/public/assets/images/default-thumbnail.png"
-                                     id="js-thumbnailyyzz-input-preview"
-                                     width="135" style="cursor: pointer"/>
-                                </a>
-                                    <else/>
-                                <a href="javascript:uploadOneImage('图片上传','#js-thumbnailyyzz-input');">
-                                    <img src="{:cmf_get_image_preview_url($post.img)}"
-                                         id="js-thumbnailyyzz-input-preview"
-                                         width="135" style="cursor: pointer"/>
-                                </a>
-                            </if>
-                        </div>
+                       id="js-img-input" value="{$post.img}">
+                <div >
+
+                    <if condition="empty($post.img)">
+                       <a href="javascript:uploadOneImage('图片上传','#js-img-input');">
+                        <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                             id="js-img-input-preview"
+                             width="135" style="cursor: pointer"/>
+                        </a>
+                            <else/>
+                        <a href="javascript:uploadOneImage('图片上传','#js-img-input');">
+                            <img src="{:cmf_get_image_preview_url($post.img)}"
+                                 id="js-img-input-preview"
+                                 width="135" style="cursor: pointer"/>
+                        </a>
+                    </if>
                 </div>
             </div>
         </div>

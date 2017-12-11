@@ -77,7 +77,7 @@
     <div class="list">     
         <foreach name="lists" item="vo"  empty="$emptylist">
             <div class="list-item">                 
-                <img src="./__ROOT__/upload/{$vo.avatar}" alt="" title=""/>
+                <img src="__ROOT__/upload/{$vo.avatar}" alt="" title=""/>
                 <div class="linkto">电话<span>{$vo.tel}</span><a href="{:cmf_url('portal/Jghome/index',array('id'=>$vo.id))}">进入机构</a></div>
                 <h1>{$vo.user_nickname}</h1>
                 <p>服务地址：山西-长治-{$vo.qy_address}</p>
