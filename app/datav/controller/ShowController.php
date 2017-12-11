@@ -37,7 +37,7 @@ class ShowController extends HomeBaseController
             exit();
         }
     }
-
+    //数据分析-首页
     public function index()
     {
         //header('Access-Control-Allow-Origin:*'); 
@@ -85,7 +85,7 @@ class ShowController extends HomeBaseController
 
         return $this->fetch(':show');
     }
-
+    //数据分析-网站流量页面
     public function site()
     {
         //header('Access-Control-Allow-Origin:*'); 
@@ -134,6 +134,7 @@ class ShowController extends HomeBaseController
         return $this->fetch(':site');
     }
 
+    //数据分析-限额以上企业数据页面
     public function xsqy()
     {
         //header('Access-Control-Allow-Origin:*'); 
@@ -182,6 +183,7 @@ class ShowController extends HomeBaseController
         return $this->fetch(':xsqy');
     }
 
+    //数据分析 - 经济运行情况数据分析
     public function jj()
     {
         //header('Access-Control-Allow-Origin:*'); 
@@ -230,6 +232,8 @@ class ShowController extends HomeBaseController
         return $this->fetch(':xm');
     }
 
+
+    //数据分析 - 服务数据页面
     public function fw()
     {
         //header('Access-Control-Allow-Origin:*'); 
@@ -279,7 +283,7 @@ class ShowController extends HomeBaseController
     }
 
 
-
+    //数据分析 - 开发区项目数据页面
     public function xm()
     {
         //header('Access-Control-Allow-Origin:*'); 
@@ -327,6 +331,9 @@ class ShowController extends HomeBaseController
 
         return $this->fetch(':xm');
     }
+
+
+    //数据分析 - 企业机构 百度地图gis页面
     public function ent()
     {
         //header('Access-Control-Allow-Origin:*'); 
