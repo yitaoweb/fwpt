@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="renderer" content="webkit">
   <meta name="data-spm" content="datav">
-  <title>{$title}</title>
+  <title>{$title}-{sub_title}</title>
 
  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=yarzUUkNb0F0UgHUbSGiHRwQ"></script>
 
@@ -91,32 +91,6 @@
 
 
 
-    // $(function(){
-
-    //     var app_id ='500554165';
-    //     var end_date ='2017-12-06';
-    //     var start_date ='2017-11-01';
-    //     var idx ='10201,10202,10203';
-    
-    //     var sign ='{$sign}';
-    //     $.ajax({
-    //         type: "get",
-    //         url: "http://mta.qq.com/h5/api/ctr_user_realtime?app_id=500554165&end_date=2017-12-06&idx=10201%2C10202%2C10203&start_date=2017-11-01&sign=0e9bcad9e694b83a22512510a4b5a9d7",
-          
-    //         dataType:"jsonp",
-    //         success: function(result){
-    //             alert(1);
-    //             writeObj(result);
-    //         },
-    //         error: function(result){
-    //             //请求失败之后的操作
-    //             alert(2);
-    //             writeObj(result);
-    //         }
-    //     });
-    // })
-
-
     function writeObj(obj){ 
      var description = ""; 
      for(var i in obj){ 
@@ -129,7 +103,7 @@
 </script>
 
 
-<
+
 
 <script type="text/javascript">
     //百度地图API功能

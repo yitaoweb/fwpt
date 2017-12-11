@@ -17,7 +17,6 @@ use think\Db;
  
 class ShowController extends HomeBaseController
 {
-    //构造函数
     public function _initialize()
     {
         parent::_initialize();
@@ -33,25 +32,18 @@ class ShowController extends HomeBaseController
             }
             $this->assign("role", $role);
             $this->assign("admin", $user);
-            $site_name = cmf_get_site_info('site_info');
-        
-            $name=$site_name['site_name'];
-      
             $title='长治市中小商贸流通企业公共服务数据分析平台';
-            $en = 'changzhi public service platform for SME';
             $this->assign('title',$title);
-            $this->assign('en',$en);
-
         } else {
             $this->error("您还没有登录！", url("datav/public/login"));
             exit();
         }
     }
-
-
     //数据分析-首页
     public function index()
     {
+         
+        
 
         $qy_num = Db::query('select count(id) as num from pt_user where user_type = 2');
         $jg_num = Db::query('select count(id) as num from pt_user where user_type = 3');
@@ -60,6 +52,7 @@ class ShowController extends HomeBaseController
         $cp_num = Db::query('select count(id) as num from pt_portal_fwcp');
         $dj_num = Db::query('select count(id) as num from pt_portal_dj');
         $zj_num = Db::query('select count(id) as num from pt_portal_zjk');
+
      
         $this->assign('qy_num',$qy_num[0]['num']);
         $this->assign('jg_num',$jg_num[0]['num']);
@@ -68,25 +61,38 @@ class ShowController extends HomeBaseController
         $this->assign('cp_num',$cp_num[0]['num']);
         $this->assign('dj_num',$dj_num[0]['num']);
         $this->assign('zj_num',$zj_num[0]['num']);
+  
 
         return $this->fetch(':show');
     }
 
+
     //数据分析-网站流量页面
     public function site()
-    {  
+    {
+        
+        $sub_title='平台整体流量分析';
+        $this->assign('sub_title',$sub_title);
+
         return $this->fetch(':site');
     }
+
 
     //数据分析-限额以上企业数据页面
     public function xsqy()
     {
+        $sub_title='限额以上企业数据分析';
+        $this->assign('sub_title',$sub_title);
+
         return $this->fetch(':xsqy');
     }
 
     //数据分析 - 经济运行情况数据分析
     public function jj()
     {
+        $sub_title='经济运行情况数据分析';
+        $this->assign('sub_title',$sub_title);
+
         return $this->fetch(':jj');
     }
 
@@ -94,6 +100,9 @@ class ShowController extends HomeBaseController
     //数据分析 - 服务数据页面
     public function fw()
     {
+        $sub_title='服务数据分析';
+        $this->assign('sub_title',$sub_title);
+
         return $this->fetch(':fw');
     }
 
@@ -101,6 +110,9 @@ class ShowController extends HomeBaseController
     //数据分析 - 开发区项目数据页面
     public function xm()
     {
+        $sub_title='开发区项目数据分析';
+        $this->assign('sub_title',$sub_title);
+
         return $this->fetch(':xm');
     }
 
@@ -108,6 +120,9 @@ class ShowController extends HomeBaseController
     //数据分析 - 企业机构 百度地图gis页面
     public function ent()
     {
+        $sub_title='企业机构GIS数据分析';
+        $this->assign('sub_title',$sub_title);
+
         return $this->fetch(':ent');
     }
 }
