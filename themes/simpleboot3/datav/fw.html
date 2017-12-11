@@ -51,7 +51,15 @@
 </body>
 </html>
 
-
+  <SCRIPT LANGUAGE="JavaScript">
+    var xctjcoun = <?php echo json_encode($xctjcoun);?>;
+    var flwqcoun = <?php echo json_encode($flwqcoun);?>;
+    var syrzcoun = <?php echo json_encode($syrzcoun);?>;
+    var swzxcoun = <?php echo json_encode($swzxcoun);?>;
+    var rcpxcoun = <?php echo json_encode($rcpxcoun);?>;
+    var xxfwcoun = <?php echo json_encode($xxfwcoun);?>;
+    var coun = <?php echo json_encode($coun);?>;
+  </SCRIPT>
 
 <script>
     function startTime()
@@ -104,7 +112,6 @@
 
 <script type="text/javascript">
     var myChart1 = echarts.init(document.getElementById('main1'));
-    
     //var colors = ['orange', '#d14a61', '#1E90FF'];
     labelTop = {
         normal : {
@@ -154,12 +161,11 @@
             x : 'center',
             y : 'center',
             data:[
-                '剧情', '奇幻', '爱情', '惊悚', '冒险', '动作', '喜剧', '科幻','悬疑','犯罪'
+                '宣传推介', '法律维权', '商业融资', '商务咨询', '人才培训', '信息服务'
             ]
         },
         title : {
-            text: '各类型电影中“好片”所占比重',
-            subtext: '原始数据来自豆瓣',
+            text: '服务产品分类统计',
             x: 'center'
         },
         toolbox: {
@@ -200,8 +206,8 @@
                 x: '0%', // for funnel
                 itemStyle : labelFromatter,
                 data : [
-                    {name:'other', value:75, itemStyle : labelBottom},
-                    {name:'剧情', value:25,itemStyle : labelTop}
+                    {name:'other', value:coun[0]['coun']-xctjcoun[0]['xctjcoun'], itemStyle : labelBottom},
+                    {name:'宣传推介', value:xctjcoun[0]['xctjcoun'],itemStyle : labelTop}
                 ]
             },
             {
@@ -211,8 +217,8 @@
                 x:'20%', // for funnel
                 itemStyle : labelFromatter,
                 data : [
-                    {name:'other', value:76, itemStyle : labelBottom},
-                    {name:'奇幻', value:24,itemStyle : labelTop}
+                    {name:'other', value:coun[0]['coun']-flwqcoun[0]['flwqcoun'], itemStyle : labelBottom},
+                    {name:'法律维权', value:flwqcoun[0]['flwqcoun'],itemStyle : labelTop}
                 ]
             },
             {
@@ -222,8 +228,8 @@
                 x:'40%', // for funnel
                 itemStyle : labelFromatter,
                 data : [
-                    {name:'other', value:86, itemStyle : labelBottom},
-                    {name:'爱情', value:14,itemStyle : labelTop}
+                    {name:'other', value:coun[0]['coun']-syrzcoun[0]['syrzcoun'], itemStyle : labelBottom},
+                    {name:'商业融资', value:syrzcoun[0]['syrzcoun'],itemStyle : labelTop}
                 ]
             },
             {
@@ -233,8 +239,8 @@
                 x:'60%', // for funnel
                 itemStyle : labelFromatter,
                 data : [
-                    {name:'other', value:89, itemStyle : labelBottom},
-                    {name:'惊悚', value:11,itemStyle : labelTop}
+                    {name:'other', value:coun[0]['coun']-swzxcoun[0]['swzxcoun'], itemStyle : labelBottom},
+                    {name:'商务咨询', value:swzxcoun[0]['swzxcoun'],itemStyle : labelTop}
                 ]
             },
             {
@@ -244,8 +250,8 @@
                 x:'80%', // for funnel
                 itemStyle : labelFromatter,
                 data : [
-                    {name:'other', value:73, itemStyle : labelBottom},
-                    {name:'冒险', value:27,itemStyle : labelTop}
+                    {name:'other', value:coun[0]['coun']-rcpxcoun[0]['rcpxcoun'], itemStyle : labelBottom},
+                    {name:'人才培训', value:rcpxcoun[0]['rcpxcoun'],itemStyle : labelTop}
                 ]
             },
             {
@@ -256,58 +262,11 @@
                 x: '0%',    // for funnel
                 itemStyle : labelFromatter,
                 data : [
-                    {name:'other', value:85, itemStyle : labelBottom},
-                    {name:'动作', value:15,itemStyle : labelTop}
-                ]
-            },
-            {
-                type : 'pie',
-                center : ['30%', '70%'],
-                radius : radius,
-                y: '55%',   // for funnel
-                x:'20%',    // for funnel
-                itemStyle : labelFromatter,
-                data : [
-                    {name:'other', value:46, itemStyle : labelBottom},
-                    {name:'喜剧', value:54,itemStyle : labelTop}
-                ]
-            },
-            {
-                type : 'pie',
-                center : ['50%', '70%'],
-                radius : radius,
-                y: '55%',   // for funnel
-                x:'40%', // for funnel
-                itemStyle : labelFromatter,
-                data : [
-                    {name:'other', value:74, itemStyle : labelBottom},
-                    {name:'科幻', value:26,itemStyle : labelTop}
-                ]
-            },
-            {
-                type : 'pie',
-                center : ['70%', '70%'],
-                radius : radius,
-                y: '55%',   // for funnel
-                x:'60%', // for funnel
-                itemStyle : labelFromatter,
-                data : [
-                    {name:'other', value:75, itemStyle : labelBottom},
-                    {name:'悬疑', value:25,itemStyle : labelTop}
-                ]
-            },
-            {
-                type : 'pie',
-                center : ['90%', '70%'],
-                radius : radius,
-                y: '55%',   // for funnel
-                x:'80%', // for funnel
-                itemStyle : labelFromatter,
-                data : [
-                    {name:'other', value:72, itemStyle : labelBottom},
-                    {name:'犯罪', value:28,itemStyle : labelTop}
+                    {name:'other', value:coun[0]['coun']-xxfwcoun[0]['xxfwcoun'], itemStyle : labelBottom},
+                    {name:'信息服务', value:xxfwcoun[0]['xxfwcoun'],itemStyle : labelTop}
                 ]
             }
+           
         ]
     };
 

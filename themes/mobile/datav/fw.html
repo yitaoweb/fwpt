@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单的Material Design风格手机App菜单特效</title>
+    <link rel="stylesheet" type="text/css" href="__TMPL__/datav/dh/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="__TMPL__/datav/dh/css/default.css">
+    <link rel="stylesheet" type="text/css" href="__TMPL__/datav/dh/css/styles.css">
+    <!--[if IE]>
+        <script src="http://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="jq22-container">
+        <header class="jq22-header">
+            <h1>数据平台分析</h1>          
+        </header>
+        <div class="phone">
+            <div class="screen">
+                <nav class="nav">
+                    <ul>
+                        <li><a href="{:cmf_url('datav/index/index')}">分析首页</a></li>
+                        <li><a href="{:cmf_url('datav/show/xsqy')}">限上企业分析</a></li>
+                        <li><a href="{:cmf_url('datav/show/xm')}">项目数据分析</a></li>
+                        <li><a href="{:cmf_url('datav/show/fw')}">服务产品分析</a></li>
+                        <li><a href="{:cmf_url('datav/show/jj')}">经济运行情况分析</a></li>
+                        <li><a href="{:cmf_url('user/Index/logout')}">退出</a></li>
+                    </ul>
+                </nav>
+                <div class="nav-toggle">
+                    <div class="icon"></div>
+                </div>
+                <div class="lower-screen">
+
+                    <div class="card">
+                        <h2>服务产品分类统计</h2>
+                        <br><br>
+                         <div id="main" style="width: 100%;height:350px;"></div>
+<!--                         <p>Created by Lewi Hussey.</p> -->
+                    </div>
+                </div>
+        </div>
+
+
+    </div>
+    
+    <script src="http://www.jq22.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="__TMPL__/datav/dh/js/echarts.min.js"></script>
+    <script>
+    $('.nav-toggle').click(function () {
+        $('body').toggleClass('nav-open');
+    });
+    </script>
+  <SCRIPT LANGUAGE="JavaScript">
+    var xctjcoun = <?php echo json_encode($xctjcoun);?>;
+    var flwqcoun = <?php echo json_encode($flwqcoun);?>;
+    var syrzcoun = <?php echo json_encode($syrzcoun);?>;
+    var swzxcoun = <?php echo json_encode($swzxcoun);?>;
+    var rcpxcoun = <?php echo json_encode($rcpxcoun);?>;
+    var xxfwcoun = <?php echo json_encode($xxfwcoun);?>;
+    var coun = <?php echo json_encode($coun);?>;
+  </SCRIPT>
+<script type="text/javascript">
+var myChart = echarts.init(document.getElementById('main'));
+option = {
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+        data:[
+                '宣传推介', '法律维权', '商业融资', '商务咨询', '人才培训', '信息服务'
+            ]
+    },
+    series : [
+        {
+            name: '',
+            type: 'pie',
+            radius : '30%',
+            center: ['50%', '60%'],
+            data:[
+                {value:coun[0]['coun']-xctjcoun[0]['xctjcoun'], name:'宣传推介'},
+                {value:coun[0]['coun']-flwqcoun[0]['flwqcoun'], name:'法律维权'},
+                {value:coun[0]['coun']-syrzcoun[0]['syrzcoun'], name:'商业融资'},
+                {value:coun[0]['coun']-swzxcoun[0]['swzxcoun'], name:'商务咨询'},
+                {value:coun[0]['coun']-rcpxcoun[0]['rcpxcoun'], name:'人才培训'},
+                {value:coun[0]['coun']-xxfwcoun[0]['xxfwcoun'], name:'信息服务'}
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+
+myChart.setOption(option);
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!-- option = {
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        x: 'left',
+        data:[
+                '宣传推介', '法律维权', '商业融资', '商务咨询', '人才培训', '信息服务'
+            ]
+    },
+    series: [
+        {
+            name:'访问来源',
+            type:'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data:[
+                {value:coun-xctjcoun, name:'宣传推介'},
+                {value:coun-flwqcoun, name:'法律维权'},
+                {value:coun-syrzcoun, name:'商业融资'},
+                {value:coun-swzxcoun, name:'商务咨询'},
+                {value:coun-rcpxcoun, name:'人才培训'},
+                {value:coun-xxfwcoun, name:'信息服务'}
+            ]
+        }
+    ]
+}; -->

@@ -34,7 +34,10 @@ class ShowController extends HomeBaseController
             $this->assign("admin", $user);
             $title='长治市中小商贸流通企业公共服务数据分析平台';
             $this->assign('title',$title);
-        } else {
+        } else if(cmf_is_user_login()){
+          
+        }
+        else {
             $this->error("您还没有登录！", url("datav/public/login"));
             exit();
         }
@@ -83,7 +86,12 @@ class ShowController extends HomeBaseController
     {
         $sub_title='限额以上企业数据分析';
         $this->assign('sub_title',$sub_title);
-
+        $qysjfx = Db::query('select sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse from pt_qysjfx');
+        $qysjfxs = Db::query('select fl,sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse from pt_qysjfx group by fl');
+        $qysjfxss = Db::query('select DATE_FORMAT(date,"%m") as time,sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse from pt_qysjfx group by DATE_FORMAT(date,"%m")');
+        $this->assign('qysjfx',$qysjfx);
+        $this->assign('qysjfxs',$qysjfxs);
+        $this->assign('qysjfxss',$qysjfxss);
         return $this->fetch(':xsqy');
     }
 
@@ -92,7 +100,11 @@ class ShowController extends HomeBaseController
     {
         $sub_title='经济运行情况数据分析';
         $this->assign('sub_title',$sub_title);
+        $get_jj = Db::query('select sum(jysr) as jysr,sum(lrze) as lrze,sum(shsr) as shsr ,sum(zsyzdwe) as zsyzdwe,sum(sjlyswzjtze) as sjlyswzjtze,sum(gdzctze) as gdzctze,sum(jcke) as jcke ,sum(yjysyfzjf) as yjysyfzjf from pt_jjyxqk');
 
+        $get_jjs = Db::query(' select DATE_FORMAT(pt_jjyxqk.date,"%m") as time,  sum(jysr) as jysr,sum(lrze) as lrze,sum(shsr) as shsr ,sum(zsyzdwe) as zsyzdwe,sum(sjlyswzjtze) as sjlyswzjtze,sum(gdzctze) as gdzctze,sum(jcke) as jcke ,sum(yjysyfzjf) as yjysyfzjf  from pt_jjyxqk group by DATE_FORMAT(pt_jjyxqk.date,"%m")');
+        $this->assign('get_jj',$get_jj);
+        $this->assign('get_jjs',$get_jjs);
         return $this->fetch(':jj');
     }
 
@@ -100,9 +112,24 @@ class ShowController extends HomeBaseController
     //数据分析 - 服务数据页面
     public function fw()
     {
+        $i=0;
         $sub_title='服务数据分析';
         $this->assign('sub_title',$sub_title);
+        $xctjcoun = Db::query('select count(a.id) as xctjcoun from  pt_portal_fwcp as a LEFT JOIN pt_portal_ssfw as b on a.ssfw_id=b.id where b.parent_id=1 or a.ssfw_id=1');
+        $flwqcoun = Db::query('select count(a.id) as flwqcoun from  pt_portal_fwcp as a LEFT JOIN pt_portal_ssfw as b on a.ssfw_id=b.id where b.parent_id=2 or a.ssfw_id=2');
+        $syrzcoun = Db::query('select count(a.id) as syrzcoun from  pt_portal_fwcp as a LEFT JOIN pt_portal_ssfw as b on a.ssfw_id=b.id where b.parent_id=3 or a.ssfw_id=3');
+        $swzxcoun = Db::query('select count(a.id) as swzxcoun from  pt_portal_fwcp as a LEFT JOIN pt_portal_ssfw as b on a.ssfw_id=b.id where b.parent_id=4 or a.ssfw_id=4');
+        $rcpxcoun = Db::query('select count(a.id) as rcpxcoun from  pt_portal_fwcp as a LEFT JOIN pt_portal_ssfw as b on a.ssfw_id=b.id where b.parent_id=5 or a.ssfw_id=5');
+        $xxfwcoun = Db::query('select count(a.id) as xxfwcoun from  pt_portal_fwcp as a LEFT JOIN pt_portal_ssfw as b on a.ssfw_id=b.id where b.parent_id=6 or a.ssfw_id=6');
+        $coun = Db::query('select count(id) as coun from  pt_portal_fwcp');
 
+        $this->assign('xctjcoun',$xctjcoun);
+        $this->assign('flwqcoun',$flwqcoun);
+        $this->assign('syrzcoun',$syrzcoun);
+        $this->assign('swzxcoun',$swzxcoun);
+        $this->assign('rcpxcoun',$rcpxcoun);
+        $this->assign('xxfwcoun',$xxfwcoun);
+        $this->assign('coun',$coun);
         return $this->fetch(':fw');
     }
 
