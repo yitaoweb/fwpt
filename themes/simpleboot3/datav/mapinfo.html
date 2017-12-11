@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> {$sub_title}</title>
+<meta http-equiv="MSThemeCompatible" content="Yes" />
+<link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/show.css" />
+<script src="__TMPL__/datav/js/jquery.js"></script>
+<script src="__TMPL__/public/assets/js/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__TMPL__/public/assets/js/artDialog/plugins/iframeTools.js"></script>
+<style type="text/css">
+body, html {width: 100%;height: 100%;overflow: hidden;margin:0;}
+#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;}
+#l-map{height:100%;width:100%;}
+</style>
+</head>
+<body>
+  <div class="box sub_main">
+      <div class="bfbl31 main_l left">
+        
+          <div class="hot_list">
+          
+              <dl class="hot_detail">
+                  <dd>
+                      <img src="__ROOT__/upload/{$avatar}" alt="" title=""/>
+                  </dd>
+                  <dd class="tit">{$user_nickname}</dd>
+                  <dd><span class="star"><i style="width:99%"></i></span><span class="score">9.9分</span></dd>
+                  <dd></dd>
+              </dl>
+     
+          </div>
+          
+          <div class="hot_list">
+      
+              <dl class="hot_detail" style="height: 170px;border-width: 0;">
+                  <dd class="tit text_left">联系人：{$qy_lxname}</dd>
+                  <dd class="tit text_left">手机：{$mobile}</dd>
+                  <dd class="tit text_left">网址：{$user_url}</dd>
+                  <dd class="tit text_left">传真：{$fax}</dd>
+              </dl>
+      
+          </div>
+      </div>
+
+      <div class="bfbl60 main_r right">
+        
+          <div class="right_content">
+            <dl>
+                <dd>简介：</dd>
+            </dl>
+            <dl style="font-size: 14px;line-height: 30px;text-indent: 25px;height: 330px; overflow:auto;">
+                {$qy_jianjie}
+            </dl>
+          </div>
+      </div>
+
+  </div>
+
+</body>
+</html>

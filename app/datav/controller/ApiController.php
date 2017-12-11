@@ -83,5 +83,83 @@ class ApiController extends HomeBaseController
     }
 
 
+    public function site_qs(){
+       
+        $tjdata = tongji2(5);//1 上月 2 本月 3 近15天 4 近30天 5 当天
+
+        return $tjdata;
+    }
+
+    public function site_xm(){
+        $year = date('Y');
+        $zt = Db::query("select date_format(date,'%m') as m , count(id) as num from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 1 group by 
+date_format(date, '%m')");
+        
+        $xqy = Db::query("select date_format(date,'%m') as m , count(id) as num from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 2 group by 
+date_format(date, '%m')");
+        $nkg = Db::query("select date_format(date,'%m') as m , count(id) as num from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 3 group by 
+date_format(date, '%m')");
+        $zj = Db::query("select date_format(date,'%m') as m , count(id) as num from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 4 group by 
+date_format(date, '%m')");
+        $zd = Db::query("select date_format(date,'%m') as m , count(id) as num from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 5 group by 
+date_format(date, '%m')");
+        $tc = Db::query("select date_format(date,'%m') as m , count(id) as num from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 6 group by 
+date_format(date, '%m')");
+        
+        $data =array();
+
+        for ($i=0; $i <= 5; $i++) { 
+            for ($j=0; $j < 12; $j++) { 
+                $data[$i][$j][0]=$i;
+                $data[$i][$j][1]=$j;
+                $data[$i][$j][2]=0;
+            }
+        } 
+        
+
+        foreach ($zt as $key => $value) {
+            $data[0][(int)$value['m']][2]=(int)$value['num'];
+        }
+
+        foreach ($xqy as $key => $value) {
+            $data[1][(int)$value['m']][2]=(int)$value['num'];
+        }
+
+        foreach ($nkg as $key => $value) {
+            $data[2][(int)$value['m']][2]=(int)$value['num'];
+        }
+
+        foreach ($zj as $key => $value) {
+            $data[3][(int)$value['m']][2]=(int)$value['num'];
+        }
+
+        foreach ($zd as $key => $value) {
+            $data[4][(int)$value['m']][2]=(int)$value['num'];
+        }
+
+        foreach ($tc as $key => $value) {
+            $data[5][(int)$value['m']][2]=(int)$value['num'];
+        }
+
+
+        $datas= array();
+
+        for ($i=0; $i <= 5; $i++) { 
+            for ($j=0; $j < 12; $j++) { 
+                $datas[]=$data[$i][$j];
+            }
+        } 
+
+        return $datas;
+    }
+
+
+    public function site_map(){
+        $type = $this->request->param('type', 2, 'intval');
+        
+        $map = Db::query("select * from pt_user where (user_type = 2 or user_type = 3 ) and lat <> '' order by create_time");
+
+        return $map;
+    }
 
 }
