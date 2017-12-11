@@ -50,7 +50,11 @@
 
 </body>
 </html>
-
+  <SCRIPT LANGUAGE="JavaScript">
+    var qysjfx = <?php echo json_encode($qysjfx);?>;
+    var qysjfxs = <?php echo json_encode($qysjfxs);?>;
+    var qysjfxss = <?php echo json_encode($qysjfxss);?>;
+  </SCRIPT>
 
 
 <script>
@@ -103,14 +107,38 @@
 
 
 <script type="text/javascript">
+    var lsy;
+    var pfy;
+    var zsy;
+    var cyy;
+    var time = new Array();
+    var xsearr = new Array();
     var myChart1 = echarts.init(document.getElementById('main1'),'chalk');
-    
+    for(var i=0;i<qysjfxs.length;i++){
+       if(qysjfxs[i].fl == 1){
+           lsy = qysjfxs[i].xse;
+       }
+       if(qysjfxs[i].fl == 2){
+           pfy = qysjfxs[i].xse;
+       }
+       if(qysjfxs[i].fl == 3){
+           zsy = qysjfxs[i].xse;
+       }
+       if(qysjfxs[i].fl == 4){
+           cyy = qysjfxs[i].xse;
+       }
+    }
+    for(var i=0;i<qysjfxss.length;i++){
+
+         time[i]=qysjfxss[i].time;
+         xsearr[i]=qysjfxss[i].xse;
+    }
     var option = {
         
         color: ['#ffd285', '#ff733f', '#ec4863'],
 
         title: [{
-            text: '企业分析',
+            text: '限上企业销售额分析',
             left: '45%',
             top: '6%',
             textStyle: {
@@ -161,10 +189,7 @@
             },
             
             boundaryGap: false,
-            data: ['东华门街道', '景山', '交道口', '安定门', '北新桥', '东四', 
-            '朝阳门','建国门','东直门','和平里','前门','崇文门外','东花市',
-            '龙潭','体育馆路','天坛','永定门外','前门管委会','王府井建管办',
-            '北京站管理处']
+            data: time
         },
         yAxis: {
             "axisLine": {
@@ -194,8 +219,7 @@
             type: 'line',
             symbolSize: 8,
             symbol: 'circle',
-            data: [650, 566, 390, 500, 960, 820, 560,900, 500, 390, 500, 1002, 820, 800,
-            900, 500, 390, 500, 1126, 820]
+            data: xsearr
         },/* {
             name: '标准版',
             smooth: true,
@@ -221,7 +245,7 @@
                 }
             },
             data: [{
-                value: 335,
+                value: cyy,
                 //name: '用户来源分析',
                 itemStyle: {
                     normal: {
@@ -239,7 +263,7 @@
                     }
                 }
             }, {
-                value: 180,
+                value: qysjfx[0].xse,
                 //name: '占位',
                 tooltip: {
                     show: false
@@ -254,7 +278,7 @@
                         textStyle: {
                             color: '#ffd285',
                         },
-                        formatter: '\n有职业危害因素企业占比'
+                        formatter: '\n餐饮企业'
                     }
                 }
             }]
@@ -269,7 +293,7 @@
                 }
             },
             data: [{
-                value: 435,
+                value: zsy,
                 name: '用户来源分析',
                 itemStyle: {
                     normal: {
@@ -287,7 +311,7 @@
                     }
                 }
             }, {
-                value: 300,
+                value: qysjfx[0].xse,
                 name: '占位1',
                 tooltip: {
                     show: false
@@ -304,7 +328,7 @@
                         textStyle: {
                             color: '#FF4500',
                         },
-                        formatter: '\n有危险化学品企业占比'
+                        formatter: '\n住宿企业'
                     }
                 }
             }]
@@ -319,7 +343,7 @@
                 }
             },
             data: [{
-                value: 500,
+                value: pfy,
                 name: '用户来源分析',
                 itemStyle: {
                     normal: {
@@ -337,7 +361,7 @@
                     }
                 }
             }, {
-                value: 80,
+                value: qysjfx[0].xse,
                 name: '占位',
                 tooltip: {
                     show: false
@@ -354,7 +378,7 @@
                         textStyle: {
                             color: '#FF4500',
                         },
-                        formatter: '\n有特种设备企业占比'
+                        formatter: '\n批发企业'
                     }
                 }
             }]
@@ -370,7 +394,7 @@
                 }
             },
             data: [{
-                value: 435,
+                value: lsy,
                 name: '用户来源分析',
                 itemStyle: {
                     normal: {
@@ -388,7 +412,7 @@
                     }
                 }
             }, {
-                value: 100,
+                value: qysjfx[0].xse,
                 name: '占位',
                 tooltip: {
                     show: false
@@ -405,7 +429,7 @@
                         textStyle: {
                             color: '#FF4500',
                         },
-                        formatter: '\n有天然气企业占比'
+                        formatter: '\n零售企业'
                     }
                 }
             }]

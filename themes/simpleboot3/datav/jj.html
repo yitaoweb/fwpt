@@ -101,40 +101,58 @@
 </script>
 
 
+  <SCRIPT LANGUAGE="JavaScript">
+    var get_jj = <?php echo json_encode($get_jj);?>;
+    var get_jjs = <?php echo json_encode($get_jjs);?>;
+  </SCRIPT>
 
 <script type="text/javascript">
     var myChart1 = echarts.init(document.getElementById('main1'),'chalk');
-    
     //var colors = ['orange', '#d14a61', '#1E90FF'];
+    var time = new Array();
+    var jysr = new Array();
+    var lrze = new Array();
+    var shsr = new Array();
+    var zsyzdwe = new Array();
+    var gdzctze = new Array();
+    
+    for(var i=0;i<get_jjs.length;i++){
+          time[i] = get_jjs[i].time;
+          jysr[i] = get_jjs[i].jysr;
+          lrze[i] = get_jjs[i].lrze;
+          shsr[i] = get_jjs[i].shsr;
+          zsyzdwe[i] = get_jjs[i].zsyzdwe;
+          gdzctze[i] = get_jjs[i].gdzctze;
+    }
     var option = {
        
         title: [{
-            text: '暂降幅值与暂降频次的函数关系',
+            text: '收入支出汇总表',
             left: '18%',
             top: '1%',
             textAlign: 'center'
         }, {
-            text: '暂降幅值的概率分布函数',
+            text: '经营收入统计',
             left: '50%',
             top: '1%',
             textAlign: 'center'
         }, {
-            text: '持续时间与暂降频次的函数关系',
+            text: '利润总额统计',
             left: '85%',
             top: '1%',
             textAlign: 'center'
         }, {
-            text: '持续时间的概率分布函数',
+            text: '税收收入统计',
             left: '18%',
             top: '51%',
             textAlign: 'center'
         }, {
-            text: '持续时间与暂降频次的函数关系23423',
+            text: '招商引资到位额统计',
             left: '50%',
             top: '51%',
             textAlign: 'center'
         }, {
-            text: '持续时间的概率分布函数234243',
+            text: '固定资产投资额统计',
             left: '85%',
             top: '51%',
             textAlign: 'center'
@@ -194,7 +212,7 @@
         xAxis: [{
             gridIndex: 0,
             type: 'category',
-            name: '暂降幅值区间',
+            name: '',
             nameLocation: 'center',
             nameGap: '30',
             nameTextStyle: {
@@ -207,11 +225,11 @@
             axisTick: {
                 alignWithLabel: true
             },
-            data: ['0~10%', '10%~20%', '20%~30%', '30%~40%', '40%~50%', '50%~60%', '60%~70%', '70%~80%', '80%~90%', ]
+            data: ['经营收入', '利润总额', '税收收入', '招商引资', '直接投资', '固定资产', '进出口额', '发展经费',]
         }, {
             gridIndex: 1,
             type: 'category',
-            name: '暂降幅值',
+            name: '',
             nameLocation: 'center',
             nameGap: '30',
             nameTextStyle: {
@@ -225,7 +243,7 @@
             axisTick: {
                 alignWithLabel: true
             },
-            data: ['0', '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%']
+            data: time
         }, {
             gridIndex: 2,
             type: 'category',
@@ -233,7 +251,7 @@
             //         interval:0,//横轴信息全部显示  
             //         rotate:-30,//-30度角倾斜显示  
             //   }  ,
-            name: '暂降持续时间（s）',
+            name: '',
             nameLocation: 'center',
             nameGap: '30',
             nameTextStyle: {
@@ -242,7 +260,7 @@
             axisTick: {
                 alignWithLabel: true
             },
-            data: ['0~0.1', '0.1~0.25', '0.25~0.5', '0.5~1', '>1']
+            data: time
 
         }, {
             gridIndex: 3,
@@ -251,7 +269,7 @@
             //         interval:0,//横轴信息全部显示  
             //         rotate:-30,//-30度角倾斜显示  
             //   }  ,
-            name: '暂降持续时间（s）',
+            name: '',
             nameLocation: 'center',
             nameGap: '30',
             nameTextStyle: {
@@ -261,7 +279,7 @@
                 alignWithLabel: true
             },
             boundaryGap: false,
-            data: ['0', '0.1', '0.25', '0.5', '1', 'inf']
+            data: time
 
         }, {
             gridIndex: 4,
@@ -270,7 +288,7 @@
             //         interval:0,//横轴信息全部显示  
             //         rotate:-30,//-30度角倾斜显示  
             //   }  ,
-            name: '暂降持续时间（s）',
+            name: '',
             nameLocation: 'center',
             nameGap: '30',
             nameTextStyle: {
@@ -279,7 +297,7 @@
             axisTick: {
                 alignWithLabel: true
             },
-            data: ['0~0.1', '0.1~0.25', '0.25~0.5', '0.5~1', '>1']
+            data: time
 
         }, {
             gridIndex: 5,
@@ -288,7 +306,7 @@
             //         interval:0,//横轴信息全部显示  
             //         rotate:-30,//-30度角倾斜显示  
             //   }  ,
-            name: '暂降持续时间（s）',
+            name: '',
             nameLocation: 'center',
             nameGap: '30',
             nameTextStyle: {
@@ -298,13 +316,13 @@
                 alignWithLabel: true
             },
             boundaryGap: false,
-            data: ['0', '0.1', '0.25', '0.5', '1', 'inf']
+            data: time
 
         }],
         yAxis: [{
             gridIndex: 0,
             type: 'value',
-            name: '暂降频次(次/年)',
+            name: '',
             nameLocation: 'center',
             nameGap: '30',
             nameTextStyle: {
@@ -321,7 +339,7 @@
         }, {
             gridIndex: 1,
             type: 'value',
-            name: '概率分布',
+            name: '',
             nameLocation: 'center',
             nameGap: '40',
             nameTextStyle: {
@@ -330,7 +348,7 @@
             axisLabel: {
                 show: true,
                 interval: 'auto',
-                formatter: '{value} %'
+                formatter: '{value}'
             },
             //position: 'right',
             axisLine: {
@@ -344,7 +362,7 @@
         }, {
             gridIndex: 2,
             type: 'value',
-            name: '暂降频次(次/年)',
+            name: '',
             nameLocation: 'center',
             nameGap: '30',
             nameTextStyle: {
@@ -362,7 +380,7 @@
         }, {
             gridIndex: 3,
             type: 'value',
-            name: '概率分布',
+            name: '',
             nameLocation: 'center',
             nameGap: '40',
             nameTextStyle: {
@@ -371,7 +389,7 @@
             axisLabel: {
                 show: true,
                 interval: 'auto',
-                formatter: '{value} %'
+                formatter: '{value}'
             },
             axisLine: {
                 lineStyle: {
@@ -385,7 +403,7 @@
         }, {
             gridIndex: 4,
             type: 'value',
-            name: '暂降频次(次/年)',
+            name: '',
             nameLocation: 'center',
             nameGap: '30',
             nameTextStyle: {
@@ -403,7 +421,7 @@
         }, {
             gridIndex: 5,
             type: 'value',
-            name: '概率分布',
+            name: '',
             nameLocation: 'center',
             nameGap: '40',
             nameTextStyle: {
@@ -412,7 +430,7 @@
             axisLabel: {
                 show: true,
                 interval: 'auto',
-                formatter: '{value} %'
+                formatter: '{value}'
             },
             axisLine: {
                 lineStyle: {
@@ -425,8 +443,8 @@
             position: 'left'
         }],
         series: [{
-                name: '暂降幅值与暂降频次',
-                type: 'bar',
+                name: '亿元',
+                type: 'line',
                 xAxisIndex: 0,
                 yAxisIndex: 0,
                 label: {
@@ -436,10 +454,10 @@
 
                     }
                 },
-                data: [3.5, 0.7, 0.6, 1.4, 1.8, 3, 5, 9.5, 24.6]
+                data: [get_jj[0].jysr, get_jj[0].lrze, get_jj[0].shsr, get_jj[0].zsyzdwe, get_jj[0].sjlyswzjtze, get_jj[0].gdzctze, get_jj[0].jcke, get_jj[0].yjysyfzjf]
             }, {
 
-                name: '暂降幅值概率分布',
+                name: '经营收入',
                 type: 'line',
                 smooth: true,
                 barWidth: 25,
@@ -460,11 +478,11 @@
                     }
                 },
 
-                data: [0, 7, 8.4, 9.6, 12.4, 16, 22, 31.9, 50.9, 100]
+                data: jysr
             }, {
 
-                name: '持续时间与暂降频次',
-                type: 'bar',
+                name: '利润总额',
+                type: 'line',
                 xAxisIndex: 2,
                 yAxisIndex: 2,
                 label: {
@@ -474,10 +492,10 @@
                     }
                 },
 
-                data: [36.1, 5.4, 2.4, 1, 5.2]
+                data: lrze
             }, {
 
-                name: '持续时间概率分布',
+                name: '税收收入',
                 type: 'line',
                 smooth: true,
                 barWidth: 25,
@@ -497,13 +515,13 @@
                         color: '#9BCA63'
                     }
                 },
-                data: [0, 72.1, 82.8, 87.6, 89.6, 100]
+                data: shsr
             }, {
 
-                name: '持续时间与暂降频次',
-                type: 'bar',
-                xAxisIndex: 2,
-                yAxisIndex: 2,
+                name: '招商引资到位额',
+                type: 'line',
+                xAxisIndex: 4,
+                yAxisIndex: 4,
                 label: {
                     normal: {
                         show: true,
@@ -511,15 +529,15 @@
                     }
                 },
 
-                data: [36.1, 5.4, 2.4, 1, 5.2]
+                data: zsyzdwe
             }, {
 
-                name: '持续时间概率分布',
+                name: '固定资产投资额',
                 type: 'line',
                 smooth: true,
                 barWidth: 25,
-                xAxisIndex: 3,
-                yAxisIndex: 3,
+                xAxisIndex: 5,
+                yAxisIndex: 5,
                 symbolSize: 8, //拐点大小
                 label: {
                     normal: {
@@ -534,7 +552,7 @@
                         color: '#9BCA63'
                     }
                 },
-                data: [0, 72.1, 82.8, 87.6, 89.6, 100]
+                data: gdzctze
             }
 
         ]
