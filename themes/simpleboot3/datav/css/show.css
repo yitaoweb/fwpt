@@ -353,6 +353,16 @@ body {
   margin-left: 5px;
   font-family: "Microsoft Yahei"; 
 }
+.box .title .text a{
+
+  color: #fff;
+
+}
+.box .title .text a:hover{
+
+  color: #fff;
+
+}
 
 .box .text1{
   float: left;

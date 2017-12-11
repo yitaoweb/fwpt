@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="renderer" content="webkit">
   <meta name="data-spm" content="datav">
-  <title>{$title}-{sub_title}</title>
+  <title>{$title}-{$sub_title}</title>
 
  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=yarzUUkNb0F0UgHUbSGiHRwQ"></script>
 
@@ -21,11 +21,11 @@
         <div class="head_left">
             <div class="info">
                 <div class="icon"></div>
-                <span class="date">{$role['name']}&nbsp;&nbsp;:&nbsp;&nbsp;{$admin['user_login']}&nbsp;&nbsp; [&nbsp;&nbsp;<a href="{:url('datav/Public/logout')}">退出</a>&nbsp;&nbsp;]</span>
+                <span class="date">{$role['name']}&nbsp;&nbsp;:&nbsp;&nbsp;{$admin['user_login']}&nbsp;&nbsp; [&nbsp;&nbsp;<a href="{:url('datav/Public/logout')}">退出</a>&nbsp;&nbsp;]&nbsp;&nbsp; [&nbsp;&nbsp;<a href="{:url('datav/show/index')}">返回主页</a>&nbsp;&nbsp;]</span>
             </div>
         </div>
         <div class="head_mid">
-            <div class="title">{$title}</div>
+            <div class="title">{$sub_title}</div>
             <div class="bt"></div>
         </div>
         <div class="head_right">
@@ -33,7 +33,6 @@
                 <div class="icon" width="18px" height="18px" ></div>
                 <span class="date" id="ShowTime"></span>
             </div>
-
         </div>
     </div>
     <div class="wraper"></div>
