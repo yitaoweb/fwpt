@@ -229,7 +229,7 @@ class ShowController extends HomeBaseController
         //var_dump($sign);
         //return $name;
 
-        return $this->fetch(':xm');
+        return $this->fetch(':jj');
     }
 
 
