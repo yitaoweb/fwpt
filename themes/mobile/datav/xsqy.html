@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单的Material Design风格手机App菜单特效</title>
+    <link rel="stylesheet" type="text/css" href="__TMPL__/datav/dh/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="__TMPL__/datav/dh/css/default.css">
+    <link rel="stylesheet" type="text/css" href="__TMPL__/datav/dh/css/styles.css">
+    <!--[if IE]>
+        <script src="http://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="jq22-container">
+        <header class="jq22-header">
+            <h1>数据平台分析</h1>          
+        </header>
+        <div class="phone">
+            <div class="screen">
+                <nav class="nav">
+                    <ul>
+                        <li><a href="{:cmf_url('datav/index/index')}">分析首页</a></li>
+                        <li><a href="{:cmf_url('datav/show/xsqy')}">限上企业分析</a></li>
+                        <li><a href="{:cmf_url('datav/show/xm')}">项目数据分析</a></li>
+                        <li><a href="{:cmf_url('datav/show/fw')}">服务产品分析</a></li>
+                        <li><a href="{:cmf_url('datav/show/jj')}">经济运行情况分析</a></li>
+                        <li><a href="{:cmf_url('user/Index/logout')}">退出</a></li>
+                    </ul>
+                </nav>
+                <div class="nav-toggle">
+                    <div class="icon"></div>
+                </div>
+                <div class="lower-screen">
+
+                    <div class="card">
+                        <h2>限额以上企业数据</h2>
+                        <br><br>
+                         <div style="width: 100%;height:350px;" id="main1"></div>
+<!--                         <p>Created by Lewi Hussey.</p> -->
+                    </div>
+                </div>
+        </div>
+
+
+    </div>
+    
+    <script src="http://www.jq22.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="__TMPL__/datav/dh/js/echarts.min.js"></script>
+    <script>
+    $('.nav-toggle').click(function () {
+        $('body').toggleClass('nav-open');
+    });
+    </script>
+    <SCRIPT LANGUAGE="JavaScript">
+    var qysjfx = <?php echo json_encode($qysjfx);?>;
+    var qysjfxs = <?php echo json_encode($qysjfxs);?>;
+    var qysjfxss = <?php echo json_encode($qysjfxss);?>;
+  </SCRIPT>
+
+
+
+
+
+<script type="text/javascript">
+    var lsy;
+    var pfy;
+    var zsy;
+    var cyy;
+    var time = new Array();
+    var xsearr = new Array();
+    var myChart1 = echarts.init(document.getElementById('main1'),'chalk');
+    for(var i=0;i<qysjfxs.length;i++){
+       if(qysjfxs[i].fl == 1){
+           lsy = qysjfxs[i].xse;
+       }
+       if(qysjfxs[i].fl == 2){
+           pfy = qysjfxs[i].xse;
+       }
+       if(qysjfxs[i].fl == 3){
+           zsy = qysjfxs[i].xse;
+       }
+       if(qysjfxs[i].fl == 4){
+           cyy = qysjfxs[i].xse;
+       }
+    }
+    for(var i=0;i<qysjfxss.length;i++){
+
+         time[i]=qysjfxss[i].time;
+         xsearr[i]=qysjfxss[i].xse;
+    }
+    var option = {
+        
+        color: ['#ffd285', '#ff733f', '#ec4863'],
+
+        title: [{
+            text: '限上企业销售额分析',
+            left: '45%',
+            top: '6%',
+            textStyle: {
+                color: '#fff'
+            }
+        }/*, {
+            text: '用户来源占比',
+            left: '83%',
+            top: '6%',
+            textAlign: 'center',
+            textStyle: {
+                color: '#fff'
+            }
+        }*/],
+        tooltip: {
+            trigger: 'axis'
+        },
+        
+        grid: {
+            left: '30%',
+            right: '35%',
+            top: '20%',
+            bottom: '20%',
+            containLabel: true
+        },
+        toolbox: {
+            "show": false,
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            "axisLine": {
+                lineStyle: {
+                    color: '#FF4500'
+                }
+            },
+            "axisTick": {
+                "show": false
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#fff'
+                },
+                interval:0,
+                rotate:40 
+            },
+            
+            boundaryGap: false,
+            data: time
+        },
+        yAxis: {
+            "axisLine": {
+                lineStyle: {
+                    color: '#fff'
+                }
+            },
+            splitLine: {
+                show: true,
+                lineStyle: {
+                    color: '#fff'
+                }
+            },
+            "axisTick": {
+                "show": false
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#fff'
+                }
+            },
+            type: 'value'
+        },
+        series: [{
+            //name: '在大理',
+            smooth: true,
+            type: 'line',
+            symbolSize: 8,
+            symbol: 'circle',
+            data: xsearr
+        },/* {
+            name: '标准版',
+            smooth: true,
+            type: 'line',
+            symbolSize: 8,
+            symbol: 'circle',
+            data: [70, 50, 50, 87, 90, 80, 70]
+        }, {
+            name: '潍V',
+            smooth: true,
+            type: 'line',
+            symbolSize: 8,
+            symbol: 'circle',
+            data: [290, 200,20, 132, 15, 200, 90]
+        }, */
+        {
+            type: 'pie',
+            center: ['83%', '33%'],
+            radius: ['25%', '30%'],
+            label: {
+                normal: {
+                    position: 'center'
+                }
+            },
+            data: [{
+                value: cyy,
+                //name: '用户来源分析',
+                itemStyle: {
+                    normal: {
+                        color: '#ffd285'
+                    }
+                },
+                label: {
+                    normal: {
+                        formatter: '{d} %',
+                        textStyle: {
+                            color: '#ffd285',
+                            fontSize: 20
+
+                        }
+                    }
+                }
+            }, {
+                value: qysjfx[0].xse,
+                //name: '占位',
+                tooltip: {
+                    show: false
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#87CEFA'
+                    }
+                },
+                label: {
+                    normal: {
+                        textStyle: {
+                            color: '#ffd285',
+                        },
+                        formatter: '\n餐饮企业'
+                    }
+                }
+            }]
+        },
+        {
+            type: 'pie',
+            center: ['15%', '33%'],
+            radius: ['25%', '30%'],
+            label: {
+                normal: {
+                    position: 'center'
+                }
+            },
+            data: [{
+                value: zsy,
+                name: '用户来源分析',
+                itemStyle: {
+                    normal: {
+                        color: '#ff733f'
+                    }
+                },
+                label: {
+                    normal: {
+                        formatter: '{d} %',
+                        textStyle: {
+                            color: '#ff733f',
+                            fontSize: 20
+
+                        }
+                    }
+                }
+            }, {
+                value: qysjfx[0].xse,
+                name: '占位1',
+                tooltip: {
+                    show: false
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#87CEFA'
+
+
+                    }
+                },
+                label: {
+                    normal: {
+                        textStyle: {
+                            color: '#FF4500',
+                        },
+                        formatter: '\n住宿企业'
+                    }
+                }
+            }]
+        },
+        {
+            type: 'pie',
+            center: ['15%', '72%'],
+            radius: ['25%', '30%'],
+            label: {
+                normal: {
+                    position: 'center'
+                }
+            },
+            data: [{
+                value: pfy,
+                name: '用户来源分析',
+                itemStyle: {
+                    normal: {
+                        color: '#ff733f'
+                    }
+                },
+                label: {
+                    normal: {
+                        formatter: '{d} %',
+                        textStyle: {
+                            color: '#ff733f',
+                            fontSize: 20
+
+                        }
+                    }
+                }
+            }, {
+                value: qysjfx[0].xse,
+                name: '占位',
+                tooltip: {
+                    show: false
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#87CEFA'
+
+
+                    }
+                },
+                label: {
+                    normal: {
+                        textStyle: {
+                            color: '#FF4500',
+                        },
+                        formatter: '\n批发企业'
+                    }
+                }
+            }]
+        },
+
+        {
+            type: 'pie',
+            center: ['83%', '72%'],
+            radius: ['25%', '30%'],
+            label: {
+                normal: {
+                    position: 'center'
+                }
+            },
+            data: [{
+                value: lsy,
+                name: '用户来源分析',
+                itemStyle: {
+                    normal: {
+                        color: '#ff733f'
+                    }
+                },
+                label: {
+                    normal: {
+                        formatter: '{d} %',
+                        textStyle: {
+                            color: '#ff733f',
+                            fontSize: 20
+
+                        }
+                    }
+                }
+            }, {
+                value: qysjfx[0].xse,
+                name: '占位',
+                tooltip: {
+                    show: false
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#87CEFA'
+
+
+                    }
+                },
+                label: {
+                    normal: {
+                        textStyle: {
+                            color: '#FF4500',
+                        },
+                        formatter: '\n零售企业'
+                    }
+                }
+            }]
+        }]
+    }
+
+    myChart1.setOption(option);
+
+</script>
+</body>
+</html>

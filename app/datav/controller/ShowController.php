@@ -34,7 +34,10 @@ class ShowController extends HomeBaseController
             $this->assign("admin", $user);
             $title='长治市中小商贸流通企业公共服务数据分析平台';
             $this->assign('title',$title);
-        } else {
+        } else if(cmf_is_user_login()){
+          
+        }
+        else {
             $this->error("您还没有登录！", url("datav/public/login"));
             exit();
         }
