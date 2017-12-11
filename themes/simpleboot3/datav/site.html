@@ -1,0 +1,240 @@
+<html style="overflow-x: hidden; overflow-y: visible">
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta name="renderer" content="webkit">
+  <meta name="data-spm" content="datav">
+  <title>{$title}</title>
+
+ <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=yarzUUkNb0F0UgHUbSGiHRwQ"></script>
+
+  <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/show.css" />
+
+  <script src="__TMPL__/datav/js/jquery.js"></script>
+  <script src="__TMPL__/datav/js/echarts.js"></script>
+  <script src="__TMPL__/datav/js/theme/chalk.js"></script>
+ 
+</head>
+<body onLoad="startTime()">  
+<div class="datavLayout">
+    <div class="header">
+        <div class="head_left">
+            <div class="info">
+                <div class="icon"></div>
+                <span class="date">{$role['name']}&nbsp;&nbsp;:&nbsp;&nbsp;{$admin['user_login']}&nbsp;&nbsp; [&nbsp;&nbsp;<a href="{:url('datav/Public/logout')}">退出</a>&nbsp;&nbsp;]</span>
+            </div>
+        </div>
+        <div class="head_mid">
+            <div class="title">{$title}</div>
+            <div class="bt"></div>
+        </div>
+        <div class="head_right">
+            <div class="times">
+                <div class="icon" width="18px" height="18px" ></div>
+                <span class="date" id="ShowTime"></span>
+            </div>
+
+        </div>
+    </div>
+    <div class="wraper"></div>
+    <div class="content">
+
+        <div class="row50">
+            <div class="rect box bfbl57">
+                <div class="sub_main" id="main1"></div>
+            </div>
+
+            <div class="rect box bfbr57">
+                <div class="sub_main" id="main1"></div>
+            </div>
+           
+        </div>
+        <div class="row50">
+            <div class="rect box bfbl57">
+                <div class="sub_main" id="main1"></div>
+            </div>
+
+            <div class="rect box bfbr57">
+                <div class="sub_main" id="main1"></div>
+            </div>
+           
+        </div>  
+        
+    </div>
+
+    <div class="wraper"></div>
+
+</div>
+
+
+</body>
+</html>
+
+
+
+<script>
+    function startTime()
+    {
+        var today=new Date()
+        var years=today.getFullYear();
+        var months=today.getMonth();
+        var d=today.getDate()
+        var h=today.getHours()
+        var m=today.getMinutes()
+        var s=today.getSeconds()
+        // add a zero in front of numbers<10
+        months=months+1
+        months=checkTime(months)
+        d=checkTime(d)
+        m=checkTime(m)
+        s=checkTime(s)
+        var weekday=new Array(7)
+        weekday[0]="星期日"
+        weekday[1]="星期一"
+        weekday[2]="星期二"
+        weekday[3]="星期三"
+        weekday[4]="星期四"
+        weekday[5]="星期五"
+        weekday[6]="星期六"
+        var w=weekday[today.getDay()]
+        document.getElementById('ShowTime').innerHTML=years+"-"+months+"-"+d+"  "+w+" "+h+":"+m+":"+s;
+        t=setTimeout('startTime()',500)
+    }
+    function checkTime(i)
+    {
+        if (i<10)
+        {i="0" + i}
+        return i
+    }
+
+
+
+
+    // $(function(){
+
+    //     var app_id ='500554165';
+    //     var end_date ='2017-12-06';
+    //     var start_date ='2017-11-01';
+    //     var idx ='10201,10202,10203';
+    
+    //     var sign ='{$sign}';
+    //     $.ajax({
+    //         type: "get",
+    //         url: "http://mta.qq.com/h5/api/ctr_user_realtime?app_id=500554165&end_date=2017-12-06&idx=10201%2C10202%2C10203&start_date=2017-11-01&sign=0e9bcad9e694b83a22512510a4b5a9d7",
+          
+    //         dataType:"jsonp",
+    //         success: function(result){
+    //             alert(1);
+    //             writeObj(result);
+    //         },
+    //         error: function(result){
+    //             //请求失败之后的操作
+    //             alert(2);
+    //             writeObj(result);
+    //         }
+    //     });
+    // })
+
+
+    function writeObj(obj){ 
+     var description = ""; 
+     for(var i in obj){ 
+     var property=obj[i]; 
+     description+=i+" = "+property+"\n"; 
+     } 
+     alert(description); 
+    } 
+
+</script>
+
+
+<
+
+<script type="text/javascript">
+    // 百度地图API功能
+    // var map = new BMap.Map("allmap");
+    // var point = new BMap.Point(116.404, 39.915);
+    // map.centerAndZoom(point, 15);
+    
+    // //创建小狐狸
+    // var pt = new BMap.Point(116.417, 39.909);
+    // var myIcon = new BMap.Icon("__TMPL__/datav/images/q.png", new BMap.Size(300,157));
+    // var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+    // map.addOverlay(marker2);              // 将标注添加到地图中
+    // map.enableScrollWheelZoom(true);      //地图缩放
+    // map.setMapStyle({style:'bluish'});  
+</script>
+
+
+<script type="text/javascript">
+    var myChart1 = echarts.init(document.getElementById('main1'),'chalk');
+    
+    var option = {
+        title: {
+            text: 'Issues解决率趋势分析',
+          
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['最高气温','最低气温']
+        },
+      
+        xAxis:  {
+            type: 'category',
+            boundaryGap: false,
+            data: ['6/1','6/4','6/7','6/10','6/13','6/16','6/19','6/21','6/24','6/27','6/30','7/2','7/5','7/8','7/11']
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value}'
+            }
+        },
+        series: [
+            {
+                name:'月度解决率',
+                type:'line',
+                data:[92, 96, 99, 91, 96, 103, 100,92, 96, 99, 91, 96, 103, 100,115],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            },
+            {
+                name:'累计解决率',
+                type:'line',
+                data:[81, 90, 96, 81, 86, 93, 90,81, 90, 96, 81, 86, 93, 90,100],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+
+    myChart1.setOption(option);
+
+</script>
+
+
+
+
+
+
+

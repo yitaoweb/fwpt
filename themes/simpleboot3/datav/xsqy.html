@@ -1,0 +1,469 @@
+<html style="overflow-x: hidden; overflow-y: visible">
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta name="renderer" content="webkit">
+  <meta name="data-spm" content="datav">
+  <title>{$title}</title>
+
+ <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=yarzUUkNb0F0UgHUbSGiHRwQ"></script>
+
+  <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/show.css" />
+
+  <script src="__TMPL__/datav/js/jquery.js"></script>
+  <script src="__TMPL__/datav/js/echarts.js"></script>
+  <script src="__TMPL__/datav/js/theme/chalk.js"></script>
+ 
+</head>
+<body onLoad="startTime()">  
+<div class="datavLayout">
+    <div class="header">
+        <div class="head_left">
+            <div class="info">
+                <div class="icon"></div>
+                <span class="date">{$role['name']}&nbsp;&nbsp;:&nbsp;&nbsp;{$admin['user_login']}&nbsp;&nbsp; [&nbsp;&nbsp;<a href="{:url('datav/Public/logout')}">退出</a>&nbsp;&nbsp;]</span>
+            </div>
+        </div>
+        <div class="head_mid">
+            <div class="title">{$title}</div>
+            <div class="bt"></div>
+        </div>
+        <div class="head_right">
+            <div class="times">
+                <div class="icon" width="18px" height="18px" ></div>
+                <span class="date" id="ShowTime"></span>
+            </div>
+
+        </div>
+    </div>
+    <div class="wraper"></div>
+    <div class="content">
+        <div class="box site">
+            <div class="sub_main" id="main1"></div>
+        </div>
+    </div>
+
+    <div class="wraper"></div>
+
+</div>
+
+
+</body>
+</html>
+
+
+
+<script>
+    function startTime()
+    {
+        var today=new Date()
+        var years=today.getFullYear();
+        var months=today.getMonth();
+        var d=today.getDate()
+        var h=today.getHours()
+        var m=today.getMinutes()
+        var s=today.getSeconds()
+        // add a zero in front of numbers<10
+        months=months+1
+        months=checkTime(months)
+        d=checkTime(d)
+        m=checkTime(m)
+        s=checkTime(s)
+        var weekday=new Array(7)
+        weekday[0]="星期日"
+        weekday[1]="星期一"
+        weekday[2]="星期二"
+        weekday[3]="星期三"
+        weekday[4]="星期四"
+        weekday[5]="星期五"
+        weekday[6]="星期六"
+        var w=weekday[today.getDay()]
+        document.getElementById('ShowTime').innerHTML=years+"-"+months+"-"+d+"  "+w+" "+h+":"+m+":"+s;
+        t=setTimeout('startTime()',500)
+    }
+    function checkTime(i)
+    {
+        if (i<10)
+        {i="0" + i}
+        return i
+    }
+
+
+
+
+    // $(function(){
+
+    //     var app_id ='500554165';
+    //     var end_date ='2017-12-06';
+    //     var start_date ='2017-11-01';
+    //     var idx ='10201,10202,10203';
+    
+    //     var sign ='{$sign}';
+    //     $.ajax({
+    //         type: "get",
+    //         url: "http://mta.qq.com/h5/api/ctr_user_realtime?app_id=500554165&end_date=2017-12-06&idx=10201%2C10202%2C10203&start_date=2017-11-01&sign=0e9bcad9e694b83a22512510a4b5a9d7",
+          
+    //         dataType:"jsonp",
+    //         success: function(result){
+    //             alert(1);
+    //             writeObj(result);
+    //         },
+    //         error: function(result){
+    //             //请求失败之后的操作
+    //             alert(2);
+    //             writeObj(result);
+    //         }
+    //     });
+    // })
+
+
+    function writeObj(obj){ 
+     var description = ""; 
+     for(var i in obj){ 
+     var property=obj[i]; 
+     description+=i+" = "+property+"\n"; 
+     } 
+     alert(description); 
+    } 
+
+</script>
+
+
+<
+
+<script type="text/javascript">
+    // 百度地图API功能
+    // var map = new BMap.Map("allmap");
+    // var point = new BMap.Point(116.404, 39.915);
+    // map.centerAndZoom(point, 15);
+    
+    // //创建小狐狸
+    // var pt = new BMap.Point(116.417, 39.909);
+    // var myIcon = new BMap.Icon("__TMPL__/datav/images/q.png", new BMap.Size(300,157));
+    // var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+    // map.addOverlay(marker2);              // 将标注添加到地图中
+    // map.enableScrollWheelZoom(true);      //地图缩放
+    // map.setMapStyle({style:'bluish'});  
+</script>
+
+
+<script type="text/javascript">
+    var myChart1 = echarts.init(document.getElementById('main1'),'chalk');
+    
+    var option = {
+        
+        color: ['#ffd285', '#ff733f', '#ec4863'],
+
+        title: [{
+            text: '企业分析',
+            left: '45%',
+            top: '6%',
+            textStyle: {
+                color: '#fff'
+            }
+        }/*, {
+            text: '用户来源占比',
+            left: '83%',
+            top: '6%',
+            textAlign: 'center',
+            textStyle: {
+                color: '#fff'
+            }
+        }*/],
+        tooltip: {
+            trigger: 'axis'
+        },
+        
+        grid: {
+            left: '30%',
+            right: '35%',
+            top: '20%',
+            bottom: '20%',
+            containLabel: true
+        },
+        toolbox: {
+            "show": false,
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            "axisLine": {
+                lineStyle: {
+                    color: '#FF4500'
+                }
+            },
+            "axisTick": {
+                "show": false
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#fff'
+                },
+                interval:0,
+                rotate:40 
+            },
+            
+            boundaryGap: false,
+            data: ['东华门街道', '景山', '交道口', '安定门', '北新桥', '东四', 
+            '朝阳门','建国门','东直门','和平里','前门','崇文门外','东花市',
+            '龙潭','体育馆路','天坛','永定门外','前门管委会','王府井建管办',
+            '北京站管理处']
+        },
+        yAxis: {
+            "axisLine": {
+                lineStyle: {
+                    color: '#fff'
+                }
+            },
+            splitLine: {
+                show: true,
+                lineStyle: {
+                    color: '#fff'
+                }
+            },
+            "axisTick": {
+                "show": false
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#fff'
+                }
+            },
+            type: 'value'
+        },
+        series: [{
+            //name: '在大理',
+            smooth: true,
+            type: 'line',
+            symbolSize: 8,
+            symbol: 'circle',
+            data: [650, 566, 390, 500, 960, 820, 560,900, 500, 390, 500, 1002, 820, 800,
+            900, 500, 390, 500, 1126, 820]
+        },/* {
+            name: '标准版',
+            smooth: true,
+            type: 'line',
+            symbolSize: 8,
+            symbol: 'circle',
+            data: [70, 50, 50, 87, 90, 80, 70]
+        }, {
+            name: '潍V',
+            smooth: true,
+            type: 'line',
+            symbolSize: 8,
+            symbol: 'circle',
+            data: [290, 200,20, 132, 15, 200, 90]
+        }, */
+        {
+            type: 'pie',
+            center: ['83%', '33%'],
+            radius: ['25%', '30%'],
+            label: {
+                normal: {
+                    position: 'center'
+                }
+            },
+            data: [{
+                value: 335,
+                //name: '用户来源分析',
+                itemStyle: {
+                    normal: {
+                        color: '#ffd285'
+                    }
+                },
+                label: {
+                    normal: {
+                        formatter: '{d} %',
+                        textStyle: {
+                            color: '#ffd285',
+                            fontSize: 20
+
+                        }
+                    }
+                }
+            }, {
+                value: 180,
+                //name: '占位',
+                tooltip: {
+                    show: false
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#87CEFA'
+                    }
+                },
+                label: {
+                    normal: {
+                        textStyle: {
+                            color: '#ffd285',
+                        },
+                        formatter: '\n有职业危害因素企业占比'
+                    }
+                }
+            }]
+        },
+        {
+            type: 'pie',
+            center: ['15%', '33%'],
+            radius: ['25%', '30%'],
+            label: {
+                normal: {
+                    position: 'center'
+                }
+            },
+            data: [{
+                value: 435,
+                name: '用户来源分析',
+                itemStyle: {
+                    normal: {
+                        color: '#ff733f'
+                    }
+                },
+                label: {
+                    normal: {
+                        formatter: '{d} %',
+                        textStyle: {
+                            color: '#ff733f',
+                            fontSize: 20
+
+                        }
+                    }
+                }
+            }, {
+                value: 300,
+                name: '占位1',
+                tooltip: {
+                    show: false
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#87CEFA'
+
+
+                    }
+                },
+                label: {
+                    normal: {
+                        textStyle: {
+                            color: '#FF4500',
+                        },
+                        formatter: '\n有危险化学品企业占比'
+                    }
+                }
+            }]
+        },
+        {
+            type: 'pie',
+            center: ['15%', '72%'],
+            radius: ['25%', '30%'],
+            label: {
+                normal: {
+                    position: 'center'
+                }
+            },
+            data: [{
+                value: 500,
+                name: '用户来源分析',
+                itemStyle: {
+                    normal: {
+                        color: '#ff733f'
+                    }
+                },
+                label: {
+                    normal: {
+                        formatter: '{d} %',
+                        textStyle: {
+                            color: '#ff733f',
+                            fontSize: 20
+
+                        }
+                    }
+                }
+            }, {
+                value: 80,
+                name: '占位',
+                tooltip: {
+                    show: false
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#87CEFA'
+
+
+                    }
+                },
+                label: {
+                    normal: {
+                        textStyle: {
+                            color: '#FF4500',
+                        },
+                        formatter: '\n有特种设备企业占比'
+                    }
+                }
+            }]
+        },
+
+        {
+            type: 'pie',
+            center: ['83%', '72%'],
+            radius: ['25%', '30%'],
+            label: {
+                normal: {
+                    position: 'center'
+                }
+            },
+            data: [{
+                value: 435,
+                name: '用户来源分析',
+                itemStyle: {
+                    normal: {
+                        color: '#ff733f'
+                    }
+                },
+                label: {
+                    normal: {
+                        formatter: '{d} %',
+                        textStyle: {
+                            color: '#ff733f',
+                            fontSize: 20
+
+                        }
+                    }
+                }
+            }, {
+                value: 100,
+                name: '占位',
+                tooltip: {
+                    show: false
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#87CEFA'
+
+
+                    }
+                },
+                label: {
+                    normal: {
+                        textStyle: {
+                            color: '#FF4500',
+                        },
+                        formatter: '\n有天然气企业占比'
+                    }
+                }
+            }]
+        }]
+    }
+
+    myChart1.setOption(option);
+
+</script>
+
+
+
+
+
+
+

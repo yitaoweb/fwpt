@@ -1,0 +1,597 @@
+<html style="overflow-x: hidden; overflow-y: visible">
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta name="renderer" content="webkit">
+  <meta name="data-spm" content="datav">
+  <title>{$title}</title>
+
+ <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=yarzUUkNb0F0UgHUbSGiHRwQ"></script>
+
+  <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/show.css" />
+
+  <script src="__TMPL__/datav/js/jquery.js"></script>
+  <script src="__TMPL__/datav/js/echarts.js"></script>
+  <script src="__TMPL__/datav/js/theme/chalk.js"></script>
+ 
+</head>
+<body onLoad="startTime()">  
+<div class="datavLayout">
+    <div class="header">
+        <div class="head_left">
+            <div class="info">
+                <div class="icon"></div>
+                <span class="date">{$role['name']}&nbsp;&nbsp;:&nbsp;&nbsp;{$admin['user_login']}&nbsp;&nbsp; [&nbsp;&nbsp;<a href="{:url('datav/Public/logout')}">退出</a>&nbsp;&nbsp;]</span>
+            </div>
+        </div>
+        <div class="head_mid">
+            <div class="title">{$title}</div>
+            <div class="bt"></div>
+        </div>
+        <div class="head_right">
+            <div class="times">
+                <div class="icon" width="18px" height="18px" ></div>
+                <span class="date" id="ShowTime"></span>
+            </div>
+
+        </div>
+    </div>
+    <div class="wraper"></div>
+    <div class="content">
+        <div class="box site">
+            <div class="sub_main" id="main1"></div>
+        </div>
+    </div>
+
+    <div class="wraper"></div>
+
+</div>
+
+
+</body>
+</html>
+
+
+
+<script>
+    function startTime()
+    {
+        var today=new Date()
+        var years=today.getFullYear();
+        var months=today.getMonth();
+        var d=today.getDate()
+        var h=today.getHours()
+        var m=today.getMinutes()
+        var s=today.getSeconds()
+        // add a zero in front of numbers<10
+        months=months+1
+        months=checkTime(months)
+        d=checkTime(d)
+        m=checkTime(m)
+        s=checkTime(s)
+        var weekday=new Array(7)
+        weekday[0]="星期日"
+        weekday[1]="星期一"
+        weekday[2]="星期二"
+        weekday[3]="星期三"
+        weekday[4]="星期四"
+        weekday[5]="星期五"
+        weekday[6]="星期六"
+        var w=weekday[today.getDay()]
+        document.getElementById('ShowTime').innerHTML=years+"-"+months+"-"+d+"  "+w+" "+h+":"+m+":"+s;
+        t=setTimeout('startTime()',500)
+    }
+    function checkTime(i)
+    {
+        if (i<10)
+        {i="0" + i}
+        return i
+    }
+
+
+
+
+    // $(function(){
+
+    //     var app_id ='500554165';
+    //     var end_date ='2017-12-06';
+    //     var start_date ='2017-11-01';
+    //     var idx ='10201,10202,10203';
+    
+    //     var sign ='{$sign}';
+    //     $.ajax({
+    //         type: "get",
+    //         url: "http://mta.qq.com/h5/api/ctr_user_realtime?app_id=500554165&end_date=2017-12-06&idx=10201%2C10202%2C10203&start_date=2017-11-01&sign=0e9bcad9e694b83a22512510a4b5a9d7",
+          
+    //         dataType:"jsonp",
+    //         success: function(result){
+    //             alert(1);
+    //             writeObj(result);
+    //         },
+    //         error: function(result){
+    //             //请求失败之后的操作
+    //             alert(2);
+    //             writeObj(result);
+    //         }
+    //     });
+    // })
+
+
+    function writeObj(obj){ 
+     var description = ""; 
+     for(var i in obj){ 
+     var property=obj[i]; 
+     description+=i+" = "+property+"\n"; 
+     } 
+     alert(description); 
+    } 
+
+</script>
+
+
+<
+
+<script type="text/javascript">
+    // 百度地图API功能
+    // var map = new BMap.Map("allmap");
+    // var point = new BMap.Point(116.404, 39.915);
+    // map.centerAndZoom(point, 15);
+    
+    // //创建小狐狸
+    // var pt = new BMap.Point(116.417, 39.909);
+    // var myIcon = new BMap.Icon("__TMPL__/datav/images/q.png", new BMap.Size(300,157));
+    // var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+    // map.addOverlay(marker2);              // 将标注添加到地图中
+    // map.enableScrollWheelZoom(true);      //地图缩放
+    // map.setMapStyle({style:'bluish'});  
+</script>
+
+
+<script type="text/javascript">
+    var myChart1 = echarts.init(document.getElementById('main1'),'chalk');
+    
+    //var colors = ['orange', '#d14a61', '#1E90FF'];
+    var option = {
+       
+        title: [{
+            text: '暂降幅值与暂降频次的函数关系',
+            left: '18%',
+            top: '1%',
+            textAlign: 'center'
+        }, {
+            text: '暂降幅值的概率分布函数',
+            left: '50%',
+            top: '1%',
+            textAlign: 'center'
+        }, {
+            text: '持续时间与暂降频次的函数关系',
+            left: '85%',
+            top: '1%',
+            textAlign: 'center'
+        }, {
+            text: '持续时间的概率分布函数',
+            left: '18%',
+            top: '51%',
+            textAlign: 'center'
+        }, {
+            text: '持续时间与暂降频次的函数关系23423',
+            left: '50%',
+            top: '51%',
+            textAlign: 'center'
+        }, {
+            text: '持续时间的概率分布函数234243',
+            left: '85%',
+            top: '51%',
+            textAlign: 'center'
+        }],
+        tooltip: {
+            trigger: 'axis'
+        },
+        grid: [{
+            show: false,
+            left: '3%',
+            top: '5%',
+            containLabel: true,
+            width: '28%',
+            height: '40%'
+        }, {
+            show: false,
+            left: '33%',
+            top: '5%',
+            containLabel: true,
+            width: '28%',
+            height: '40%'
+        }, {
+            show: false,
+            left: '66%',
+            top: '5%',
+            containLabel: true,
+            width: '28%',
+            height: '40%'
+        }, {
+            show: false,
+            left: '3%',
+            top: '55%',
+            containLabel: true,
+            width: '28%',
+            height: '40%'
+        }, {
+            show: false,
+            left: '33%',
+            top: '55%',
+            containLabel: true,
+            width: '28%',
+            height: '40%'
+        }, {
+            show: false,
+            left: '66%',
+            top: '55%',
+            containLabel: true,
+            width: '28%',
+            height: '40%'
+        }],
+        // legend: [{
+        //   data:['各幅值区间暂降频次', '暂降频次2'],
+        //   x:'right',
+        // },{data:['暂降频次3', '暂降频次4'],
+        //      x:'right',
+        // }],
+        xAxis: [{
+            gridIndex: 0,
+            type: 'category',
+            name: '暂降幅值区间',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            //axisLabel:{  
+            //             interval:0,//横轴信息全部显示  
+            //            rotate:-30,//-30度角倾斜显示  
+            //       }  ,
+            axisTick: {
+                alignWithLabel: true
+            },
+            data: ['0~10%', '10%~20%', '20%~30%', '30%~40%', '40%~50%', '50%~60%', '60%~70%', '70%~80%', '80%~90%', ]
+        }, {
+            gridIndex: 1,
+            type: 'category',
+            name: '暂降幅值',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 14
+            },
+            boundaryGap: false,
+            //axisLabel:{  
+            //             interval:0,//横轴信息全部显示  
+            //            rotate:-30,//-30度角倾斜显示  
+            //       }  ,
+            axisTick: {
+                alignWithLabel: true
+            },
+            data: ['0', '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%']
+        }, {
+            gridIndex: 2,
+            type: 'category',
+            //axisLabel:{  
+            //         interval:0,//横轴信息全部显示  
+            //         rotate:-30,//-30度角倾斜显示  
+            //   }  ,
+            name: '暂降持续时间（s）',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisTick: {
+                alignWithLabel: true
+            },
+            data: ['0~0.1', '0.1~0.25', '0.25~0.5', '0.5~1', '>1']
+
+        }, {
+            gridIndex: 3,
+            type: 'category',
+            //axisLabel:{  
+            //         interval:0,//横轴信息全部显示  
+            //         rotate:-30,//-30度角倾斜显示  
+            //   }  ,
+            name: '暂降持续时间（s）',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisTick: {
+                alignWithLabel: true
+            },
+            boundaryGap: false,
+            data: ['0', '0.1', '0.25', '0.5', '1', 'inf']
+
+        }, {
+            gridIndex: 4,
+            type: 'category',
+            //axisLabel:{  
+            //         interval:0,//横轴信息全部显示  
+            //         rotate:-30,//-30度角倾斜显示  
+            //   }  ,
+            name: '暂降持续时间（s）',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisTick: {
+                alignWithLabel: true
+            },
+            data: ['0~0.1', '0.1~0.25', '0.25~0.5', '0.5~1', '>1']
+
+        }, {
+            gridIndex: 5,
+            type: 'category',
+            //axisLabel:{  
+            //         interval:0,//横轴信息全部显示  
+            //         rotate:-30,//-30度角倾斜显示  
+            //   }  ,
+            name: '暂降持续时间（s）',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisTick: {
+                alignWithLabel: true
+            },
+            boundaryGap: false,
+            data: ['0', '0.1', '0.25', '0.5', '1', 'inf']
+
+        }],
+        yAxis: [{
+            gridIndex: 0,
+            type: 'value',
+            name: '暂降频次(次/年)',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisLine: {
+                lineStyle: {
+                    //color: colors[1]
+                }
+            },
+            splitLine: {
+                show: false
+            }
+        }, {
+            gridIndex: 1,
+            type: 'value',
+            name: '概率分布',
+            nameLocation: 'center',
+            nameGap: '40',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisLabel: {
+                show: true,
+                interval: 'auto',
+                formatter: '{value} %'
+            },
+            //position: 'right',
+            axisLine: {
+                lineStyle: {
+                    //color: colors[0]
+                }
+            },
+            splitLine: {
+                show: false
+            }
+        }, {
+            gridIndex: 2,
+            type: 'value',
+            name: '暂降频次(次/年)',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisLine: {
+                lineStyle: {
+                    //color: colors[0]
+                }
+            },
+            splitLine: {
+                show: false
+            },
+            position: 'left'
+        }, {
+            gridIndex: 3,
+            type: 'value',
+            name: '概率分布',
+            nameLocation: 'center',
+            nameGap: '40',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisLabel: {
+                show: true,
+                interval: 'auto',
+                formatter: '{value} %'
+            },
+            axisLine: {
+                lineStyle: {
+                    //color: colors[1]
+                }
+            },
+            splitLine: {
+                show: false
+            },
+            position: 'left'
+        }, {
+            gridIndex: 4,
+            type: 'value',
+            name: '暂降频次(次/年)',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisLine: {
+                lineStyle: {
+                    //color: colors[0]
+                }
+            },
+            splitLine: {
+                show: false
+            },
+            position: 'left'
+        }, {
+            gridIndex: 5,
+            type: 'value',
+            name: '概率分布',
+            nameLocation: 'center',
+            nameGap: '40',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisLabel: {
+                show: true,
+                interval: 'auto',
+                formatter: '{value} %'
+            },
+            axisLine: {
+                lineStyle: {
+                    //color: colors[1]
+                }
+            },
+            splitLine: {
+                show: false
+            },
+            position: 'left'
+        }],
+        series: [{
+                name: '暂降幅值与暂降频次',
+                type: 'bar',
+                xAxisIndex: 0,
+                yAxisIndex: 0,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+
+                    }
+                },
+                data: [3.5, 0.7, 0.6, 1.4, 1.8, 3, 5, 9.5, 24.6]
+            }, {
+
+                name: '暂降幅值概率分布',
+                type: 'line',
+                smooth: true,
+                barWidth: 25,
+                xAxisIndex: 1,
+                yAxisIndex: 1,
+                symbolSize: 8, //拐点大小
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        color: '#FAD860',
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        width: 4,
+                        color: '#FAD860'
+                    }
+                },
+
+                data: [0, 7, 8.4, 9.6, 12.4, 16, 22, 31.9, 50.9, 100]
+            }, {
+
+                name: '持续时间与暂降频次',
+                type: 'bar',
+                xAxisIndex: 2,
+                yAxisIndex: 2,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                    }
+                },
+
+                data: [36.1, 5.4, 2.4, 1, 5.2]
+            }, {
+
+                name: '持续时间概率分布',
+                type: 'line',
+                smooth: true,
+                barWidth: 25,
+                xAxisIndex: 3,
+                yAxisIndex: 3,
+                symbolSize: 8, //拐点大小
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        color: '#9BCA63',
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        width: 4,
+                        color: '#9BCA63'
+                    }
+                },
+                data: [0, 72.1, 82.8, 87.6, 89.6, 100]
+            }, {
+
+                name: '持续时间与暂降频次',
+                type: 'bar',
+                xAxisIndex: 2,
+                yAxisIndex: 2,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                    }
+                },
+
+                data: [36.1, 5.4, 2.4, 1, 5.2]
+            }, {
+
+                name: '持续时间概率分布',
+                type: 'line',
+                smooth: true,
+                barWidth: 25,
+                xAxisIndex: 3,
+                yAxisIndex: 3,
+                symbolSize: 8, //拐点大小
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        color: '#9BCA63',
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        width: 4,
+                        color: '#9BCA63'
+                    }
+                },
+                data: [0, 72.1, 82.8, 87.6, 89.6, 100]
+            }
+
+        ]
+    };
+
+    myChart1.setOption(option);
+
+</script>
+
+
+
+
+
+
+

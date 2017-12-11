@@ -1,0 +1,368 @@
+<html style="overflow-x: hidden; overflow-y: visible">
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta name="renderer" content="webkit">
+  <meta name="data-spm" content="datav">
+  <title>{$title}</title>
+
+ <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=yarzUUkNb0F0UgHUbSGiHRwQ"></script>
+
+  <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/show.css" />
+
+  <script src="__TMPL__/datav/js/jquery.js"></script>
+  <script src="__TMPL__/datav/js/echarts.js"></script>
+  <script src="__TMPL__/datav/js/theme/chalk.js"></script>
+ 
+</head>
+<body onLoad="startTime()">  
+<div class="datavLayout">
+    <div class="header">
+        <div class="head_left">
+            <div class="info">
+                <div class="icon"></div>
+                <span class="date">{$role['name']}&nbsp;&nbsp;:&nbsp;&nbsp;{$admin['user_login']}&nbsp;&nbsp; [&nbsp;&nbsp;<a href="{:url('datav/Public/logout')}">退出</a>&nbsp;&nbsp;]</span>
+            </div>
+        </div>
+        <div class="head_mid">
+            <div class="title">{$title}</div>
+            <div class="bt"></div>
+        </div>
+        <div class="head_right">
+            <div class="times">
+                <div class="icon" width="18px" height="18px" ></div>
+                <span class="date" id="ShowTime"></span>
+            </div>
+
+        </div>
+    </div>
+    <div class="wraper"></div>
+    <div class="content">
+        <div class="box site">
+            <div class="sub_main" id="main1"></div>
+        </div>
+    </div>
+
+    <div class="wraper"></div>
+
+</div>
+
+
+</body>
+</html>
+
+
+
+<script>
+    function startTime()
+    {
+        var today=new Date()
+        var years=today.getFullYear();
+        var months=today.getMonth();
+        var d=today.getDate()
+        var h=today.getHours()
+        var m=today.getMinutes()
+        var s=today.getSeconds()
+        // add a zero in front of numbers<10
+        months=months+1
+        months=checkTime(months)
+        d=checkTime(d)
+        m=checkTime(m)
+        s=checkTime(s)
+        var weekday=new Array(7)
+        weekday[0]="星期日"
+        weekday[1]="星期一"
+        weekday[2]="星期二"
+        weekday[3]="星期三"
+        weekday[4]="星期四"
+        weekday[5]="星期五"
+        weekday[6]="星期六"
+        var w=weekday[today.getDay()]
+        document.getElementById('ShowTime').innerHTML=years+"-"+months+"-"+d+"  "+w+" "+h+":"+m+":"+s;
+        t=setTimeout('startTime()',500)
+    }
+    function checkTime(i)
+    {
+        if (i<10)
+        {i="0" + i}
+        return i
+    }
+
+
+
+
+    // $(function(){
+
+    //     var app_id ='500554165';
+    //     var end_date ='2017-12-06';
+    //     var start_date ='2017-11-01';
+    //     var idx ='10201,10202,10203';
+    
+    //     var sign ='{$sign}';
+    //     $.ajax({
+    //         type: "get",
+    //         url: "http://mta.qq.com/h5/api/ctr_user_realtime?app_id=500554165&end_date=2017-12-06&idx=10201%2C10202%2C10203&start_date=2017-11-01&sign=0e9bcad9e694b83a22512510a4b5a9d7",
+          
+    //         dataType:"jsonp",
+    //         success: function(result){
+    //             alert(1);
+    //             writeObj(result);
+    //         },
+    //         error: function(result){
+    //             //请求失败之后的操作
+    //             alert(2);
+    //             writeObj(result);
+    //         }
+    //     });
+    // })
+
+
+    function writeObj(obj){ 
+     var description = ""; 
+     for(var i in obj){ 
+     var property=obj[i]; 
+     description+=i+" = "+property+"\n"; 
+     } 
+     alert(description); 
+    } 
+
+</script>
+
+
+<
+
+<script type="text/javascript">
+    // 百度地图API功能
+    // var map = new BMap.Map("allmap");
+    // var point = new BMap.Point(116.404, 39.915);
+    // map.centerAndZoom(point, 15);
+    
+    // //创建小狐狸
+    // var pt = new BMap.Point(116.417, 39.909);
+    // var myIcon = new BMap.Icon("__TMPL__/datav/images/q.png", new BMap.Size(300,157));
+    // var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+    // map.addOverlay(marker2);              // 将标注添加到地图中
+    // map.enableScrollWheelZoom(true);      //地图缩放
+    // map.setMapStyle({style:'bluish'});  
+</script>
+
+
+<script type="text/javascript">
+    var myChart1 = echarts.init(document.getElementById('main1'));
+    
+    //var colors = ['orange', '#d14a61', '#1E90FF'];
+    labelTop = {
+        normal : {
+            label : {
+                show : true,
+                position : 'center',
+                formatter : '{b}',
+                textStyle: {
+                    baseline : 'bottom'
+                }
+            },
+            labelLine : {
+                show : false
+            }
+        }
+    };
+    var labelFromatter = {
+        normal : {
+            label : {
+                formatter : function (params){
+                    return 100 - params.value + '%'
+                },
+                textStyle: {
+                    baseline : 'top'
+                }
+            }
+        },
+    }
+    var labelBottom = {
+        normal : {
+            color: '#ccc',
+            label : {
+                show : true,
+                position : 'center'
+            },
+            labelLine : {
+                show : false
+            }
+        },
+        emphasis: {
+            color: 'rgba(70,5,0,0)'
+        }
+    };
+    var radius = [40, 55];
+    option = {
+        legend: {
+            x : 'center',
+            y : 'center',
+            data:[
+                '剧情', '奇幻', '爱情', '惊悚', '冒险', '动作', '喜剧', '科幻','悬疑','犯罪'
+            ]
+        },
+        title : {
+            text: '各类型电影中“好片”所占比重',
+            subtext: '原始数据来自豆瓣',
+            x: 'center'
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                dataView : {show: true, readOnly: false},
+                magicType : {
+                    show: true, 
+                    type: ['pie', 'funnel'],
+                    option: {
+                        funnel: {
+                            width: '20%',
+                            height: '30%',
+                            itemStyle : {
+                                normal : {
+                                    label : {
+                                        formatter : function (params){
+                                            return 'other\n' + params.value + '%\n'
+                                        },
+                                        textStyle: {
+                                            baseline : 'middle'
+                                        }
+                                    }
+                                },
+                            } 
+                        }
+                    }
+                },
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+       series : [
+            {
+                type : 'pie',
+                center : ['10%', '30%'],
+                radius : radius,
+                x: '0%', // for funnel
+                itemStyle : labelFromatter,
+                data : [
+                    {name:'other', value:75, itemStyle : labelBottom},
+                    {name:'剧情', value:25,itemStyle : labelTop}
+                ]
+            },
+            {
+                type : 'pie',
+                center : ['30%', '30%'],
+                radius : radius,
+                x:'20%', // for funnel
+                itemStyle : labelFromatter,
+                data : [
+                    {name:'other', value:76, itemStyle : labelBottom},
+                    {name:'奇幻', value:24,itemStyle : labelTop}
+                ]
+            },
+            {
+                type : 'pie',
+                center : ['50%', '30%'],
+                radius : radius,
+                x:'40%', // for funnel
+                itemStyle : labelFromatter,
+                data : [
+                    {name:'other', value:86, itemStyle : labelBottom},
+                    {name:'爱情', value:14,itemStyle : labelTop}
+                ]
+            },
+            {
+                type : 'pie',
+                center : ['70%', '30%'],
+                radius : radius,
+                x:'60%', // for funnel
+                itemStyle : labelFromatter,
+                data : [
+                    {name:'other', value:89, itemStyle : labelBottom},
+                    {name:'惊悚', value:11,itemStyle : labelTop}
+                ]
+            },
+            {
+                type : 'pie',
+                center : ['90%', '30%'],
+                radius : radius,
+                x:'80%', // for funnel
+                itemStyle : labelFromatter,
+                data : [
+                    {name:'other', value:73, itemStyle : labelBottom},
+                    {name:'冒险', value:27,itemStyle : labelTop}
+                ]
+            },
+            {
+                type : 'pie',
+                center : ['10%', '70%'],
+                radius : radius,
+                y: '55%',   // for funnel
+                x: '0%',    // for funnel
+                itemStyle : labelFromatter,
+                data : [
+                    {name:'other', value:85, itemStyle : labelBottom},
+                    {name:'动作', value:15,itemStyle : labelTop}
+                ]
+            },
+            {
+                type : 'pie',
+                center : ['30%', '70%'],
+                radius : radius,
+                y: '55%',   // for funnel
+                x:'20%',    // for funnel
+                itemStyle : labelFromatter,
+                data : [
+                    {name:'other', value:46, itemStyle : labelBottom},
+                    {name:'喜剧', value:54,itemStyle : labelTop}
+                ]
+            },
+            {
+                type : 'pie',
+                center : ['50%', '70%'],
+                radius : radius,
+                y: '55%',   // for funnel
+                x:'40%', // for funnel
+                itemStyle : labelFromatter,
+                data : [
+                    {name:'other', value:74, itemStyle : labelBottom},
+                    {name:'科幻', value:26,itemStyle : labelTop}
+                ]
+            },
+            {
+                type : 'pie',
+                center : ['70%', '70%'],
+                radius : radius,
+                y: '55%',   // for funnel
+                x:'60%', // for funnel
+                itemStyle : labelFromatter,
+                data : [
+                    {name:'other', value:75, itemStyle : labelBottom},
+                    {name:'悬疑', value:25,itemStyle : labelTop}
+                ]
+            },
+            {
+                type : 'pie',
+                center : ['90%', '70%'],
+                radius : radius,
+                y: '55%',   // for funnel
+                x:'80%', // for funnel
+                itemStyle : labelFromatter,
+                data : [
+                    {name:'other', value:72, itemStyle : labelBottom},
+                    {name:'犯罪', value:28,itemStyle : labelTop}
+                ]
+            }
+        ]
+    };
+
+    myChart1.setOption(option);
+
+</script>
+
+
+
+
+
+
+
