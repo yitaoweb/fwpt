@@ -40,7 +40,7 @@ class AdminQyshController extends AdminBaseController
          $arrData = $this->request->param(); 
         if($arrData){
             if($arrData['qy_name'] != ''){
-                 $portalTagModel->where('qy_name','like',"%{$arrData['qy_name']}%");
+                 $portalTagModel->where('user_nickname','like',"%{$arrData['qy_name']}%");
                  $this->assign('qy_name', $arrData['qy_name']);
             }
            
