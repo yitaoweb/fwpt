@@ -16,20 +16,6 @@ use think\Db;
 
 class IndexController extends HomeBaseController
 {
-    public function index()
-    {
-    	$site_name = cmf_get_site_info('site_info');
-    	
-        $name=$site_name['site_name'];
-  
-        $title='中小商贸流通企业公共服务数据分析平台';
-        $en = 'changzhi public service platform for SME';
-        $this->assign('title',$title);
-        $this->assign('en',$en);
-        //return $name;
-
-        return $this->fetch(':index');
-    }
 
     public function login()
     {
