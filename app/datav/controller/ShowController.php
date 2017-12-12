@@ -145,11 +145,28 @@ class ShowController extends HomeBaseController
 
 
     //数据分析 - 企业机构 百度地图gis页面
-    public function ent()
+    public function map()
     {
         $sub_title='企业机构GIS数据分析';
         $this->assign('sub_title',$sub_title);
 
-        return $this->fetch(':ent');
+        return $this->fetch(':map');
     }
+
+    //数据分析 - 企业机构 百度地图gis详情页面
+    public function map_info()
+    {
+        $id = $this->request->param('id', 1, 'intval');
+        $jigou = Db::name('user')->where('id',$id)->find();
+
+        $this->assign($jigou);   
+
+        $sub_title='企业机构GIS数据分析';
+        $this->assign('sub_title',$sub_title);
+
+        return $this->fetch(':mapinfo');
+    }
+
+
+
 }

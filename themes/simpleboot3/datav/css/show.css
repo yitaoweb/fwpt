@@ -34,6 +34,7 @@ body {
   transform: scale(1, 1); 
   transform-origin: left top 0px;
   padding: 0.5vw;
+  font-family: "Microsoft Yahei"; 
 }
 
 
@@ -54,7 +55,7 @@ body {
   height: 4vw;
 }
 .datavLayout .header .head_left{
-  width: 18%;
+  width: 25%;
   height: 100%;
   float: left;
 }
@@ -98,7 +99,7 @@ body {
 }
 
 .datavLayout .header .head_mid{
-  width: 64%; 
+  width: 50%; 
   height: 100%; 
   float: left;
 }
@@ -133,7 +134,7 @@ body {
 }
 
 .datavLayout .header .head_right{
-  width: 18%;
+  width: 25%;
   height: 100%;
   float: left;
 }
@@ -235,6 +236,13 @@ body {
 .bfb31{
   float: left;
   width: 100%;
+  height: 31%;
+  margin: 3% auto;
+}
+
+.bfb60{
+  float: left;
+  width: 60%;
   height: 31%;
   margin: 3% auto;
 }
@@ -344,6 +352,16 @@ body {
   color: #fff;
   margin-left: 5px;
   font-family: "Microsoft Yahei"; 
+}
+.box .title .text a{
+
+  color: #fff;
+
+}
+.box .title .text a:hover{
+
+  color: #fff;
+
 }
 
 .box .text1{
@@ -550,3 +568,38 @@ body {
   white-space: nowrap; 
   overflow: hidden;
 }
+
+
+
+.main_l{float: left; width:250px;border-right:1px dotted #eee;}
+.main_l .left_nav_title{ width:250px; height:40px; font-size:16px; text-indent:2em; color:#589DEB; font-weight:bold; line-height:40px; }
+.main_l .left_title{ width:250px; height:40px; font-size:16px; text-indent:1em; color:#fff; font-weight:bold; line-height:40px; }
+.main_r{float: left; width:340px; min-height:300px;}
+
+
+/*左侧推荐机构*/
+.hot_detail{ margin:15px 15px; width:220px; height:180px; border-bottom:1px dotted #eee;}
+a:hover .hot_detail{ background-color:#fafafa;}
+.hot_detail dd{ float:left; width:220px; text-align: center;}
+.hot_detail dd img{ display:block; border-radius:3px; width:220px; height:120px;}
+.hot_detail dd{ font-size:12px; line-height:22px; overflow:hidden; color:#999;}
+.hot_detail .tit{ font-size:14px; line-height:32px; height:30px;color:#fff;text-align: center;}
+.star i{ background:url(../images/sprite.png) no-repeat 0 0; background-size:60px 174px;}
+.star,.star i{ float:left; margin:4px 4px 0 40px; width:60px; height:12px; background-position:0 -80px; font:0/0 a;}
+.star i{ margin:0; background-position:0 -92px;}
+.price{ font-size:15px; font-weight:bold; color:#FF3300; font-family:Verdana, Arial, Helvetica, sans-serif}
+.score{ font-size:12px; line-height:22px;}
+.hot_detail dd .score{ color:#ee0000; margin-right:3px;}
+
+
+.text_left{
+  text-align: left;
+}
+
+.right_content{ width:340px; padding:10px 10px; height:auto; min-height:100px; color:#fff; font-size:15px; line-height:2.0; margin-bottom:20px; overflow-x:hidden; text-align:left;}
+.right_content img{ clear:both;width:auto;display:block;margin:0 auto;padding:0;max-width:878px;width:expression(this.width>878 ? "878px":true);}
+.right_content h1.content_title{ width:100%; height:60px; font-size:20px; text-align:center; line-height:60px;}
+.right_content dl{ width:100%; min-height:40px; line-height:40px; font-size:15px;border-bottom:1px dotted #ddd; color:#fff;}
+.right_content dl:last-child{ border:0px;}
+.right_content dt{ width:120px; text-align:center; float:left;}
+.right_content dd{ float:left; text-align:left;}

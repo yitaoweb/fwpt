@@ -2011,6 +2011,10 @@ function getDateInfo($type)
       'firstday' => date('Ymd', strtotime("now")),
       'lastday' => date('Ymd', strtotime("now")),
     ),
+    array(
+      'firstday' => date('Ymd', strtotime('-1 day')),
+      'lastday' => date('Ymd', strtotime("now")),
+    ),
   );
   return is_null($type) ? $data : $data[$type-1];
 }
@@ -2057,6 +2061,57 @@ function tongji($type = '4'){
                 'metrics' => 'pv_count,visit_count,visitor_count,ip_count',  //所查询指标为PV和UV
                 'max_results' => 0,                     //返回所有条数
                 'gran' => 'day',                        //按天粒度
+            ));
+            echo $ret['raw'] . PHP_EOL;
+        }
+
+        // doLogout
+        $loginService->doLogout(USERNAME, TOKEN, $ucid, $st);
+
+}
+
+function tongji2($type = '4'){
+
+        $loginService = new LoginService(LOGIN_URL, UUID);
+
+        // preLogin
+        if (!$loginService->preLogin(USERNAME, TOKEN)) {
+            exit();
+        }
+
+        // doLogin
+        $ret = $loginService->doLogin(USERNAME, PASSWORD, TOKEN);
+        if ($ret) {
+            $ucid = $ret['ucid'];
+            $st = $ret['st'];
+        }
+        else {
+            exit();
+        }
+        $date =getDateInfo($type);//1 上月 2 本月 3 近15天 4 近30天 5 当天
+
+        $date1 = $date['firstday'];
+        $date2 = $date['lastday'];
+
+
+        $reportService = new ReportService(API_URL, USERNAME, TOKEN, $ucid, $st);
+
+        // get site list
+        $ret = $reportService->getSiteList();
+        //echo $ret['raw'] . PHP_EOL;
+
+        $siteList = $ret['body']['data'][0]['list'];
+        if (count($siteList) > 0) {
+            $siteId = $siteList[0]['site_id'];
+            // get report data of the first site
+            $ret = $reportService->getData(array(
+                'site_id' => $siteId,                   //站点ID
+                'method' => 'source/all/a',             //趋势分析报告
+                'start_date' => $date1,             //所查询数据的起始日期
+                'end_date' => $date2,               //所查询数据的结束日期
+                'metrics' => 'pv_count',  //所查询指标为PV和UV
+                'max_results' => 0,                     //返回所有条数
+                'gran' => 'hour',                        //按天粒度
             ));
             echo $ret['raw'] . PHP_EOL;
         }

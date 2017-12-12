@@ -45,17 +45,17 @@
             </div>
 
             <div class="rect box bfbr57">
-                <div class="sub_main" id="main1"></div>
+                <div class="sub_main" id="main2"></div>
             </div>
            
         </div>
         <div class="row50">
             <div class="rect box bfbl57">
-                <div class="sub_main" id="main1"></div>
+                <div class="sub_main" id="main3"></div>
             </div>
 
             <div class="rect box bfbr57">
-                <div class="sub_main" id="main1"></div>
+                <div class="sub_main" id="main4"></div>
             </div>
            
         </div>  
@@ -122,68 +122,128 @@
 
 
 <script type="text/javascript">
-    var myChart1 = echarts.init(document.getElementById('main1'),'chalk');
     
-    var option = {
-        title: {
-            text: 'Issues解决率趋势分析',
-          
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        legend: {
-            data:['最高气温','最低气温']
-        },
-      
-        xAxis:  {
-            type: 'category',
-            boundaryGap: false,
-            data: ['6/1','6/4','6/7','6/10','6/13','6/16','6/19','6/21','6/24','6/27','6/30','7/2','7/5','7/8','7/11']
-        },
-        yAxis: {
-            type: 'value',
-            axisLabel: {
-                formatter: '{value}'
-            }
-        },
-        series: [
-            {
-                name:'月度解决率',
-                type:'line',
-                data:[92, 96, 99, 91, 96, 103, 100,92, 96, 99, 91, 96, 103, 100,115],
-                markPoint: {
-                    data: [
-                        {type: 'max', name: '最大值'},
-                        {type: 'min', name: '最小值'}
-                    ]
-                },
-                markLine: {
-                    data: [
-                        {type: 'average', name: '平均值'}
-                    ]
+    var myChart2 = echarts.init(document.getElementById('main2'),'chalk');
+    var myChart3 = echarts.init(document.getElementById('main3'),'chalk');
+    var myChart4 = echarts.init(document.getElementById('main4'),'chalk');
+    $.ajax({
+        type: "POST",
+        url: "{:url('datav/api/site_qs')}",
+        dataType:"json",
+        success: function(result){
+            if (result) {
+                var myChart1 = echarts.init(document.getElementById('main1'),'chalk');
+                var texts = result['body']['data'][0]['result']['items'][0];
+                var data = result['body']['data'][0]['result']['items'][1];
+                var datas=[];
+                for (var i = 0; i <= 25; i++) {
+                    if (data[i] > 0 ) {
+                        datas.push(data[i]);
+                    }else{
+                        datas.push(0);
+                    }
+                    
                 }
-            },
-            {
-                name:'累计解决率',
-                type:'line',
-                data:[81, 90, 96, 81, 86, 93, 90,81, 90, 96, 81, 86, 93, 90,100],
-                markPoint: {
-                    data: [
-                        {type: 'max', name: '最大值'},
-                        {type: 'min', name: '最小值'}
-                    ]
-                },
-                markLine: {
-                    data: [
-                        {type: 'average', name: '平均值'}
-                    ]
-                }
-            }
-        ]
-    };
+        
+                var option = {
+       
+                    title:{
+                        text: '暂降幅值与暂降频次的函数关系',
+                        left: '18%',
+                        top: '1%',
+                        textAlign: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    grid:{
+                        show: false,
+                        left: '3%',
+                        top: '5%',
+                        containLabel: true,
+                       
+                    },
+                    // legend: [{
+                    //   data:['各幅值区间暂降频次', '暂降频次2'],
+                    //   x:'right',
+                    // },{data:['暂降频次3', '暂降频次4'],
+                    //      x:'right',
+                    // }],
+                    xAxis: {
+                
+                        type: 'category',
+                        name: '暂降幅值区间',
+                        nameLocation: 'center',
+                        nameGap: '30',
+                        nameTextStyle: {
+                            fontSize: 16
+                        },
+                        axisLabel:{  
+                                    interval:0,//横轴信息全部显示  
+                                   rotate:30,//-30度角倾斜显示  
+                              } ,
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        data:texts
+                    },
+                    yAxis: {
+                    
+                        type: 'value',
+                        name: '暂降频次(次/年)',
+                        nameLocation: 'center',
+                        nameGap: '30',
+                        nameTextStyle: {
+                            fontSize: 16
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                //color: colors[1]
+                            }
+                        },
+                        splitLine: {
+                            show: true
+                        }，
+                        interval:0
+                    },
+                    series: {
 
-    myChart1.setOption(option);
+                            name: '暂降幅值概率分布',
+                            type: 'line',
+                            smooth: true,
+                            barWidth: 25,
+                     
+                            symbolSize: 8, //拐点大小
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top',
+                                    color: '#FAD860',
+                                }
+                            },
+                            lineStyle: {
+                                normal: {
+                                    width: 4,
+                                    color: '#FAD860'
+                                }
+                            },
+
+                            data: datas
+                        }
+                };
+                myChart1.setOption(option);
+
+            }
+        },
+        error:function(result){
+
+        }
+    });
+    
+    
+    myChart2.setOption(option);
+    myChart3.setOption(option);
+    myChart4.setOption(option);
 
 </script>
 

@@ -1,0 +1,262 @@
+<html style="overflow-x: hidden; overflow-y: visible">
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta name="renderer" content="webkit">
+  <meta name="data-spm" content="datav">
+  <title>{$title}-{$sub_title}</title>
+
+ <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=yarzUUkNb0F0UgHUbSGiHRwQ"></script>
+
+  <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/show.css" />
+
+  <script src="__TMPL__/datav/js/jquery.js"></script>
+  <script src="__TMPL__/datav/js/echarts.js"></script>
+  <script src="__TMPL__/datav/js/theme/chalk.js"></script>
+
+  <script src="__TMPL__/public/assets/js/artDialog/jquery.artDialog.js?skin=default"></script>
+  <script src="__TMPL__/public/assets/js/artDialog/plugins/iframeTools.js"></script>
+
+ 
+</head>
+<body onLoad="startTime()">  
+
+
+<div class="datavLayout">
+    <div class="header">
+        <div class="head_left">
+            <div class="info">
+                <div class="icon"></div>
+                <span class="date">{$role['name']}&nbsp;&nbsp;:&nbsp;&nbsp;{$admin['user_login']}&nbsp;&nbsp; [&nbsp;&nbsp;<a href="{:url('datav/Public/logout')}">退出</a>&nbsp;&nbsp;]&nbsp;&nbsp; [&nbsp;&nbsp;<a href="{:url('datav/show/index')}">返回主页</a>&nbsp;&nbsp;]</span>
+            </div>
+        </div>
+        <div class="head_mid">
+            <div class="title">{$sub_title}</div>
+            <div class="bt"></div>
+        </div>
+        <div class="head_right">
+            <div class="times">
+                <div class="icon" width="18px" height="18px" ></div>
+                <span class="date" id="ShowTime"></span>
+            </div>
+        </div>
+    </div>
+    <div class="wraper"></div>
+    <div class="content">
+        <div class="box site">
+            <div class="sub_main" id="allmap"></div>
+            <div id="right" style="width:400px;height:375px;float:left">  
+                <ul>  
+                    <li class="lihidden" name='104.05434130.68075'>企业</li>  
+                    <li name='104.09070430.596048'>机构</li>  
+                </ul>  
+            </div> 
+        </div>
+    </div>
+
+    <div class="wraper"></div>
+
+</div>
+
+
+</body>
+</html>
+
+
+
+<script>
+    function startTime()
+    {
+        var today=new Date()
+        var years=today.getFullYear();
+        var months=today.getMonth();
+        var d=today.getDate()
+        var h=today.getHours()
+        var m=today.getMinutes()
+        var s=today.getSeconds()
+        // add a zero in front of numbers<10
+        months=months+1
+        months=checkTime(months)
+        d=checkTime(d)
+        m=checkTime(m)
+        s=checkTime(s)
+        var weekday=new Array(7)
+        weekday[0]="星期日"
+        weekday[1]="星期一"
+        weekday[2]="星期二"
+        weekday[3]="星期三"
+        weekday[4]="星期四"
+        weekday[5]="星期五"
+        weekday[6]="星期六"
+        var w=weekday[today.getDay()]
+        document.getElementById('ShowTime').innerHTML=years+"-"+months+"-"+d+"  "+w+" "+h+":"+m+":"+s;
+        t=setTimeout('startTime()',500)
+    }
+    function checkTime(i)
+    {
+        if (i<10)
+        {i="0" + i}
+        return i
+    }
+
+
+
+
+    function writeObj(obj){ 
+     var description = ""; 
+     for(var i in obj){ 
+     var property=obj[i]; 
+     description+=i+" = "+property+"\n"; 
+     } 
+     alert(description); 
+    } 
+
+</script>
+
+
+
+
+<script type="text/javascript">
+
+
+$.ajax({
+    type: "POST",
+    url: "{:url('datav/api/site_map')}",
+    dataType:"json",
+    success: function(result){
+        if (result) {    
+     
+            for(var i=0;i<result.length;i++)
+            {
+                var data =result[i];
+                addpoint(data.lng,data.lat,data.user_nickname,data.user_type,data.id); 
+              
+            }
+              
+        }
+    },
+    error:function(result){
+        alert(1);
+    }
+});
+
+var map = new BMap.Map("allmap");            // 创建Map实例  
+map.enableScrollWheelZoom(true);  
+var  mapStyle ={   
+    features: ["road", "building","water","land"],//隐藏地图上的poi  
+    style : "normal"  //设置地图底图样式，目前支持normal（默认样式）,dark（深色样式）,light（浅色样式）  
+}  
+map.setMapStyle(mapStyle);  
+var point = new BMap.Point(113.129945,36.205546); //创建坐标点  
+map.centerAndZoom(point, 15); //设置中心点和层级  
+                  
+var cr = new BMap.CopyrightControl({anchor: BMAP_ANCHOR_TOP_LEFT});   //设置版权控件位置  
+map.addControl(cr); //添加版权控件  
+                  
+var bs = map.getBounds();   //返回地图可视区域  
+cr.addCopyright({id: 1, content: '<img src="__TMPL__/datav/images/item.png"/>', bounds: bs});  //设置左边提示 
+
+
+//添加标注点函数  
+/*  
+px 经度坐标点  
+py 纬度坐标点  
+title 标注内容  
+style 标注风格 1在售 2规划 3售罄  
+*/
+function addpoint(px, py, title, style,id) {
+
+    // 根据风格参数设置ico  
+    var newpointimg = "";
+    var newlabimg = "";
+    switch (style) {
+    case 2:
+        newpointimg = "__TMPL__/datav/images/bzico.png";
+        newlabimg = "url(__TMPL__/datav/images/titleico.png)";
+        break;
+    case 3:
+        newpointimg = "__TMPL__/datav/images/bzico2.png";
+        newlabimg = "url(__TMPL__/datav/images/titleico2.png)";
+        break;
+    }
+
+    var newpoint = new BMap.Point(px, py); //设置新的坐标点  
+    var newlabtitle = title;
+    var icon = new BMap.Icon(newpointimg, new BMap.Size(15, 15), { //是引用图标的名字以及大小，注意大小要一样  
+        anchor: new BMap.Size(7, 15) //这句表示图片相对于所加的点的位置  
+    });
+    var mkr = new BMap.Marker(newpoint,{icon: icon});
+    
+    map.addOverlay(mkr); //添加标注  
+
+    //添加标签  
+    var label = new BMap.Label(newlabtitle, {
+        offset: new BMap.Size(10, -18),
+        position: newpoint
+    }); // 创建文本标注对象  
+    label.setStyle({
+        color: "white",
+        fontSize: "12px",
+        height: "18px",
+        width: "auto",
+        fontFamily: "微软雅黑",
+        border: "0px",
+        background: newlabimg,
+        textAlign: "center",
+        paddingTop: "2px",
+        cursor: "pointer"
+    });
+    label.id = id ;
+    map.addOverlay(label);
+    label.addEventListener("click", attribute); //创建label监听事件  
+}
+//触发监听事件  
+//根据x,y坐标显示对应窗口  
+function attribute(e) {
+    //var p = e.target;
+    //var name = (p.getPosition().lng).toString() + (p.getPosition().lat).toString();
+    //alert(e.target.id);
+    //$("#right ul li").hide(); //隐藏所有子类  
+    //$("#right>ul>li[name='" + name + "']").show(); //取得li id 显示 必须全匹配否则火狐不兼容  
+    var str ='/id/'+e.target.id;
+    var strs = "{:url('datav/show/map_info')}";
+    var url = insertString(strs,'.',str);
+
+    art.dialog.open(url,{lock:false,title:e.target.content,width:600,height:400,yesText:'关闭',background: '#071c43',opacity: 0.87});
+}
+
+function insertString(mainStr,searchStr,insertStr){ 
+    var front=getFront(mainStr,searchStr); 
+    var end=getEnd(mainStr,searchStr); 
+    if(front!=null && end!=null){ 
+        return front+insertStr+searchStr+end; 
+    } 
+    return null; 
+} 
+
+function getFront(mainStr,searchStr){ 
+    foundOffset=mainStr.indexOf(searchStr); 
+    if(foundOffset==-1){ 
+        return null; 
+    } 
+    return mainStr.substring(0,foundOffset); 
+} 
+
+function getEnd(mainStr,searchStr){ 
+    foundOffset=mainStr.indexOf(searchStr); 
+    if(foundOffset==-1){ 
+        return null; 
+    }    
+    return mainStr.substring(foundOffset+searchStr.length,mainStr.length); 
+} 
+
+</script>
+
+
+
+
+
+
+
+
+
