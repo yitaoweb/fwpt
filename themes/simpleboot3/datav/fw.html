@@ -112,7 +112,7 @@
 
 <script type="text/javascript">
     var myChart1 = echarts.init(document.getElementById('main1'));
-    //var colors = ['orange', '#d14a61', '#1E90FF'];
+    var colors = ['orange', '#d14a61', '#1E90FF'];
     labelTop = {
         normal : {
             label : {
@@ -162,12 +162,19 @@
             y : 'center',
             data:[
                 '宣传推介', '法律维权', '商业融资', '商务咨询', '人才培训', '信息服务'
-            ]
+            ],
+            textStyle:{
+            color:'#fff'
+            }
         },
         title : {
             text: '服务产品分类统计',
-            x: 'center'
+            x: 'center',
+            textStyle:{
+            color:'#fff'
+            },
         },
+        
         toolbox: {
             show : true,
             feature : {
@@ -201,7 +208,7 @@
        series : [
             {
                 type : 'pie',
-                center : ['10%', '30%'],
+                center : ['30%', '30%'],
                 radius : radius,
                 x: '0%', // for funnel
                 itemStyle : labelFromatter,
@@ -212,7 +219,7 @@
             },
             {
                 type : 'pie',
-                center : ['30%', '30%'],
+                center : ['50%', '30%'],
                 radius : radius,
                 x:'20%', // for funnel
                 itemStyle : labelFromatter,
@@ -223,7 +230,7 @@
             },
             {
                 type : 'pie',
-                center : ['50%', '30%'],
+                center : ['70%', '30%'],
                 radius : radius,
                 x:'40%', // for funnel
                 itemStyle : labelFromatter,
@@ -234,7 +241,7 @@
             },
             {
                 type : 'pie',
-                center : ['70%', '30%'],
+                center : ['30%', '70%'],
                 radius : radius,
                 x:'60%', // for funnel
                 itemStyle : labelFromatter,
@@ -245,7 +252,7 @@
             },
             {
                 type : 'pie',
-                center : ['90%', '30%'],
+                center : ['50%', '70%'],
                 radius : radius,
                 x:'80%', // for funnel
                 itemStyle : labelFromatter,
@@ -256,7 +263,7 @@
             },
             {
                 type : 'pie',
-                center : ['10%', '70%'],
+                center : ['70%', '70%'],
                 radius : radius,
                 y: '55%',   // for funnel
                 x: '0%',    // for funnel
