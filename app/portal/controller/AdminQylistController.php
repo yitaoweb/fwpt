@@ -47,22 +47,30 @@ class AdminQylistController extends AdminBaseController
 
         if($arrData){
             if(isset($arrData['name'])){
+                if($arrData['name'] != ''){
                  $portalTagModel->where('user_nickname','like',"%{$arrData['name']}%");
                  $this->assign('name', $arrData['name']);
+                 }
             }
             if(isset($arrData['xyflid'] )){
+                if($arrData['xyflid'] != ''){
                  $categoriesTree = $portalSshyModel->adminCategoryTree($arrData['xyflid']);
                  $portalTagModel->where('qy_sshy',$arrData['xyflid']);
                  $this->assign("xyflid", $arrData['xyflid']);
+                 }
             }
             if(isset($arrData['xzqyid'])){
+                if($arrData['xzqyid'] != ''){
                  $xzqyTree = $portalXzqyModel->adminCategoryTree($arrData['xzqyid']);
                  $portalTagModel->where('qy_area',$arrData['xzqyid']);
                  $this->assign("xzqyid", $arrData['xzqyid']);
+                 }
             }
             if(isset($arrData['qy_shstatid'])){
+                if($arrData['qy_shstatid'] != ''){
                  $portalTagModel->where('qy_shstat',$arrData['qy_shstatid']);
                  $this->assign("qy_shstatid", $arrData['qy_shstatid']);
+                 }
             }
            
         } 

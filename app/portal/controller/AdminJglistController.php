@@ -45,24 +45,33 @@ class AdminJglistController extends AdminBaseController
         $categoriesTree = $portalSsfwModel->adminCategoryTree();
         $xzqyTree = $portalXzqyModel->adminCategoryTree();
         $this->assign("qy_shstatid", 2);
+
         if($arrData){
-            if(isset($arrData['name'] )){
+            if(isset($arrData['name'])){
+                if($arrData['name'] != ''){
                  $portalTagModel->where('user_nickname','like',"%{$arrData['name']}%");
                  $this->assign('name', $arrData['name']);
+                 }
             }
-            if(isset($arrData['fwflid'])){
-                 $categoriesTree = $portalSsfwModel->adminCategoryTree($arrData['fwflid']);
+            if(isset($arrData['fwflid'] )){
+                if($arrData['fwflid'] != ''){
+                 $categoriesTree = $portalSshyModel->adminCategoryTree($arrData['fwflid']);
                  $portalTagModel->where('qy_ssfw',$arrData['fwflid']);
                  $this->assign("fwflid", $arrData['fwflid']);
+                 }
             }
             if(isset($arrData['xzqyid'])){
+                if($arrData['xzqyid'] != ''){
                  $xzqyTree = $portalXzqyModel->adminCategoryTree($arrData['xzqyid']);
                  $portalTagModel->where('qy_area',$arrData['xzqyid']);
                  $this->assign("xzqyid", $arrData['xzqyid']);
+                 }
             }
             if(isset($arrData['qy_shstatid'])){
+                if($arrData['qy_shstatid'] != ''){
                  $portalTagModel->where('qy_shstat',$arrData['qy_shstatid']);
                  $this->assign("qy_shstatid", $arrData['qy_shstatid']);
+                 }
             }
            
         } 
