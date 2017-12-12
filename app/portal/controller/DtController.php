@@ -12,14 +12,14 @@ namespace app\portal\controller;
 
 use app\portal\model\UserModel;
 use app\portal\model\PortalLxdwzModel;
-use cmf\controller\AdminBaseController;
+use cmf\controller\HomeBaseController;
 use think\Db;
 
 /**
  * Class AdminTagController 标签管理控制器
  * @package app\portal\controller
  */
-class DtController extends AdminBaseController
+class DtController extends HomeBaseController
 {
     /**
      * 文章标签管理
