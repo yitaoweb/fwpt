@@ -21,6 +21,7 @@
             <div class="screen">
                 <nav class="nav">
                     <ul>
+                        <li><a href="{:cmf_url('datav/index/index')}">分析首页</a></li>
                         <li><a href="{:cmf_url('datav/show/xsqy')}">限上企业分析</a></li>
                         <li><a href="{:cmf_url('datav/show/xm')}">项目数据分析</a></li>
                         <li><a href="{:cmf_url('datav/show/fw')}">服务产品分析</a></li>
@@ -32,52 +33,11 @@
                     <div class="icon"></div>
                 </div>
                 <div class="lower-screen">
-                    <div class="card">
-                        <h2>企业需求数据</h2>
-                        <br><br>
-                         <div id="main3" style="width: 100%;height:350px;"></div>
-<!--                         <p>Created by Lewi Hussey.</p> -->
-                    </div>
 
                     <div class="card">
-                        <h2>平台当日流量数据</h2>
+                        <h2>开发区项目数据分析</h2>
                         <br><br>
-                         <div id="main2" style="width: 100%;height:350px;"></div>
-<!--                         <p>Created by Lewi Hussey.</p> -->
-                    </div>
-
-                    <div class="card">
-                        <h2>机构产品数据</h2>
-                        <br><br>
-                         <div id="main4" style="width: 100%;height:350px;"></div>
-<!--                         <p>Created by Lewi Hussey.</p> -->
-                    </div>
-
-                    <div class="card">
-                        <h2>服务对接数据</h2>
-                        <br><br>
-                         <div id="main5" style="width: 100%;height:350px;"></div>
-<!--                         <p>服务对接数据</p> -->
-                    </div>
-
-                    <div class="card">
-                        <h2>高新区经济数据</h2>
-                        <br><br>
-                         <div id="main6" style="width: 100%;height:350px;"></div>
-<!--                         <p>Created by Lewi Hussey.</p> -->
-                    </div>
-
-                    <div class="card">
-                        <h2>高新区项目数据</h2>
-                        <br><br>
-                         <div id="main7" style="width: 100%;height:350px;"></div>
-<!--                         <p>Created by Lewi Hussey.</p> -->
-                    </div>
-
-                    <div class="card">
-                        <h2>限额以上企业数据</h2>
-                        <br><br>
-                         <div id="main8" style="width: 100%;height:350px;"></div>
+                         <div style="width: 100%;height:350px;" id="main1"></div>
 <!--                         <p>Created by Lewi Hussey.</p> -->
                     </div>
                 </div>
@@ -93,717 +53,111 @@
         $('body').toggleClass('nav-open');
     });
     </script>
-    <script type="text/javascript">
-        var myChart3 = echarts.init(document.getElementById('main3'));
-        var fwxqname = new Array();
-        var ddcoun = new Array();
-        var zzcoun = new Array();
-        var wccoun = new Array();
-        $.ajax({
-            type: "POST",
-            url: '/datav/Api/xq',
-            async: false,
-            cache: false,
-            success: function(data) {
-                for (var i = 0; i < data.length; i++) {
-                    fwxqname[i] = data[i].fwxqname;
 
-                    ddcoun[i] = data[i].ddcoun;
-
-                    zzcoun[i] = data[i].zzcoun;
-
-                    wccoun[i] = data[i].wccoun;
-
-                }
-            }
-        })
-
-        var option3 = {
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    lineStyle: {
-                        color: '#57617B'
-                    }
-                }
-            },
-            grid: {
-                left: '3%',
-                right: '4%',
-                top: '20%',
-                bottom: '3%',
-                containLabel: true
-            },
-            xAxis: [{
-                type: 'category',
-                boundaryGap: false,
-                axisLine: {
-                    lineStyle: {
-                        color: '#57617B'
-                    }
-                },
-                data: fwxqname
-            },
-            {
-                axisPointer: {
-                    show: false
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: '#57617B'
-                    }
-                },
-                axisTick: {
-                    show: false
-                },
-
-                position: 'bottom',
-                offset: 20
-            }],
-            yAxis: [{
-                type: 'value',
-                axisTick: {
-                    show: false
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: '#57617B'
-                    }
-                },
-                axisLabel: {
-                    margin: 8,
-                    textStyle: {
-                        fontSize: 16
-                    }
-                },
-                splitLine: {
-                    lineStyle: {
-                        color: '#57617B'
-                    }
-                },
-                splitNumber: 3,
-                max: '10',
-                min: '1'
-            }],
-            series: [{
-                name: '等待对接',
-                type: 'line',
-                smooth: true,
-                symbol: 'circle',
-                symbolSize: 5,
-                showSymbol: false,
-                lineStyle: {
-                    normal: {
-                        width: 1
-                    }
-                },
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: 'rgba(137, 189, 27, 0.3)'
-                        },
-                        {
-                            offset: 0.8,
-                            color: 'rgba(137, 189, 27, 0)'
-                        }], false),
-                        shadowColor: 'rgba(0, 0, 0, 0.1)',
-                        shadowBlur: 10
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: 'rgb(137,189,27)',
-                        borderColor: 'rgba(137,189,2,0.27)',
-                        borderWidth: 12
-
-                    }
-                },
-                data: ddcoun
-            },
-            {
-                name: '正在对接',
-                type: 'line',
-                smooth: true,
-                symbol: 'circle',
-                symbolSize: 5,
-                showSymbol: false,
-                lineStyle: {
-                    normal: {
-                        width: 1
-                    }
-                },
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: 'rgba(0, 136, 212, 0.3)'
-                        },
-                        {
-                            offset: 0.8,
-                            color: 'rgba(0, 136, 212, 0)'
-                        }], false),
-                        shadowColor: 'rgba(0, 0, 0, 0.1)',
-                        shadowBlur: 10
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: 'rgb(0,136,212)',
-                        borderColor: 'rgba(0,136,212,0.2)',
-                        borderWidth: 12
-
-                    }
-                },
-                data: zzcoun
-            },
-            {
-                name: '对接完成',
-                type: 'line',
-                smooth: true,
-                symbol: 'circle',
-                symbolSize: 5,
-                showSymbol: false,
-                lineStyle: {
-                    normal: {
-                        width: 1
-                    }
-                },
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: 'rgba(219, 50, 51, 0.3)'
-                        },
-                        {
-                            offset: 0.8,
-                            color: 'rgba(219, 50, 51, 0)'
-                        }], false),
-                        shadowColor: 'rgba(0, 0, 0, 0.1)',
-                        shadowBlur: 10
-                    }
-                },
-                itemStyle: {
-                    normal: {
-
-                        color: 'rgb(219,50,51)',
-                        borderColor: 'rgba(219,50,51,0.2)',
-                        borderWidth: 12
-                    }
-                },
-                data: wccoun
-            },
-            ]
-        };
-         myChart3.setOption(option3);
-
-
-         $.ajax({
-            type: "POST",
-            url: "{:url('datav/api/tongji',array('type'=>5))}",
-            dataType:"json",
-            success: function(result){
-                var myChart2 = echarts.init(document.getElementById('main2'));
-                var tongji = result['body']['data'][0]['result']['pageSum'][0];
-
-                var option = {
-                    tooltip : {
-                        trigger: 'item',
-                        confine: true,
-                        formatter: "{b} : {c} ({d}%)"
+<script type="text/javascript">
+    $.ajax({
+        type: "POST",
+        url: "{:url('datav/api/site_xm')}",
+        dataType:"json",
+        success: function(result){
+            if (result) {
+                //writeObj(result);
+                var myChart1 = echarts.init(document.getElementById('main1'),'chalk');
+    
+                var hours = ['1', '2', '3', '4', '5', '6', '7','8', '9', '10','11','12'];
+                var days = [ '在谈', '新签', '拟开', '在建', '重点', '新投'];
+                var data = result;
+                data = data.map(function (item) {
+                    return [item[1], item[0], item[2]];
+                });
+                option = {
+                    title: {
+                        text: '',
+                        link: 'https://github.com/pissang/echarts-next/graphs/punch-card'
                     },
-                    series: {
-                        type: 'pie',
-                        radius: '55%',
-                        data: [
-                            {value:tongji[0], name:'浏览量(PV)'},
-                            {value:tongji[1], name:'访问次数'},
-                            {value:tongji[2], name:'访客数(UV)'},
-                            {value:tongji[3], name:'IP数'}
-                        ],
-                        roseType: 'angle',
-                        itemStyle: {
-                            normal: {
-                                shadowBlur: 200,
-                                shadowColor: 'rgba(0, 0, 0, 0.5)'
-                            }
+                    legend: {
+                        data: ['Punch Card'],
+                        left: 'right'
+                    },
+                    tooltip: {
+                        position: 'top',
+                        formatter: function (params) {
+                            return '在'+hours[params.value[0]] + '份有 ' +params.value[2] + ' 个 ' +  days[params.value[1]];
                         }
-                    }
+                    },
+                    grid: {
+                        left: 2,
+                        bottom: 10,
+                        right: 10,
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: hours,
+                        axisLabel: {
+                            show: true,
+                            textStyle: {
+                                fontSize: 16,
+                                
+                                }
+                            },
+                        boundaryGap: false,
+                        splitLine: {
+                            show: true,
+                            lineStyle: {
+                                color: '#96dee8',
+                                type: 'soild'
+                            }
+                        },
+                        axisLine: {
+                            show: false
+                        }
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: days,
+                        axisLabel: {
+                            show: true,
+                            textStyle: {
+                                fontSize: 20,
+                                
+                                }
+                            },
+                        boundaryGap: false,
+                        splitLine: {
+                            show: true,
+                            lineStyle: {
+                                color: '#96dee8',
+                                type: 'soild'
+                            }
+                        },
+                        axisLine: {
+                            show: false
+                        }
+                    },
+                    series: [{
+                        name: '数据量',
+                        type: 'scatter',
+                        symbolSize: function (val) {
+                            return val[2] * 15;
+                        },
+                        data: data
+                    }]
                 };
 
-                myChart2.setOption(option);
-            },
-            error:function(result){
-                alert('获取平台流量失败！请重试！')
+                myChart1.setOption(option);
             }
-        });
-
-
-        var fwname = new Array();
-        var cpcoun = new Array();
-            $.ajax({
-                type: "POST",
-                url:'/datav/Api/cp',
-                async: false,
-                cache: false,
-                success: function (data) {               
-                  for (var i = 0; i < data.length; i++) {
-                      fwname[i]=data[i].fwname;
-                      cpcoun[i]=data[i].cpcoun;                   
-                  }
-                }
-        })
-        var myChart4 = echarts.init(document.getElementById('main4'));
-         //data
-        var data = cpcoun;
-        var markLineData = [];
-        for (var i = 1; i < data.length; i++) {
-            markLineData.push([{
-                xAxis: i - 1,
-                yAxis: data[i - 1],
-                value: (data[i] + data[i-1]).toFixed(2)
-            }, {
-                xAxis: i,
-                yAxis: data[i]
-            }]);
+            
+        },
+        error:function(result){
+            alert('获取平台流量失败！请重试！')
         }
-            
-        //option
-        var option4 = {
-   
-            tooltip : {
-                trigger: 'axis'
-            }, 
-            grid: {
-                left: '3%',
-                right: '4%',
-                top:'20%',
-                bottom: '3%',
-                containLabel: true
-            },   
-            xAxis: {
-                data: fwname
-            },
-            yAxis: {
-                splitNumber : 3,
-                max : '50',
-                min : '1'
-            },
-            series: [{
-                type: 'line',
-                data:data,
-                markPoint: {
-                    data: [
-                        {type: 'max', name: '最大值'},
-                        {type: 'min', name: '最小值'}
-                    ]
-                },
-                markLine: {
-                    smooth: true,
-                            effect: {
-                                show: true
-                            },
-                            distance: 10,
-                    label: {
-                        normal: {
-                            position: 'middle'
-                        }
-                    },
-                    symbol: ['none', 'none'],
-                    data: markLineData
-                }
-            }]
-        };
-         myChart4.setOption(option4);
-
-
-
-         var myChart5 = echarts.init(document.getElementById('main5'));
-
-         var time = new Array();
-            var cgcoundj = new Array();
-            var jjcoundj = new Array();
-            var wccoundj = new Array();
-            $.ajax({
-                type: "POST",
-                url:'/datav/Api/dj',
-                async: false,
-                cache: false,
-                success: function (data) {            
-                  for (var i = 0; i < data.length; i++) {
-                            time[i]=data[i].time;
-                            cgcoundj.push({
-                                name : '',
-                                value : data[i].cgcoundj
-                            })
-                            jjcoundj.push({
-                                name : '',
-                                value : data[i].jjcoundj
-                            })
-                            wccoundj.push({
-                                name : '',
-                                value : data[i].wccoundj
-                            })
-                   
-                  }
-                }
-            })
-        var color = '#189cbb';
-        var lineColor = '#0a324b'
-        var xAxisData = time;
-        // var seriesData = [45, 55, 70, 95, 55, 70, 85];
-        var scale = 1;
-
-        var maxData = '55%';
-
-        var option5 = {
-            tooltip: {
-                show: true, //去除面板显示
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'cross',
-                    label: {
-                        backgroundColor: '#185164'
-                    }
-                }
-            },
-            legend: {
-                show: true,
-                itemGap:20,
-                data: ['成功受理', '拒绝受理','对接完成'],
-                icon: 'circle',
-                textStyle: {
-                    color: '#3dd3f8',
-                    fontSize:10*scale
-                },
-            },
-          
-            color: ['#295beb', '#eb297d','#ffc72b'], //3dd3f8
-            grid: {
-                left: '3%',
-                right: '10%',
-                top:'30%',
-                bottom: '3%',
-                containLabel: true
-            },
-            xAxis: {
-                type: 'category',
-                boundaryGap: false,
-                axisLabel: {
-                    textStyle: {
-                        color: color,
-                        fontSize: 16*scale,
-                    }
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: lineColor,
-                    }
-                },
-            
-                data: xAxisData
-            },
-            yAxis: {
-                type: 'value',
-                max: 10,
-                axisLabel: {
-                    padding: [0, 15, 0, 0],
-                    textStyle: {
-                        color: color,
-                        fontSize: 16*scale,
-                    }
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: lineColor,
-                    }
-                },
-                splitLine: {
-                    show: false
-                },
-               
-         
-            },
-            series: [{
-                name: '成功受理',
-                type: 'line',
-                stack: '总量',
-                smooth: true, //这句就是让曲线变平滑的
-                data: cgcoundj,
-                symbol: 'none', //拐点样式
-             
-            }, {
-                name: '拒绝受理',
-                type: 'line',
-                smooth: true, //这句就是让曲线变平滑的
-                data: jjcoundj,
-                symbol: 'none', //拐点样式
-            
-            },
-            {
-                name: '对接完成',
-                type: 'line',
-                smooth: true, //这句就是让曲线变平滑的
-                data: wccoundj,
-                symbol: 'none', //拐点样式
-            
-            }]
-        };
-
-         myChart5.setOption(option5);
-
-
-
-         var myChart6 = echarts.init(document.getElementById('main6'));
-
-         var fl = new Array();
-            var gmzcz = new Array();
-            $.ajax({
-                type: "POST",
-                url:'/datav/Api/jjyxqk',
-                async: false,
-                cache: false,
-                success: function (data) {            
-                  for (var i = 0; i < data.length; i++) {
-                            fl[i]=data[i].fl;
-                            if(data[i].fl == 1){
-                                 fl[i]='工业';
-                            }
-                            if(data[i].fl == 2){
-                                 fl[i]='建筑业';
-                            }
-                            if(data[i].fl == 3){
-                                 fl[i]='批零住餐';
-                            }
-                            if(data[i].fl == 4){
-                                 fl[i]='服务业';
-                            }
-                            gmzcz[i]=data[i].gmzcz;                  
-                  }
-                }
-            })
-        var option6 = {
-            tooltip : {
-                trigger: 'axis',
-                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                }
-            },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '10%',
-                containLabel: true
-            },
-            xAxis : [
-                {
-                    type : 'category',
-                    data : fl,
-                    axisTick: {
-                        show:false,
-                        alignWithLabel: false
-                    },
-                    axisLabel:{
-                        show:false,
-                    },
-                     axisLine: {
-                        show:false,
-                    },
-                    
-                }
-            ],
-            yAxis : [
-                {
-                    show:false,
-                    type : 'value'
-                }
-            ],
-            series : [
-                {
-                    name:'规模以上工业总产值',
-                    type:'bar',
-                    barWidth: '30%',
-                    label:{
-                      normal:{
-                          show:true,
-                          position:'bottom',
-                          formatter:'{c}亿元 \n{b}',
-                          textStyle:{
-                              color:'#666'
-                          }
-                      }  
-                    },
-                    itemStyle:{
-                      normal:{
-                          barBorderRadius:100,
-                          color:function(idx) {
-                              console.log(idx)
-                              var color = ['#dc4e54','#db8258','#eda350','#a6a34b','#84aa6d','#84abab']
-                              return color[idx.dataIndex % color.length]
-                          }
-                      }  
-                    },
-                    data:gmzcz
-                }
-            ]
-        };
-
-
-         myChart6.setOption(option6);
-
-
-
-         $.ajax({
-                type: "POST",
-                url: "{:url('datav/api/xm')}",
-                dataType:"json",
-                success: function(result){
-
-                    var myChart7 = echarts.init(document.getElementById('main7'));
-                    var xm = result[0];
-                    var option = {
-                                tooltip: {
-                                    trigger: 'axis',
-                                    axisPointer: {
-                                        type: 'none'
-                                    },
-                                    formatter: function (params) {
-                                        return params[0].name + ': ' + params[0].value;
-                                    }
-                                },
-                                xAxis: {
-                                    data: ['在谈', '新签约', '拟开工', '新开工', '在建', '重点', '新投产'],
-
-                                    axisTick: {show: false},
-                                    axisLine: {show: false},
-                                    axisLabel: {
-                                        interval: 0,
-                                        textStyle: {
-                                            color: '#e54027'
-                                        }
-                                    }
-                                },
-                                yAxis: {
-                                    splitNumber : 5,
-                                    max : 'dataMax',
-                                    min : '0',
-                                    splitLine: {show: false},
-                                    axisTick: {show: false},
-                                    axisLine: {show: false},
-                                    axisLabel: {show: false}
-                                },
-
-
-                                grid: {
-                                    left: '3%',
-                                    right: '4%',
-                                    top:'20%',
-                                    bottom: '3%',
-                                    containLabel: true
-                                },   
-
-                                color: ['#e54027'],
-                                series: [{
-                                    name: 'hill',
-                                    type: 'pictorialBar',
-                                    barCategoryGap: '-130%',
-                                    //symbol: 'path://M0,5 L10,0 L5,10 L0,10 z',
-                                    symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
-                                    itemStyle: {
-                                        normal: {
-                                            opacity: 0.5
-                                        },
-                                        emphasis: {
-                                            opacity: 1
-                                        }
-                                    },
-                                    data: [xm.zt, xm.xq, xm.nkg, xm.xkg, xm.zj, xm.zd, xm.tc],
-                                    z: 10
-                                }, {
-                                    name: 'glyph',
-                                    type: 'pictorialBar',
-                                    barGap: '-100%',
-                                    symbolPosition: 'end',
-                                    symbolSize: 10,
-                                    symbolOffset: [0, '-120%'],
-                                    data: [xm.zt, xm.xq, xm.nkg, xm.xkg, xm.zj, xm.zd, xm.tc],
-                                }]
-                    };
-
-                    myChart7.setOption(option);
-                },
-                error:function(result){
-                    alert('获取平台流量失败！请重试！')
-                }
-            });
-
-
-
-            $.ajax({
-                    type: "POST",
-                    url: "{:url('datav/api/xsqy')}",
-                    dataType:"json",
-                    success: function(result){
-                        var xsqy = result[0];
-                        var myChart8 = echarts.init(document.getElementById('main8'));
-                        var option8 = {
-                                      
-                                         
-                            tooltip : {
-                                trigger: 'item',
-                                formatter: "{a} <br/>{b} : {c} ({d}%)"
-                            },
-                            legend: {
-                                show : false,
-                                orient : 'vertical',
-                                x : 'left',
-                                data:['零售企业','批发企业','住宿企业','餐饮企业']
-                            },
-                            toolbox: {
-                                show : false,
-                                feature : {
-                                    mark : {show: false},
-                                    dataView : {show: true, readOnly: false},
-
-                                    restore : {show: true},
-                                    saveAsImage : {show: true}
-                                }
-                            },
-                            calculable : false,
-                            series : [
-                                {
-                                    name:'销售额占比',
-                                    selectedMode: 'single',
-                                    type:'pie',
-                                    radius : [49, 35],
-                                    label: {
-                                        normal: {
-                                            formatter:"{b}:({d}%)",
-                                        }
-                                    },
-                                    // for funnel
-                                    x: '50%',
-                                    width: '35%',
-                                    funnelAlign: 'left',
-
-                                    data:[
-                                        {value:xsqy.ls, name:'零售企业'},
-                                        {value:xsqy.pf, name:'批发企业'},
-                                        {value:xsqy.zs, name:'住宿企业'},
-                                        {value:xsqy.cy, name:'餐饮企业'}
-                                    ]
-                                }
-                            ]
-                        };
-                        
-
-                        myChart8.setOption(option8);
-
-                    },
-                    error:function(result){
-                        alert('获取平台流量失败！请重试！')
-                    }
-                });
-    </script>
+    });
+</script>
 </body>
 </html>
+
+
+
+
+
