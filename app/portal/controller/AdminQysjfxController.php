@@ -42,8 +42,10 @@ class AdminQysjfxController extends AdminBaseController
 
         $portalTagModel->order(["id" => "ASC"]);
         $tags = $portalTagModel->paginate(10);
+        $xmcoun = Db::query('select sum(xse) as xse,sum(lse) as lse from pt_qysjfx');
         $this->assign("arrStatus", $portalTagModel::$STATUS);
         $this->assign("tags", $tags);
+        $this->assign("xmcoun", $xmcoun);
         $this->assign('page', $tags->render());
 
         return $this->fetch();

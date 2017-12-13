@@ -18,6 +18,7 @@
                 <th width="50">ID</th>
                 <th>上报日期</th>
                 <th>当月销售额</th>
+                <th>当月零售额</th>
                 <th>同期</th>
                 <th>同比</th>
                 <th>状态</th>
@@ -30,6 +31,7 @@
                     <td>{$vo.id}</td>
                     <td>{$vo.date}</td>
                     <td>{$vo.xse}</td>
+                    <td>{$vo.lse}</td>
                     <td>{$vo.tq}</td>
                     <td>{$vo.tb}</td>
                     <td>
@@ -50,12 +52,18 @@
                     </td>
                 </tr>
             </foreach>
+                <tr>
+                  <td colspan="2" style="text-align: center;"><b>合计</b></td>
+                  <td colspan="1" ><b>销售总额：</b>{$xmcoun[0]['xse']}<b>亿元</b></td>
+                  <td colspan="0" ><b>零售总额：</b>{$xmcoun[0]['lse']}<b>亿元</b></td>
+                </tr>
             </tbody>
             <tfoot>
             <tr>
                 <th width="50">ID</th>
                 <th>上报日期</th>
                 <th>当月销售额</th>
+                <th>当月零售额</th>
                 <th>同期</th>
                 <th>同比</th>
                 <th>状态</th>

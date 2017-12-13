@@ -16,9 +16,10 @@
             <thead>
             <tr>
                 <th width="50">ID</th>
-                <th>是否四上企业</th>
+
                         <th>主要产品</th>
-                        <th>生成规模</th>
+                        <th>经营收入</th>
+                        <th>工业总产值</th>
                         <th>上报日期</th>
                         <th>状态</th>
                         <th>操作</th>
@@ -28,16 +29,9 @@
             <foreach name="tags" item="vo">
                 <tr>
                     <td>{$vo.id}</td>
-                    <td>
-                            <if condition="1 eq $vo.is_ssqy">
-                                是
-                            </if>
-                            <if condition="0 eq $vo.is_ssqy">
-                                否
-                            </if>
-                        </td>
                         <td>{$vo.zycp}</td>
-                        <td>{$vo.scgm}</td>
+                        <td>{$vo.jysr}</td>
+                        <td>{$vo.gmzcz}</td>
                         <td>{$vo.date}</td>
                         <td>
                             <if condition="$vo.stat eq 0">
@@ -57,13 +51,18 @@
                     </td>
                 </tr>
             </foreach>
+                <tr>
+                  <td colspan="2" style="text-align: center;"><b>合计</b></td>
+                  <td colspan="1" ><b>经营收入：</b>{$xmcoun[0]['jysr']}<b>亿元</b></td>
+                  <td colspan="0" ><b>工业总产值：</b>{$xmcoun[0]['gmzcz']}<b>亿元</b></td>
+                </tr>
             </tbody>
             <tfoot>
             <tr>
                 <th width="50">ID</th>
-                <th>是否四上企业</th>
                         <th>主要产品</th>
-                        <th>生成规模</th>
+                        <th>经营收入</th>
+                        <th>工业总产值</th>
                         <th>上报日期</th>
                         <th>状态</th>
                         <th>操作</th>
