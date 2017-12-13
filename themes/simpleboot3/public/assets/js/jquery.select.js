@@ -14,7 +14,7 @@
 		tag_select.insertBefore(select_container);
 
 		//显示框class为select_showbox,插入到创建的tag_select中
-		var select_showbox=$('<div></div>');//显示框
+		var select_showbox=$('<div id="ss"></div>');//显示框
 		select_showbox.css('cursor','pointer').attr('class','select_showbox').appendTo(tag_select);
 
 		//创建option容器，class为select_option，插入到创建的tag_select中

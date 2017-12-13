@@ -1,0 +1,61 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('AdminTs/index')}">投诉管理</a></li>
+    </ul>
+    <form method="post" class="js-ajax-form margin-top-20">
+        <div class="table-actions">
+            <!--<button type="submit" class="btn btn-primary btn-sm js-ajax-submit">{:lang('SORT')}</button>-->
+        </div>
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th width="50">ID</th>
+                <th>发布人</th>
+                <th>发送时间</th>
+                <th>投诉内容</th>
+                <th width="160">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach name="tags" item="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <foreach name="username" item="vos">
+                    <if condition="$vos.id eq $vo.user_id">
+                    <td>{$vos.user_nickname}</td>
+                    </if>
+                    </foreach>
+                    <td>{$vo.time}</td>
+                    <td height="100px">
+                    <div style="overflow-y:scroll;height: 100px">
+                    {$vo.nr}
+                    </div>
+                    </td>
+                    <td>
+                        <a class="js-ajax-delete" href="{:url('AdminTs/delete',['id'=>$vo['id']])}">删除</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
+            <tfoot>
+            <tr>
+               <th width="50">ID</th>
+                 <th>发布人</th>
+                <th>发送时间</th>
+                <th>投诉内容</th>
+                <th width="160">操作</th>
+            </tr>
+            </tfoot>
+        </table>
+        <div class="table-actions">
+            <!--<button type="submit" class="btn btn-primary btn-sm js-ajax-submit">{:lang('SORT')}</button>-->
+        </div>
+    </form>
+    <ul class="pagination">{$page|default=''}</ul>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

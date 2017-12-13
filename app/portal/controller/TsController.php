@@ -19,7 +19,7 @@ use think\Db;
  * Class AdminTagController 标签管理控制器
  * @package app\portal\controller
  */
-class DtController extends HomeBaseController
+class TsController extends HomeBaseController
 {
     /**
      * 文章标签管理
@@ -36,11 +36,13 @@ class DtController extends HomeBaseController
      */
     public function index()
     {
-        $id = $this->request->param('id', 0, 'intval');
-        $data['qy'] = Db::name('User')->where('qy_area',$id)->where('user_type',2)->count();
-        $data['jg'] = Db::name('User')->where('qy_area',$id)->where('user_type',3)->count();
-        $data['lxd'] = Db::name('portal_lxd')->where('lxd_xzqy',$id)->count();
-        return $data;
+        $arrData = $this->request->param();
+        $portalPostModel = Db::name('Ts');
+        $user = cmf_get_current_user();
+        $portalPostModel->insert(
+                 ['user_id'=>$user['id'],'time'=>date('y-m-d h:i:s',time()),'nr'=>$arrData['nr']]
+            );
+        $this->success('投诉成功');
     }
 
     /**

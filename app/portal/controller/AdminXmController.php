@@ -41,15 +41,18 @@ class AdminXmController extends AdminBaseController
         $portalTagModel = new XmModel();
         $PortalSshyModel = new PortalXzqyModel();
         $fuwu = $PortalSshyModel->select();
+        $xmcoun = Db::query('select sum(tzze) as tzze,sum(yzze) as yzze from pt_xm');
         if($id != 0){
+          $xmcoun = Db::query('select sum(tzze) as tzze,sum(yzze) as yzze from pt_xm where xm_qf ='.$id);
           $portalTagModel->where('xm_qf',$id);
         }
         $portalTagModel->order(["id" => "ASC"]);
         $tags = $portalTagModel->paginate(10);
+
         $this->assign("arrStatus", $portalTagModel::$STATUS);
         $this->assign("tags", $tags);
         $this->assign("fuwu", $fuwu);
-
+        $this->assign("xmcoun", $xmcoun);
            $this->assign("id", $id);
    
         $this->assign('page', $tags->render());

@@ -3,7 +3,7 @@
 <body>
 <div class="wrap">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="{:url('AdminJjyxqk/index')}">上限企业数据分析</a></li>
+        <li class="active"><a href="{:url('AdminJjyxqk/index')}">数据分析</a></li>
     </ul>
 <form class="well form-inline margin-top-20" method="post" action="{:url('AdminXm/sh')}">
                  <select class="form-control" name="pageselect" onchange="window.open(options[selectedIndex].value,'_self')">
@@ -67,6 +67,11 @@
                     </td>
                 </tr>
             </foreach>
+                <tr>
+                  <td colspan="2" style="text-align: center;"><b>合计</b></td>
+                  <td colspan="2" ><b>投资总额：</b>{$xmcoun[0]['tzze']}<b>亿元</b></td>
+                  <td colspan="3" ><b>引资总额：</b>{$xmcoun[0]['yzze']}<b>亿元</b></td>
+                </tr>
             </tbody>
             <tfoot>
             <tr>
