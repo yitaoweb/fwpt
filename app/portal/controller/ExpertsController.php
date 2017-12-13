@@ -51,7 +51,14 @@ class ExpertsController extends HomeBaseController
             $where['ssfwid'] = $cid2;
         }
 
-        $experts = Db::name('portal_zjk')->where($where)->order('time')->paginate(10);
+        $experts = Db::name('portal_zjk');
+            if(isset($_GET['name'])){
+              $title = $_GET['name'];
+            if ($_GET['name']) {
+                 $experts->where('name','like',"%$title%");
+            }
+            }
+        $experts = $experts->where($where)->order('time')->paginate(10);
 
         $this->assign("page", $experts->render());
         $this->assign("lists", $experts->items());

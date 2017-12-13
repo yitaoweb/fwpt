@@ -22,6 +22,7 @@ class SupplyController extends HomeBaseController
         $cid                  = $this->request->param('cid', 0, 'intval');
         $gx                  = $this->request->param('gx', 0, 'intval');
         $cid2                  = $this->request->param('cid2', 0, 'intval');
+        
         $where = array();
         $portalSsfwModel = new PortalSsfwModel();
 
@@ -53,8 +54,15 @@ class SupplyController extends HomeBaseController
         if ($gx) {
             $where['gx'] = $gx;
         }
-        $supply = Db::name('portal_gxfb')->where($where)->order('time')->paginate(10);
 
+        $supply = Db::name('portal_gxfb');
+        if(isset($_GET['name'])){
+          $title = $_GET['name'];
+        if ($_GET['name']) {
+             $supply->where('title','like',"%$title%");
+        }
+        }
+        $supply = $supply->where($where)->order('time')->paginate(10);
 
         $this->assign("page", $supply->render());
         $this->assign("lists", $supply->items());

@@ -55,7 +55,14 @@ class JglistController extends HomeBaseController
         if ($fid) {
             $where[$fid] = array('in','fwqy');
         }
-        $jigou = Db::name('user')->where($where)->order('id')->paginate(10);
+        $jigou = Db::name('user');
+            if(isset($_GET['name'])){
+              $title = $_GET['name'];
+            if ($_GET['name']) {
+                 $jigou->where('user_nickname','like',"%$title%");
+            }
+            }
+        $jigou = $jigou->where($where)->order('id')->paginate(10);
         $xzqys = Db::name('portal_xzqy')->select();
          $this->assign('xzqys', $xzqys);
         $this->assign("page", $jigou->render());
