@@ -59,10 +59,17 @@ class DemandController extends HomeBaseController
         }
 
 
-        $xuqiu = Db::name('user')
-                        ->alias('u')
-                        ->join('__PORTAL_FWXQ__ a','a.user_id = u.id')
-                        ->where($where)->order('a.id')->paginate(10);
+        $xuqiu = Db::name('user');
+                        $xuqiu->alias('u');
+                        $xuqiu->join('__PORTAL_FWXQ__ a','a.user_id = u.id');
+                        $xuqiu->where($where);
+                        if(isset($_GET['name'])){
+                          $title = $_GET['name'];
+                        if ($_GET['name']) {
+                             $xuqiu->where('content','like',"%$title%");
+                        }
+                        }
+                        $xuqiu = $xuqiu->where($where)->order('a.id')->paginate(10);
 
 
         $this->assign("page", $xuqiu->render());

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<questionlist>
+	<quesiton>
+		<title>1、路边停着一辆汽车，你会以为它里面坐着的是?</title>
+		<answers>
+			<opt valume="1">普通人</opt>
+			<opt valume="2">偷车贼</opt>
+			<opt valume="3">杀人狂</opt>
+			<opt valume="4">毒贩或者劫匪</opt>
+		</answers>
+	</quesiton>
+	<quesiton>
+		<title>2、电线上停着的鸟最可能的是?</title>
+		<answers>
+			<opt valume="1">麻雀</opt>
+			<opt valume="2">燕子</opt>
+			<opt valume="3">乌鸦</opt>
+			<opt valume="4">喜鹊</opt>
+		</answers>
+	</quesiton>
+	<quesiton>
+		<title>3、大街上一个陌生人向你打招呼 你会怎样?</title>
+		<answers>
+			<opt valume="1">不认识不理睬</opt>
+			<opt valume="2">询问TA为什么会认识你</opt>
+			<opt valume="3">虽然不认识 但是礼貌性的回复</opt>		
+		</answers>
+	</quesiton>
+	<quesiton>
+		<title>4、接到陌生电话 要找你不认识的一个人 你会?</title>
+		<answers>
+			<opt valume="1">直接告诉他打错了</opt>
+			<opt valume="2">告诉他你不认识这个人</opt>
+			<opt valume="3">跟打电话者聊半天 然后告诉他不认识</opt>		
+		</answers>
+	</quesiton>
+	<quesiton>
+		<title>5、路边停着一辆汽车，你会以为它里面坐着的是?</title>
+		<answers>
+			<opt valume="1">普通人</opt>
+			<opt valume="2">偷车贼</opt>
+			<opt valume="3">杀人狂</opt>
+			<opt valume="4">毒贩或者劫匪</opt>
+		</answers>
+	</quesiton>
+	<quesiton>
+		<title>6、电线上停着的鸟最可能的是?</title>
+		<answers>
+			<opt valume="1">麻雀</opt>
+			<opt valume="2">燕子</opt>
+			<opt valume="3">乌鸦</opt>
+			<opt valume="4">喜鹊</opt>
+		</answers>
+	</quesiton>
+	<quesiton>
+		<title>7、大街上一个陌生人向你打招呼 你会怎样?</title>
+		<answers>
+			<opt valume="1">不认识不理睬</opt>
+			<opt valume="2">询问TA为什么会认识你</opt>
+			<opt valume="3">虽然不认识 但是礼貌性的回复</opt>		
+		</answers>
+	</quesiton>
+	<quesiton>
+		<title>8、接到陌生电话 要找你不认识的一个人 你会?</title>
+		<answers>
+			<opt valume="1">直接告诉他打错了</opt>
+			<opt valume="2">告诉他你不认识这个人</opt>
+			<opt valume="3">跟打电话者聊半天 然后告诉他不认识</opt>		
+		</answers>
+	</quesiton>
+	<quesiton>
+		<title>9、路边停着一辆汽车，你会以为它里面坐着的是?</title>
+		<answers>
+			<opt valume="1">普通人</opt>
+			<opt valume="2">偷车贼</opt>
+			<opt valume="3">杀人狂</opt>
+			<opt valume="4">毒贩或者劫匪</opt>
+		</answers>
+	</quesiton>
+	<quesiton>
+		<title>10、电线上停着的鸟最可能的是?</title>
+		<answers>
+			<opt valume="1">麻雀</opt>
+			<opt valume="2">燕子</opt>
+			<opt valume="3">乌鸦</opt>
+			<opt valume="4">喜鹊</opt>
+		</answers>
+	</quesiton>
+	<quesiton>
+		<title>11、大街上一个陌生人向你打招呼 你会怎样?</title>
+		<answers>
+			<opt valume="1">不认识不理睬</opt>
+			<opt valume="2">询问TA为什么会认识你</opt>
+			<opt valume="3">虽然不认识 但是礼貌性的回复</opt>		
+		</answers>
+	</quesiton>
+	<quesiton>
+		<title>12、接到陌生电话 要找你不认识的一个人 你会?</title>
+		<answers>
+			<opt valume="1">直接告诉他打错了</opt>
+			<opt valume="2">告诉他你不认识这个人</opt>
+			<opt valume="3">跟打电话者聊半天 然后告诉他不认识</opt>		
+		</answers>
+	</quesiton>
+</questionlist>

@@ -24,9 +24,23 @@ class ContactController extends HomeBaseController
         $AreaModel = new PortalXzqyModel();
 
         if ($id > 0) {
-            $Contact = Db::name('portal_lxd')->where('lxd_xzqy',$id)->order('list_order')->paginate(10);
+            $Contact = Db::name('portal_lxd');
+            if(isset($_GET['name'])){
+              $title = $_GET['name'];
+            if ($_GET['name']) {
+                 $Contact->where('lxd_name','like',"%$title%");
+            }
+            }
+            $Contact = $Contact->where('lxd_xzqy',$id)->order('list_order')->paginate(10);
         }else{
-            $Contact = Db::name('portal_lxd')->order('list_order')->paginate(10);
+            $Contact = Db::name('portal_lxd');
+            if(isset($_GET['name'])){
+              $title = $_GET['name'];
+            if ($_GET['name']) {
+                 $Contact->where('lxd_name','like',"%$title%");
+            }
+            }
+            $Contact = $Contact->order('list_order')->paginate(10);
         }
 
         $xzqys = Db::name('portal_xzqy')->select();

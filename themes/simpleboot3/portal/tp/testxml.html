@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>滚动投票插件</title>
+<link type="text/css" href="style/style.css" media="all" rel="stylesheet" title="主样式" />
+<script type="text/javascript" src="_lib/jquery-1.8.3.js"></script> 
+<script type="text/javascript" src="_lib/testxml.js"></script>
+</head>
+
+<body>
+    <div class="main">
+      <div class="warp">
+      	<div class="issue" id="issue">
+           <div id="loader" class="loader"><img  src="style/img/loader.gif" title="loading.." alt="loading..." /> </div>          
+        </div>
+        
+        <div class="ctrl">
+        <div class="temp" id="temp">
+        您的分数
+        </div>
+        	<div class="btns">
+            	<span title="Previous" class="prev" id="prev">Previous</span>
+                <span title="Next" class="next" id="next">Next</span>
+            </div>
+            <div class="prog" id="prog">
+            	<div class="ptip" id="tips"><span></span></div>
+            	<div class="ress" id="ress"></div>
+            </div>
+        </div>
+        <div class="war" id="war"></div>
+      </div>
+      <div class="info">
+      	<h4>Info:</h4>
+        <p>测试答题框</p>
+        <p>可作心理测试等测试题使用</p>
+        <p>问题和选项通过questions.xml设置</p>
+        <p>显示当前得分</p>
+        <p>显示当前答题进度</p>
+        <p>可作翻看选过的选项</p>
+        <p>通过不同的得分调取不同结果内容</p>
+        
+      </div>  
+    </div>
+</body>
+</html>

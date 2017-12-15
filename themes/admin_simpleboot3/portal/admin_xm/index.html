@@ -3,7 +3,7 @@
 <body>
 <div class="wrap">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="{:url('AdminJjyxqk/index')}">数据分析</a></li>
+        <li class="active"><a href="{:url('AdminJjyxqk/index')}">开发区数据分析</a></li>
     </ul>
 <form class="well form-inline margin-top-20" method="post" action="{:url('AdminXm/sh')}">
                  <select class="form-control" name="pageselect" onchange="window.open(options[selectedIndex].value,'_self')">
@@ -30,6 +30,7 @@
                         <th>开发区</th>
                         <th>项目名称</th>
                         <th>投资总额（亿元）</th>
+                        <th>引资总额（亿元）</th>
                         <th>投资方名称</th>
                         <th>状态</th>
                         <th>操作</th>
@@ -48,6 +49,7 @@
                         </td>
                         <td>{$vo.xmname}</td>
                         <td>{$vo.tzze}</td>
+                        <td>{$vo.yzze}</td>
                         <td>{$vo.tzfname}</td>
                         <td>
                             <if condition="$vo.stat eq 0">
@@ -79,6 +81,7 @@
                         <th>开发区</th>
                         <th>项目名称</th>
                         <th>投资总额（亿元）</th>
+                        <th>引资总额（亿元）</th>
                         <th>投资方名称</th>
                         <th>状态</th>
                         <th>操作</th>
