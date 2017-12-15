@@ -38,7 +38,7 @@ class TpController extends HomeBaseController
     {
 
         $i=0;
-        $tptj = Db::name('portal_tptj')->where('parent_id',0)->find();
+        $tptj = Db::name('portal_tptj')->where('parent_id',0)->where('tptj',1)->find();
         $tptjs = Db::name('portal_tptj')->where('parent_id',$tptj['id'])->select();
         $tptall = Db::name('portal_tptj')->select();
         $tp = Db::query('select b.name as name,a.tptj_id as tptj_id,a.tptj_pid as tptj_pid,count(a.tptj_pid) as counpid from pt_portal_tp as a LEFT JOIN pt_portal_tptj as b on a.tptj_pid=b.id GROUP BY a.tptj_pid,b.name');
