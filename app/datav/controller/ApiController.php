@@ -92,60 +92,110 @@ class ApiController extends HomeBaseController
 
     public function site_xm(){
         $year = date('Y');
-        $zt = Db::query("select date_format(date,'%m') as m , count(id) as num from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 1 group by 
+
+        $zt = Db::query("select date_format(date,'%m') as m , count(id) as num, sum(tzze) as tz,sum(yzze) as yz from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 1 group by 
 date_format(date, '%m')");
         
-        $xqy = Db::query("select date_format(date,'%m') as m , count(id) as num from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 2 group by 
+        $xqy = Db::query("select date_format(date,'%m') as m , count(id) as num, sum(tzze) as tz,sum(yzze) as yz from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 2 group by 
 date_format(date, '%m')");
-        $nkg = Db::query("select date_format(date,'%m') as m , count(id) as num from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 3 group by 
+        $nkg = Db::query("select date_format(date,'%m') as m , count(id) as num, sum(tzze) as tz,sum(yzze) as yz from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 3 group by 
 date_format(date, '%m')");
-        $zj = Db::query("select date_format(date,'%m') as m , count(id) as num from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 4 group by 
+        $xkg = Db::query("select date_format(date,'%m') as m , count(id) as num, sum(tzze) as tz,sum(yzze) as yz from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 4 group by 
 date_format(date, '%m')");
-        $zd = Db::query("select date_format(date,'%m') as m , count(id) as num from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 5 group by 
+        $zj = Db::query("select date_format(date,'%m') as m , count(id) as num, sum(tzze) as tz,sum(yzze) as yz from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 5 group by 
 date_format(date, '%m')");
-        $tc = Db::query("select date_format(date,'%m') as m , count(id) as num from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 6 group by 
+        $zd = Db::query("select date_format(date,'%m') as m , count(id) as num, sum(tzze) as tz,sum(yzze) as yz from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 6 group by 
 date_format(date, '%m')");
+
+        $tc = Db::query("select date_format(date,'%m') as m , count(id) as num, sum(tzze) as tz,sum(yzze) as yz from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = 7 group by 
+date_format(date, '%m')");
+
+        $thz = Db::query("select xm_qf , count(id) as num, sum(tzze) as tz,sum(yzze) as yz from pt_xm where date_format(date,'%Y')='".$year."' group by xm_qf ");
+
+        $mhz = Db::query("select date_format(date,'%m') as m , count(id) as num, sum(tzze) as tz,sum(yzze) as yz from pt_xm where date_format(date,'%Y')='".$year."' group by 
+date_format(date, '%m')");
+
+        $hz = Db::query("select  count(id) as num, sum(tzze) as tz,sum(yzze) as yz from pt_xm where date_format(date,'%Y')='".$year."' ");
         
         $data =array();
 
-        for ($i=0; $i <= 5; $i++) { 
-            for ($j=0; $j < 12; $j++) { 
+        for ($i=1; $i <= 8; $i++) { 
+            for ($j=1; $j <= 13; $j++) { 
                 $data[$i][$j][0]=$i;
                 $data[$i][$j][1]=$j;
                 $data[$i][$j][2]=0;
+                $data[$i][$j][3]=0;
+                $data[$i][$j][4]=0;
+
             }
         } 
-        
+
+        foreach ($mhz as $key => $value) {
+            $data[1][(int)$value['m']][2]=(int)$value['num'];
+            $data[1][(int)$value['m']][3]=(int)$value['tz'];
+            $data[1][(int)$value['m']][4]=(int)$value['yz'];
+        }
 
         foreach ($zt as $key => $value) {
-            $data[0][(int)$value['m']][2]=(int)$value['num'];
+            $data[2][(int)$value['m']][2]=(int)$value['num'];
+            $data[2][(int)$value['m']][3]=(int)$value['tz'];
+            $data[2][(int)$value['m']][4]=(int)$value['yz'];
         }
 
         foreach ($xqy as $key => $value) {
-            $data[1][(int)$value['m']][2]=(int)$value['num'];
+            $data[3][(int)$value['m']][2]=(int)$value['num'];
+            $data[3][(int)$value['m']][3]=(int)$value['tz'];
+            $data[3][(int)$value['m']][4]=(int)$value['yz'];
         }
 
         foreach ($nkg as $key => $value) {
-            $data[2][(int)$value['m']][2]=(int)$value['num'];
+            $data[4][(int)$value['m']][2]=(int)$value['num'];
+            $data[4][(int)$value['m']][3]=(int)$value['tz'];
+            $data[4][(int)$value['m']][4]=(int)$value['yz'];
+        }
+
+        foreach ($xkg as $key => $value) {
+            $data[5][(int)$value['m']][2]=(int)$value['num'];
+            $data[5][(int)$value['m']][3]=(int)$value['tz'];
+            $data[5][(int)$value['m']][4]=(int)$value['yz'];
         }
 
         foreach ($zj as $key => $value) {
-            $data[3][(int)$value['m']][2]=(int)$value['num'];
+            $data[6][(int)$value['m']][2]=(int)$value['num'];
+            $data[6][(int)$value['m']][3]=(int)$value['tz'];
+            $data[6][(int)$value['m']][4]=(int)$value['yz'];
         }
 
         foreach ($zd as $key => $value) {
-            $data[4][(int)$value['m']][2]=(int)$value['num'];
+            $data[7][(int)$value['m']][2]=(int)$value['num'];
+            $data[7][(int)$value['m']][3]=(int)$value['tz'];
+            $data[7][(int)$value['m']][4]=(int)$value['yz'];
         }
 
         foreach ($tc as $key => $value) {
-            $data[5][(int)$value['m']][2]=(int)$value['num'];
+            $data[8][(int)$value['m']][2]=(int)$value['num'];
+            $data[8][(int)$value['m']][3]=(int)$value['tz'];
+            $data[8][(int)$value['m']][4]=(int)$value['yz'];
         }
+
+        foreach ($thz as $key => $value) {
+            $data[(int)$value['xm_qf']+1][13][2]=(int)$value['num'];
+            $data[(int)$value['xm_qf']+1][13][3]=(int)$value['tz'];
+            $data[(int)$value['xm_qf']+1][13][4]=(int)$value['yz'];
+        }
+
+        foreach ($hz as $key => $value) {
+            $data[1][13][2]=(int)$value['num'];
+            $data[1][13][3]=(int)$value['tz'];
+            $data[1][13][4]=(int)$value['yz'];
+        }
+
 
 
         $datas= array();
 
-        for ($i=0; $i <= 5; $i++) { 
-            for ($j=0; $j < 12; $j++) { 
+        for ($i=1; $i <= 8; $i++) { 
+            for ($j=1; $j <= 13; $j++) { 
                 $datas[]=$data[$i][$j];
             }
         } 

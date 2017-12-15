@@ -34,9 +34,7 @@ class ShowController extends HomeBaseController
             $this->assign("admin", $user);
             $title='长治市中小商贸流通企业公共服务数据分析平台';
             $this->assign('title',$title);
-        } else if(cmf_is_user_login()){
-          
-        }
+        } 
         else {
             $this->error("您还没有登录！", url("datav/public/login"));
             exit();
@@ -142,6 +140,51 @@ class ShowController extends HomeBaseController
 
         return $this->fetch(':xm');
     }
+
+
+    //数据分析 - 开发区项目数据页面
+    public function xm_info()
+    {
+        $m = $this->request->param('m', 1, 'intval');
+        $t = $this->request->param('t', 1, 'intval');
+
+        $year = date('Y');
+
+        if ($t > 0) {
+            if ($m == 13) {
+                $xmlist = Db::query("select * from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = '".$t."'");
+
+                $heji = Db::query("select  count(id) as num ,sum(tzze) as tz,sum(yzze) as yz ,sum(ncz) as cz,sum(nss) as ss ,sum(dwzj) as dw from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = '".$t."'");
+            }else{
+                $xmlist = Db::query("select * from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = '".$t."' and  date_format(date, '%m') = ".$m);
+                $heji = Db::query("select  count(id) as num ,sum(tzze) as tz,sum(yzze) as yz ,sum(ncz) as cz,sum(nss) as ss ,sum(dwzj) as dw from pt_xm where date_format(date,'%Y')='".$year."' and xm_qf = '".$t."' and  date_format(date, '%m') = ".$m);
+            }
+            
+        }else{
+            if ($m == 13) {
+                $xmlist = Db::query("select * from pt_xm where date_format(date,'%Y')='".$year."'");
+                $heji = Db::query("select  count(id) as num ,sum(tzze) as tz,sum(yzze) as yz ,sum(ncz) as cz,sum(nss) as ss ,sum(dwzj) as dw from pt_xm where date_format(date,'%Y')='".$year."'");
+            }else{
+                $xmlist = Db::query("select * from pt_xm where date_format(date,'%Y')='".$year."'  and  date_format(date, '%m') = ".$m);
+                $heji = Db::query("select  count(id) as num ,sum(tzze) as tz,sum(yzze) as yz ,sum(ncz) as cz,sum(nss) as ss ,sum(dwzj) as dw  from pt_xm where date_format(date,'%Y')='".$year."'  and  date_format(date, '%m') = ".$m);
+            }
+        }
+        
+        $sshy=Db::name('portal_xzqy')->where('1=1')->order('id')->select();
+        $this->assign("fuwu",$sshy);
+        $this->assign('xmlist',$xmlist);
+        $this->assign('heji',$heji);
+
+        $this->assign('y',$year);
+        $this->assign('m',$m);
+        $this->assign('t',$t);
+
+        $sub_title='开发区项目数据分析';
+        $this->assign('sub_title',$sub_title);
+
+        return $this->fetch(':xminfo');
+    }
+
 
 
     //数据分析 - 企业机构 百度地图gis页面

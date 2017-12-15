@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>ThinkCMF {:lang('ADMIN_CENTER')}==</title>
+    <title>长治市中小商贸流通企业公共服务平台 {:lang('ADMIN_CENTER')}</title>
     <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge"/>
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta name="robots" content="noindex,nofollow">
@@ -12,6 +12,8 @@
     <![endif]-->
 
     <link href="__TMPL__/public/assets/themes/{:cmf_get_admin_style()}/style.css" rel="stylesheet">
+    <script src="__TMPL__/public/assets/js/jquery-1.10.2.min.js"></script>
+    <script src="__TMPL__/public/assets/js//custominput.js"></script>  
     <script>
         if (window.parent !== window.self) {
             document.write              = '';
@@ -53,7 +55,8 @@
   </dl>
   <div class="admin_login_tip">
   <span class="left">
-  <input type="checkbox" name="remember" id="remember" /><label for="remember">记住用户名</label>
+  <input type="checkbox" name="remember" id="remember" style="top:12px;" />
+  <label for="remember">记住用户名</label>
   </span></div>
   <div class="admin_login_tip">
   <button type="submit" class="btn-block btn-blue left js-ajax-submit" style="width:130px; margin-left:5px;">登录</button>
@@ -77,8 +80,7 @@
         APP: ''/*当前应用名*/
     };
 </script>
-<script src="__TMPL__/public/assets/js/jquery-1.10.2.min.js"></script>
-<script src="__TMPL__/public/assets/js//custominput.js"></script>    
+  
 <script src="__STATIC__/js/wind.js"></script>
 <script src="__STATIC__/js/admin.js"></script>
 
