@@ -32,7 +32,10 @@ function setlatlng(lng,lat){
     $is_sj = is_sj();
     $is_yx = is_yx();
 </php>
-<div class="register_tab"><span>企业注册</span><a href="{:cmf_url('user/Register/jigou')}" style="padding: 0 20px;">机构注册</a></div>
+<div class="register_tab"><span>企业注册</span><a href="{:cmf_url('user/Register/jigou')}" style="padding: 0 20px;">机构注册</a>
+<a href="{:cmf_url('user/Register/xeys')}" style="padding: 0 20px;">限额以上企业</a>
+<a href="{:cmf_url('user/Register/jjyxqk')}" style="padding: 0 20px;">经济运行情况上报企业</a>
+</div>
 <div class="register_title">企业基本信息</div>
 <div class="register_box radius4" style="height: 1025px;">
 <form action="{:url('user/Register/doRegister')}" method="post" id="register">  
