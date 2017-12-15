@@ -56,7 +56,10 @@ $(document).ready(function(){
                           if(data == 2){
                                 alert("您已投过票了");
                           }
-                          if(data != 1 && data != 2){
+                          if(data == 3){
+                                alert("您还没有登入");
+                          }
+                          if(data != 1 && data != 2 && data != 3){
                                alert("出错");
                           }
 					})	  
@@ -69,8 +72,11 @@ $(document).ready(function(){
                           if(data == 2){
 
                           }
-                          if(data != 1 && data != 2){
-                               alert("出错");
+                          if(data == 3){
+
+                          }
+                          if(data != 1 && data != 2 && data != 3){
+
                           }
 					})	
 				result(res);
