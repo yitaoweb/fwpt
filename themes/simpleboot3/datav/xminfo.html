@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> {$sub_title}</title>
+<meta http-equiv="MSThemeCompatible" content="Yes" />
+<link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/show.css" />
+<script src="__TMPL__/datav/js/jquery.js"></script>
+<script src="__TMPL__/public/assets/js/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__TMPL__/public/assets/js/artDialog/plugins/iframeTools.js"></script>
+<style type="text/css">
+body, html {width: 100%;height: 100%;overflow: hidden;margin:0;}
+#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;}
+#l-map{height:100%;width:100%;}
+</style>
+</head>
+<body>
+  <div class="box sub_main" style=" overflow:auto;">
+
+     <div class="xminfo_tit"> 
+      
+
+      <if condition="$t eq 0">
+          <if condition="$m eq 13">
+             全市{$y}年度开发区项目表
+          <else/>
+             全市{$y}年度{$m}月份开发区项目表
+          </if>
+      </if>
+
+      <if condition="$t neq 0">
+          <if condition="$m eq 13">
+              <switch name="t">
+                  <case value="1">全市{$y}年度开发区在谈项目表</case>
+                  <case value="2">全市{$y}年度开发区新签约项目明细表</case>
+                  <case value="3">全市{$y}年度开发区拟开工项目表</case>
+                  <case value="4">全市{$y}年度开发区新开工项目明细表</case>
+                  <case value="5">全市{$y}年度开发区在建项目表</case>
+                  <case value="6">全市开发区2016年前重点投产项目明细表</case>
+                  <case value="7">全市{$y}年度开发区新投产项目明细表</case>
+              </switch>
+          <else/>
+              <switch name="t">
+                  <case value="1">全市{$y}年度{$m}月份开发区在谈项目表</case>
+                  <case value="2">全市{$y}年度{$m}月份开发区新签约项目明细表</case>
+                  <case value="3">全市{$y}年度{$m}月份开发区拟开工项目表</case>
+                  <case value="4">全市{$y}年度{$m}月份开发区新开工项目明细表</case>
+                  <case value="5">全市{$y}年度{$m}月份开发区在建项目表</case>
+                  <case value="6">全市开发区2016年前重点投产项目明细表</case>
+                  <case value="7">全市{$y}年度{$m}月份开发区新投产项目明细表</case>
+              </switch>
+          </if>
+      </if>
+      (单位：亿元)
+     </div>
+     <table class="fwtable">
+        <thead>
+            <tr>
+              <th>序号</th>
+              <th>开发区</th>
+              <th>项目名称</th>
+              <th>投资总额</th>
+              <if condition="$t neq 6">
+              <th>引资总额</th>
+              <th>引资方名称</th>
+              </if>
+              <th>投资方名称</th>
+
+              <if condition="$t eq 1">
+              <th>预计签约时间</th>
+              </if>
+
+              <if condition="$t eq 2">
+              <th>签约时间</th>
+              <th>开工时间</th>
+              <th>投产时间</th>
+              <th>到位资金</th>
+              </if>
+
+              <if condition="$t eq 3">
+              <th>签约时间</th>
+              <th>拟开工时间</th>
+              </if>
+
+              <if condition="$t eq 4">
+              <th>签约时间</th>
+              <th>开工时间</th>
+              <th>投产时间</th>
+              <th>到位资金</th>
+              </if>
+
+              <if condition="$t eq 5">
+              <th>签约时间</th>
+              <th>开工时间</th>
+              <th>到位资金</th>
+              </if>
+
+              <if condition="$t eq 6">
+              <th>主要产品</th>
+              <th>投产时间</th>
+              <th>产值</th>
+              <th>税收</th>
+              </if>
+
+              <if condition="$t eq 7">
+              <th>签约时间</th>
+              <th>开工时间</th>
+              <th>投产时间</th>
+              <th>到位资金</th>
+              </if>
+
+            </tr>
+        </thead>
+        
+        <tbody>
+            <foreach name="xmlist" item="vo">
+                <tr>
+                    <td>{$key+1}</td>
+                    <td>
+                        <volist name="fuwu" id="vos">
+                            <if condition="$vos.id eq $vo.kfq">
+                                {$vos.name}
+                            </if>
+                        </volist>
+                    </td>
+                    <td>{$vo.xmname}</td>
+                    <td>{$vo.tzze}</td>
+                    <if condition="$t neq 6">
+                    <th>{$vo.yzze}</th>
+                    <td>{$vo.yzfname}</td>
+                    </if>
+                    <td>{$vo.tzfname}</td>
+
+
+                    <if condition="$t eq 1">
+                    <th>{:date('Y-m-d',strtotime($vo.yjqytime))}</th>
+                    </if>
+
+                    <if condition="$t eq 2">
+                    <th>{:date('Y-m-d',strtotime($vo.qytime))}</th>
+                    <th>{:date('Y-m-d',strtotime($vo.kgtime))}</th>
+                    <th>{:date('Y-m-d',strtotime($vo.tctime))}</th>
+                    <th>{$vo.dwzj}</th>
+                    </if>
+
+                    <if condition="$t eq 3">
+                    <th>{:date('Y-m-d',strtotime($vo.qytime))}</th>
+                    <th>{:date('Y-m-d',strtotime($vo.nkgtime))}</th>
+                    </if>
+
+                    <if condition="$t eq 4">
+                    <th>{:date('Y-m-d',strtotime($vo.qytime))}</th>
+                    <th>{:date('Y-m-d',strtotime($vo.kgtime))}</th>
+                    <th>{:date('Y-m-d',strtotime($vo.tctime))}</th>
+                    <th>{$vo.dwzj}</th>
+                    </if>
+
+                    <if condition="$t eq 5">
+                    <th>{:date('Y-m-d',strtotime($vo.qytime))}</th>
+                    <th>{:date('Y-m-d',strtotime($vo.kgtime))}</th>
+                    <th>{$vo.dwzj}</th>
+                    </if>
+
+                    <if condition="$t eq 6">
+                    <th>{$vo.zycp}</th>
+                    <th>{:date('Y-m-d',strtotime($vo.tctime))}</th>
+                    <th>{$vo.ncz}</th>
+                    <th>{$vo.nss}</th>
+                    </if>
+
+                    <if condition="$t eq 7">
+                    <th>{:date('Y-m-d',strtotime($vo.qytime))}</th>
+                    <th>{:date('Y-m-d',strtotime($vo.kgtime))}</th>
+                    <th>{:date('Y-m-d',strtotime($vo.tctime))}</th>
+                    <th>{$vo.dwzj}</th>
+                    </if>
+
+                </tr>
+            </foreach>
+        </tbody>
+
+        <tbody>
+            <foreach name="heji" item="vo">
+                <tr>
+                    <td>合计</td>
+                    <td></td>
+                    <td>数量：{$vo.num}</td>
+                    <td>{$vo.tz}</td>
+                    <if condition="$t neq 6">
+                    <th>{$vo.yz}</th>
+                    <th></th>
+                    </if>
+                    <td></td>
+                    
+
+                    <if condition="$t eq 1">
+                    <th></th>
+                    </if>
+
+                    <if condition="$t eq 2">
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>{$vo.dw}</th>
+                    </if>
+
+                    <if condition="$t eq 3">
+                    <th></th>
+                    <th></th>
+                    </if>
+
+                    <if condition="$t eq 4">
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>{$vo.dw}</th>
+                    </if>
+
+                    <if condition="$t eq 5">
+                    <th></th>
+                    <th></th>
+                    <th>{$vo.dw}</th>
+                    </if>
+
+                    <if condition="$t eq 6">
+                    <th></th>
+                    <th></th>
+                    <th>{$vo.cz}</th>
+                    <th>{$vo.ss}</th>
+                    </if>
+
+                    <if condition="$t eq 7">
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>{$vo.dw}</th>
+                    </if>
+                </tr>
+            </foreach>
+        </tbody>
+
+    </table>
+
+  </div>
+
+</body>
+</html>
