@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+
+<title>投票调查</title>
+<include file="public@head"/>
+
+    <style>
+        .caption-wraper {
+            position: absolute;
+            left: 50%;
+            bottom: 2em;
+        }
+
+        .caption-wraper .caption {
+            position: relative;
+            left: -50%;
+            background-color: rgba(0, 0, 0, 0.54);
+            padding: 0.4em 1em;
+            color: #fff;
+            -webkit-border-radius: 1.2em;
+            -moz-border-radius: 1.2em;
+            -ms-border-radius: 1.2em;
+            -o-border-radius: 1.2em;
+            border-radius: 1.2em;
+        }
+
+        .tc-gridbox {
+            margin: 0;
+        }
+
+        @media (max-width: 767px) {
+            .caption-wraper {
+                left: 0;
+                bottom: 0.4em;
+            }
+
+            .caption-wraper .caption {
+                left: 0;
+                padding: 0.2em 0.4em;
+                font-size: 0.92em;
+                -webkit-border-radius: 0;
+                -moz-border-radius: 0;
+                -ms-border-radius: 0;
+                -o-border-radius: 0;
+                border-radius: 0;
+            }
+        }
+
+    </style>
+
+<link type="text/css" href="__TMPL__/portal/tp/style/style.css" media="all" rel="stylesheet" title="主样式" />
+<link type="text/css" href="__TMPL__/portal/tp/style.css" media="all" rel="stylesheet" title="主样式" />
+<script type="text/javascript" src="__TMPL__/portal/tp/_lib/jquery-1.8.3.js"></script> 
+
+<script type="text/javascript" src="__TMPL__/portal/tp/_lib/test.js"></script>
+
+</head>
+
+
+
+<body>
+<include file="public@nav"/>
+    <div class="main">
+
+      <div class="warp">
+
+      	<div class="issue" id="issue">
+
+        
+           <volist name="tptjs" id="vo">
+        	<div class="cnt">
+
+            	<h3>{$vo['name']}</h3>
+
+                <ul>
+                  <volist name="tptjss[$vo['id']]" id="vos">
+                	<li pss={$vos['id']} idss={$vo['id']}><span>&nbsp;</span><label><input type="radio" class="pid" name="is0" value={$vos['id']} />{$vos['name']}</label></li>
+                  </volist>
+                </ul>
+
+            </div>
+           </volist>
+            
+
+            
+
+            <div class="result" id="result">
+
+            	
+
+            </div>
+
+        </div>
+
+        
+
+        <div class="ctrl">
+
+        <div class="temp" id="temp">
+
+<!--         您的分数 -->
+
+        </div>
+
+        	<div class="btns">
+
+            	<span title="Previous" class="prev" id="prev">Previous</span>
+
+                <span title="Next" class="next" id="next">Next</span>
+
+            </div>
+
+            <div class="prog" id="prog">
+
+            	<div class="ptip" id="tips"><span></span></div>
+
+            	<div class="ress" id="ress"></div>
+
+            </div>
+
+        </div>
+
+        <div class="war" id="war"></div>
+
+      </div>
+
+      
+
+      <div class="info">
+        <volist name="tptall" id="vo">
+            <if condition="$tptj.id eq $vo.parent_id">
+                 <h4>{$vo.name}</h4>
+                 <volist name="tp" id="vos">
+                      <if condition="$vo.id eq $vos.tptj_id">
+                               <p>{$vos.name}</p>
+                                <div class="skillbar clearfix " data-percent={$vos.counpid}%>
+
+
+                                    <div class="skillbar-bar" style="background: #e67e22;"></div>
+
+                                    <div class="skill-bar-percent">{$vos.counpid}%</div>
+
+                                </div>
+                      </if>
+                 </volist>
+            </if>
+            
+        </volist>
+      	
+      </div>  
+
+    </div>
+
+</body>
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+    $('.skillbar').each(function(){
+
+        $(this).find('.skillbar-bar').animate({
+
+            width:$(this).attr('data-percent')
+
+        },6000);
+
+    });
+
+});
+
+</script>
+</html>
+
