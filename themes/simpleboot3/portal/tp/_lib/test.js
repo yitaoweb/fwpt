@@ -58,6 +58,7 @@ $(document).ready(function(){
                           }
                           if(data == 3){
                                 alert("您还没有登入");
+                                return;
                           }
                           if(data != 1 && data != 2 && data != 3){
                                alert("出错");
@@ -70,16 +71,19 @@ $(document).ready(function(){
 			if(i==len){	
 				    $.post('tps',{pss:pss,idss:idss},function(data){
                           if(data == 2){
-
+                               
                           }
                           if(data == 3){
 
                           }
                           if(data != 1 && data != 2 && data != 3){
-
+                              
+                          }
+                          if(data == 1){
+                             result(res);
                           }
 					})	
-				result(res);
+				
 				}	
 			return false;	
 		})
