@@ -1,0 +1,382 @@
+<html style="overflow-x: hidden; overflow-y: visible">
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta name="renderer" content="webkit">
+  <meta name="data-spm" content="datav">
+  <title>{$title}-{$sub_title}</title>
+
+ <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=yarzUUkNb0F0UgHUbSGiHRwQ"></script>
+
+  <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/show.css" />
+  <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/rfm.css" />
+  <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/common.css" />
+
+
+  <script src="__TMPL__/datav/js/jquery.js"></script>
+  <script src="__TMPL__/datav/js/echarts.js"></script>
+  <script src="__TMPL__/datav/js/theme/chalk.js"></script>
+ 
+</head>
+<body onLoad="startTime()">  
+<div class="datavLayout">
+    <div class="header">
+        <div class="head_left">
+            <div class="info">
+                <div class="icon"></div>
+                <span class="date">{$role['name']}&nbsp;&nbsp;:&nbsp;&nbsp;{$admin['user_login']}&nbsp;&nbsp; [&nbsp;&nbsp;<a href="{:url('datav/Public/logout')}">退出</a>&nbsp;&nbsp;]&nbsp;&nbsp; [&nbsp;&nbsp;<a href="{:url('datav/show/index')}">返回主页</a>&nbsp;&nbsp;]</span>
+            </div>
+        </div>
+        <div class="head_mid">
+            <div class="title">{$sub_title}</div>
+            <div class="bt"></div>
+        </div>
+        <div class="head_right">
+            <div class="times">
+                <div class="icon" width="18px" height="18px" ></div>
+                <span class="date" id="ShowTime"></span>
+            </div>
+        </div>
+    </div>
+    <div class="wraper"></div>
+
+    <header class="rfm_header">
+        <ul>
+        <li class="active"><a class="animsition-link" href="#" data-animsition-out="fade-out-left-sm">数据汇总</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/xsqy_xf')}" data-animsition-out="fade-out-left-sm">消费结构</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/xsqy_fb')}" data-animsition-out="fade-out-left-sm">网点分布</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/xsqy_zd')}" data-animsition-out="fade-out-left-sm">重点企业</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/xsqy_zs')}" data-animsition-out="fade-out-left-sm">增速排序</a></li>
+        </ul>
+    </header>
+    <div class="content">
+        <div class="box site">
+            <div class="row50">
+                <div class="sub_main" id="main1"></div>
+                <div class="sub_main" id="main2"></div>
+            </div>
+
+            <div class="row50">
+                <table class="fwtable">
+                    <thead>
+                        <tr>
+                          <th>序号</th>
+                          <th>开发区</th>
+                          <th>项目名称</th>
+                          <th>投资总额</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+        
+                            <tr>
+                                <td>1</td>
+                             
+                                <td>3</td>
+                                <td>3</td>
+                                <td>3</td>
+
+
+
+                            </tr>
+      
+                    </tbody>
+
+                    <tbody>
+             
+                            <tr>
+                                <td>合计</td>
+                                <td></td>
+                                <td>数量：2</td>
+                                <td>132</td>
+   
+
+
+                            </tr>
+       
+                    </tbody>
+
+                </table>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="wraper"></div>
+
+</div>
+
+
+</body>
+</html>
+
+
+
+
+<script>
+    function startTime()
+    {
+        var today=new Date()
+        var years=today.getFullYear();
+        var months=today.getMonth();
+        var d=today.getDate()
+        var h=today.getHours()
+        var m=today.getMinutes()
+        var s=today.getSeconds()
+        // add a zero in front of numbers<10
+        months=months+1
+        months=checkTime(months)
+        d=checkTime(d)
+        m=checkTime(m)
+        s=checkTime(s)
+        var weekday=new Array(7)
+        weekday[0]="星期日"
+        weekday[1]="星期一"
+        weekday[2]="星期二"
+        weekday[3]="星期三"
+        weekday[4]="星期四"
+        weekday[5]="星期五"
+        weekday[6]="星期六"
+        var w=weekday[today.getDay()]
+        document.getElementById('ShowTime').innerHTML=years+"-"+months+"-"+d+"  "+w+" "+h+":"+m+":"+s;
+        t=setTimeout('startTime()',500)
+    }
+    function checkTime(i)
+    {
+        if (i<10)
+        {i="0" + i}
+        return i
+    }
+
+
+    function writeObj(obj){ 
+     var description = ""; 
+     for(var i in obj){ 
+     var property=obj[i]; 
+     description+=i+" = "+property+"\n"; 
+     } 
+     alert(description); 
+    } 
+
+</script>
+
+<SCRIPT LANGUAGE="JavaScript">
+    var yres = <?php echo json_encode($yres);?>;
+    var mres = <?php echo json_encode($mres);?>;
+</SCRIPT>
+
+<script type="text/javascript">
+    var myChart1 = echarts.init(document.getElementById('main1'),'chalk');
+    
+    //var colors = ['orange', '#d14a61', '#1E90FF'];
+    var year = new Array();
+    var yxse = new Array();
+    var ylse = new Array();
+    var ytq = new Array();
+    var ytb = new Array();
+    var yhb = new Array();
+
+    var time = new Array();
+    var mxse = new Array();
+    var mlse = new Array();
+    var mtq = new Array();
+    var mtb = new Array();
+    var mhb = new Array();
+    
+    for(var i=0;i<yres.length;i++){
+          year[i] = yres[i].time;
+          yxse[i] = yres[i].xse;
+          ylse[i] = yres[i].lse;
+          ytq[i] = yres[i].tq;
+          ytb[i] = yres[i].tb;
+          yhb[i] = yres[i].hb;
+    }
+
+    for(var i=0;i<mres.length;i++){
+          time[i] = mres[i].time;
+          mxse[i] = mres[i].xse;
+          mlse[i] = mres[i].lse;
+          mtq[i] = mres[i].tq;
+          mtb[i] = mres[i].tb;
+          mhb[i] = mres[i].hb;
+    }
+
+    var option = {
+       
+        title: [{
+            text: '限额以上企业数据月报汇总',
+            left: '50%',
+            top: '1%',
+            textAlign: 'center'
+        }, {
+            text: '限额以上企业数据年度汇总',
+            left: '50%',
+            top: '48%',
+            textAlign: 'center'
+        }],
+        tooltip: {
+            trigger: 'axis'
+        },
+        grid: [{
+            show: false,
+            left: '3%',
+            top: '10%',
+            containLabel: true,
+            width: '90%',
+            height: '30%'
+        }, {
+            show: false,
+            left: '3%',
+            top: '60%',
+            containLabel: true,
+            width: '90%',
+            height: '30%'
+        }],
+        // legend: [{
+        //   data:['各幅值区间暂降频次', '暂降频次2'],
+        //   x:'right',
+        // },{data:['暂降频次3', '暂降频次4'],
+        //      x:'right',
+        // }],
+        xAxis: [{
+            gridIndex: 0,
+            type: 'category',
+            name: '',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            //axisLabel:{  
+            //             interval:0,//横轴信息全部显示  
+            //            rotate:-30,//-30度角倾斜显示  
+            //       }  ,
+            axisTick: {
+                alignWithLabel: true
+            },
+            data: time
+        }, {
+            gridIndex: 1,
+            type: 'category',
+            //axisLabel:{  
+            //         interval:0,//横轴信息全部显示  
+            //         rotate:-30,//-30度角倾斜显示  
+            //   }  ,
+            name: '',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisTick: {
+                alignWithLabel: true
+            },
+      
+            data: year
+
+        }],
+        yAxis: [{
+            gridIndex: 0,
+            type: 'value',
+            name: '',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisLabel: {
+                show: true,
+                interval: 'auto',
+                formatter: '{value}'
+            },
+            axisLine: {
+                lineStyle: {
+                    //color: colors[1]
+                }
+            },
+            splitLine: {
+                show: false
+            }
+        }, {
+            gridIndex: 1,
+            type: 'value',
+            name: '',
+            nameLocation: 'center',
+            nameGap: '40',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisLabel: {
+                show: true,
+                interval: 'auto',
+                formatter: '{value}'
+            },
+            axisLine: {
+                lineStyle: {
+                    //color: colors[1]
+                }
+            },
+            splitLine: {
+                show: false
+            },
+            position: 'left'
+        }],
+        series: [{
+                name: '亿元',
+                type: 'line',
+                barWidth: 25,
+                xAxisIndex: 0,
+                yAxisIndex: 0,
+                symbolSize: 8, //拐点大小
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        color: '#9BCA63',
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        width: 4,
+                        color: '#9BCA63'
+                    }
+                },
+                data: mxse
+            }, {
+
+                name: '销售额',
+                type: 'line',
+                smooth: true,
+                barWidth: 25,
+                xAxisIndex: 1,
+                yAxisIndex: 1,
+                symbolSize: 8, //拐点大小
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        color: '#9BCA63',
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        width: 4,
+                        color: '#9BCA63'
+                    }
+                },
+                data: yxse
+            }
+
+        ]
+    };
+
+    myChart1.setOption(option);
+
+</script>
+        
+
+
+
+
+
+

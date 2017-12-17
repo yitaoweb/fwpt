@@ -86,11 +86,54 @@ class ShowController extends HomeBaseController
         $this->assign('sub_title',$sub_title);
         $qysjfx = Db::query('select sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse from pt_qysjfx');
         $qysjfxs = Db::query('select fl,sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse from pt_qysjfx group by fl');
-        $qysjfxss = Db::query('select DATE_FORMAT(date,"%m") as time,sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse from pt_qysjfx group by DATE_FORMAT(date,"%m")');
+        $qysjfxss = Db::query('select DATE_FORMAT(date,"%m") as time,sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse,sum(lse) as lse from pt_qysjfx group by DATE_FORMAT(date,"%m")');
         $this->assign('qysjfx',$qysjfx);
         $this->assign('qysjfxs',$qysjfxs);
         $this->assign('qysjfxss',$qysjfxss);
         return $this->fetch(':xsqy');
+    }
+
+    public function xsqy_sj()
+    {
+        $sub_title='限额以上企业-数据汇总分析';
+        $this->assign('sub_title',$sub_title);
+        $mres = Db::query('select DATE_FORMAT(date,"%m") as time,sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse from pt_qysjfx group by DATE_FORMAT(date,"%m")');
+        $yres = Db::query('select DATE_FORMAT(date,"%Y") as time,sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse from pt_qysjfx group by DATE_FORMAT(date,"%Y")');
+        $this->assign('mres',$mres);
+        $this->assign('yres',$yres);
+        return $this->fetch(':xsqy_sj');
+    }
+
+    public function xsqy_xf()
+    {
+        $sub_title='限额以上企业-消费结构分析';
+        $this->assign('sub_title',$sub_title);
+
+        return $this->fetch(':xsqy_xf');
+    }
+
+    public function xsqy_fb()
+    {
+        $sub_title='限额以上企业-网点分布分析';
+        $this->assign('sub_title',$sub_title);
+
+        return $this->fetch(':xsqy_fb');
+    }
+
+    public function xsqy_zd()
+    {
+        $sub_title='限额以上企业-重点企业分析';
+        $this->assign('sub_title',$sub_title);
+
+        return $this->fetch(':xsqy_zd');
+    }
+
+    public function xsqy_zs()
+    {
+        $sub_title='限额以上企业-增速分析';
+        $this->assign('sub_title',$sub_title);
+
+        return $this->fetch(':xsqy_zs');
     }
 
     //数据分析 - 经济运行情况数据分析
