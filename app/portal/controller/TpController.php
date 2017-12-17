@@ -56,6 +56,9 @@ class TpController extends HomeBaseController
     
     public function tp(){
         $users = cmf_get_current_user();
+        if(!$users){
+            return 3;
+        }
         $uret = Db::name('portal_tp')->where('user_id',$users['id'])->find();
         if($uret){
             return 2;
@@ -66,6 +69,9 @@ class TpController extends HomeBaseController
     }
     public function tps(){
         $users = cmf_get_current_user();
+        if(!$users){
+            return 3;
+        }
         $uret = Db::name('portal_tp')->where('user_id',$users['id'])->find();
         if($uret){
             return 2;

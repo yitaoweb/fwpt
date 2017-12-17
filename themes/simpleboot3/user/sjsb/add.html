@@ -34,10 +34,10 @@
               <dl>
                 <dt>行业类型</dt>
                 <dd>
-                <select name="fl" style="width:326px;"  datatype="*" sucmsg=" ">
+                <select name="fl" id="fl" style="width:326px;"  datatype="*" sucmsg=" ">
                     <option value="0" selected="selected">请选服务类型</option>
                     <volist name="fuwu" id="vo">
-                        <option value="{$vo.id}">{$vo.name}</option>
+                        <option value="{$vo.id}" name="{$vo.name}">{$vo.name}</option>
                     </volist>
                 </select>
                 </dd>
@@ -46,7 +46,71 @@
                 <dt></dt>
                 <dd></dd>
               </dl>
+              <script type="text/javascript">
+                   $("#fl").change(function(){
+                        if($(this).find("option:selected").attr("name") == "住宿业"){
+                             $("#dd").show();
+                             $("#dds").hide();
+                             $("#ddss").hide();
+                        }else if($(this).find("option:selected").attr("name") == "餐饮业"){
+                          $("#dds").show();
+                          $("#dd").hide();
+                          $("#ddss").hide();
+                        }else{
+                          $("#ddss").show();
+                           $("#dd").hide();
+                           $("#dds").hide();
+                        }
+                   })
+              </script>
+<div id="dd" style="display:none;">
+              <dl>
+                <dt>客房收入</dt>
+                <dd><input type="text" name="kfsr" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt></dt>
+                <dd></dd>
+              </dl>
 
+              <dl>
+                <dt>餐费收入</dt>
+                <dd><input type="text" name="cfsr" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt></dt>
+                <dd></dd>
+              </dl>
+
+              <dl>
+                <dt>商品销售额收入</dt>
+                <dd><input type="text" name="spxse" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt></dt>
+                <dd></dd>
+              </dl>
+
+              <dl>
+                <dt>其他收入</dt>
+                <dd><input type="text" name="qtsr" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt></dt>
+                <dd></dd>
+              </dl>
+</div>
+<div id="dds" style="display:none;">
+              <dl>
+                <dt>营业收入</dt>
+                <dd><input type="text" name="yysr" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt></dt>
+                <dd></dd>
+              </dl>
+</div>
+<div id="ddss">              
               <dl>
                 <dt>当月销售额</dt>
                 <dd><input type="text" name="xse" class="input large"/></dd>
@@ -64,7 +128,7 @@
                 <dt></dt>
                 <dd></dd>
               </dl>
-
+</div>
               <dl>
                 <dt>同期</dt>
                 <dd><input type="text" name="tq" class="input large"/></dd>

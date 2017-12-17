@@ -75,6 +75,38 @@
             </div>
         </div>
         <div class="form-group">
+        <label class="col-sm-2 control-label"><span class="form-required">*</span>企业分类:</label>
+        <div class="col-md-6 col-sm-10">
+          <select class="form-control" name="user_type" id="user_type">
+                      <option value="2" <if condition="$post.user_type eq 2">selected="selected"</if>>企业</option>
+                      <option value="4" <if condition="$post.user_type eq 4">selected="selected"</if>>限额以上企业</option>
+                      <option value="5" <if condition="$post.user_type eq 5">selected="selected"</if>>经济运行情况上报企业</option>
+                  </select>
+        </div>
+        </div>
+        <script type="text/javascript">
+              if($("#user_type").val()==4){
+                       $("#js").show();
+              }
+
+              $("#user_type").change(function(){
+              if($(this).val()==4){
+                       $("#js").show();
+              }else{
+                $("#js").hide();
+              }
+              })
+
+        </script>
+        <div class="form-group" style="display:none;" id="js">
+        <label class="col-sm-2 control-label"><span class="form-required">*</span>企业角色:</label>
+        <div class="col-md-6 col-sm-10">
+          <select class="form-control" name="qy_js" id="qy_js">
+                      {$qyjs_tree}
+          </select>
+        </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-2 control-label"><span class="form-required">*</span>所属商圈:</label>
             <div class="col-md-6 col-sm-10">
                 <select class="form-control" name="qy_sq" id="qy_sq">

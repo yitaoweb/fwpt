@@ -37,12 +37,18 @@ class TsController extends HomeBaseController
     public function index()
     {
         $arrData = $this->request->param();
-        $portalPostModel = Db::name('Ts');
+        $portalPostModel = Db::name('portal_ts');
         $user = cmf_get_current_user();
-        $portalPostModel->insert(
+      
+        if($user['id'] == null){
+            $this->success('请登入');
+        }else{
+            $portalPostModel->insert(
                  ['user_id'=>$user['id'],'time'=>date('y-m-d h:i:s',time()),'nr'=>$arrData['nr']]
             );
-        $this->success('投诉成功');
+            $this->success('投诉成功');
+        }
+        
     }
 
     /**

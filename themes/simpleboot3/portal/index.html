@@ -113,68 +113,13 @@
   <div class="menu2">
     <a href="/guide.html" class="m01"><br/>服务指南</a>
     <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1121292237&amp;site=qq&amp;menu=yes" target="_blank" class="m02"><br/>在线咨询</a>
-    <!-- 弹窗 -->
-      <div id="dialog" class="animated">
-      <div style="margin: auto;width: 80%">
-         <a href="javascript:;" class="claseDialogBtn" style="color: #000;text-align: left">关闭</a>
-        <form action="{:cmf_url('portal/ts/index')}" method="post" id="editForm">
 
-            <table>
-                  <tr>
-                    <td>投诉内容：</td>
-                    <td>
-                       <textarea name="nr"></textarea>
-                    </td>
-                  </tr>
-                  <tr>
-                      <td><input type="submit" value="确认提交" class="submitBtn" /></td>
-                  </tr>
-            </table>
 
-        </form>
-      </div>
-      </div>
-      <div id="dialogBg"></div>
+    <a href="javascript:;" class="m03 demo0"><br/>投诉建议</a>
 
-      <script type="text/javascript">
-      var w,h,className;
-      function getSrceenWH(){
-        w = $(window).width();
-        h = $(window).height();
-        $('#dialogBg').width(w).height(h);
-      }
-
-      window.onresize = function(){  
-        getSrceenWH();
-      }  
-      $(window).resize();  
-
-      $(function(){
-        getSrceenWH();
-        
-        //显示弹框
-        $('.box a').click(function(){
-          className = $(this).attr('class');
-          $('#dialogBg').fadeIn(300);
-          $('#dialog').removeAttr('class').addClass('animated '+className+'').fadeIn();
-        });
-        
-        //关闭弹窗
-        $('.claseDialogBtn').click(function(){
-          $('#dialogBg').fadeOut(300,function(){
-            $('#dialog').addClass('bounceOutUp').fadeOut();
-          });
-        });
-      });
-      </script>
-      <!-- 弹窗结束 -->
-    <div class="box">
-    <a href="javascript:;" class="bounceIn m03"><br/>投诉建议</a>
-    </div>
     <a href="{:cmf_url('portal/tp/index')}" class="m04"><br/>民意调查</a>
   </div>
 </div>
-
 <div class="news-box">
   <php>
     $category_ids=9;
@@ -413,6 +358,26 @@
 
 
     <include file="public@scripts"/>
+    <!-- 弹窗 -->
 
+        <div id="HBox">
+          <form action="{:cmf_url('portal/ts/index')}" method="post">
+            <ul class="list">
+              <li>
+                <div class="fl"><textarea name="nr" placeholder="投诉内容..." rows="30" cols="29"></textarea></div>
+              </li>
+              <li><input type="submit" value="确认提交" class="submitBtn" /></li>
+            </ul>
+          </form>
+        </div>
+
+      <script type="text/javascript">
+        $(function(){
+          var $el = $('.dialog');
+          $el.hDialog();
+          $('.demo0').hDialog({title: '投诉建议',height: 200});          
+        });
+      </script>
+      <!-- 弹窗结束 -->
 </body>
 </html>

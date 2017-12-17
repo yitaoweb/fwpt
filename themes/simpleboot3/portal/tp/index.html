@@ -128,9 +128,10 @@
         <div class="war" id="war"></div>
 
       </div>
-
-      
-
+<br>
+<br>
+<div style="font-size:1.5em;color:#000">投票统计</div>   
+<hr/>
       <div class="info">
         <volist name="tptall" id="vo">
             <if condition="$tptj.id eq $vo.parent_id">
@@ -157,6 +158,9 @@
     </div>
 
 </body>
+    <include file="public@link"/>
+    <include file="public@footer"/>
+
 <script type="text/javascript">
 
 $(document).ready(function(){

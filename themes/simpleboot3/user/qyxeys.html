@@ -26,21 +26,23 @@ function setlatlng(lng,lat){
 }
 </script>
 <include file="public@nav"/>
+
 <php>
     $is_registration = is_registration();
     $is_sj = is_sj();
     $is_yx = is_yx();
 </php>
-<div class="register_tab"><span>机构注册</span><a href="{:cmf_url('user/Register/qiye')}" style="padding: 0 20px;">企业注册</a>
-<a href="{:cmf_url('user/Register/xeys')}" style="padding: 0 20px;">限额以上企业</a>
+<div class="register_tab"><span>限额以上企业</span>
+<a href="{:cmf_url('user/Register/jigou')}" style="padding: 0 20px;">机构注册</a>
+<a href="{:cmf_url('user/Register/qiye')}" style="padding: 0 20px;">企业注册</a>
 <a href="{:cmf_url('user/Register/jjyxqk')}" style="padding: 0 20px;">经济运行情况上报企业</a>
 </div>
-<div class="register_title">机构基本信息</div>
+<div class="register_title">企业基本信息</div>
 <div class="register_box radius4" style="height: 1025px;">
-<form action="{:url('user/Register/dojgRegister')}" method="post" id="register">  
+<form action="{:url('user/Register/doRegisterxeys')}" method="post" id="register">  
 <div class="register_form">
   <dl>
-    <dt>机构全称</dt>
+    <dt>企业全称</dt>
     <dd>
         <input type="text" name="user_nickname" class="input large" placeholder="请输入企业全称"  datatype="*2-100" sucmsg=" "/>
     </dd>
@@ -49,43 +51,6 @@ function setlatlng(lng,lat){
     <dt>社会信用代码</dt>
     <dd>
         <input type="text" name="qy_xydm" class="input large" placeholder="请输入统一社会信用代码" datatype="*2-100" sucmsg=" "/>
-    </dd>
-  </dl>
-
-  <dl>
-    <dt>注册资金</dt>
-    <dd>
-      <input type="text" name="qy_zczj" class="input large" placeholder="万元"  datatype="*2-100" sucmsg=" " />
-    </dd>
-  </dl>
- <dl>
-    <dt>注册时间</dt>
-    <dd>
-      <input type="date" name="qy_zcsj" class="input large"  value="{:date('Y-m-d',time())}"  datatype="*2-100" sucmsg=" " />
-    </dd>
-  </dl>
-
-  <dl>
-    <dt>注册登记类型</dt>
-    <dd>
-    <select name="qy_class" style="width:326px;"  datatype="*" sucmsg=" ">
-        <option value="0" selected="selected">请选择注册登记类型</option>
-        <volist name="djlx" id="vo">
-            <option value="{$vo.id}">{$vo.name}</option>
-        </volist>
-    </select>
-    </dd>
-  </dl>
-
-  <dl>
-    <dt>服务类型</dt>
-    <dd>
-    <select name="qy_ssfw" style="width:326px;"  datatype="*" sucmsg=" ">
-        <option value="0" selected="selected">请选服务类型</option>
-        <volist name="fuwu" id="vo">
-            <option value="{$vo.id}">{$vo.name}</option>
-        </volist>
-    </select>
     </dd>
   </dl>
 
@@ -109,7 +74,39 @@ function setlatlng(lng,lat){
     </dd>
   </dl>
 
-   <dl>
+  <dl>
+    <dt>所属行业</dt>
+    <dd>
+    <select name="qy_sshy" style="width:326px;"  datatype="*" sucmsg=" ">
+        <option value="0" selected="selected">请选择行业分类</option>
+        {$categories_tree}
+    </select>
+    </dd>
+  </dl>
+
+  <dl>
+    <dt>企业角色</dt>
+    <dd>
+    <select name="qy_js" style="width:326px;"  datatype="*" sucmsg=" ">
+        <option value="0" selected="selected">请选择企业角色</option>
+        {$PortalQyjs_tree}
+    </select>
+    </dd>
+  </dl>
+
+  <dl>
+    <dt>联系点</dt>
+    <dd>
+    <select name="qy_sq" style="width:326px;"  datatype="*" sucmsg=" ">
+        <option value="0" selected="selected">请选择联系点</option>
+        <volist name="sq" id="vo">
+            <option value="{$vo.id}">{$vo.lxd_name}</option>
+        </volist>
+    </select>
+    </dd>
+  </dl>
+
+  <dl>
     <dt>法人姓名</dt>
     <dd>
       <input type="text" name="qy_faren" class="input large" placeholder="请输入法人姓名"  datatype="*2-100" sucmsg=" " />
@@ -127,7 +124,26 @@ function setlatlng(lng,lat){
     </dd>
   </dl>
 
-   <dl>
+  <dl>
+    <dt>出生日期</dt>
+    <dd>
+      <input type="date" name="birthday" class="input large"  value="{:date('Y-m-d',time())}"  datatype="*2-100" sucmsg=" " />
+    </dd>
+  </dl>
+
+  <dl>
+    <dt>学历</dt>
+    <dd>
+    <select name="qy_xueli" style="width:326px;"  datatype="*" sucmsg=" ">
+        <option value="0" selected="selected">请选择学历</option>
+        <volist name="xueli" id="vo">
+            <option value="{$vo.id}">{$vo.name}</option>
+        </volist>
+    </select>
+    </dd>
+  </dl>
+
+  <dl>
     <dt>联系人</dt>
     <dd>
       <input type="text" name="qy_lxname" class="input large" placeholder="请输入联系人姓名"  datatype="*2-100" sucmsg=" " />
@@ -143,13 +159,13 @@ function setlatlng(lng,lat){
   <dl>
     <dt>手机号</dt>
     <dd>
-      <input type="text" name="mobile" id="jgmobile" class="input large" placeholder="请输入手机号"  datatype="*2-100" sucmsg=" " />
+      <input type="text" name="mobile" id="qymobile" class="input large" placeholder="请输入手机号"  datatype="*2-100" sucmsg=" " />
     </dd>
   </dl>
   <dl>
     <dt>邮箱</dt>
     <dd>
-      <input type="text" name="user_email" id="jgemail" class="input large" placeholder="请输入邮箱地址"  datatype="*2-100" sucmsg=" " />
+      <input type="text" name="user_email" id="qyemail" class="input large" placeholder="请输入邮箱地址"  datatype="*2-100" sucmsg=" " />
     </dd>
   </dl>
 
@@ -160,52 +176,100 @@ function setlatlng(lng,lat){
     </dd>
   </dl>
   <dl>
-    <dt>机构官网</dt>
+    <dt>企业官网</dt>
     <dd>
       <input type="text" name="user_url" class="input large" placeholder="如:http://www.baidu.com"  datatype="*2-100" sucmsg=" " />
     </dd>
   </dl>
 
-  <dl style="width:100%; height:30px">
-    <dt>服务区域</dt>&nbsp;&nbsp;&nbsp;&nbsp;
-        <foreach name="area" item="vo">
-            <input type="checkbox" name="fwqy[]" value="{$vo.id}">{$vo.name}&nbsp;&nbsp;&nbsp;
-        </foreach>
+  <dl>
+    <dt>注册资金</dt>
+    <dd>
+      <input type="text" name="qy_zczj" class="input large" placeholder="万元"  datatype="*2-100" sucmsg=" " />
+    </dd>
+  </dl>
+ <dl>
+    <dt>注册时间</dt>
+    <dd>
+      <input type="date" name="qy_zcsj" class="input large"  value="{:date('Y-m-d',time())}"  datatype="*2-100" sucmsg=" " />
+    </dd>
   </dl>
 
-  
+  <dl>
+    <dt>注销时间</dt>
+    <dd>
+      <input type="date" name="qy_zxsj" class="input large"  value="{:date('Y-m-d',time())}"  datatype="*2-100" sucmsg=" " />
+    </dd>
+  </dl>
+
+  <dl>
+    <dt>注册登记类型</dt>
+    <dd>
+    <select name="qy_class" style="width:326px;"  datatype="*" sucmsg=" ">
+        <option value="0" selected="selected">请选择注册登记类型</option>
+        <volist name="djlx" id="vo">
+            <option value="{$vo.id}">{$vo.name}</option>
+        </volist>
+    </select>
+    </dd>
+  </dl>
+
+  <dl>
+    <dt>职工总数</dt>
+    <dd>
+      <input type="text" name="qy_zg_num" class="input large" placeholder="请输入职工总数"  datatype="*2-100" sucmsg=" " />
+    </dd>
+  </dl>
+  <dl>
+    <dt>大专以上人数</dt>
+    <dd>
+      <input type="text" name="qy_dz_num" class="input large" placeholder="请输入大专以上人数"  datatype="*2-100" sucmsg=" " />
+    </dd>
+  </dl>
+
+  <dl>
+    <dt>研究开发人数</dt>
+    <dd>
+      <input type="text" name="qy_kf_num" class="input large" placeholder="请输入研究开发人数"  datatype="*2-100" sucmsg=" " />
+    </dd>
+  </dl>
+  <dl>
+    <dt>企业划分类型</dt>
+    <dd>
+    <select name="qy_sme_class" style="width:326px;"  datatype="*" sucmsg=" ">
+        <option value="0" selected="selected">请选择中小企业划分类型</option>
+        <volist name="huafen" id="vo">
+            <option value="{$vo.id}">{$vo.name}</option>
+        </volist>
+    </select>
+    </dd>
+  </dl>
 
   <dl style="width:100%; height:120px">
-    <dt>机构简介</dt>
+    <dt>经营范围</dt>
+   <dd><textarea name="qy_jyfw" rows="2" cols="20"  style="height:100px;width:809px;"></textarea></dd>
+  </dl>
+
+  <dl style="width:100%; height:120px">
+    <dt>企业简介</dt>
    <dd><textarea name="qy_jianjie" rows="2" cols="20"  style="height:100px;width:809px;"></textarea></dd>
   </dl>
-
-
-  <dl style="width:100%; height:120px">
-    <dt>成功案例</dt>
-   <dd><textarea name="qy_anli" rows="2" cols="20"  style="height:100px;width:809px;"></textarea></dd>
-  </dl>
-
-  <dl style="width:100%; height:120px">
-    <dt>荣誉资质</dt>
-   <dd><textarea name="qy_rongyu" rows="2" cols="20"  style="height:100px;width:809px;"></textarea></dd>
-  </dl>
-
 
   <dl>
     <dt>企业LOGO</dt>
     <dd>
-      <input type="text" name="jgavatar" style="width: 150px;" id="jgavatar" class="input large" datatype="*2-100" sucmsg=" " />
-      <a class="btn-r" style="width: 158px;cursor: pointer;"  href="javascript:uploadOneImage('图片上传','#jgavatar');">上传</a>
+      <input type="text" name="qyavatar" style="width: 150px;" id="qyavatar" class="input large" datatype="*2-100" sucmsg=" " />
+      <a class="btn-r" style="width: 158px;cursor: pointer;"  href="javascript:uploadOneImage('图片上传','#qyavatar');">上传</a>
     </dd>
   </dl>
   <dl>
     <dt>社会信用代码证</dt>
     <dd>
-      <input type="text" name="jgdaima" id="jgdaima" class="input large"  style="width:150px;" datatype="*2-100" sucmsg=" " />
-      <a class="btn-r" style="width: 158px;cursor: pointer;" href="javascript:uploadOneImage('图片上传','#jgdaima');">上传</a>
+      <input type="text" name="qydaima" id="qydaima" class="input large"  style="width:150px;" datatype="*2-100" sucmsg=" " />
+      <a class="btn-r" style="width: 158px;cursor: pointer;" href="javascript:uploadOneImage('图片上传','#qydaima');">上传</a>
     </dd>
   </dl>
+
 
   <dl>
     <dt>地图坐标</dt>
@@ -229,7 +293,7 @@ function setlatlng(lng,lat){
                 <input type="text" name="code" class="input large" style="width:150px;" datatype="*2-100" sucmsg=" " />
                 <a class="btn-r btn-success js-get-mobile-code"
                                                            style="width: 158px;cursor: pointer;"
-                                                           data-wait-msg="[second]秒后才能再次获取" data-mobile-input="#jgmobile"
+                                                           data-wait-msg="[second]秒后才能再次获取" data-mobile-input="#yqmobile"
                                                            data-url="{:url('user/VerificationCode/send')}"
                                                            data-init-second-left="60">获取手机验证码</a>
             </dd>
@@ -243,7 +307,7 @@ function setlatlng(lng,lat){
                 <input type="text" name="code" class="input large" placeholder="邮件验证码" style="width:150px;" datatype="*2-100" sucmsg=" " />
                 <a class="btn-r large js-get-email-code"
                                                            style="width: 158px;height: 35px;cursor: pointer;"
-                                                           data-wait-msg="[second]秒后才能再次获取" data-email-input="#jgemail"
+                                                           data-wait-msg="[second]秒后才能再次获取" data-email-input="#qyemail"
                                                            data-url="{:url('user/VerificationCode/send')}"
                                                            data-init-second-left="60">获取邮箱验证码</a>
             </dd>
@@ -260,10 +324,12 @@ function setlatlng(lng,lat){
         </dl>
     </if>
 
+</div>
+
 <div class="register_tip">
     <div class="agree">
         <input type="checkbox" name="xieyi" id="agree" value="1" />
-        <label for="agree">我已阅读《机构用户注册协议书》</label>
+        <label for="agree">我已阅读《企业用户注册协议书》</label>
     </div>
 </div>
 <div class="register_tip"></div>
@@ -273,5 +339,6 @@ function setlatlng(lng,lat){
 
 
 <include file="public@scripts"/>
+
 </body>
 </html>

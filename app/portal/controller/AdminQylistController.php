@@ -12,6 +12,7 @@ namespace app\portal\controller;
 
 use app\portal\model\UserModel;
 use app\portal\model\PortalSshyModel;
+use app\portal\model\PortalQyjsModel;
 use app\portal\model\PortalXzqyModel;
 use cmf\controller\AdminBaseController;
 use think\Db;
@@ -74,7 +75,7 @@ class AdminQylistController extends AdminBaseController
             }
            
         } 
-        $portalTagModel->where('user_type',"2");
+        $portalTagModel->where('user_type',['=',2],['=',4],['=',5],'or');
         $tags = $portalTagModel->paginate(10);    
         $xzqy = Db::name('portal_xzqy')->select();  
         $this->assign("tags", $tags);
@@ -102,12 +103,14 @@ class AdminQylistController extends AdminBaseController
     {
         $portalTagModel = new UserModel();
         $portalCategoryModel = new PortalSshyModel();
+        $QyjsModel = new PortalQyjsModel();
         $xzqy = Db::name('portal_xzqy')->select(); 
         $lxd = Db::name('portal_lxd')->select(); 
         $djlx = Db::name('portal_djlx')->select(); 
         $xl = Db::name('portal_xl')->select(); 
         $huafenlx = Db::name('portal_huafenlx')->select(); 
         $categoriesTree = $portalCategoryModel->adminCategoryTree();
+        $qyjsTree = $QyjsModel->adminCategoryTree();
         $this->assign("xzqy", $xzqy); 
         $this->assign("lxd", $lxd); 
         $this->assign("djlx", $djlx); 
@@ -115,6 +118,7 @@ class AdminQylistController extends AdminBaseController
         $this->assign("huafenlx", $huafenlx); 
         $this->assign("time", date('y-m-d h:i:s',time()));
         $this->assign('categories_tree', $categoriesTree);
+        $this->assign('qyjs_tree', $qyjsTree);
         return $this->fetch();
     }
 
@@ -140,7 +144,7 @@ class AdminQylistController extends AdminBaseController
         $qy_code = encode('user',1,$arrData['qy_area']);
         $arrData['qy_code'] = $qy_code;
         $arrData['user_pass'] = cmf_password($pass);
-        $arrData['user_type'] = 2;
+        // $arrData['user_type'] = 2;
 
         $subject="用户注册通知";
         $content="尊敬的企业用户".$arrData['user_nickname'].":<br>";
@@ -171,6 +175,7 @@ class AdminQylistController extends AdminBaseController
         $portalPostModel = new UserModel();
         $post = $portalPostModel->where('id', $id)->find();
         $portalCategoryModel = new PortalSshyModel();
+                $QyjsModel = new PortalQyjsModel();
         $xzqy = Db::name('portal_xzqy')->select(); 
         $lxd = Db::name('portal_lxd')->select(); 
         $djlx = Db::name('portal_djlx')->select(); 
@@ -178,6 +183,7 @@ class AdminQylistController extends AdminBaseController
         $xl = Db::name('portal_xl')->select(); 
         $huafenlx = Db::name('portal_huafenlx')->select(); 
         $categoriesTree = $portalCategoryModel->adminCategoryTree();
+        $qyjsTree = $QyjsModel->adminCategoryTree($post['qy_js']);
         $this->assign("xzqy", $xzqy); 
         $this->assign("lxd", $lxd); 
         $this->assign("djlx", $djlx); 
@@ -187,6 +193,7 @@ class AdminQylistController extends AdminBaseController
         $this->assign("time", date('y-m-d h:i:s',time()));
         $this->assign('categories_tree', $categoriesTree);
         $this->assign('post', $post);
+        $this->assign('qyjs_tree', $qyjsTree);
         return $this->fetch();
     }
     public function editPost(){
