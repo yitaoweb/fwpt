@@ -143,6 +143,7 @@ class AdminJglistController extends AdminBaseController
         $pass = rand_number(0,999999);
         $qy_code = encode('user',1,$arrData['qy_area']);
         $arrData['qy_code'] = $qy_code;
+        $arrData['user_login'] = $qy_code;
         $arrData['user_pass'] = cmf_password($pass);
         $arrData['user_type'] = 3;
         $subject="用户注册通知";
