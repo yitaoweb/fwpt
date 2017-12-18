@@ -40,6 +40,12 @@ class ProfileController extends UserBaseController
             case 3:
                 $listTpl = 'jgcenter';
                 break;
+                case 4:
+                $listTpl = 'qycenter';
+                break;
+                case 5:
+                $listTpl = 'qycenter';
+                break;
             default:
                 $listTpl = 'center';
                 break;

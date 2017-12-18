@@ -367,7 +367,7 @@ class UserModel extends Model
                 'qy_sme_class'             =>    $user['qy_sme_class'],
                 'qy_jyfw'                  =>    $user['qy_jyfw'],
                 'qy_jianjie'               =>    $user['qy_jianjie'],
-                'coord'               =>    $user['coord'],
+                // 'coord'               =>    $user['coord'],
                 'last_login_time'          =>    time(),
                 'score'                    =>    0,
                 'avatar'                   =>    $user['qyavatar'],
@@ -386,6 +386,7 @@ class UserModel extends Model
         
 
             $userId = Db::name("user")->insertGetId($data);
+
             $data   = Db::name("user")->where('id', $userId)->find();
             $subject="用户注册通知";
             $content="尊敬的企业用户".$user['user_nickname'].":<br>";
@@ -448,7 +449,7 @@ class UserModel extends Model
                 'qy_sme_class'             =>    $user['qy_sme_class'],
                 'qy_jyfw'                  =>    $user['qy_jyfw'],
                 'qy_jianjie'               =>    $user['qy_jianjie'],
-                'coord'               =>    $user['coord'],
+                // 'coord'               =>    $user['coord'],
                 'last_login_time'          =>    time(),
                 'score'                    =>    0,
                 'avatar'                   =>    $user['qyavatar'],
