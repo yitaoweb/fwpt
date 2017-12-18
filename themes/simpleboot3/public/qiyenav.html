@@ -20,7 +20,7 @@
                 </ul>
             </li>
 
-            <if condition='($user_type == 2)'>
+            <if condition='($user_type == 2 or $user_type == 4 or $user_type == 5)'>
 
             <li>
                 <div class="link">我的需求<i class="fa fa-chevron-down"></i></div>
@@ -30,16 +30,15 @@
                 </ul>
             </li>
             <li>
-            <php>$users = cmf_get_current_user();</php>
             
                 <div class="link">数据上报<i class="fa fa-chevron-down"></i></div>
                 <ul class="submenu <if condition='($um == 4)'>dis</if>">
-                    <if condition="$users.user_type eq 4">
+                    <if condition="$user_type eq 4">
                     <li><a href="{:url('user/sjsb/index')}">企业数据</a></li>
 					<li><a href="{:url('user/sjsb/add')}">企业数据上报</a></li>
                     </if>
 
-                    <if condition="$users.user_type eq 5">
+                    <if condition="$user_type eq 5">
                     <li><a href="{:url('user/Jjyxqk/index')}">经济运行情况</a></li>
                     <li><a href="{:url('user/Jjyxqk/add')}">经济运行情况上报</a></li>
                                    

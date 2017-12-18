@@ -20,7 +20,7 @@
 </head>
 <body onLoad="startTime()">  
 <div class="datavLayout">
-    <div class="header">
+    <div class="head">
         <div class="head_left">
             <div class="info">
                 <div class="icon"></div>
@@ -42,11 +42,12 @@
 
     <header class="rfm_header">
         <ul>
+        <li><a class="animsition-link" href="{:url('datav/show/xsqy')}" data-animsition-out="fade-out-left-sm">数据概况</a></li>
         <li class="active"><a class="animsition-link" href="#" data-animsition-out="fade-out-left-sm">数据汇总</a></li>
         <li><a class="animsition-link" href="{:url('datav/show/xsqy_xf')}" data-animsition-out="fade-out-left-sm">消费结构</a></li>
         <li><a class="animsition-link" href="{:url('datav/show/xsqy_fb')}" data-animsition-out="fade-out-left-sm">网点分布</a></li>
         <li><a class="animsition-link" href="{:url('datav/show/xsqy_zd')}" data-animsition-out="fade-out-left-sm">重点企业</a></li>
-        <li><a class="animsition-link" href="{:url('datav/show/xsqy_zs')}" data-animsition-out="fade-out-left-sm">增速排序</a></li>
+        <!-- <li><a class="animsition-link" href="{:url('datav/show/xsqy_zs')}" data-animsition-out="fade-out-left-sm">增速排序</a></li> -->
         </ul>
     </header>
     <div class="content">
@@ -56,43 +57,89 @@
                 <div class="sub_main" id="main2"></div>
             </div>
 
-            <div class="row50">
+            <div class="row50" style=" overflow:auto;">
                 <table class="fwtable">
                     <thead>
                         <tr>
                           <th>序号</th>
-                          <th>开发区</th>
-                          <th>项目名称</th>
-                          <th>投资总额</th>
+                          <th>月份</th>
+                          <th>销售额</th>
+                          <th>零售额</th>
+                          <th>客房收入</th>
+                          <th>餐费收入</th>
+                          <th>商品销售收入</th>
+                          <th>营业收入</th>
+                          <th>其他</th>
+
                         </tr>
                     </thead>
                     
                     <tbody>
-        
+                        <foreach name="mres" item="vo">    
                             <tr>
-                                <td>1</td>
-                             
-                                <td>3</td>
-                                <td>3</td>
-                                <td>3</td>
-
-
-
+                                <td>{$key+1}</td>
+                                <td>{$vo.time}</td>
+                                <td>{$vo.xse}</td>
+                                <td>{$vo.lse}</td>
+                                <td>{$vo.kfsr}</td>
+                                <td>{$vo.cfsr}</td>
+                                <td>{$vo.spxse}</td>
+                                <td>{$vo.yysr}</td>
+                                <td>{$vo.qtsr}</td>
                             </tr>
+                        </foreach>
+      
+                    </tbody>
+
+                    <thead>
+                        <tr>
+                          <th>序号</th>
+                          <th>年份</th>
+                          <th>销售额</th>
+                          <th>零售额</th>
+                          <th>客房收入</th>
+                          <th>餐费收入</th>
+                          <th>商品销售收入</th>
+                          <th>营业收入</th>
+                          <th>其他</th>
+
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <foreach name="yres" item="vo">    
+                            <tr>
+                                <td>{$key+1}</td>
+                                <td>{$vo.time}</td>
+                                <td>{$vo.xse}</td>
+                                <td>{$vo.lse}</td>
+                                <td>{$vo.kfsr}</td>
+                                <td>{$vo.cfsr}</td>
+                                <td>{$vo.spxse}</td>
+                                <td>{$vo.yysr}</td>
+                                <td>{$vo.qtsr}</td>
+                            </tr>
+                        </foreach>
       
                     </tbody>
 
                     <tbody>
-             
+                        <foreach name="heji" item="vo">
                             <tr>
                                 <td>合计</td>
-                                <td></td>
-                                <td>数量：2</td>
-                                <td>132</td>
+                                <td>数量：{$vo.num}</td>
+                                <td>{$vo.xse}</td>
+                                <td>{$vo.lse}</td>
+                                <td>{$vo.kfsr}</td>
+                                <td>{$vo.cfsr}</td>
+                                <td>{$vo.spxse}</td>
+                                <td>{$vo.yysr}</td>
+                                <td>{$vo.qtsr}</td>
    
 
 
                             </tr>
+                        </foreach>
        
                     </tbody>
 

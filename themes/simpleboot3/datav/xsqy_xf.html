@@ -19,7 +19,7 @@
 </head>
 <body onLoad="startTime()">  
 <div class="datavLayout">
-    <div class="header">
+    <div class="head">
         <div class="head_left">
             <div class="info">
                 <div class="icon"></div>
@@ -41,16 +41,196 @@
 
     <header class="rfm_header">
         <ul>
+        <li><a class="animsition-link" href="{:url('datav/show/xsqy')}" data-animsition-out="fade-out-left-sm">数据概况</a></li>
         <li><a class="animsition-link" href="{:url('datav/show/xsqy_sj')}" data-animsition-out="fade-out-left-sm">数据汇总</a></li>
         <li class="active"><a class="animsition-link" href="#" data-animsition-out="fade-out-left-sm">消费结构</a></li>
         <li><a class="animsition-link" href="{:url('datav/show/xsqy_fb')}" data-animsition-out="fade-out-left-sm">网点分布</a></li>
         <li><a class="animsition-link" href="{:url('datav/show/xsqy_zd')}" data-animsition-out="fade-out-left-sm">重点企业</a></li>
-        <li><a class="animsition-link" href="{:url('datav/show/xsqy_zs')}" data-animsition-out="fade-out-left-sm">增速排序</a></li>
+        <!-- <li><a class="animsition-link" href="{:url('datav/show/xsqy_zs')}" data-animsition-out="fade-out-left-sm">增速排序</a></li> -->
         </ul>
     </header>
     <div class="content">
         <div class="box site">
-            <div class="sub_main" id="main1"></div>
+            <div class="row50" style=" overflow:auto;">
+                <div class="sub_main" id="main1" style="height: 50%"></div>
+                <table class="fwtable">
+                    <thead>
+                        <tr>
+                          <th>序号</th>
+                          <th>行业</th>
+                          <th>销售额</th>
+                          <th>零售额</th>
+                          <th>客房</th>
+                          <th>餐费</th>
+                          <th>商品</th>
+                          <th>其他</th>
+                          <th>营业</th>
+                          <th>同期</th>
+                          <th>同比</th>
+                          <th>环比</th>
+
+                        </tr>
+                    </thead>
+                    
+                 
+                    <tbody>
+                        <tr>
+                          <th>1</th>
+                          <th>批发企业</th>
+                          <if condition="$pf[0]['num'] eq NULL">
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <else/>
+                          <th>{$pf[0]['xse']}</th>
+                          <th>{$pf[0]['lse']}</th>
+                          <th>{$pf[0]['kfsr']}</th>
+                          <th>{$pf[0]['cfsr']}</th>
+                          <th>{$pf[0]['spxse']}</th>
+                          <th>{$pf[0]['qtsr']}</th>
+                          <th>{$pf[0]['yysr']}</th>
+                          <th>{$pf[0]['tq']}</th>
+                          <th>{$pf[0]['tb']}</th>
+                          <th>{$pf[0]['hb']}</th>
+                          </if>
+                        </tr>
+                        <tr>
+                          <th>2</th>
+                          <th>零售企业</th>
+                          <if condition="$ls[0]['num'] eq NULL">
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <else/>
+                          <th>{$ls[0]['xse']}</th>
+                          <th>{$ls[0]['lse']}</th>
+                          <th>{$ls[0]['kfsr']}</th>
+                          <th>{$ls[0]['cfsr']}</th>
+                          <th>{$ls[0]['spxse']}</th>
+                          <th>{$ls[0]['qtsr']}</th>
+                          <th>{$ls[0]['yysr']}</th>
+                          <th>{$ls[0]['tq']}</th>
+                          <th>{$ls[0]['tb']}</th>
+                          <th>{$ls[0]['hb']}</th>
+                          </if>
+                        </tr>
+
+                        <tr>
+                          <th>3</th>
+                          <th>住宿企业</th>
+                          <if condition="$zs[0]['num'] eq NULL">
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <else/>
+                          <th>{$zs[0]['xse']}</th>
+                          <th>{$zs[0]['lse']}</th>
+                          <th>{$zs[0]['kfsr']}</th>
+                          <th>{$zs[0]['cfsr']}</th>
+                          <th>{$zs[0]['spxse']}</th>
+                          <th>{$zs[0]['qtsr']}</th>
+                          <th>{$zs[0]['yysr']}</th>
+                          <th>{$zs[0]['tq']}</th>
+                          <th>{$zs[0]['tb']}</th>
+                          <th>{$zs[0]['hb']}</th>
+                          
+                          </if>
+                        </tr>
+
+                        <tr>
+                          <th>4</th>
+                          <th>餐饮企业</th>
+                          <if condition="$cy[0]['num'] eq NULL">
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <th>0.00</th>
+                          <else/>
+                          <th>{$cy[0]['xse']}</th>
+                          <th>{$cy[0]['lse']}</th>
+                          <th>{$cy[0]['kfsr']}</th>
+                          <th>{$cy[0]['cfsr']}</th>
+                          <th>{$cy[0]['spxse']}</th>
+                          <th>{$cy[0]['qtsr']}</th>
+                          <th>{$cy[0]['yysr']}</th>
+                          <th>{$cy[0]['tq']}</th>
+                          <th>{$cy[0]['tb']}</th>
+                          <th>{$cy[0]['hb']}</th>
+                          
+                          </if>
+                        </tr>
+
+                    </tbody>
+                    
+
+                </table>
+            </div>
+
+
+            <div class="row50" style=" overflow:auto;">
+                <div class="sub_main" id="main2" style="height: 50%"></div>
+                <table class="fwtable">
+                    <thead>
+                        <tr>
+                          <th>序号</th>
+                          <th>业态</th>
+                          <th>销售额</th>
+                          <th>零售额</th>
+                          <th>同期</th>
+                          <th>同比</th>
+                          <th>环比</th>
+
+                        </tr>
+                    </thead>
+                    
+                 
+                    <tbody>
+                        <foreach name="yt" item="vo">  
+                        <tr>
+                          <th>{$key+1}</th>
+                          <th>{$vo.name}</th>
+                          <th>{$vo.xse}</th>
+                          <th>{$vo.value}</th>
+                          <th>{$vo.tq}</th>
+                          <th>{$vo.tb}</th>
+                          <th>{$vo.hb}</th>
+                        </tr>
+                
+                        </foreach>
+
+                    </tbody>
+                    
+
+                </table>
+            </div>
+
         </div>
     </div>
 
@@ -111,5 +291,225 @@
     } 
 
 </script>
+
+<SCRIPT LANGUAGE="JavaScript">
+    var pf = <?php echo json_encode($pf);?>;
+    var ls = <?php echo json_encode($ls);?>;
+    var zs = <?php echo json_encode($zs);?>;
+    var cy = <?php echo json_encode($cy);?>;
+
+
+    var yt = <?php echo json_encode($yt);?>;
+</SCRIPT>
+
+<script type="text/javascript">
+    var myChart1 = echarts.init(document.getElementById('main1'));
+    var myChart2 = echarts.init(document.getElementById('main2'));
+    //var colors = ['orange', '#d14a61', '#1E90FF'];
+    var hy = new Array();
+    var hyxse = new Array();
+    var hylse = new Array();
+
+    var pf_xse = 0;
+    var pf_lse = 0;
+
+    var ls_xse = 0;
+    var ls_lse = 0;
+
+    var zs_cfsr = 0;
+    var zs_spxse = 0;
+    var zs_qtsr = 0;
+
+    var cy_yysy = 0;
+
+    if (pf[0].num != 0) {
+        pf_xse = pf[0].xse;
+        pf_lse = pf[0].lse;
+    }
+
+    if (ls[0].num != 0) {
+        ls_xse = ls[0].xse;
+        ls_xse = ls[0].lse;
+    }
+
+    if (zs[0].num != 0) {
+        zs_kfsr = zs[0].kfsr;
+        zs_cfsr = zs[0].cfsr;
+        zs_spxse = zs[0].spxse;
+        zs_qtsr = zs[0].qtsr;
+    }
+    if (cy[0].num != 0) {
+        cy_yysr = cy[0].yysr;
+    }
+
+    var yt_arr  = new Array();
+    var yt_name = new Array();
+
+
+    for(var i=0;i<yt.length;i++){
+        yt_name[i] = yt[i].name;
+        //yt_arr[i]['value'] = yt[i].lse;
+       // yt_arr[i]['name'] = yt[i].name;
+    }
+
+
+
+    var option = {
+        title:{
+            text:'商品类别及行业汇总',
+            fontSize:12,
+            left:'35%',
+            top:'2%',
+            textStyle:{
+                color:'#fff'
+            }
+
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        legend: {
+            x: 'left',
+            data:['批发企业','零售企业','住宿企业','餐饮企业']
+        },
+        series: [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius: ['30%', '50%'],
+                label: {
+                    normal: {
+                        formatter: '{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+                        backgroundColor: '#eee',
+                        borderColor: '#aaa',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        // shadowBlur:3,
+                        // shadowOffsetX: 2,
+                        // shadowOffsetY: 2,
+                        // shadowColor: '#999',
+                        // padding: [0, 7],
+                        rich: {
+                            a: {
+                                color: '#999',
+                                lineHeight: 22,
+                                align: 'center'
+                            },
+                            abg: {
+                                backgroundColor: '#333',
+                                width: '100%',
+                                align: 'right',
+                                height: 22,
+                                borderRadius: [4, 4, 0, 0]
+                            },
+                            hr: {
+                                borderColor: '#aaa',
+                                width: '100%',
+                                borderWidth: 0.5,
+                                height: 0
+                            },
+                            b: {
+                                fontSize: 16,
+                                lineHeight: 33
+                            },
+                            per: {
+                                color: '#eee',
+                                backgroundColor: '#334455',
+                                padding: [2, 4],
+                                borderRadius: 2
+                            }
+                        }
+                    }
+                },
+                data:[
+                    {value:pf_xse, name:'销售额'},
+                    {value:ls_xse, name:'零售额'},
+                    {value:zs_kfsr, name:'客房收入'},
+                    {value:cy_yysr, name:'营业收入'}
+                ]
+            }
+        ]
+    };
+
+    var option2 = {
+        title:{
+            text:'业态汇总',
+            fontSize:12,
+            left:'40%',
+            top:'2%',
+            textStyle:{
+                color:'#fff'
+            }
+
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        legend: {
+            x: 'left',
+            data:yt_name
+        },
+        series: [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius: ['30%', '50%'],
+                label: {
+                    normal: {
+                        formatter: '{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+                        backgroundColor: '#eee',
+                        borderColor: '#aaa',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        // shadowBlur:3,
+                        // shadowOffsetX: 2,
+                        // shadowOffsetY: 2,
+                        // shadowColor: '#999',
+                        // padding: [0, 7],
+                        rich: {
+                            a: {
+                                color: '#999',
+                                lineHeight: 22,
+                                align: 'center'
+                            },
+                            abg: {
+                                backgroundColor: '#333',
+                                width: '100%',
+                                align: 'right',
+                                height: 22,
+                                borderRadius: [4, 4, 0, 0]
+                            },
+                            hr: {
+                                borderColor: '#aaa',
+                                width: '100%',
+                                borderWidth: 0.5,
+                                height: 0
+                            },
+                            b: {
+                                fontSize: 16,
+                                lineHeight: 33
+                            },
+                            per: {
+                                color: '#eee',
+                                backgroundColor: '#334455',
+                                padding: [2, 4],
+                                borderRadius: 2
+                            }
+                        }
+                    }
+                },
+                data:yt
+            }
+        ]
+    };
+
+    myChart1.setOption(option);
+
+    myChart2.setOption(option2);
+
+</script>
+        
 
 

@@ -19,7 +19,7 @@
 </head>
 <body onLoad="startTime()">  
 <div class="datavLayout">
-    <div class="header">
+    <div class="head">
         <div class="head_left">
             <div class="info">
                 <div class="icon"></div>
@@ -46,7 +46,7 @@
         <li><a class="animsition-link" href="{:url('datav/show/xsqy_xf')}" data-animsition-out="fade-out-left-sm">消费结构</a></li>
         <li><a class="animsition-link" href="{:url('datav/show/xsqy_fb')}" data-animsition-out="fade-out-left-sm">网点分布</a></li>
         <li><a class="animsition-link" href="{:url('datav/show/zd')}" data-animsition-out="fade-out-left-sm">重点企业</a></li>
-        <li><a class="animsition-link" href="{:url('datav/show/xsqy_zs')}" data-animsition-out="fade-out-left-sm">增速排序</a></li>
+        <!-- <li><a class="animsition-link" href="{:url('datav/show/xsqy_zs')}" data-animsition-out="fade-out-left-sm">增速排序</a></li> -->
         </ul>
     </header>
     <div class="content">
@@ -173,6 +173,11 @@
 
 
 <script type="text/javascript">
+    var pf = <?php echo json_encode($pf);?>;
+    var ls = <?php echo json_encode($ls);?>;
+    var zs = <?php echo json_encode($zs);?>;
+    var cy = <?php echo json_encode($cy);?>;
+
     var lsy;
     var pfy;
     var zsy;
@@ -201,6 +206,39 @@
          xsearr[i]=qysjfxss[i].xse;
          lsearr[i]=qysjfxss[i].lse;
     }
+
+    var pf_xse = 0;
+    var pf_lse = 0;
+
+    var ls_xse = 0;
+    var ls_lse = 0;
+
+    var zs_cfsr = 0;
+    var zs_spxse = 0;
+    var zs_qtsr = 0;
+
+    var cy_yysy = 0;
+
+    if (pf[0].num != 0) {
+        pf_xse = pf[0].xse;
+        pf_lse = pf[0].lse;
+    }
+
+    if (ls[0].num != 0) {
+        ls_xse = ls[0].xse;
+        ls_xse = ls[0].lse;
+    }
+
+    if (zs[0].num != 0) {
+        zs_kfsr = zs[0].kfsr;
+        zs_cfsr = zs[0].cfsr;
+        zs_spxse = zs[0].spxse;
+        zs_qtsr = zs[0].qtsr;
+    }
+    if (cy[0].num != 0) {
+        cy_yysr = cy[0].yysr;
+    }
+ 
     var option = {
         
         color: ['#ffd285', '#ff733f', '#ec4863'],
@@ -313,7 +351,7 @@
                 }
             },
             data: [{
-                value: cyy,
+                value: cy_yysr,
                 //name: '用户来源分析',
                 itemStyle: {
                     normal: {
@@ -361,7 +399,7 @@
                 }
             },
             data: [{
-                value: zsy,
+                value: zs_kfsr,
                 name: '用户来源分析',
                 itemStyle: {
                     normal: {
@@ -411,7 +449,7 @@
                 }
             },
             data: [{
-                value: pfy,
+                value: pf_xse,
                 name: '用户来源分析',
                 itemStyle: {
                     normal: {
@@ -462,7 +500,7 @@
                 }
             },
             data: [{
-                value: lsy,
+                value: ls_lse,
                 name: '用户来源分析',
                 itemStyle: {
                     normal: {

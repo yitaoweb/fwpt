@@ -15,7 +15,7 @@
 </head>
 <body onLoad="startTime()">  
 <div class="datavLayout">
-    <div class="header">
+    <div class="head">
         <div class="head_left">
             <div class="info">
                 <div class="icon"></div>
@@ -880,7 +880,7 @@ $.ajax({
     url: "{:url('datav/api/xsqy')}",
     dataType:"json",
     success: function(result){
-        var xsqy = result[0];
+        
         var myChart8 = echarts.init(document.getElementById('main8'));
         var option8 = {
                       
@@ -923,10 +923,10 @@ $.ajax({
                     funnelAlign: 'left',
 
                     data:[
-                        {value:xsqy.ls, name:'零售企业'},
-                        {value:xsqy.pf, name:'批发企业'},
-                        {value:xsqy.zs, name:'住宿企业'},
-                        {value:xsqy.cy, name:'餐饮企业'}
+                        {value:result['ls'][0].lse, name:'零售企业'},
+                        {value:result['pf'][0].xse, name:'批发企业'},
+                        {value:result['zs'][0].kfsr, name:'住宿企业'},
+                        {value:result['cy'][0].yysr, name:'餐饮企业'}
                     ]
                 }
             ]

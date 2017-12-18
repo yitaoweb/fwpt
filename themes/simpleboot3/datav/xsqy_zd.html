@@ -11,15 +11,20 @@
   <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/show.css" />
   <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/rfm.css" />
   <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/common.css" />
+  <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/xsfx.css" />
 
   <script src="__TMPL__/datav/js/jquery.js"></script>
   <script src="__TMPL__/datav/js/echarts.js"></script>
   <script src="__TMPL__/datav/js/theme/chalk.js"></script>
- 
+
+  <script src="__TMPL__/datav/js/jquery-latest.js"></script>
+  <script src="__TMPL__/datav/js/jquery.tablesorter.min.js"></script>
+  <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+        <script src="http://www.jq22.com/jquery/jquery-ui-1.11.0.js"></script>
 </head>
 <body onLoad="startTime()">  
 <div class="datavLayout">
-    <div class="header">
+    <div class="head">
         <div class="head_left">
             <div class="info">
                 <div class="icon"></div>
@@ -41,16 +46,53 @@
 
     <header class="rfm_header">
         <ul>
+        <li><a class="animsition-link" href="{:url('datav/show/xsqy')}" data-animsition-out="fade-out-left-sm">数据概况</a></li>
         <li><a class="animsition-link" href="{:url('datav/show/xsqy_sj')}" data-animsition-out="fade-out-left-sm">数据汇总</a></li>
         <li><a class="animsition-link" href="{:url('datav/show/xsqy_xf')}" data-animsition-out="fade-out-left-sm">消费结构</a></li>
         <li><a class="animsition-link" href="{:url('datav/show/xsqy_fb')}" data-animsition-out="fade-out-left-sm">网点分布</a></li>
         <li class="active"><a class="animsition-link" href="#" data-animsition-out="fade-out-left-sm">重点企业</a></li>
-        <li><a class="animsition-link" href="{:url('datav/show/xsqy_zs')}" data-animsition-out="fade-out-left-sm">增速排序</a></li>
+        <!-- <li><a class="animsition-link" href="{:url('datav/show/xsqy_zs')}" data-animsition-out="fade-out-left-sm">增速排序</a></li> -->
         </ul>
     </header>
     <div class="content">
         <div class="box site">
-            <div class="sub_main" id="main1"></div>
+            <table class="fwtable tablesorter" style="float:none; width:95%;margin: 10px auto;">
+                    <thead>
+                        <tr>
+                          <th>序号</th>
+                          <th>地区</th>
+                          <th>业态</th>
+                          <th>重点企业</th>
+                          <th>销售额</th>
+                          <th>零售额</th>
+        
+                          <th>同期</th>
+                          <th>同比</th>
+                          <th>环比</th>
+
+                        </tr>
+                    </thead>
+                    
+                 
+                    <tbody>
+                        <foreach name="zdqy" item="vo">
+                        <tr>
+                          <th>{$key+1}</th>
+                          <th>{$vo.name}</th>
+                          <th>{:getfield('portal_qyjs',$vo.qy_js,'name')}</th>
+                          <th>{$vo.user_nickname}</th>
+                          <th>{$vo.xse}</th>
+                          <th>{$vo.lse}</th>
+                          <th>{$vo.tq}</th>
+                          <th>{$vo.tb}</th>
+                          <th>{$vo.hb}</th>
+             
+                        </tr>
+                        </foreach>
+                    </tbody>
+                    
+
+                </table>
         </div>
     </div>
 
@@ -107,5 +149,17 @@
      } 
      alert(description); 
     } 
+    var $j=jQuery.noConflict();
+    $j(document).ready(function() {
+        //表格排序
+        $("table").tablesorter();
 
+        $j('.tablesorter tbody tr').hover(function () {
+                    $(this).css('background','#5c7784');
+                },function () {
+                    $(this).css('background','none');
+                })
+    });
+
+    
 </script>

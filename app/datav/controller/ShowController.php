@@ -87,6 +87,25 @@ class ShowController extends HomeBaseController
         $qysjfx = Db::query('select sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse from pt_qysjfx');
         $qysjfxs = Db::query('select fl,sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse from pt_qysjfx group by fl');
         $qysjfxss = Db::query('select DATE_FORMAT(date,"%m") as time,sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse,sum(lse) as lse from pt_qysjfx group by DATE_FORMAT(date,"%m")');
+
+
+        $pfids = '0'.getChildrenids(1);
+        $lsids = '0'.getChildrenids(2);
+
+
+
+        $pf = Db::query('select count(id) as num, sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse,sum(kfsr) as kfsr,sum(cfsr) as cfsr,sum(spxse) as spxse,sum(qtsr) as qtsr,sum(yysr) as yysr from pt_qysjfx where fl in ('.$pfids.')');
+        $ls = Db::query('select count(id) as num, sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse,sum(kfsr) as kfsr,sum(cfsr) as cfsr,sum(spxse) as spxse,sum(qtsr) as qtsr,sum(yysr) as yysr from pt_qysjfx where fl in ('.$lsids.')');
+
+        $zs = Db::query('select count(id) as num, sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse,sum(kfsr) as kfsr,sum(cfsr) as cfsr,sum(spxse) as spxse,sum(qtsr) as qtsr,sum(yysr) as yysr from pt_qysjfx where fl = 5');
+
+        $cy = Db::query('select count(id) as num, sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse,sum(kfsr) as kfsr,sum(cfsr) as cfsr,sum(spxse) as spxse,sum(qtsr) as qtsr,sum(yysr) as yysr from pt_qysjfx where fl = 6');
+
+        $this->assign('pf',$pf);
+        $this->assign('ls',$ls);
+        $this->assign('zs',$zs);
+        $this->assign('cy',$cy);
+        
         $this->assign('qysjfx',$qysjfx);
         $this->assign('qysjfxs',$qysjfxs);
         $this->assign('qysjfxss',$qysjfxss);
@@ -97,10 +116,12 @@ class ShowController extends HomeBaseController
     {
         $sub_title='限额以上企业-数据汇总分析';
         $this->assign('sub_title',$sub_title);
-        $mres = Db::query('select DATE_FORMAT(date,"%m") as time,sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse from pt_qysjfx group by DATE_FORMAT(date,"%m")');
-        $yres = Db::query('select DATE_FORMAT(date,"%Y") as time,sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse from pt_qysjfx group by DATE_FORMAT(date,"%Y")');
+        $mres = Db::query('select DATE_FORMAT(date,"%m") as time,sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse,sum(kfsr) as kfsr,sum(cfsr) as cfsr,sum(spxse) as spxse,sum(qtsr) as qtsr,sum(yysr) as yysr from pt_qysjfx group by DATE_FORMAT(date,"%m")');
+        $yres = Db::query('select DATE_FORMAT(date,"%Y") as time,sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse,sum(kfsr) as kfsr,sum(cfsr) as cfsr,sum(spxse) as spxse,sum(qtsr) as qtsr,sum(yysr) as yysr from pt_qysjfx group by DATE_FORMAT(date,"%Y")');
+        $heji = Db::query('select count(id) as num, sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse,sum(kfsr) as kfsr,sum(cfsr) as cfsr,sum(spxse) as spxse,sum(qtsr) as qtsr,sum(yysr) as yysr from pt_qysjfx');
         $this->assign('mres',$mres);
         $this->assign('yres',$yres);
+        $this->assign('heji',$heji);
         return $this->fetch(':xsqy_sj');
     }
 
@@ -108,6 +129,29 @@ class ShowController extends HomeBaseController
     {
         $sub_title='限额以上企业-消费结构分析';
         $this->assign('sub_title',$sub_title);
+
+ 
+
+        $pfids = '0'.getChildrenids(1);
+        $lsids = '0'.getChildrenids(2);
+
+
+
+        $pf = Db::query('select count(id) as num, sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse,sum(kfsr) as kfsr,sum(cfsr) as cfsr,sum(spxse) as spxse,sum(qtsr) as qtsr,sum(yysr) as yysr from pt_qysjfx where fl in ('.$pfids.')');
+        $ls = Db::query('select count(id) as num, sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse,sum(kfsr) as kfsr,sum(cfsr) as cfsr,sum(spxse) as spxse,sum(qtsr) as qtsr,sum(yysr) as yysr from pt_qysjfx where fl in ('.$lsids.')');
+
+        $zs = Db::query('select count(id) as num, sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse,sum(kfsr) as kfsr,sum(cfsr) as cfsr,sum(spxse) as spxse,sum(qtsr) as qtsr,sum(yysr) as yysr from pt_qysjfx where fl = 5');
+
+        $cy = Db::query('select count(id) as num, sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse,sum(kfsr) as kfsr,sum(cfsr) as cfsr,sum(spxse) as spxse,sum(qtsr) as qtsr,sum(yysr) as yysr from pt_qysjfx where fl = 6');
+
+        $yt = Db::query('select j.name , sum(q.tq)as tq,sum(q.tb)as tb,sum(q.hb)as hb,sum(q.xse)as xse ,sum(q.lse) as value,sum(q.kfsr) as kfsr,sum(q.cfsr) as cfsr,sum(q.spxse) as spxse,sum(q.qtsr) as qtsr,sum(q.yysr) as yysr  from pt_qysjfx as q left join pt_user as u  on q.user_id = u.id left join pt_portal_qyjs as j on u.qy_js = j.id where j.parent_id = 24 group by j.name');
+        $this->assign('pf',$pf);
+        $this->assign('ls',$ls);
+        $this->assign('zs',$zs);
+        $this->assign('cy',$cy);
+
+        $this->assign('yt',$yt);
+
 
         return $this->fetch(':xsqy_xf');
     }
@@ -117,6 +161,10 @@ class ShowController extends HomeBaseController
         $sub_title='限额以上企业-网点分布分析';
         $this->assign('sub_title',$sub_title);
 
+        $map = Db::query("select * from pt_user where user_type = 4  and lat <> '' order by create_time");
+
+        $this->assign('map',$map);
+
         return $this->fetch(':xsqy_fb');
     }
 
@@ -124,7 +172,8 @@ class ShowController extends HomeBaseController
     {
         $sub_title='限额以上企业-重点企业分析';
         $this->assign('sub_title',$sub_title);
-
+        $zdqy = Db::query('select u.user_nickname, a.name, u.qy_js, count(q.id) as num, sum(q.tq)as tq,sum(q.tb)as tb,sum(q.hb)as hb,sum(q.xse)as xse ,sum(q.lse) as lse,sum(q.kfsr) as kfsr,sum(q.cfsr) as cfsr,sum(q.spxse) as spxse,sum(q.qtsr) as qtsr,sum(q.yysr) as yysr from pt_qysjfx as q left join pt_user as u on u.id = q.user_id left join pt_portal_xzqy as a on u.qy_area = a.id  group by u.user_nickname ');
+        $this->assign('zdqy',$zdqy);
         return $this->fetch(':xsqy_zd');
     }
 

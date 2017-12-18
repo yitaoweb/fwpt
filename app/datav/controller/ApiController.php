@@ -73,8 +73,30 @@ class ApiController extends HomeBaseController
     }
 
     public function xsqy(){
+        $pfids = '0'.getChildrenids(1);
+        $lsids = '0'.getChildrenids(2);
+
+
+
+        $pf = Db::query('select count(id) as num, sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse,sum(kfsr) as kfsr,sum(cfsr) as cfsr,sum(spxse) as spxse,sum(qtsr) as qtsr,sum(yysr) as yysr from pt_qysjfx where fl in ('.$pfids.')');
+        $ls = Db::query('select count(id) as num, sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse,sum(kfsr) as kfsr,sum(cfsr) as cfsr,sum(spxse) as spxse,sum(qtsr) as qtsr,sum(yysr) as yysr from pt_qysjfx where fl in ('.$lsids.')');
+
+        $zs = Db::query('select count(id) as num, sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse,sum(kfsr) as kfsr,sum(cfsr) as cfsr,sum(spxse) as spxse,sum(qtsr) as qtsr,sum(yysr) as yysr from pt_qysjfx where fl = 5');
+
+        $cy = Db::query('select count(id) as num, sum(tq)as tq,sum(tb)as tb,sum(hb)as hb,sum(xse)as xse ,sum(lse) as lse,sum(kfsr) as kfsr,sum(cfsr) as cfsr,sum(spxse) as spxse,sum(qtsr) as qtsr,sum(yysr) as yysr from pt_qysjfx where fl = 6');
+
+        $xsqy = array();
+
+        $xsqy['pf'] = $pf;
+        $xsqy['ls'] = $ls;
+        $xsqy['zs'] = $zs;
+        $xsqy['cy'] = $cy;
+
+
+
         $get_xsqy = Db::query('select cast(sum(case when fl = 1 then xse end) as signed )as ls ,cast(sum(case when fl = 2 then xse end) as signed ) as pf, cast(sum(case when fl = 3 then xse end ) as signed ) as zs, cast(sum(case when fl = 4 then xse end ) as signed ) as cy from pt_qysjfx');
-        return $get_xsqy;
+
+        return $xsqy;
     }
 
     public function jjyxqk(){
@@ -205,9 +227,15 @@ date_format(date, '%m')");
 
 
     public function site_map(){
-        $type = $this->request->param('type', 2, 'intval');
         
         $map = Db::query("select * from pt_user where (user_type = 2 or user_type = 3 ) and lat <> '' order by create_time");
+
+        return $map;
+    }
+
+    public function site_xsmap(){
+        
+        $map = Db::query("select * from pt_user where  user_type = 4 and lat <> '' order by create_time");
 
         return $map;
     }
