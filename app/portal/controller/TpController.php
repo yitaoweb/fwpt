@@ -36,7 +36,6 @@ class TpController extends HomeBaseController
      */
     public function index()
     {
-
         $i=0;
         $tptj = Db::name('portal_tptj')->where('parent_id',0)->where('tptj',1)->find();
         $tptjs = Db::name('portal_tptj')->where('parent_id',$tptj['id'])->select();

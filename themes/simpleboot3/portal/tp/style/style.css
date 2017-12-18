@@ -13,7 +13,7 @@ body{  font-size:12px; color:#1d70eb;}
 /*.issue ul{ padding:4px 10px;}*/
 .issue li{ margin-bottom:3px; line-height:24px; min-height:24px; padding:1px 10px 4px; border:1px solid #fff;}
 .issue li:hover,
-.issue li.hover{ border-radius:5px;border:1px solid #2271e7; background:#66ffff;}
+.issue li.hover{ border-radius:5px;border:0px solid #2271e7; background:#66ffff;}
 .issue li input{ display:none;}
 .issue li span{ float:left; clear:left; width:22px; height:22px; overflow:hidden; margin:3px 3px 0 0; background:url(img/bg.png) 0 0 no-repeat;}
 .issue li:hover span,
