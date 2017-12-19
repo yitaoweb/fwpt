@@ -32,7 +32,7 @@ class XmController extends UserBaseController
           $gongqiuQuery->where('xm_qf',$id);
         }
 
-          $gongqiuQuery->where('stat',$stat);
+          $gongqiuQuery->where('user_id',$userId);
 
         $all           = $gongqiuQuery->order('id desc')->paginate(10);
         $sshy=Db::name('portal_xzqy')->where('1=1')->order('id')->select();

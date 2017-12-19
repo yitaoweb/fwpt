@@ -18,7 +18,7 @@
     
     <div class="main_r right" style="min-height: 600px;">
         <include file="public@qiyetop" />
-        <div class="right_title"><span>限上企业数据上报</span></div>
+        <div class="right_title"><span>限上企业数据上报</span> &nbsp;&nbsp;单位（亿元）</div>
           <form class="js-ajax-form" action="{:url('user/Xm/editpost')}" method="post" id="register"> 
             <div class="center_form">
               <dl>
@@ -26,7 +26,7 @@
                 <dd><input type="text" name="xmname" value="{$xm.xmname}"  class="input large"/></dd>
               </dl>
               <dl>
-                <dt>投资总额（亿元）</dt>
+                <dt>投资总额</dt>
                 <dd><input type="text" name="tzze" value="{$xm.tzze}" class="input large"/></dd>
               </dl>
              
@@ -44,7 +44,7 @@
               </dl>
               <if condition="$xm.xm_qf neq 6">
                 <dl>
-                  <dt>引资总额（亿元）</dt>
+                  <dt>引资总额</dt>
                   <dd><input type="text" name="yzze" value="{$xm.yzze}" class="input large"/></dd>
                 </dl>
 
@@ -80,7 +80,7 @@
                 </dl>
 
                 <dl>
-                <dt>到位资金（亿元）</dt>
+                <dt>到位资金</dt>
                 <dd><input type="text" value="{$xm.dwzj}" name="dwzj" class="input large"/></dd>
                 </dl>
               </if>
@@ -107,7 +107,7 @@
                 </dl>
 
                 <dl>
-                <dt>到位资金（亿元）</dt>
+                <dt>到位资金</dt>
                 <dd><input type="text" value="{$xm.dwzj}" name="dwzj" class="input large"/></dd>
                 </dl>
               </if>
@@ -123,12 +123,12 @@
                 </dl>
 
                 <dl>
-                <dt>2016年产值（亿元）</dt>
+                <dt>2016年产值</dt>
                 <dd><input type="text" value="{$xm.ncz}" name="ncz" class="input large"/></dd>
                 </dl>
 
                 <dl>
-                <dt>2016年税收（亿元）</dt>
+                <dt>2016年税收</dt>
                 <dd><input type="text" value="{$xm.nss}" name="nss" class="input large"/></dd>
                 </dl>
               </if>
