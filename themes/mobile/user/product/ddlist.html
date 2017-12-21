@@ -100,7 +100,7 @@
 
 </div>
 <div class="order-link">
-		<if condition='($vo.stat == 0 && $vo.shenQing_qf == 2)'>
+		<if condition='($vo.stat == 0 && $vo.shenQing_qf != 3)'>
 	      <a href="{:url('user/product/statup',array('id'=>$vo.id,'stat'=>1))}">确认受理</a>
 	      <a href="{:url('user/product/statup',array('id'=>$vo.id,'stat'=>2))}">拒绝受理</a>
 	   </if>
