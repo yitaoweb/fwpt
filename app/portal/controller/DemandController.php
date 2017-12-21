@@ -62,7 +62,7 @@ class DemandController extends HomeBaseController
         $xuqiu = Db::name('user');
                         $xuqiu->alias('u');
                         $xuqiu->join('__PORTAL_FWXQ__ a','a.user_id = u.id');
-                        $xuqiu->where($where);
+               
                         if(isset($_GET['name'])){
                           $title = $_GET['name'];
                         if ($_GET['name']) {

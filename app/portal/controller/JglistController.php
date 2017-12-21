@@ -53,7 +53,7 @@ class JglistController extends HomeBaseController
         }
 
         if ($fid) {
-            $where[$fid] = array('in','fwqy');
+            $where['qy_area'] = $fid;
         }
         $jigou = Db::name('user');
             if(isset($_GET['name'])){

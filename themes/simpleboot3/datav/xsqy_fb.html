@@ -9,6 +9,8 @@
  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=yarzUUkNb0F0UgHUbSGiHRwQ"></script>
 
   <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/show.css" />
+  <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/rfm.css" />
+  <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/common.css" />
 
   <script src="__TMPL__/datav/js/jquery.js"></script>
   <script src="__TMPL__/datav/js/echarts.js"></script>
@@ -16,12 +18,9 @@
 
   <script src="__TMPL__/public/assets/js/artDialog/jquery.artDialog.js?skin=default"></script>
   <script src="__TMPL__/public/assets/js/artDialog/plugins/iframeTools.js"></script>
-
  
 </head>
 <body onLoad="startTime()">  
-
-
 <div class="datavLayout">
     <div class="head">
         <div class="head_left">
@@ -42,13 +41,24 @@
         </div>
     </div>
     <div class="wraper"></div>
+
+    <header class="rfm_header">
+        <ul>
+        <li><a class="animsition-link" href="{:url('datav/show/xsqy')}" data-animsition-out="fade-out-left-sm">数据概况</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/xsqy_sj')}" data-animsition-out="fade-out-left-sm">数据汇总</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/xsqy_xf')}" data-animsition-out="fade-out-left-sm">消费结构</a></li>
+        <li class="active"><a class="animsition-link" href="#" data-animsition-out="fade-out-left-sm">网点分布</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/xsqy_zd')}" data-animsition-out="fade-out-left-sm">重点企业</a></li>
+        <!-- <li><a class="animsition-link" href="{:url('datav/show/xsqy_zs')}" data-animsition-out="fade-out-left-sm">增速排序</a></li> -->
+        </ul>
+    </header>
     <div class="content">
         <div class="box site">
             <div class="sub_main" id="allmap"></div>
             <div id="right" style="width:400px;height:375px;float:left">  
                 <ul>  
-                    <li class="lihidden" name='104.05434130.68075'>企业</li>  
-                    <li name='104.09070430.596048'>机构</li>  
+                    <li class="lihidden" name='104.05434130.68075'>行业</li>  
+                    <li name='104.09070430.596048'>业态</li>  
                 </ul>  
             </div> 
         </div>
@@ -61,9 +71,6 @@
 
 </body>
 </html>
-
-
-
 <script>
     function startTime()
     {
@@ -100,8 +107,6 @@
     }
 
 
-
-
     function writeObj(obj){ 
      var description = ""; 
      for(var i in obj){ 
@@ -115,13 +120,12 @@
 
 
 
-
 <script type="text/javascript">
 
 
 $.ajax({
     type: "POST",
-    url: "{:url('datav/api/site_map')}",
+    url: "{:url('datav/api/site_xsmap')}",
     dataType:"json",
     success: function(result){
         if (result) {    
@@ -129,7 +133,7 @@ $.ajax({
             for(var i=0;i<result.length;i++)
             {
                 var data =result[i];
-                addpoint(data.lng,data.lat,data.user_nickname,data.user_type,data.id); 
+                addpoint(data.lng,data.lat,data.user_nickname,2,data.id); 
               
             }
               
@@ -251,11 +255,6 @@ function getEnd(mainStr,searchStr){
 } 
 
 </script>
-
-
-
-
-
 
 
 

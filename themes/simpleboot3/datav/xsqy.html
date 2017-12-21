@@ -9,6 +9,8 @@
  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=yarzUUkNb0F0UgHUbSGiHRwQ"></script>
 
   <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/show.css" />
+  <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/rfm.css" />
+  <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/common.css" />
 
   <script src="__TMPL__/datav/js/jquery.js"></script>
   <script src="__TMPL__/datav/js/echarts.js"></script>
@@ -17,7 +19,7 @@
 </head>
 <body onLoad="startTime()">  
 <div class="datavLayout">
-    <div class="header">
+    <div class="head">
         <div class="head_left">
             <div class="info">
                 <div class="icon"></div>
@@ -36,6 +38,17 @@
         </div>
     </div>
     <div class="wraper"></div>
+
+    <header class="rfm_header">
+        <ul>
+        <li class="active"><a class="animsition-link" href="#" data-animsition-out="fade-out-left-sm">数据概况</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/xsqy_sj')}" data-animsition-out="fade-out-left-sm">数据汇总</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/xsqy_xf')}" data-animsition-out="fade-out-left-sm">消费结构</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/xsqy_fb')}" data-animsition-out="fade-out-left-sm">网点分布</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/zd')}" data-animsition-out="fade-out-left-sm">重点企业</a></li>
+        <!-- <li><a class="animsition-link" href="{:url('datav/show/xsqy_zs')}" data-animsition-out="fade-out-left-sm">增速排序</a></li> -->
+        </ul>
+    </header>
     <div class="content">
         <div class="box site">
             <div class="sub_main" id="main1"></div>
@@ -49,6 +62,9 @@
 
 </body>
 </html>
+
+
+
   <SCRIPT LANGUAGE="JavaScript">
     var qysjfx = <?php echo json_encode($qysjfx);?>;
     var qysjfxs = <?php echo json_encode($qysjfxs);?>;
@@ -103,15 +119,72 @@
 
 </script>
 
+        <script>
+            $(document).ready(function() {
+                
+                //配置单选
+                $(":radio").labelauty({ label: false });
+                
+              //初始化切换
+              $(".animsition").animsition({
+              
+                inClass               :   'fade-in-right',
+                outClass              :   'fade-out',
+                inDuration            :    1500,
+                outDuration           :    800,
+                linkElement           :   '.animsition-link',
+                // e.g. linkElement   :   'a:not([target="_blank"]):not([href^=#])'
+                loading               :    true,
+                loadingParentElement  :   'body', //animsition wrapper element
+                loadingClass          :   'animsition-loading',
+                unSupportCss          : [ 'animation-duration',
+                                          '-webkit-animation-duration',
+                                          '-o-animation-duration'
+                                        ],
+                //"unSupportCss" option allows you to disable the "animsition" in case the css property in the array is not supported by your browser.
+                //The default setting is to disable the "animsition" in a browser that does not support "animation-duration".
+                
+                overlay               :   false,
+                
+                overlayClass          :   'animsition-overlay-slide',
+                overlayParentElement  :   'body'
+              });
+              
+               //初始化累计占比
+              $('.bar').jqbar({ label: '', value: 55.55, barColor: '#d9edf7' });
+              
+              //时隔选择
+              $('input[name=date_radio]').click(function(e){
+                if(e.target.id == 'customize'){
+                    $('.date_set').attr('disabled',false);
+                }
+                else{
+                    $('.date_set').attr('disabled','disabled');
+                }
+              })
+              
+              
+              /*$('.ui-select').next().find('.select-list li').on('click',function(){
+                 $('.ui-select').next().find('.select-set').html('123')
+              })*/
+              
+            });
+        </script>
 
 
 <script type="text/javascript">
+    var pf = <?php echo json_encode($pf);?>;
+    var ls = <?php echo json_encode($ls);?>;
+    var zs = <?php echo json_encode($zs);?>;
+    var cy = <?php echo json_encode($cy);?>;
+
     var lsy;
     var pfy;
     var zsy;
     var cyy;
     var time = new Array();
     var xsearr = new Array();
+    var lsearr = new Array();
     var myChart1 = echarts.init(document.getElementById('main1'),'chalk');
     for(var i=0;i<qysjfxs.length;i++){
        if(qysjfxs[i].fl == 1){
@@ -131,14 +204,48 @@
 
          time[i]=qysjfxss[i].time;
          xsearr[i]=qysjfxss[i].xse;
+         lsearr[i]=qysjfxss[i].lse;
     }
+
+    var pf_xse = 0;
+    var pf_lse = 0;
+
+    var ls_xse = 0;
+    var ls_lse = 0;
+
+    var zs_cfsr = 0;
+    var zs_spxse = 0;
+    var zs_qtsr = 0;
+
+    var cy_yysy = 0;
+
+    if (pf[0].num != 0) {
+        pf_xse = pf[0].xse;
+        pf_lse = pf[0].lse;
+    }
+
+    if (ls[0].num != 0) {
+        ls_xse = ls[0].xse;
+        ls_xse = ls[0].lse;
+    }
+
+    if (zs[0].num != 0) {
+        zs_kfsr = zs[0].kfsr;
+        zs_cfsr = zs[0].cfsr;
+        zs_spxse = zs[0].spxse;
+        zs_qtsr = zs[0].qtsr;
+    }
+    if (cy[0].num != 0) {
+        cy_yysr = cy[0].yysr;
+    }
+ 
     var option = {
         
         color: ['#ffd285', '#ff733f', '#ec4863'],
 
         title: [{
-            text: '限上企业销售额分析',
-            left: '45%',
+            text: '限额以上企业数据分析',
+            left: '43%',
             top: '6%',
             textStyle: {
                 color: '#fff'
@@ -155,7 +262,14 @@
         tooltip: {
             trigger: 'axis'
         },
-        
+        legend: {
+            left: '44%',
+            top: '12%',
+            textStyle: {
+                color: '#fff'
+            },
+            data: ['销售额','零售额']
+        },
         grid: {
             left: '30%',
             right: '35%',
@@ -213,27 +327,20 @@
             type: 'value'
         },
         series: [{
-            //name: '在大理',
+            name: '销售额',
             smooth: true,
             type: 'line',
             symbolSize: 8,
             symbol: 'circle',
             data: xsearr
-        },/* {
-            name: '标准版',
+        },{
+            name: '零售额',
             smooth: true,
             type: 'line',
             symbolSize: 8,
             symbol: 'circle',
-            data: [70, 50, 50, 87, 90, 80, 70]
-        }, {
-            name: '潍V',
-            smooth: true,
-            type: 'line',
-            symbolSize: 8,
-            symbol: 'circle',
-            data: [290, 200,20, 132, 15, 200, 90]
-        }, */
+            data: lsearr
+        },
         {
             type: 'pie',
             center: ['83%', '33%'],
@@ -244,7 +351,7 @@
                 }
             },
             data: [{
-                value: cyy,
+                value: cy_yysr,
                 //name: '用户来源分析',
                 itemStyle: {
                     normal: {
@@ -292,7 +399,7 @@
                 }
             },
             data: [{
-                value: zsy,
+                value: zs_kfsr,
                 name: '用户来源分析',
                 itemStyle: {
                     normal: {
@@ -342,7 +449,7 @@
                 }
             },
             data: [{
-                value: pfy,
+                value: pf_xse,
                 name: '用户来源分析',
                 itemStyle: {
                     normal: {
@@ -393,7 +500,7 @@
                 }
             },
             data: [{
-                value: lsy,
+                value: ls_lse,
                 name: '用户来源分析',
                 itemStyle: {
                     normal: {

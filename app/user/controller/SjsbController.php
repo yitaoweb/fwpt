@@ -11,6 +11,7 @@
 namespace app\user\controller;
 
 use cmf\controller\UserBaseController;
+use app\portal\model\PortalSshyModel;
 use app\user\model\UserModel;
 use think\Validate;
 use think\Db;
@@ -66,8 +67,10 @@ class SjsbController extends UserBaseController
     {
         $user = cmf_get_current_user();
         $this->assign($user);
-        $sshy=Db::name('portal_sshy')->where('1=1')->order('id')->select();
-        $this->assign('fuwu',$sshy);
+        $portalCategoryModel = new PortalSshyModel();
+        $parentId            = $this->request->param('parent', 0, 'intval');
+        $categoriesTree      = $portalCategoryModel->adminCategoryTree($parentId);
+        $this->assign('categories_tree',$categoriesTree);
         $this->assign("um",4);
         return $this->fetch();
     }

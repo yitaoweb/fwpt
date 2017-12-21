@@ -36,9 +36,7 @@
                 <dd>
                 <select name="fl" id="fl" style="width:326px;"  datatype="*" sucmsg=" ">
                     <option value="0" selected="selected">请选服务类型</option>
-                    <volist name="fuwu" id="vo">
-                        <option value="{$vo.id}" name="{$vo.name}">{$vo.name}</option>
-                    </volist>
+                    {$categories_tree}
                 </select>
                 </dd>
               </dl>
@@ -48,11 +46,11 @@
               </dl>
               <script type="text/javascript">
                    $("#fl").change(function(){
-                        if($(this).find("option:selected").attr("name") == "住宿业"){
+                        if($(this).val() == "5"){
                              $("#dd").show();
                              $("#dds").hide();
                              $("#ddss").hide();
-                        }else if($(this).find("option:selected").attr("name") == "餐饮业"){
+                        }else if($(this).val() == "6"){
                           $("#dds").show();
                           $("#dd").hide();
                           $("#ddss").hide();

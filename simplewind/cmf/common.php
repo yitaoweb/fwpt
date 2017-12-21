@@ -2120,3 +2120,21 @@ function tongji2($type = '4'){
         $loginService->doLogout(USERNAME, TOKEN, $ucid, $st);
 
 }
+
+
+function getChildrenids ($sort_id)
+{
+    $ids = '';
+    $sql = "SELECT * FROM pt_portal_sshy WHERE  parent_id  = '".$sort_id."'";
+    $result = Db::query($sql);
+ 
+       if ($result)
+       {
+           foreach ($result as $key=>$val)
+           {
+               $ids .= ','.$val['id'];
+               $ids .= getChildrenIds ($val['id']);
+           }
+       }
+       return $ids;
+}
