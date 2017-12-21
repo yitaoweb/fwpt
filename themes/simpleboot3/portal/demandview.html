@@ -44,7 +44,7 @@
    <dt>需求名称：</dt>
    <dd class="bold">{$title}</dd>
    <dd style="background-color: #0099cc;margin-left: 100px;width: 150px;text-align: center;">
-   <if condition="($user_types == 3)">
+   <if condition="$user_types != 2">
    <a href="{:cmf_url('portal/Demand/sq_fu',array('id'=>$xq_id))}" style="color: #ffffff">申请服务</a>
    </if>
    </dd>
