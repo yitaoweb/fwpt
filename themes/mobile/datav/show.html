@@ -740,70 +740,70 @@
 
 
 
-            $.ajax({
-                    type: "POST",
-                    url: "{:url('datav/api/xsqy')}",
-                    dataType:"json",
-                    success: function(result){
-                        var xsqy = result[0];
-                        var myChart8 = echarts.init(document.getElementById('main8'));
-                        var option8 = {
-                                      
-                                         
-                            tooltip : {
-                                trigger: 'item',
-                                formatter: "{a} <br/>{b} : {c} ({d}%)"
-                            },
-                            legend: {
-                                show : false,
-                                orient : 'vertical',
-                                x : 'left',
-                                data:['零售企业','批发企业','住宿企业','餐饮企业']
-                            },
-                            toolbox: {
-                                show : false,
-                                feature : {
-                                    mark : {show: false},
-                                    dataView : {show: true, readOnly: false},
-
-                                    restore : {show: true},
-                                    saveAsImage : {show: true}
-                                }
-                            },
-                            calculable : false,
-                            series : [
-                                {
-                                    name:'销售额占比',
-                                    selectedMode: 'single',
-                                    type:'pie',
-                                    radius : [49, 35],
-                                    label: {
-                                        normal: {
-                                            formatter:"{b}:({d}%)",
-                                        }
-                                    },
-                                    // for funnel
-                                    x: '50%',
-                                    width: '35%',
-                                    funnelAlign: 'left',
-
-                                    data:[
-                                        {value:xsqy.ls, name:'零售企业'},
-                                        {value:xsqy.pf, name:'批发企业'},
-                                        {value:xsqy.zs, name:'住宿企业'},
-                                        {value:xsqy.cy, name:'餐饮企业'}
-                                    ]
-                                }
-                            ]
-                        };
-                        
-
-                        myChart8.setOption(option8);
-
+          $.ajax({
+            type: "POST",
+            url: "{:url('datav/api/xsqy')}",
+            dataType:"json",
+            success: function(result){
+                
+                var myChart8 = echarts.init(document.getElementById('main8'));
+                var option8 = {
+                              
+                                 
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
                     },
-                    error:function(result){
-                        alert('获取平台流量失败！请重试！')
-                    }
+                    legend: {
+                        show : false,
+                        orient : 'vertical',
+                        x : 'left',
+                        data:['零售企业','批发企业','住宿企业','餐饮企业']
+                    },
+                    toolbox: {
+                        show : false,
+                        feature : {
+                            mark : {show: false},
+                            dataView : {show: true, readOnly: false},
+
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    calculable : false,
+                    series : [
+                        {
+                            name:'销售额占比',
+                            selectedMode: 'single',
+                            type:'pie',
+                            radius : [49, 35],
+                            label: {
+                                normal: {
+                                    formatter:"{b}:({d}%)",
+                                }
+                            },
+                            // for funnel
+                            x: '50%',
+                            width: '35%',
+                            funnelAlign: 'left',
+
+                            data:[
+                                {value:result['ls'][0].lse, name:'零售企业'},
+                                {value:result['pf'][0].xse, name:'批发企业'},
+                                {value:result['zs'][0].kfsr, name:'住宿企业'},
+                                {value:result['cy'][0].yysr, name:'餐饮企业'}
+                            ]
+                        }
+                    ]
+                };
+                
+
+                myChart8.setOption(option8);
+
+            },
+            error:function(result){
+                alert('获取平台流量失败！请重试！')
+            }
                 });
     </script>
 </body>

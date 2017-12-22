@@ -21,13 +21,11 @@ class ShowController extends HomeBaseController
     {
         parent::_initialize();
         $session_admin_id = cmf_get_current_admin_id();
-        if (!empty($session_admin_id)) {
+        if ((!empty($session_admin_id)) or (!empty(cmf_get_current_user()))) {
             $user = Db::name('user')->where(['id' => $session_admin_id])->find();
             $role_user = Db::name('role_user')->where(['user_id' => $session_admin_id])->find();
             if ($role_user['id'] >= 1) {
                $role = Db::name('role')->where(['id' => $role_user['role_id']])->find();
-            }else if(cmf_get_current_user()){
-
             }
             else{
                 $role = Db::name('role')->where(['id' => 1])->find();
