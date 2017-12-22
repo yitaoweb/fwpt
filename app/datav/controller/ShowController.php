@@ -20,16 +20,19 @@ class ShowController extends HomeBaseController
     public function _initialize()
     {
         parent::_initialize();
- 
         $session_admin_id = cmf_get_current_admin_id();
         if (!empty($session_admin_id)) {
             $user = Db::name('user')->where(['id' => $session_admin_id])->find();
             $role_user = Db::name('role_user')->where(['user_id' => $session_admin_id])->find();
             if ($role_user['id'] >= 1) {
                $role = Db::name('role')->where(['id' => $role_user['role_id']])->find();
-            }else{
+            }else if(cmf_get_current_user()){
+
+            }
+            else{
                 $role = Db::name('role')->where(['id' => 1])->find();
             }
+
             $this->assign("role", $role);
             $this->assign("admin", $user);
             $title='长治市中小商贸流通企业公共服务数据分析平台';

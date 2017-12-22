@@ -34,7 +34,6 @@ class IndexController extends HomeBaseController
             $user['user_pass'] = $data['password'];
             $user['user_login'] = $data['username'];
             $log                = $userModel->doName($user);
-
             $session_login_http_referer = session('login_http_referer');
             $redirect                   = empty($session_login_http_referer) ? $this->request->root() : $session_login_http_referer;
             $ret = array();
