@@ -40,56 +40,215 @@ class AdminXmController extends AdminBaseController
         $intId = $this->request->param("name", 0, 'intval');
         $id = $this->request->param('id', 0, 'intval');
         $kfqid = $this->request->param('kfqid', 0, 'intval');
+        $timeq = $this->request->param('timeq', date('Y-m-d')); 
         $portalTagModel = new XmModel();
         $PortalSshyModel = new PortalXzqyModel();
         $fuwu = $PortalSshyModel->select();
         $user = Db::name('user')->where('user_type',5)->select();
         $xmcoun = Db::query('select count(id)as sl,sum(tzze) as tzze,sum(yzze) as yzze from pt_xm');
-        if($id != 0 && $kfqid != 0){
-          $xmcoun = Db::query('select sum(id)as sl,sum(tzze) as tzze,sum(yzze) as yzze from pt_xm where user_id='.$kfqid.' and xm_qf ='.$id);
+       if($id != 0 && $kfqid != 0){
+          $xmcoun = Db::query('select count(id)as sl,sum(tzze) as tzze,sum(yzze) as yzze from pt_xm where user_id='.$kfqid.' and xm_qf ='.$id);
           $portalTagModel->where('xm_qf',$id);
           $portalTagModel->where('user_id',$kfqid);
         }
-        if($id != 0){
+        if($id != 0 && $kfqid == 0){
           $xmcoun = Db::query('select count(id)as sl,sum(tzze) as tzze,sum(yzze) as yzze from pt_xm where xm_qf ='.$id);
           $portalTagModel->where('xm_qf',$id);
         }
-        if($kfqid != 0){
+        if($kfqid != 0 && $id == 0){
           $xmcoun = Db::query('select count(id)as sl,sum(tzze) as tzze,sum(yzze) as yzze from pt_xm where user_id='.$kfqid.'');
           $portalTagModel->where('user_id',$kfqid);
         }
         $portalTagModel->order(["id" => "ASC"]);
         $tags = $portalTagModel->paginate(10);
+        $xlsData = $portalTagModel->select();
+        $xlsName  = '';
+        $xlsCell  = array();
         if($intId == 2){
-            header("Content-type:application/vnd.ms-excel");    
-            header("Content-Disposition:filename=项目.xls");    
-            
-            $strexport="开发区\t项目名称\t投资总额（万元）\t引资总额（万元）\t投资方名称\r";    
-            foreach ($tags as $row){    
-               foreach ($user as $rows){
-                if($rows['id']==$row['user_id']){
-                    $strexport.=$rows['user_nickname']."\t"; 
-                }      
-                }   
-                $strexport.=$row['xmname']."\t";    
-                $strexport.=$row['tzze']."\t"; 
-                $strexport.=$row['yzze']."\t"; 
-                $strexport.=$row['tzfname']."\r";    
-                  
-            }    
-            $strexport.='合计'."\t";
-            $strexport.='投资总额：'.$xmcoun[0]['tzze']."\t";
-            $strexport.='引资总额：'.$xmcoun[0]['yzze']."\r";
-            $strexport=iconv('UTF-8',"GB2312//IGNORE",$strexport);    
-            exit($strexport);   
+            if ($id == 1) {
+                if ($kfqid != 0) {
+                    $xlsName  = getfield('user',$kfqid,'user_nickname')."1-".date('m', strtotime($timeq)).'月在谈项目明细表'; 
+                }
+
+                $xlsCell  = array(
+                    array('id','序号'),
+                    array('user_id','开发区'),
+                    array('xmname','项目名称'),
+                    array('tzze','投资总额（万元）'),
+                    array('yzze','引资总额（万元）'),
+                    array('yzfname','引资方名称'),
+                    array('tzfname','投资方名称'),
+                    array('yjqytime','预计签约时间'),
+                ); 
+
+                
+
+
+            }
+
+            if ($id == 2) {
+                if ($kfqid != 0) {
+                    $xlsName  = getfield('user',$kfqid,'user_nickname')."1-".date('m', strtotime($timeq)).'月新签约项目明细表'; 
+                }
+
+                $xlsCell  = array(
+                    array('id','序号'),
+                    array('user_id','开发区'),
+                    array('xmname','项目名称'),
+                    array('tzze','投资总额（万元）'),
+                    array('yzze','引资总额（万元）'),
+                    array('yzfname','引资方名称'),
+                    array('tzfname','投资方名称'),
+                    array('qytime','签约时间'),
+                    array('kgtime','开工时间'),
+                    array('tctime','投产时间'),
+                    array('dwzj','到位资金(万元)'),
+                ); 
+
+                
+            }
+
+            if ($id == 3) {
+                if ($kfqid != 0) {
+                    $xlsName  = getfield('user',$kfqid,'user_nickname')."1-".date('m', strtotime($timeq)).'月拟开工项目明细表'; 
+                }
+
+                $xlsCell  = array(
+                    array('id','序号'),
+                    array('user_id','开发区'),
+                    array('xmname','项目名称'),
+                    array('tzze','投资总额（万元）'),
+                    array('yzze','引资总额（万元）'),
+                    array('yzfname','引资方名称'),
+                    array('tzfname','投资方名称'),
+                    array('qytime','签约时间'),
+                    array('nkgtime','拟开工时间'),
+                ); 
+
+                
+            }
+
+            if ($id == 4) {
+                if ($kfqid != 0) {
+                    $xlsName  = getfield('user',$kfqid,'user_nickname')."1-".date('m', strtotime($timeq)).'月新开工项目明细表'; 
+                }
+
+                $xlsCell  = array(
+                    array('id','序号'),
+                    array('user_id','开发区'),
+                    array('xmname','项目名称'),
+                    array('tzze','投资总额（万元）'),
+                    array('yzze','引资总额（万元）'),
+                    array('yzfname','引资方名称'),
+                    array('tzfname','投资方名称'),
+                    array('qytime','签约时间'),
+                    array('kgtime','开工时间'),
+                    array('tctime','投产时间'),
+                    array('dwzj','到位资金(万元)'),
+                ); 
+
+                
+            }
+
+            if ($id == 5) {
+                if ($kfqid != 0) {
+                    $xlsName  = getfield('user',$kfqid,'user_nickname')."1-".date('m', strtotime($timeq)).'月在建项目明细表'; 
+                }
+
+                $xlsCell  = array(
+                    array('id','序号'),
+                    array('user_id','开发区'),
+                    array('xmname','项目名称'),
+                    array('tzze','投资总额（万元）'),
+                    array('yzze','引资总额（万元）'),
+                    array('yzfname','引资方名称'),
+                    array('tzfname','投资方名称'),
+                    array('qytime','签约时间'),
+                    array('kgtime','开工时间'),
+                    array('dwzj','到位资金(万元)'),
+                ); 
+
+                
+            }
+
+            if ($id == 6) {
+                if ($kfqid != 0) {
+                    $xlsName  = getfield('user',$kfqid,'user_nickname').date('Y', strtotime($timeq)).'年前重点投产项目明细表'; 
+                }
+
+                $xlsCell  = array(
+                    array('id','序号'),
+                    array('user_id','开发区'),
+                    array('xmname','项目名称'),
+                    array('tzze','投资总额（万元）'),
+                
+                    array('tzfname','投资方名称'),
+                    array('zycp','主要产品'),
+                    array('tctime','投产时间'),
+
+                    array('ncz',date('Y', strtotime('2017-08-25')).'年产值(万元)'),
+                    array('ncz',date('Y', strtotime('2017-08-25')).'年税收(万元)'),
+                ); 
+
+                
+            }
+
+            if ($id == 7) {
+                if ($kfqid != 0) {
+                    $xlsName  = getfield('user',$kfqid,'user_nickname')."1-".date('m', strtotime($timeq)).'月新投产项目明细表'; 
+                }
+
+                $xlsCell  = array(
+                    array('id','序号'),
+                    array('user_id','开发区'),
+                    array('xmname','项目名称'),
+                    array('tzze','投资总额（万元）'),
+                    array('yzze','引资总额（万元）'),
+                    array('yzfname','引资方名称'),
+                    array('tzfname','投资方名称'),
+                    array('qytime','签约时间'),
+                    array('kgtime','开工时间'),
+                    array('tctime','投产时间'),
+                    array('dwzj','到位资金(万元)'),
+                ); 
+
+                
+            }
+
+       
+             
+            $this->exportExcel($xlsName,$xlsCell,$xlsData);
         }
+        // if($intId == 2){
+        //     header("Content-type:application/vnd.ms-excel");    
+        //     header("Content-Disposition:filename=项目.xls");    
+            
+        //     $strexport="开发区\t项目名称\t投资总额（万元）\t引资总额（万元）\t投资方名称\r";    
+        //     foreach ($tags as $row){    
+        //        foreach ($user as $rows){
+        //         if($rows['id']==$row['user_id']){
+        //             $strexport.=$rows['user_nickname']."\t"; 
+        //         }      
+        //         }   
+        //         $strexport.=$row['xmname']."\t";    
+        //         $strexport.=$row['tzze']."\t"; 
+        //         $strexport.=$row['yzze']."\t"; 
+        //         $strexport.=$row['tzfname']."\r";    
+                  
+        //     }    
+        //     $strexport.='合计'."\t";
+        //     $strexport.='投资总额：'.$xmcoun[0]['tzze']."\t";
+        //     $strexport.='引资总额：'.$xmcoun[0]['yzze']."\r";
+        //     $strexport=iconv('UTF-8',"GB2312//IGNORE",$strexport);    
+        //     exit($strexport);   
+        // }
         $this->assign("arrStatus", $portalTagModel::$STATUS);
         $this->assign("tags", $tags);
         $this->assign("user", $user);
         $this->assign("xmcoun", $xmcoun);
-           $this->assign("id", $id);
-           $this->assign("kfqid", $kfqid);
-   
+        $this->assign("id", $id);
+        $this->assign("kfqid", $kfqid);
+        $this->assign("timeq", $timeq);
         $this->assign('page', $tags->render());
 
         return $this->fetch();
