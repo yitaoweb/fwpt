@@ -53,7 +53,7 @@ class QylistController extends HomeBaseController
         }
 
         if ($fid) {
-            $where[$fid] = array('in','fwqy');
+           $where['qy_area'] = $fid;
         }
         $jigou = Db::name('user')->where($where)->order('id')->paginate(10);
 

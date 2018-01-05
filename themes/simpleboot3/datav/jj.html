@@ -9,11 +9,13 @@
  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=yarzUUkNb0F0UgHUbSGiHRwQ"></script>
 
   <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/show.css" />
+    <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/rfm.css" />
+  <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/common.css" />
 
   <script src="__TMPL__/datav/js/jquery.js"></script>
   <script src="__TMPL__/datav/js/echarts.js"></script>
   <script src="__TMPL__/datav/js/theme/chalk.js"></script>
- 
+<script type="text/javascript" src="__TMPL__/public/assets/js/date.js"></script>
 </head>
 <body onLoad="startTime()">  
 <div class="datavLayout">
@@ -36,9 +38,33 @@
         </div>
     </div>
     <div class="wraper"></div>
+    <header class="rfm_header">
+        <ul>
+        <li class="active"><a class="animsition-link" href="#" data-animsition-out="fade-out-left-sm">目标值对比</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/qst')}" data-animsition-out="fade-out-left-sm">趋势图</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/jjyxqksy')}" data-animsition-out="fade-out-left-sm">长治市市域考核</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/jjyxqkxq')}" data-animsition-out="fade-out-left-sm">各县区考核</a></li>
+        <li><input type="text" id="qytime" onclick="SetDate(this,'yyyy-MM-dd')" name="qytime" class="input large"/></li>
+        <li><a onclick="cx()">[年度查询]</a></li>
+        </ul>
+        <script type="text/javascript">
+             function cx(){
+               var qytime = $("#qytime").val();
+                window.open('/datav/show/jj?qytime='+qytime, "_self");
+             }
+        </script>
+    </header>
     <div class="content">
         <div class="box site">
-            <div class="sub_main" id="main1"></div>
+
+            <div class="sub_main" style="width: 30%;height: 30%;margin: 0 1.5%" id="main1"></div>
+            <div class="sub_main" style="width: 30%;height: 30%;margin: 0 1.5%" id="main2"></div>
+
+            <div class="sub_main" style="width: 30%;height: 30%;margin: 0 1.5%" id="main4"></div>
+            <div class="sub_main" style="width: 30%;height: 30%;margin: 0 1.5%" id="main5"></div>
+            <div class="sub_main" style="width: 30%;height: 30%;margin: 0 1.5%" id="main6"></div>
+            <div class="sub_main" style="width: 30%;height: 30%;margin: 0 1.5%" id="main7"></div>
+            <div class="sub_main" style="width: 30%;height: 30%;margin: 0 1.5%" id="main8"></div>
         </div>
     </div>
 
@@ -49,9 +75,9 @@
 
 </body>
 </html>
-
-
-
+  <SCRIPT LANGUAGE="JavaScript">
+    var get_mb = <?php echo json_encode($get_mb);?>;
+  </SCRIPT>
 <script>
     function startTime()
     {
@@ -99,465 +125,427 @@
 
 </script>
 
+<script>
+ var ss = new Array();
+ var scgm = new Array();
+ var scgm_mb = new Array();
+ var gmzcz = new Array();
+ var gmzcz_mb = new Array();
+ var jysr = new Array();
+ var jysr_mb = new Array();
+ var lrze = new Array();
+ var lrze_mb = new Array();
+ var shsr = new Array();
+ var shsr_mb = new Array();
+ var zsyzdwe = new Array();
+ var zsyzdwe_mb = new Array();
+ var sjlyswzjtze = new Array();
+ var sjlyswzjtze_mb = new Array();
+ var gdzctze = new Array();
+ var gdzctze_mb = new Array();
+ var jcke = new Array();
+ var jcke_mb = new Array();
+for (var i = 0; i < get_mb.length; i++) {
+      ss[i] = get_mb[i].name;
+      scgm[i] = get_mb[i].scgm;
+      scgm_mb[i] = get_mb[i].scgm_mb;
+      gmzcz[i] = get_mb[i].gmzcz;
+      gmzcz_mb[i] = get_mb[i].gmzcz_mb;
+      jysr[i] = get_mb[i].jysr;
+      jysr_mb[i] = get_mb[i].jysr_mb;
+      lrze[i] = get_mb[i].lrze;
+      lrze_mb[i] = get_mb[i].lrze_mb;
+      shsr[i] = get_mb[i].shsr;
+      shsr_mb[i] = get_mb[i].shsr_mb;
+      zsyzdwe[i] = get_mb[i].zsyzdwe;
+      zsyzdwe_mb[i] = get_mb[i].zsyzdwe_mb;
+      sjlyswzjtze[i] = get_mb[i].sjlyswzjtze;
+      sjlyswzjtze_mb[i] = get_mb[i].sjlyswzjtze_mb;
+      gdzctze[i] = get_mb[i].gdzctze;
+      gdzctze_mb[i] = get_mb[i].gdzctze_mb;
+      jcke[i] = get_mb[i].jcke;
+      jcke_mb[i] = get_mb[i].jcke_mb;
+}
 
-  <SCRIPT LANGUAGE="JavaScript">
-    var get_jj = <?php echo json_encode($get_jj);?>;
-    var get_jjs = <?php echo json_encode($get_jjs);?>;
-  </SCRIPT>
-
-<script type="text/javascript">
-    var myChart1 = echarts.init(document.getElementById('main1'),'chalk');
-    //var colors = ['orange', '#d14a61', '#1E90FF'];
-    var time = new Array();
-    var jysr = new Array();
-    var lrze = new Array();
-    var shsr = new Array();
-    var zsyzdwe = new Array();
-    var gdzctze = new Array();
-    
-    for(var i=0;i<get_jjs.length;i++){
-          time[i] = get_jjs[i].time;
-          jysr[i] = get_jjs[i].jysr;
-          lrze[i] = get_jjs[i].lrze;
-          shsr[i] = get_jjs[i].shsr;
-          zsyzdwe[i] = get_jjs[i].zsyzdwe;
-          gdzctze[i] = get_jjs[i].gdzctze;
-    }
-    var option = {
-       
-        title: [{
-            text: '收入支出汇总表',
-            left: '18%',
-            top: '1%',
-            textAlign: 'center'
-        }, {
-            text: '经营收入统计',
-            left: '50%',
-            top: '1%',
-            textAlign: 'center'
-        }, {
-            text: '利润总额统计',
-            left: '85%',
-            top: '1%',
-            textAlign: 'center'
-        }, {
-            text: '税收收入统计',
-            left: '18%',
-            top: '51%',
-            textAlign: 'center'
-        }, {
-            text: '招商引资到位额统计',
-            left: '50%',
-            top: '51%',
-            textAlign: 'center'
-        }, {
-            text: '固定资产投资额统计',
-            left: '85%',
-            top: '51%',
-            textAlign: 'center'
-        }],
-        tooltip: {
-            trigger: 'axis'
-        },
-        grid: [{
-            show: false,
-            left: '3%',
-            top: '5%',
-            containLabel: true,
-            width: '28%',
-            height: '40%'
-        }, {
-            show: false,
-            left: '33%',
-            top: '5%',
-            containLabel: true,
-            width: '28%',
-            height: '40%'
-        }, {
-            show: false,
-            left: '66%',
-            top: '5%',
-            containLabel: true,
-            width: '28%',
-            height: '40%'
-        }, {
-            show: false,
-            left: '3%',
-            top: '55%',
-            containLabel: true,
-            width: '28%',
-            height: '40%'
-        }, {
-            show: false,
-            left: '33%',
-            top: '55%',
-            containLabel: true,
-            width: '28%',
-            height: '40%'
-        }, {
-            show: false,
-            left: '66%',
-            top: '55%',
-            containLabel: true,
-            width: '28%',
-            height: '40%'
-        }],
-        // legend: [{
-        //   data:['各幅值区间暂降频次', '暂降频次2'],
-        //   x:'right',
-        // },{data:['暂降频次3', '暂降频次4'],
-        //      x:'right',
-        // }],
-        xAxis: [{
-            gridIndex: 0,
-            type: 'category',
-            name: '',
-            nameLocation: 'center',
-            nameGap: '30',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            //axisLabel:{  
-            //             interval:0,//横轴信息全部显示  
-            //            rotate:-30,//-30度角倾斜显示  
-            //       }  ,
-            axisTick: {
-                alignWithLabel: true
-            },
-            data: ['经营收入', '利润总额', '税收收入', '招商引资', '直接投资', '固定资产', '进出口额', '发展经费',]
-        }, {
-            gridIndex: 1,
-            type: 'category',
-            name: '',
-            nameLocation: 'center',
-            nameGap: '30',
-            nameTextStyle: {
-                fontSize: 14
-            },
-            boundaryGap: false,
-            //axisLabel:{  
-            //             interval:0,//横轴信息全部显示  
-            //            rotate:-30,//-30度角倾斜显示  
-            //       }  ,
-            axisTick: {
-                alignWithLabel: true
-            },
-            data: time
-        }, {
-            gridIndex: 2,
-            type: 'category',
-            //axisLabel:{  
-            //         interval:0,//横轴信息全部显示  
-            //         rotate:-30,//-30度角倾斜显示  
-            //   }  ,
-            name: '',
-            nameLocation: 'center',
-            nameGap: '30',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisTick: {
-                alignWithLabel: true
-            },
-            data: time
-
-        }, {
-            gridIndex: 3,
-            type: 'category',
-            //axisLabel:{  
-            //         interval:0,//横轴信息全部显示  
-            //         rotate:-30,//-30度角倾斜显示  
-            //   }  ,
-            name: '',
-            nameLocation: 'center',
-            nameGap: '30',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisTick: {
-                alignWithLabel: true
-            },
-            boundaryGap: false,
-            data: time
-
-        }, {
-            gridIndex: 4,
-            type: 'category',
-            //axisLabel:{  
-            //         interval:0,//横轴信息全部显示  
-            //         rotate:-30,//-30度角倾斜显示  
-            //   }  ,
-            name: '',
-            nameLocation: 'center',
-            nameGap: '30',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisTick: {
-                alignWithLabel: true
-            },
-            data: time
-
-        }, {
-            gridIndex: 5,
-            type: 'category',
-            //axisLabel:{  
-            //         interval:0,//横轴信息全部显示  
-            //         rotate:-30,//-30度角倾斜显示  
-            //   }  ,
-            name: '',
-            nameLocation: 'center',
-            nameGap: '30',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisTick: {
-                alignWithLabel: true
-            },
-            boundaryGap: false,
-            data: time
-
-        }],
-        yAxis: [{
-            gridIndex: 0,
-            type: 'value',
-            name: '',
-            nameLocation: 'center',
-            nameGap: '30',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisLine: {
-                lineStyle: {
-                    //color: colors[1]
+    var myChart8 = echarts.init(document.getElementById('main8'));
+       option8 = {
+            title: {
+                top:'15px',
+                text: '进出总额',
+                textStyle:{
+                color:'#fff'
                 }
             },
-            splitLine: {
-                show: false
-            }
-        }, {
-            gridIndex: 1,
-            type: 'value',
-            name: '',
-            nameLocation: 'center',
-            nameGap: '40',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisLabel: {
-                show: true,
-                interval: 'auto',
-                formatter: '{value}'
-            },
-            //position: 'right',
-            axisLine: {
-                lineStyle: {
-                    //color: colors[0]
-                }
-            },
-            splitLine: {
-                show: false
-            }
-        }, {
-            gridIndex: 2,
-            type: 'value',
-            name: '',
-            nameLocation: 'center',
-            nameGap: '30',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisLine: {
-                lineStyle: {
-                    //color: colors[0]
-                }
-            },
-            splitLine: {
-                show: false
-            },
-            position: 'left'
-        }, {
-            gridIndex: 3,
-            type: 'value',
-            name: '',
-            nameLocation: 'center',
-            nameGap: '40',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisLabel: {
-                show: true,
-                interval: 'auto',
-                formatter: '{value}'
-            },
-            axisLine: {
-                lineStyle: {
-                    //color: colors[1]
-                }
-            },
-            splitLine: {
-                show: false
-            },
-            position: 'left'
-        }, {
-            gridIndex: 4,
-            type: 'value',
-            name: '',
-            nameLocation: 'center',
-            nameGap: '30',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisLine: {
-                lineStyle: {
-                    //color: colors[0]
-                }
-            },
-            splitLine: {
-                show: false
-            },
-            position: 'left'
-        }, {
-            gridIndex: 5,
-            type: 'value',
-            name: '',
-            nameLocation: 'center',
-            nameGap: '40',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisLabel: {
-                show: true,
-                interval: 'auto',
-                formatter: '{value}'
-            },
-            axisLine: {
-                lineStyle: {
-                    //color: colors[1]
-                }
-            },
-            splitLine: {
-                show: false
-            },
-            position: 'left'
-        }],
-        series: [{
-                name: '亿元',
-                type: 'line',
-                xAxisIndex: 0,
-                yAxisIndex: 0,
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top',
-
-                    }
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
                 },
-                data: [get_jj[0].jysr, get_jj[0].lrze, get_jj[0].shsr, get_jj[0].zsyzdwe, get_jj[0].sjlyswzjtze, get_jj[0].gdzctze, get_jj[0].jcke, get_jj[0].yjysyfzjf]
+            },
+
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                data: ss,
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value}'
+                },
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            series: [{
+                name: '完成值',
+                type: 'bar',
+                data: jcke
             }, {
+                name: '目标值',
+                type: 'bar',
+                data: jcke_mb
+            }]
+        };
+    myChart8.setOption(option8);
 
-                name: '经营收入',
-                type: 'line',
-                smooth: true,
-                barWidth: 25,
-                xAxisIndex: 1,
-                yAxisIndex: 1,
-                symbolSize: 8, //拐点大小
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top',
-                        color: '#FAD860',
-                    }
-                },
-                lineStyle: {
-                    normal: {
-                        width: 4,
-                        color: '#FAD860'
-                    }
-                },
+    var myChart7 = echarts.init(document.getElementById('main7'));
+       option7 = {
+            title: {
+                top:'15px',
+                text: '固定资产投资额',
+                textStyle:{
+                color:'#fff'
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
 
-                data: jysr
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                data: ss,
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value}'
+                },
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            series: [{
+                name: '完成值',
+                type: 'bar',
+                data: gdzctze
             }, {
+                name: '目标值',
+                type: 'bar',
+                data: gdzctze_mb
+            }]
+        };
+    myChart7.setOption(option7);
 
-                name: '利润总额',
-                type: 'line',
-                xAxisIndex: 2,
-                yAxisIndex: 2,
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top',
-                    }
+    var myChart6 = echarts.init(document.getElementById('main6'));
+       option6 = {
+            title: {
+                top:'15px',
+                text: '实际利用省外直接投资额',
+                textStyle:{
+                color:'#fff'
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                data: ss,
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value}'
                 },
-
-                data: lrze
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            series: [{
+                name: '完成值',
+                type: 'bar',
+                data: sjlyswzjtze
             }, {
+                name: '目标值',
+                type: 'bar',
+                data: sjlyswzjtze_mb
+            }]
+        };
+    myChart6.setOption(option6);
+ 
+    var myChart5 = echarts.init(document.getElementById('main5'));
+       option5 = {
+            title: {
+                top:'15px',
+                text: '招商引资到位额',
+                textStyle:{
+                color:'#fff'
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
 
-                name: '税收收入',
-                type: 'line',
-                smooth: true,
-                barWidth: 25,
-                xAxisIndex: 3,
-                yAxisIndex: 3,
-                symbolSize: 8, //拐点大小
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top',
-                        color: '#9BCA63',
-                    }
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                data: ss,
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value}'
                 },
-                lineStyle: {
-                    normal: {
-                        width: 4,
-                        color: '#9BCA63'
-                    }
-                },
-                data: shsr
-            }, {
-
-                name: '招商引资到位额',
-                type: 'line',
-                xAxisIndex: 4,
-                yAxisIndex: 4,
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top',
-                    }
-                },
-
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            series: [{
+                name: '完成值',
+                type: 'bar',
                 data: zsyzdwe
             }, {
+                name: '目标值',
+                type: 'bar',
+                data: zsyzdwe_mb
+            }]
+        };
+    myChart5.setOption(option5);
 
-                name: '固定资产投资额',
-                type: 'line',
-                smooth: true,
-                barWidth: 25,
-                xAxisIndex: 5,
-                yAxisIndex: 5,
-                symbolSize: 8, //拐点大小
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top',
-                        color: '#9BCA63',
-                    }
+    var myChart4 = echarts.init(document.getElementById('main4'));
+       option4 = {
+            title: {
+                top:'15px',
+                text: '税收收入',
+                textStyle:{
+                color:'#fff'
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                data: ss,
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value}'
                 },
-                lineStyle: {
-                    normal: {
-                        width: 4,
-                        color: '#9BCA63'
-                    }
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            series: [{
+                name: '完成值',
+                type: 'bar',
+                data: shsr
+            }, {
+                name: '目标值',
+                type: 'bar',
+                data: shsr_mb
+            }]
+        };
+    myChart4.setOption(option4);
+
+
+    var myChart2 = echarts.init(document.getElementById('main2'));
+       option2 = {
+            title: {
+                top:'15px',
+                text: '经营收入',
+                textStyle:{
+                color:'#fff'
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                data: ss,
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value}'
                 },
-                data: gdzctze
-            }
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            series: [{
+                name: '完成值',
+                type: 'bar',
+                data: jysr
+            }, {
+                name: '目标值',
+                type: 'bar',
+                data: jysr_mb
+            }]
+        };
+    myChart2.setOption(option2);
 
-        ]
-    };
+    var myChart1 = echarts.init(document.getElementById('main1'));
+       option1 = {
+            title: {
+                top:'15px',
+                text: '规模以上工业总产值',
+                textStyle:{
+                color:'#fff'
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
 
-    myChart1.setOption(option);
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                data: ss,
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value}'
+                },
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            series: [{
+                name: '完成值',
+                type: 'bar',
+                data: gmzcz
+            }, {
+                name: '目标值',
+                type: 'bar',
+                data: gmzcz_mb
+            }]
+        };
+    myChart1.setOption(option1);
+
 
 </script>
 

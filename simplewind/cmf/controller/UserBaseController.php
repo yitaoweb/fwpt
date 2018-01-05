@@ -17,6 +17,7 @@ class UserBaseController extends HomeBaseController
     {
         parent::_initialize();
         $this->checkUserLogin();
+        $this->assign("dates", date("Y/m/d"));
     }
 
 

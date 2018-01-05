@@ -1,0 +1,101 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+	<ul class="nav nav-tabs">
+		<li><a href="{:url('AdminJjyxmbxq/index')}">目标值管理</a></li>
+		<li class="active"><a href="{:url('AdminJjyxmbxq/add')}">目标值添加</a></li>
+		<!--<li><a  href="{:url('nav/edit')}" >{:lang('ADMIN_NAV_EDIT')}</a></li>-->
+	</ul>
+	<form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('AdminJjyxmbxq/addPost')}">
+        <div class="form-group">
+			<label class="col-sm-2 control-label"><span class="form-required">*</span>开发区:</label>
+			<div class="col-md-6 col-sm-10">
+				<select class="form-control" name="xzqy_id" id="xzqy_id">
+				          <option value=''>全部</option>
+                          {$xzqyTree|default=''}
+                </select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label"><span class="form-required">*</span>日期:</label>
+			<div class="col-md-6 col-sm-10">
+				<input class="form-control js-bootstrap-datetime" id="data" type="text" name="data"
+                                   value="{:date('Y',time())}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label"><span class="form-required">*</span>入区企业数:</label>
+			<div class="col-md-6 col-sm-10">
+				<input type="text" class="form-control" name="rzqys_mb" id="rzqys_mb" value="">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label"><span class="form-required">*</span>经营收入:</label>
+			<div class="col-md-6 col-sm-10">
+				<input type="text" class="form-control" name="jysr_mb" id="jysr_mb" value="">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label"><span class="form-required">*</span>投资强度:</label>
+			<div class="col-md-6 col-sm-10">
+				<input type="text" class="form-control" name="tzqd_mb" id="tzqd_mb" value="">
+			</div>
+		</div>
+
+		<div class="col-sm-offset-2 col-sm-10">
+		<input type="hidden" name="time" value="{$time}">
+			<button type="submit" class="btn btn-primary js-ajax-submit">添加</button>
+			<a class="btn btn-default" href="__URL__">返回</a>
+		</div>
+	</form>
+
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<script type="text/javascript">
+    //编辑器路径定义
+    var editorURL = GV.WEB_ROOT;
+</script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        editorcontent = new baidu.editor.ui.Editor();
+        editorcontent.render('content');
+        try {
+            editorcontent.sync();
+        } catch (err) {
+        }
+
+        $('.btn-cancel-thumbnail').click(function () {
+            $('#thumbnail-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
+            $('#thumbnail').val('');
+        });
+
+    });
+
+    function doSelectCategory() {
+        var selectedCategoriesId = $('#js-categories-id-input').val();
+        openIframeLayer("{:url('AdminCategory/select')}?ids=" + selectedCategoriesId, '请选择分类', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedCategories = iframeWin.confirm();
+                if (selectedCategories.selectedCategoriesId.length == 0) {
+                    layer.msg('请选择分类');
+                    return;
+                }
+                $('#js-categories-id-input').val(selectedCategories.selectedCategoriesId.join(','));
+                $('#js-categories-name-input').val(selectedCategories.selectedCategoriesName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    }
+</script>
+</body>
+</html>

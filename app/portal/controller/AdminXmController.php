@@ -37,23 +37,58 @@ class AdminXmController extends AdminBaseController
      */
     public function index()
     {
+        $intId = $this->request->param("name", 0, 'intval');
         $id = $this->request->param('id', 0, 'intval');
+        $kfqid = $this->request->param('kfqid', 0, 'intval');
         $portalTagModel = new XmModel();
         $PortalSshyModel = new PortalXzqyModel();
         $fuwu = $PortalSshyModel->select();
-        $xmcoun = Db::query('select sum(tzze) as tzze,sum(yzze) as yzze from pt_xm');
-        if($id != 0){
-          $xmcoun = Db::query('select sum(tzze) as tzze,sum(yzze) as yzze from pt_xm where xm_qf ='.$id);
+        $user = Db::name('user')->where('user_type',5)->select();
+        $xmcoun = Db::query('select count(id)as sl,sum(tzze) as tzze,sum(yzze) as yzze from pt_xm');
+        if($id != 0 && $kfqid != 0){
+          $xmcoun = Db::query('select sum(id)as sl,sum(tzze) as tzze,sum(yzze) as yzze from pt_xm where user_id='.$kfqid.' and xm_qf ='.$id);
           $portalTagModel->where('xm_qf',$id);
+          $portalTagModel->where('user_id',$kfqid);
+        }
+        if($id != 0){
+          $xmcoun = Db::query('select count(id)as sl,sum(tzze) as tzze,sum(yzze) as yzze from pt_xm where xm_qf ='.$id);
+          $portalTagModel->where('xm_qf',$id);
+        }
+        if($kfqid != 0){
+          $xmcoun = Db::query('select count(id)as sl,sum(tzze) as tzze,sum(yzze) as yzze from pt_xm where user_id='.$kfqid.'');
+          $portalTagModel->where('user_id',$kfqid);
         }
         $portalTagModel->order(["id" => "ASC"]);
         $tags = $portalTagModel->paginate(10);
-
+        if($intId == 2){
+            header("Content-type:application/vnd.ms-excel");    
+            header("Content-Disposition:filename=项目.xls");    
+            
+            $strexport="开发区\t项目名称\t投资总额（万元）\t引资总额（万元）\t投资方名称\r";    
+            foreach ($tags as $row){    
+               foreach ($user as $rows){
+                if($rows['id']==$row['user_id']){
+                    $strexport.=$rows['user_nickname']."\t"; 
+                }      
+                }   
+                $strexport.=$row['xmname']."\t";    
+                $strexport.=$row['tzze']."\t"; 
+                $strexport.=$row['yzze']."\t"; 
+                $strexport.=$row['tzfname']."\r";    
+                  
+            }    
+            $strexport.='合计'."\t";
+            $strexport.='投资总额：'.$xmcoun[0]['tzze']."\t";
+            $strexport.='引资总额：'.$xmcoun[0]['yzze']."\r";
+            $strexport=iconv('UTF-8',"GB2312//IGNORE",$strexport);    
+            exit($strexport);   
+        }
         $this->assign("arrStatus", $portalTagModel::$STATUS);
         $this->assign("tags", $tags);
-        $this->assign("fuwu", $fuwu);
+        $this->assign("user", $user);
         $this->assign("xmcoun", $xmcoun);
            $this->assign("id", $id);
+           $this->assign("kfqid", $kfqid);
    
         $this->assign('page', $tags->render());
 

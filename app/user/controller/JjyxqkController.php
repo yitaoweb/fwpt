@@ -19,7 +19,7 @@ class JjyxqkController extends UserBaseController
 {
 
     /**
-     * 需求列表
+     * 需求列表s
      */
     public function index()
     {
@@ -73,7 +73,7 @@ class JjyxqkController extends UserBaseController
     }
 
     /**
-     * 供求资料提交
+     * 供求资料提交s
      */
     public function addPost()
     {
@@ -82,8 +82,20 @@ class JjyxqkController extends UserBaseController
         $data = $this->request->post();
 
         $user = cmf_get_current_user();
-        $data['user_id']=$user['id'];
+        $jjyxpymx = Db::query('select count(id)as rzqys,sum(gmzcz)as gmzcz,sum(jysr)as jysr,sum(shsr)as shsr,sum(zsyzdwe)as zsyzdwe,sum(sjlyswzjtze)as sjlyswzjtze,sum(gdzctze)as gdzctze,sum(jcke)as jcke,sum(yjysyfzjf)as yjysyfzjf  from pt_jjyxqkmx where user_id='.$user['id'].' and date_format(pt_jjyxqkmx.date, "%y%m")=date_format("'.$data['date'].'", "%y%m")');
+
+        $data['rzqys']=$jjyxpymx[0]['rzqys'];
+        $data['gmzcz']=$jjyxpymx[0]['gmzcz'];
+        $data['jysr']=$jjyxpymx[0]['jysr'];
+        $data['shsr']=$jjyxpymx[0]['shsr'];
+        $data['zsyzdwe']=$jjyxpymx[0]['zsyzdwe'];
+        $data['sjlyswzjtze']=$jjyxpymx[0]['sjlyswzjtze'];
+        $data['gdzctze']=$jjyxpymx[0]['gdzctze'];
+        $data['jcke']=$jjyxpymx[0]['jcke'];
+        $data['yjysyfzjf']=$jjyxpymx[0]['yjysyfzjf'];
         $data['stat']=0;
+        $data['user_id']=$user['id'];
+
         $qysjfx=Db::name('jjyxqk');
         $ret = $qysjfx->insert($data);
         if($ret == 1){

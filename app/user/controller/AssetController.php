@@ -39,11 +39,11 @@ class AssetController extends AdminBaseController
             $uploader = new Upload();
 
             $result = $uploader->upload();
-
             if ($result === false) {
                 $this->error($uploader->getError()."-");
             } else {
                 $this->success("上传成功!", '', $result);
+
             }
 
         } else {

@@ -59,7 +59,14 @@
   </dl>
  <dl>
    <dt>服务进度：</dt>
-   <dd>{$state|state=###}</dd>
+   <dd>
+        <if condition="$sh_state == 1"> 
+             审核
+        </if>
+        <if condition="$sh_state == 0"> 
+             未审核
+        </if>
+   </dd>
   </dl>
  <dl>
    <dt>联系人：</dt>

@@ -1,0 +1,579 @@
+<html style="overflow-x: hidden; overflow-y: visible">
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta name="renderer" content="webkit">
+  <meta name="data-spm" content="datav">
+  <title>{$title}-{$sub_title}</title>
+
+ <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=yarzUUkNb0F0UgHUbSGiHRwQ"></script>
+
+  <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/show.css" />
+      <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/rfm.css" />
+  <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/common.css" />
+
+  <script src="__TMPL__/datav/js/jquery.js"></script>
+  <script src="__TMPL__/datav/js/echarts.js"></script>
+  <script src="__TMPL__/datav/js/theme/chalk.js"></script>
+ 
+</head>
+<body onLoad="startTime()">  
+<div class="datavLayout">
+    <div class="head">
+        <div class="head_left">
+            <div class="info">
+                <div class="icon"></div>
+                <span class="date">{$role['name']}&nbsp;&nbsp;:&nbsp;&nbsp;{$admin['user_login']}&nbsp;&nbsp; [&nbsp;&nbsp;<a href="{:url('datav/Public/logout')}">退出</a>&nbsp;&nbsp;]&nbsp;&nbsp; [&nbsp;&nbsp;<a href="{:url('datav/show/index')}">返回主页</a>&nbsp;&nbsp;]</span>
+            </div>
+        </div>
+        <div class="head_mid">
+            <div class="title">{$sub_title}</div>
+            <div class="bt"></div>
+        </div>
+        <div class="head_right">
+            <div class="times">
+                <div class="icon" width="18px" height="18px" ></div>
+                <span class="date" id="ShowTime"></span>
+            </div>
+        </div>
+    </div>
+    <div class="wraper"></div>
+        <header class="rfm_header">
+        <ul>
+        <li class="active"><a class="animsition-link" href="#" data-animsition-out="fade-out-left-sm">趋势图</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/jj')}" data-animsition-out="fade-out-left-sm">目标值对比</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/jjyxqksy')}" data-animsition-out="fade-out-left-sm">长治市市域考核</a></li>
+                <li><a class="animsition-link" href="{:url('datav/show/jjyxqkxq')}" data-animsition-out="fade-out-left-sm">各县区考核</a></li>
+        </ul>
+    </header>
+    <div class="content">
+        <div class="box site">
+            <div class="sub_main" id="main1"></div>
+        </div>
+    </div>
+
+    <div class="wraper"></div>
+
+</div>
+
+
+</body>
+</html>
+
+
+
+<script>
+    function startTime()
+    {
+        var today=new Date()
+        var years=today.getFullYear();
+        var months=today.getMonth();
+        var d=today.getDate()
+        var h=today.getHours()
+        var m=today.getMinutes()
+        var s=today.getSeconds()
+        // add a zero in front of numbers<10
+        months=months+1
+        months=checkTime(months)
+        d=checkTime(d)
+        m=checkTime(m)
+        s=checkTime(s)
+        var weekday=new Array(7)
+        weekday[0]="星期日"
+        weekday[1]="星期一"
+        weekday[2]="星期二"
+        weekday[3]="星期三"
+        weekday[4]="星期四"
+        weekday[5]="星期五"
+        weekday[6]="星期六"
+        var w=weekday[today.getDay()]
+        document.getElementById('ShowTime').innerHTML=years+"-"+months+"-"+d+"  "+w+" "+h+":"+m+":"+s;
+        t=setTimeout('startTime()',500)
+    }
+    function checkTime(i)
+    {
+        if (i<10)
+        {i="0" + i}
+        return i
+    }
+
+
+    function writeObj(obj){ 
+     var description = ""; 
+     for(var i in obj){ 
+     var property=obj[i]; 
+     description+=i+" = "+property+"\n"; 
+     } 
+     alert(description); 
+    } 
+
+</script>
+
+
+  <SCRIPT LANGUAGE="JavaScript">
+    var get_jj = <?php echo json_encode($get_jj);?>;
+    var get_jjs = <?php echo json_encode($get_jjs);?>;
+  </SCRIPT>
+
+<script type="text/javascript">
+    var myChart1 = echarts.init(document.getElementById('main1'),'chalk');
+    //var colors = ['orange', '#d14a61', '#1E90FF'];
+    var time = new Array();
+    var jysr = new Array();
+    var lrze = new Array();
+    var shsr = new Array();
+    var zsyzdwe = new Array();
+    var gdzctze = new Array();
+    
+    for(var i=0;i<get_jjs.length;i++){
+          time[i] = get_jjs[i].time;
+          jysr[i] = get_jjs[i].jysr;
+          lrze[i] = get_jjs[i].lrze;
+          shsr[i] = get_jjs[i].shsr;
+          zsyzdwe[i] = get_jjs[i].zsyzdwe;
+          gdzctze[i] = get_jjs[i].gdzctze;
+    }
+    var option = {
+       
+        title: [{
+            text: '收入支出汇总表',
+            left: '18%',
+            top: '1%',
+            textAlign: 'center'
+        }, {
+            text: '经营收入统计',
+            left: '50%',
+            top: '1%',
+            textAlign: 'center'
+        }, {
+            text: '利润总额统计',
+            left: '85%',
+            top: '1%',
+            textAlign: 'center'
+        }, {
+            text: '税收收入统计',
+            left: '18%',
+            top: '51%',
+            textAlign: 'center'
+        }, {
+            text: '招商引资到位额统计',
+            left: '50%',
+            top: '51%',
+            textAlign: 'center'
+        }, {
+            text: '固定资产投资额统计',
+            left: '85%',
+            top: '51%',
+            textAlign: 'center'
+        }],
+        tooltip: {
+            trigger: 'axis'
+        },
+        grid: [{
+            show: false,
+            left: '3%',
+            top: '5%',
+            containLabel: true,
+            width: '28%',
+            height: '40%'
+        }, {
+            show: false,
+            left: '33%',
+            top: '5%',
+            containLabel: true,
+            width: '28%',
+            height: '40%'
+        }, {
+            show: false,
+            left: '66%',
+            top: '5%',
+            containLabel: true,
+            width: '28%',
+            height: '40%'
+        }, {
+            show: false,
+            left: '3%',
+            top: '55%',
+            containLabel: true,
+            width: '28%',
+            height: '40%'
+        }, {
+            show: false,
+            left: '33%',
+            top: '55%',
+            containLabel: true,
+            width: '28%',
+            height: '40%'
+        }, {
+            show: false,
+            left: '66%',
+            top: '55%',
+            containLabel: true,
+            width: '28%',
+            height: '40%'
+        }],
+        // legend: [{
+        //   data:['各幅值区间暂降频次', '暂降频次2'],
+        //   x:'right',
+        // },{data:['暂降频次3', '暂降频次4'],
+        //      x:'right',
+        // }],
+        xAxis: [{
+            gridIndex: 0,
+            type: 'category',
+            name: '',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            //axisLabel:{  
+            //             interval:0,//横轴信息全部显示  
+            //            rotate:-30,//-30度角倾斜显示  
+            //       }  ,
+            axisTick: {
+                alignWithLabel: true
+            },
+            data: ['经营收入', '利润总额', '税收收入', '招商引资', '直接投资', '固定资产', '进出口额', '发展经费',]
+        }, {
+            gridIndex: 1,
+            type: 'category',
+            name: '',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 14
+            },
+            boundaryGap: false,
+            //axisLabel:{  
+            //             interval:0,//横轴信息全部显示  
+            //            rotate:-30,//-30度角倾斜显示  
+            //       }  ,
+            axisTick: {
+                alignWithLabel: true
+            },
+            data: time
+        }, {
+            gridIndex: 2,
+            type: 'category',
+            //axisLabel:{  
+            //         interval:0,//横轴信息全部显示  
+            //         rotate:-30,//-30度角倾斜显示  
+            //   }  ,
+            name: '',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisTick: {
+                alignWithLabel: true
+            },
+            data: time
+
+        }, {
+            gridIndex: 3,
+            type: 'category',
+            //axisLabel:{  
+            //         interval:0,//横轴信息全部显示  
+            //         rotate:-30,//-30度角倾斜显示  
+            //   }  ,
+            name: '',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisTick: {
+                alignWithLabel: true
+            },
+            boundaryGap: false,
+            data: time
+
+        }, {
+            gridIndex: 4,
+            type: 'category',
+            //axisLabel:{  
+            //         interval:0,//横轴信息全部显示  
+            //         rotate:-30,//-30度角倾斜显示  
+            //   }  ,
+            name: '',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisTick: {
+                alignWithLabel: true
+            },
+            data: time
+
+        }, {
+            gridIndex: 5,
+            type: 'category',
+            //axisLabel:{  
+            //         interval:0,//横轴信息全部显示  
+            //         rotate:-30,//-30度角倾斜显示  
+            //   }  ,
+            name: '',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisTick: {
+                alignWithLabel: true
+            },
+            boundaryGap: false,
+            data: time
+
+        }],
+        yAxis: [{
+            gridIndex: 0,
+            type: 'value',
+            name: '',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisLine: {
+                lineStyle: {
+                    //color: colors[1]
+                }
+            },
+            splitLine: {
+                show: false
+            }
+        }, {
+            gridIndex: 1,
+            type: 'value',
+            name: '',
+            nameLocation: 'center',
+            nameGap: '40',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisLabel: {
+                show: true,
+                interval: 'auto',
+                formatter: '{value}'
+            },
+            //position: 'right',
+            axisLine: {
+                lineStyle: {
+                    //color: colors[0]
+                }
+            },
+            splitLine: {
+                show: false
+            }
+        }, {
+            gridIndex: 2,
+            type: 'value',
+            name: '',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisLine: {
+                lineStyle: {
+                    //color: colors[0]
+                }
+            },
+            splitLine: {
+                show: false
+            },
+            position: 'left'
+        }, {
+            gridIndex: 3,
+            type: 'value',
+            name: '',
+            nameLocation: 'center',
+            nameGap: '40',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisLabel: {
+                show: true,
+                interval: 'auto',
+                formatter: '{value}'
+            },
+            axisLine: {
+                lineStyle: {
+                    //color: colors[1]
+                }
+            },
+            splitLine: {
+                show: false
+            },
+            position: 'left'
+        }, {
+            gridIndex: 4,
+            type: 'value',
+            name: '',
+            nameLocation: 'center',
+            nameGap: '30',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisLine: {
+                lineStyle: {
+                    //color: colors[0]
+                }
+            },
+            splitLine: {
+                show: false
+            },
+            position: 'left'
+        }, {
+            gridIndex: 5,
+            type: 'value',
+            name: '',
+            nameLocation: 'center',
+            nameGap: '40',
+            nameTextStyle: {
+                fontSize: 16
+            },
+            axisLabel: {
+                show: true,
+                interval: 'auto',
+                formatter: '{value}'
+            },
+            axisLine: {
+                lineStyle: {
+                    //color: colors[1]
+                }
+            },
+            splitLine: {
+                show: false
+            },
+            position: 'left'
+        }],
+        series: [{
+                name: '亿元',
+                type: 'line',
+                xAxisIndex: 0,
+                yAxisIndex: 0,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+
+                    }
+                },
+                data: [get_jj[0].jysr, get_jj[0].lrze, get_jj[0].shsr, get_jj[0].zsyzdwe, get_jj[0].sjlyswzjtze, get_jj[0].gdzctze, get_jj[0].jcke, get_jj[0].yjysyfzjf]
+            }, {
+
+                name: '经营收入',
+                type: 'line',
+                smooth: true,
+                barWidth: 25,
+                xAxisIndex: 1,
+                yAxisIndex: 1,
+                symbolSize: 8, //拐点大小
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        color: '#FAD860',
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        width: 4,
+                        color: '#FAD860'
+                    }
+                },
+
+                data: jysr
+            }, {
+
+                name: '利润总额',
+                type: 'line',
+                xAxisIndex: 2,
+                yAxisIndex: 2,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                    }
+                },
+
+                data: lrze
+            }, {
+
+                name: '税收收入',
+                type: 'line',
+                smooth: true,
+                barWidth: 25,
+                xAxisIndex: 3,
+                yAxisIndex: 3,
+                symbolSize: 8, //拐点大小
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        color: '#9BCA63',
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        width: 4,
+                        color: '#9BCA63'
+                    }
+                },
+                data: shsr
+            }, {
+
+                name: '招商引资到位额',
+                type: 'line',
+                xAxisIndex: 4,
+                yAxisIndex: 4,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                    }
+                },
+
+                data: zsyzdwe
+            }, {
+
+                name: '固定资产投资额',
+                type: 'line',
+                smooth: true,
+                barWidth: 25,
+                xAxisIndex: 5,
+                yAxisIndex: 5,
+                symbolSize: 8, //拐点大小
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top',
+                        color: '#9BCA63',
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        width: 4,
+                        color: '#9BCA63'
+                    }
+                },
+                data: gdzctze
+            }
+
+        ]
+    };
+
+    myChart1.setOption(option);
+
+</script>
+
+
+
+
+
+
+

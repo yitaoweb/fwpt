@@ -30,10 +30,10 @@
                     <thead>
                       <tr>
                         <th>序号</th>
-                        <th>是否四上企业</th>
-                        <th>主要产品</th>
-                        <th>生成规模</th>
-                        <th>上报日期</th>
+
+                        <th>投资强度</th>
+                        <th>规模以上工业总产值</th>
+                        <th>经营收入</th>
                         <th>状态</th>
                         <th>操作</th>
                       </tr>
@@ -42,17 +42,10 @@
                     <foreach name="lists" item="vo">
                       <tr>
                         <td>{$key+1}</td>
-                        <td>
-                            <if condition="1 eq $vo.is_ssqy">
-                                是
-                            </if>
-                            <if condition="0 eq $vo.is_ssqy">
-                                否
-                            </if>
-                        </td>
-                        <td>{$vo.zycp}</td>
-                        <td>{$vo.scgm}</td>
-                        <td>{$vo.date}</td>
+
+                        <td><php>echo $vo['ljtz']/$vo['kfmj']</php></td>
+                        <td>{$vo.gmzcz}</td>
+                        <td>{$vo.jysr}</td>
                         <td>
                             <if condition="$vo.stat eq 0">
                                   未审核

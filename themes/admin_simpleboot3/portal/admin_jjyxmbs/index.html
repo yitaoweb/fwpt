@@ -1,0 +1,61 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('AdminJjyxmbs/index')}">目标值管理</a></li>
+        <li><a href="{:url('AdminJjyxmbs/add')}">添加目标值</a></li>
+    </ul>
+
+    <form method="post" class="js-ajax-form margin-top-20">
+        <div class="table-actions">
+            <!--<button type="submit" class="btn btn-primary btn-sm js-ajax-submit">{:lang('SORT')}</button>-->
+        </div>
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th width="50">ID</th>
+                <th>入区企业数</th>
+                <th>开发区经营收入</th>
+                <th>开发区投资强度</th>
+                <th>实际利用省外直接投资</th>
+                <th>研究与实验发展经费</th>
+                <th width="50">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach name="tags" item="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.rzqys_mb}</td>
+                    <td>{$vo.jysr_mb}</td>
+                    <td>{$vo.tzqd_mb}</td>
+                    <td>{$vo.sjlyswzjtze_mb}</td>
+                    <td>{$vo.yjysyfzjf_mb}</td>
+                    <td>
+                        <a class="js-ajax-delete" href="{:url('AdminJjyxmbs/delete',['id'=>$vo['id']])}">删除</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th width="50">ID</th>
+                <th>入区企业数</th>
+                <th>开发区经营收入</th>
+                <th>开发区投资强度</th>
+                <th>实际利用省外直接投资</th>
+                <th>研究与实验发展经费</th>
+                <th width="50">操作</th>
+            </tr>
+            </tfoot>
+        </table>
+        <div class="table-actions">
+            <!--<button type="submit" class="btn btn-primary btn-sm js-ajax-submit">{:lang('SORT')}</button>-->
+        </div>
+    </form>
+    <ul class="pagination">{$page|default=''}</ul>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

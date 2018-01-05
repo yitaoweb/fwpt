@@ -18,14 +18,14 @@
     
     <div class="main_r right" style="min-height: 600px;">
         <include file="public@qiyetop" />
-        <div class="right_title"><span>经济运行情况明细</span>&nbsp;&nbsp;单位（亿元）</div>
+        <div class="right_title"><span>经济运行情况明细</span>&nbsp;&nbsp;单位（万元）</div>
           <form class="js-ajax-form" action="{:url('user/Jjyxqk/addPost')}" method="post" id="register"> 
             <div class="center_form">
               <dl>
                 <dt>上报日期</dt>
                 <dd><input type="text" name="date" placeholder="1994-6-7" class="input large"/></dd>
               </dl>
-              <dl>
+<!--               <dl>
                 <dt>是否四上企业</dt>
                 <dd>
                     <select name="is_ssqy" style="width:326px;"  datatype="*" sucmsg=" ">
@@ -33,34 +33,34 @@
                         <option value="0">否</option>
                     </select>
                 </dd>
-              </dl>
+              </dl> -->
              
 
-              <dl>
+<!--               <dl>
                 <dt>行业类型</dt>
                 <dd>
                 <select name="fl" style="width:326px;"  datatype="*" sucmsg=" ">
                     <option value="1" >工业</option>
                     <option value="2" >建筑业</option>
                     <option value="3" >批零住餐</option>
-                    <option value="4" >服务业</option>
+                    <option value="4" >服务业</option> -->
 <!--                     <volist name="fuwu" id="vo">
                         <option value="{$vo.id}">{$vo.name}</option>
                     </volist> -->
-                </select>
+<!--                 </select>
                 </dd>
-              </dl>
-              <dl>
+              </dl> -->
+<!--               <dl>
                 <dt>生产规模</dt>
                 <dd><input type="text" name="scgm" class="input large"/></dd>
-              </dl>
+              </dl> -->
 
 
-              <dl>
+<!--               <dl>
                 <dt>主要产品</dt>
                 <dd><input type="text" name="zycp" class="input large"/></dd>
-              </dl>
-              <dl>
+              </dl> -->
+<!--               <dl>
                 <dt>工业总产值</dt>
                 <dd><input type="text" name="gmzcz" class="input large"/></dd>
               </dl>
@@ -68,13 +68,26 @@
               <dl>
                 <dt>经营收入</dt>
                 <dd><input type="text" name="jysr" class="input large"/></dd>
-              </dl>
-              <dl>
+              </dl> -->
+<!--               <dl>
                 <dt>利润总额</dt>
                 <dd><input type="text" name="lrze" class="input large"/></dd>
-              </dl>
+              </dl> -->
+<!--               <dl>
+                <dt>入驻企业数</dt>
+                <dd><input type="text" name="rzqys" class="input large"/></dd>
+              </dl> -->
 
               <dl>
+                <dt>累计投资</dt>
+                <dd><input type="text" name="ljtz" placeholder="单位：（万元）" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt>开发面积</dt>
+                <dd><input type="text" name="kfmj" placeholder="单位：（亩）" class="input large"/></dd>
+              </dl>
+
+<!--               <dl>
                 <dt>税收收入</dt>
                 <dd><input type="text" name="shsr" class="input large"/></dd>
               </dl>
@@ -84,7 +97,7 @@
               </dl>
 
               <dl>
-                <dt>直接投资额</dt>
+                <dt>利用省外投资额</dt>
                 <dd><input type="text" name="sjlyswzjtze" class="input large"/></dd>
               </dl>
               <dl>
@@ -99,7 +112,7 @@
               <dl>
                 <dt>研究与试验发展经费</dt>
                 <dd><input type="text" name="yjysyfzjf" class="input large"/></dd>
-              </dl>
+              </dl> -->
 
              
               <dl>

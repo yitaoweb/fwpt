@@ -35,6 +35,7 @@ class XmController extends UserBaseController
           $gongqiuQuery->where('user_id',$userId);
 
         $all           = $gongqiuQuery->order('id desc')->paginate(10);
+
         $sshy=Db::name('portal_xzqy')->where('1=1')->order('id')->select();
         $this->assign($user);
         $this->assign("page", $all->render());
@@ -42,6 +43,7 @@ class XmController extends UserBaseController
         $this->assign("id", $id);
         $this->assign("stat", $stat);
         $this->assign("um",4);
+
         $this->assign("fuwu",$sshy);
         return $this->fetch();
     }
@@ -75,9 +77,16 @@ class XmController extends UserBaseController
         $id = $this->request->param("id", 0, "intval");
         $user = cmf_get_current_user();
         $this->assign($user);
+        $xm=Db::name('xm')->where('xm_qf',$id)->where('user_id',$user['id'])->order('date desc')->limit(1)->select();
+
+        if(count($xm)){
+           $this->assign("sdate",$xm[0]['date']);
+        }else{
+            $this->assign("sdate","没有上报记录");
+        }
         $sshy=Db::name('portal_xzqy')->where('1=1')->order('id')->select();
         $this->assign('fuwu',$sshy);
-        $this->assign("um",4);
+        $this->assign("um",4);     
         $this->assign("id",$id);
         return $this->fetch();
     }
@@ -87,15 +96,17 @@ class XmController extends UserBaseController
      */
     public function addPost()
     {
-
-
         $data = $this->request->post();
-
         $user = cmf_get_current_user();
         $data['user_id']=$user['id'];
         $data['stat']=0;
-        $qysjfx=Db::name('xm');
-        $ret = $qysjfx->insert($data);
+        if($data['date']){
+         $qysjfx=Db::name('xm');
+         $ret = $qysjfx->insert($data);
+        }else{
+            $this->error("请填写上报日期");
+        }
+       
         if($ret == 1){
             $this->success("上报成功！");
         }else{
@@ -145,6 +156,19 @@ class XmController extends UserBaseController
         }else{
              $this->error("修改失败！");
         }
+    }
+    public function insertid()
+    {
+        $id = $this->request->param("id", 0, "intval");
+         $user = cmf_get_current_user();
+        $this->assign($user);
+        $xm=Db::name('xm')->where('id',$id)->order('id')->find();
+         $sshy=Db::name('portal_xzqy')->where('1=1')->order('id')->select();
+
+         $this->assign('fuwu',$sshy);
+        $this->assign('xm',$xm);
+        $this->assign("um",4);
+        return $this->fetch();       
     }
 
 }

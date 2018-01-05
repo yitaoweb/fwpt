@@ -5,7 +5,68 @@
     <ul class="nav nav-tabs">
         <li class="active"><a href="{:url('AdminQysjfx/index')}">限上企业数据分析</a></li>
     </ul>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminQysjfx/index')}">
+        开始时间：<input class="form-control js-bootstrap-datetime" type="text" name="post[published_timeq]"
+                                   value="{$timestamq}">
+        停止时间：<input class="form-control js-bootstrap-datetime" type="text" name="post[published_timeh]"
+                                   value="{$timestamh}">
 
+        <input type="submit" class="btn btn-primary" value="搜索"/>
+        <a class="btn btn-danger" href="{:url('AdminQysjfx/index')}">清空</a>
+
+            <table class="table table-hover table-bordered table-list">
+                <thead>
+                <tr>
+                  <td colspan="2" style="text-align: center;"><b>总合计</b></td>
+                  <td colspan="1" ><b>销售总额：</b>{$xmcounxse}<b>万元</b></td>
+                  <td colspan="0" ><b>零售总额：</b>{$xmcounlse}<b>万元</b></td>
+                  <td colspan="0" ><b>销售额同比：</b>{$xse_tb}<b>%</b></td>
+                  <td colspan="0" ><b>零售额同比：</b>{$lse_tb}<b>%</b></td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="text-align: center;"><b>批发合计</b></td>
+                  <td colspan="1" ><b>销售总额：</b>{$tb_qpfxs}<b>万元</b></td>
+                  <td colspan="0" ><b>零售总额：</b>{$tb_qpfls}<b>万元</b></td>
+                  <td colspan="0" ><b>销售额同比：</b>{$xse_tbpf}<b>%</b></td>
+                  <td colspan="0" ><b>零售额同比：</b>{$lse_tbpf}<b>%</b></td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="text-align: center;"><b>零售合计</b></td>
+
+                  <td colspan="0" ><b>零售总额：</b>{$tb_qls}<b>万元</b></td>
+
+                  <td colspan="0" ><b>零售额同比：</b>{$lse_tbls}<b>%</b></td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="text-align: center;"><b>住宿合计</b></td>
+                  <td colspan="1" ><b>销售总额：</b>{$tb_qzsxs}<b>万元</b></td>
+                  <td colspan="0" ><b>零售总额：</b>{$tb_qzsls}<b>万元</b></td>
+                  <td colspan="0" ><b>销售额同比：</b>{$xse_tbzs}<b>%</b></td>
+                  <td colspan="0" ><b>零售额同比：</b>{$lse_tbzs}<b>%</b></td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="text-align: center;"><b>餐饮合计</b></td>
+                  <td colspan="1" ><b>销售总额：</b>{$tb_qcyxs}<b>万元</b></td>
+                  <td colspan="0" ><b>零售总额：</b>{$tb_qcyls}<b>万元</b></td>
+                  <td colspan="0" ><b>销售额同比：</b>{$xse_tbcy}<b>%</b></td>
+                  <td colspan="0" ><b>零售额同比：</b>{$lse_tbcy}<b>%</b></td>
+                </tr>
+                </thead>
+            </table>
+    </form>
+
+    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminQysjfx/index')}">
+        行业分类:
+        <select class="form-control" name="xyflid" style="width: 140px;">
+            <option value=''>全部</option>
+            {$categoriesTree|default=''}
+        </select> &nbsp;&nbsp;
+
+        <input type="submit" class="btn btn-primary" value="搜索"/>
+        <a class="btn btn-danger" href="{:url('AdminQysjfx/index')}">清空</a>
+        <input type="submit" class="btn btn-primary" name="dc" value="导出"/>
+<!--         <a class="btn btn-danger" href="{:url('AdminQysjfx/index',array('name'=>2))}">导出</a> -->
+    </form>
 
 
     <form method="post" class="js-ajax-form margin-top-20">
@@ -14,6 +75,8 @@
         </div>
         <table class="table table-hover table-bordered table-list">
             <thead>
+            
+
             <tr>
                 <th width="50">ID</th>
                 <th>上报日期</th>
@@ -26,6 +89,7 @@
             </tr>
             </thead>
             <tbody>
+                
             <foreach name="tags" item="vo">
                 <tr>
                     <td>{$vo.id}</td>
@@ -54,8 +118,10 @@
             </foreach>
                 <tr>
                   <td colspan="2" style="text-align: center;"><b>合计</b></td>
-                  <td colspan="1" ><b>销售总额：</b>{$xmcoun[0]['xse']}<b>亿元</b></td>
-                  <td colspan="0" ><b>零售总额：</b>{$xmcoun[0]['lse']}<b>亿元</b></td>
+                  <td colspan="1" ><b>销售总额：</b>{$tb_qpflx}<b>万元</b></td>
+                  <td colspan="0" ><b>零售总额：</b>{$tb_qpfll}<b>万元</b></td>
+                  <td colspan="0" ><b>销售额同比：</b>{$xse_tbpfl}<b>%</b></td>
+                  <td colspan="0" ><b>零售额同比：</b>{$lse_tbpfl}<b>%</b></td>
                 </tr>
             </tbody>
             <tfoot>

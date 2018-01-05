@@ -37,15 +37,59 @@ class AdminJjyxqkController extends AdminBaseController
      */
     public function index()
     {
-      
+        $id=0;
         $portalTagModel = new JjyxqkModel();
+        $data = $this->request->param();
 
+        if(isset($data['kfq'])){
+            if($data['kfq'] != 0){
+            $id = $data['kfq'];
+            $portalTagModel->where('user_id',$id);
+            }
+            
+        }
         $portalTagModel->order(["id" => "ASC"]);
         $tags = $portalTagModel->paginate(10);
-        $xmcoun = Db::query('select sum(jysr) as jysr,sum(gmzcz) as gmzcz from pt_jjyxqk');
+        if(isset($data['kfq'])){
+            if($data['kfq'] != 0){
+
+            $ids = $data['kfq'];
+            $xmcoun = Db::query('select sum(jysr) as jysr,sum(gmzcz) as gmzcz,sum(gdzctze) as gdzctze,sum(zsyzdwe) as zsyzdwe,sum(jcke) as jcke,sum(shsr) as shsr from pt_jjyxqk where user_id='.$ids.'');
+            }
+            else{
+            $xmcoun = Db::query('select sum(jysr) as jysr,sum(gmzcz) as gmzcz,sum(gdzctze) as gdzctze,sum(zsyzdwe) as zsyzdwe,sum(jcke) as jcke,sum(shsr) as shsr from pt_jjyxqk');
+        } 
+        }else{
+            $xmcoun = Db::query('select sum(jysr) as jysr,sum(gmzcz) as gmzcz,sum(gdzctze) as gdzctze,sum(zsyzdwe) as zsyzdwe,sum(jcke) as jcke,sum(shsr) as shsr from pt_jjyxqk');
+        }   
+         if(isset($data['dc'])){
+            header("Content-type:application/vnd.ms-excel");    
+            header("Content-Disposition:filename=经济运行情况表.xls");    
+            
+            $strexport="入区企业数\t累计投资\t开发面积\t投资强度\t经营收入(万元)\t工业总产值(万元)\t固定资产(万元)\t招商引资(万元)\t进出口(万元)\t税收(万元)\r";    
+            foreach ($tags as $row){    
+              
+                $strexport.=$row['rzqys']."\t";  
+                $strexport.=$row['ljtz']."\t";  
+                $strexport.=$row['kfmj']."\t"; 
+                $strexport.=$row['ljtz']/$row['kfmj']."\t";  
+                $strexport.=$row['jysr']."\t";    
+                $strexport.=$row['gmzcz']."\t";    
+                $strexport.=$row['gdzctze']."\t"; 
+                $strexport.=$row['zsyzdwe']."\t"; 
+                $strexport.=$row['jcke']."\t";
+                $strexport.=$row['shsr']."\r";    
+                  
+            }    
+            $strexport=iconv('UTF-8',"GB2312//IGNORE",$strexport);    
+            exit($strexport);   
+        }    
+        $user = Db::name('user')->where('user_type',5)->select();
         $this->assign("arrStatus", $portalTagModel::$STATUS);
         $this->assign("tags", $tags);
         $this->assign("xmcoun", $xmcoun);
+        $this->assign("id", $id);
+        $this->assign("user", $user);
         $this->assign('page', $tags->render());
 
         return $this->fetch();

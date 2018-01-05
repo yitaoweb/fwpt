@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$user_login}  - 修改资料</title>
+<meta name="keywords" content=""/>
+<meta name="description" content="">
+<include file="public@head"/>
+
+</head>
+<body class="body-white" id="top">
+
+<include file="public@nav" />
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;<if condition='($user_type == 2)'>企业<else/>机构</if>中心</div>
+<div class="main">
+    <div class="main_l left">
+        <include file="public@qiyenav" />
+    </div>
+    
+    <div class="main_r right" style="min-height: 600px;">
+        <include file="public@qiyetop" />
+        <div class="tabPanel">
+            <div class="tabnav">
+              <div <if condition='($stat == 0)'>class="hit"</if>><a href="{:url('user/Jjyxqkmx/index',array('stat'=>0))}">未审核</a></div>
+              <div <if condition='($stat == 1)'>class="hit"</if>><a href="{:url('user/Jjyxqkmx/index',array('stat'=>1))}">已审核</a></div>
+              <div <if condition='($stat == 2)'>class="hit"</if>><a href="{:url('user/Jjyxqkmx/index',array('stat'=>2))}">驳回</a></div>
+            </div>
+           <div class="tabpanes">
+              <div class="pane" style="display:block;">
+                  <table class="fwtable">
+                    <thead>
+                      <tr>
+                        <th>序号</th>
+                        <th>是否四上企业</th>
+                        <th>主要产品</th>
+                        <th>生成规模</th>
+                        <th>上报日期</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                  <tbody>
+                    <foreach name="lists" item="vo">
+                      <tr>
+                        <td>{$key+1}</td>
+                        <td>
+                            <if condition="1 eq $vo.is_ssqy">
+                                是
+                            </if>
+                            <if condition="0 eq $vo.is_ssqy">
+                                否
+                            </if>
+                        </td>
+                        <td>{$vo.zycp}</td>
+                        <td>{$vo.scgm}</td>
+                        <td>{$vo.date}</td>
+                        <td>
+                            <if condition="$vo.stat eq 0">
+                                  未审核
+                            </if>
+                            <if condition="$vo.stat eq 1">
+                                  审核
+                            </if>
+                             <if condition="$vo.stat eq 2">
+                                  驳回
+                            </if>
+                        </td>
+                        <td>
+                            <if condition="$vo.stat eq 0 || $vo.stat eq 2">
+                                 <a href="{:url('user/Jjyxqkmx/edit',array('id'=>$vo['id']))}">修改</a>
+                                  <a href="{:url('user/Jjyxqkmx/delete',array('id'=>$vo['id']))}">删除</a>
+                            </if>
+                        </td>
+                      </tr>
+                      </foreach>
+                  </tbody>
+                </table>
+                <div class="clear"></div>
+                
+                <div class="yahoo2">{$page|default=''}</div>
+              </div>
+
+           </div>
+        <div class="clear"></div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('.tabPanel .tabnav div').click(function () {
+                    $(this).addClass('hit').siblings().removeClass('hit');
+                    $('.tabpanes>div:eq(' + $(this).index() + ')').show().siblings().hide();
+                })
+            })
+        </script>
+    </div>
+</div>							
+  <include file="public@link" />
+	<include file="public@footer" />
+
+	<!-- /container -->
+	<include file="public@scripts" />
+</body>
+</html>

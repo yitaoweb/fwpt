@@ -83,8 +83,8 @@ class SjsbController extends UserBaseController
 
 
         $data = $this->request->post();
-
         $user = cmf_get_current_user();
+        $data['fl'] = $user['qy_sshy'];
         $data['user_id']=$user['id'];
         $data['stat']=0;
         $qysjfx=Db::name('qysjfx');
@@ -140,6 +140,28 @@ class SjsbController extends UserBaseController
         }else{
              $this->error("修改失败！");
         }
+    }
+
+    public function thb(){
+          //环比
+          $sbrq = $_POST['sbrq'];
+          $user = cmf_get_current_user();
+          $timestamp=strtotime($sbrq);   
+          $hb=date('Y-m-01',strtotime(date('Y',$timestamp).'-'.(date('m',$timestamp)-1).'-01')); 
+          // var_dump($hb);
+          $data['get_hb'] = Db::query('select * from pt_qysjfx where date_format(pt_qysjfx.date, "%y%m")=date_format("'.$hb.'", "%y%m") and pt_qysjfx.user_id = '.$user['id'].'');
+          
+          // // var_dump($get_hb);
+          // //同比
+ 
+          // $timestamp=strtotime($sbrq);   
+          $tb=date('Y-m-01',strtotime((date('y',$timestamp)-1).'-'.(date('m',$timestamp)).'-01')); 
+          // var_dump($tb);
+          $data['get_tb'] = Db::query('select * from pt_qysjfx where date_format(pt_qysjfx.date, "%y%m")=date_format("'.$tb.'", "%y%m") and pt_qysjfx.user_id = '.$user['id'].'');
+          // return json_encode($data);
+          // var_dump($get_hb);die;
+          // 同期
+        return json_encode($data);
     }
 
 }

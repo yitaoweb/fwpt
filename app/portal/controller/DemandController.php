@@ -47,7 +47,7 @@ class DemandController extends HomeBaseController
             $arr=Db::name('portal_ssfw')->where('parent_id',$cid)->field('id')->select()->toArray();
              $arr = array_column($arr,'id');
             //var_dump($arr);die;
-            $where['a.ssfw_id'] = array('in',$arr);
+            $where['a.ssfw_id'] = $cid;
         }
 
         if ($cid2 > 0) {

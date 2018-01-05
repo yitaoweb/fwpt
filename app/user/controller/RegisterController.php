@@ -299,25 +299,25 @@ class RegisterController extends HomeBaseController
                 'qy_xydm'        => 'require',
                 'qy_area'        => 'require|gt:0',
                 'qy_address'     => 'require',
-                'qy_sshy'        => 'require|gt:0',
-                'qy_sq'          => 'require',
-                'qy_faren'       => 'require',
+                // 'qy_sshy'        => 'require|gt:0',
+                // 'qy_sq'          => 'require',
+                // 'qy_faren'       => 'require',
 
                 'qy_lxname'      => 'require',
 
                 'mobile'         => 'require',
                 'user_email'     => 'require',
 
-                'qy_zczj'        => 'require',
-                'qy_zcsj'        => 'require',
-                'qy_class'       => 'require',
-                'birthday'       => 'require',
-                'qy_zg_num'      => 'require',
-                'qy_sme_class'   => 'require|gt:0',
+                // 'qy_zczj'        => 'require',
+                // 'qy_zcsj'        => 'require',
+                // 'qy_class'       => 'require',
+                // 'birthday'       => 'require',
+                // 'qy_zg_num'      => 'require',
+                // 'qy_sme_class'   => 'require|gt:0',
 
-                'qy_jyfw'        => 'require',
+                // 'qy_jyfw'        => 'require',
                 'qy_jianjie'     => 'require',
-                'qydaima'          => 'require',
+                // 'qydaima'          => 'require',
                 'code'           => 'require',
 
             ];
@@ -336,25 +336,25 @@ class RegisterController extends HomeBaseController
                 'qy_area.require'        => '行政区域不能为空',
                 'qy_area.gt'        => '行政区域不能为空',
                 'qy_address.require'     => '办公地址不能为空',
-                'qy_sshy.require'        => '所属行业分类不能为空',
-                'qy_sshy.gt'        => '所属行业分类不能为空',
-                'qy_sq.require'          => '所属联系点不能为空',
-                'qy_faren.require'       => '企业法人不能为空',
+                // 'qy_sshy.require'        => '所属行业分类不能为空',
+                // 'qy_sshy.gt'        => '所属行业分类不能为空',
+                // 'qy_sq.require'          => '所属联系点不能为空',
+                // 'qy_faren.require'       => '企业法人不能为空',
 
                 'qy_lxname.require'      => '联系人不能为空',
                 'mobile.require'         => '手机号不能为空',
                 'user_email.require'          => '电子邮箱不能为空',
 
-                'qy_zczj.require'        => '企业注册资金不能为空',
-                'qy_zcsj.require'        => '企业注册登记时间不能为空',
-                'qy_class.require'       => '企业注册登记类型不能为空',
+                // 'qy_zczj.require'        => '企业注册资金不能为空',
+                // 'qy_zcsj.require'        => '企业注册登记时间不能为空',
+                // 'qy_class.require'       => '企业注册登记类型不能为空',
 
-                'qy_zg_num.require'      => '企业职工人数不能为空',
-                'qy_sme_class.require'   => '中小企业划分类型不能为空',
+                // 'qy_zg_num.require'      => '企业职工人数不能为空',
+                // 'qy_sme_class.require'   => '中小企业划分类型不能为空',
 
-                'qy_jyfw.require'        => '经营范围不能为空',
+                // 'qy_jyfw.require'        => '经营范围不能为空',
                 'qy_jianjie.require'     => '企业简介不能为空',
-                'yqdaima.require'     => '统一社会信用代码证扫描件不能为空',
+                // 'yqdaima.require'     => '统一社会信用代码证扫描件不能为空',
                 'code.require'     => '验证码不能为空',
   
             ]);

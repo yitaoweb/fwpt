@@ -18,7 +18,7 @@
     
     <div class="main_r right" style="min-height: 600px;">
         <include file="public@qiyetop" />
-        <div class="right_title"><span>经济运行情况明细</span> &nbsp;&nbsp;单位（亿元）</div>
+        <div class="right_title"><span>经济运行情况明细</span> &nbsp;&nbsp;单位（万元）</div>
           <form class="js-ajax-form" action="{:url('user/Xm/addPost')}" method="post" id="register"> 
             <div class="center_form">
               <dl>
@@ -27,7 +27,7 @@
               </dl>
               <dl>
                 <dt>上报日期</dt>
-                <dd><input type="text" name="date" placeholder="1994-6-7" class="input large"/></dd>
+                <dd><input type="text" name="date" placeholder="上一次上报日期：{$sdate}" class="input large"/></dd>
               </dl>
               <dl>
                 <dt>投资总额</dt>
@@ -35,7 +35,7 @@
               </dl>
              
 
-              <dl>
+<!--               <dl>
                 <dt>开发区</dt>
                 <dd>
                 <select name="kfq" style="width:326px;"  datatype="*" sucmsg=" ">
@@ -45,7 +45,7 @@
                     </volist>
                 </select>
                 </dd>
-              </dl>
+              </dl> -->
               <if condition="$id neq 6">
                 <dl>
                   <dt>引资总额</dt>
@@ -64,23 +64,23 @@
               <if condition="$id eq 1">
                 <dl>
                 <dt>预计签约时间</dt>
-                <dd><input type="text" onclick="SetDate(this,'yyyy-MM-dd hh:mm:ss')" name="yjqytime" class="input large"/></dd>
+                <dd><input type="text" onclick="SetDate(this,'yyyy-MM-dd')" name="yjqytime" class="input large"/></dd>
                 </dl>
               </if>
               <if condition="$id eq 2 || $id eq 4 || $id eq 7">
                 <dl>
                 <dt>签约时间</dt>
-                <dd><input type="text" onclick="SetDate(this,'yyyy-MM-dd hh:mm:ss')" name="qytime" class="input large"/></dd>
+                <dd><input type="text" value="{$dates}" onclick="SetDate(this,'yyyy-MM-dd')" name="qytime" class="input large"/></dd>
                 </dl>
 
                 <dl>
                 <dt>开工时间</dt>
-                <dd><input type="text" onclick="SetDate(this,'yyyy-MM-dd hh:mm:ss')" name="kgtime" class="input large"/></dd>
+                <dd><input type="text" onclick="SetDate(this,'yyyy-MM-dd')" name="kgtime" class="input large"/></dd>
                 </dl>
 
                 <dl>
                 <dt>投产时间</dt>
-                <dd><input type="text" onclick="SetDate(this,'yyyy-MM-dd hh:mm:ss')" name="tctime" class="input large"/></dd>
+                <dd><input type="text" onclick="SetDate(this,'yyyy-MM-dd')" name="tctime" class="input large"/></dd>
                 </dl>
 
                 <dl>
@@ -91,23 +91,23 @@
               <if condition="$id eq 3">
                 <dl>
                 <dt>签约时间</dt>
-                <dd><input type="text" onclick="SetDate(this,'yyyy-MM-dd hh:mm:ss')" name="qytime" class="input large"/></dd>
+                <dd><input type="text" value="{$dates}" onclick="SetDate(this,'yyyy-MM-dd')" name="qytime" class="input large"/></dd>
                 </dl>
 
                 <dl>
                 <dt>拟开工时间</dt>
-                <dd><input type="text" onclick="SetDate(this,'yyyy-MM-dd hh:mm:ss')" name="nkgtime" class="input large"/></dd>
+                <dd><input type="text" onclick="SetDate(this,'yyyy-MM-dd')" name="nkgtime" class="input large"/></dd>
                 </dl>
               </if>
               <if condition="$id eq 5">
                 <dl>
                 <dt>签约时间</dt>
-                <dd><input type="text" onclick="SetDate(this,'yyyy-MM-dd hh:mm:ss')" name="qytime" class="input large"/></dd>
+                <dd><input type="text" value="{$dates}" onclick="SetDate(this,'yyyy-MM-dd')" name="qytime" class="input large"/></dd>
                 </dl>
 
                 <dl>
                 <dt>开工时间</dt>
-                <dd><input type="text" onclick="SetDate(this,'yyyy-MM-dd hh:mm:ss')" name="kgtime" class="input large"/></dd>
+                <dd><input type="text" onclick="SetDate(this,'yyyy-MM-dd')" name="kgtime" class="input large"/></dd>
                 </dl>
 
                 <dl>
@@ -123,16 +123,16 @@
 
                 <dl>
                 <dt>投产时间</dt>
-                <dd><input type="text" onclick="SetDate(this,'yyyy-MM-dd hh:mm:ss')" name="tctime" class="input large"/></dd>
+                <dd><input type="text" onclick="SetDate(this,'yyyy-MM-dd')" name="tctime" class="input large"/></dd>
                 </dl>
 
                 <dl>
-                <dt>2016年产值</dt>
+                <dt>上年产值</dt>
                 <dd><input type="text" name="ncz" class="input large"/></dd>
                 </dl>
 
                 <dl>
-                <dt>2016年税收</dt>
+                <dt>上年税收</dt>
                 <dd><input type="text" name="nss" class="input large"/></dd>
                 </dl>
               </if>

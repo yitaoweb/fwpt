@@ -77,7 +77,14 @@
                     <a href="{:cmf_url('portal/demand/view',array('id'=>$vo['id']))}">查看详情</a>
                 </div>
                 <h1>{$vo.title}</h1>
-                <p>对接状态：{$vo.state|state=###}</p>
+                <p>对接状态：
+                <if condition="$vo.sh_state == 1"> 
+                     审核
+                </if>
+                <if condition="$vo.sh_state == 0"> 
+                     未审核
+                </if>
+                </p>
                 <p>服务类型：{:getfield('portal_ssfw',$vo.ssfw_id,'name')}</p>
                 <p style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">内容摘要：{$vo.content}</p>
             </div>

@@ -1,0 +1,314 @@
+<html style="overflow-x: hidden; overflow-y: visible">
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta name="renderer" content="webkit">
+  <meta name="data-spm" content="datav">
+  <title>{$title}-{$sub_title}</title>
+
+ <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=yarzUUkNb0F0UgHUbSGiHRwQ"></script>
+
+  <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/show.css" />
+    <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/rfm.css" />
+  <link rel="stylesheet" type="text/css" href="__TMPL__/datav/css/common.css" />
+
+  <script src="__TMPL__/datav/js/jquery.js"></script>
+  <script src="__TMPL__/datav/js/echarts.js"></script>
+  <script src="__TMPL__/datav/js/theme/chalk.js"></script>
+<script type="text/javascript" src="__TMPL__/public/assets/js/date.js"></script>
+</head>
+<body onLoad="startTime()">  
+<div class="datavLayout">
+    <div class="head">
+        <div class="head_left">
+            <div class="info">
+                <div class="icon"></div>
+                <span class="date">{$role['name']}&nbsp;&nbsp;:&nbsp;&nbsp;{$admin['user_login']}&nbsp;&nbsp; [&nbsp;&nbsp;<a href="{:url('datav/Public/logout')}">退出</a>&nbsp;&nbsp;]&nbsp;&nbsp; [&nbsp;&nbsp;<a href="{:url('datav/show/index')}">返回主页</a>&nbsp;&nbsp;]</span>
+            </div>
+        </div>
+        <div class="head_mid">
+            <div class="title">{$sub_title}</div>
+            <div class="bt"></div>
+        </div>
+        <div class="head_right">
+            <div class="times">
+                <div class="icon" width="18px" height="18px" ></div>
+                <span class="date" id="ShowTime"></span>
+            </div>
+        </div>
+    </div>
+    <div class="wraper"></div>
+    <header class="rfm_header">
+        <ul>
+        <li class="active"><a class="animsition-link" href="#" data-animsition-out="fade-out-left-sm">各县区考核</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/qst')}" data-animsition-out="fade-out-left-sm">趋势图</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/jjyxqksy')}" data-animsition-out="fade-out-left-sm">长治市市域考核</a></li>
+        <li><a class="animsition-link" href="{:url('datav/show/jj')}" data-animsition-out="fade-out-left-sm">目标值对比</a></li>
+        <li><input type="text" id="qytime" onclick="SetDate(this,'yyyy-MM-dd')" name="qytime" class="input large"/></li>
+        <li><a onclick="cx()">[年度查询]</a></li>
+        </ul>
+        <script type="text/javascript">
+             function cx(){
+               var qytime = $("#qytime").val();
+                window.open('/datav/show/jj?qytime='+qytime, "_self");
+             }
+        </script>
+    </header>
+    <div class="content">
+        <div class="box site">
+
+            <div class="sub_main" style="width: 30%;height: 30%;margin: 0 1.5%" id="main6"></div>
+            <div class="sub_main" style="width: 30%;height: 30%;margin: 0 1.5%" id="main7"></div>
+            <div class="sub_main" style="width: 30%;height: 30%;margin: 0 1.5%" id="main8"></div>
+        </div>
+    </div>
+
+    <div class="wraper"></div>
+
+</div>
+
+
+</body>
+</html>
+  <SCRIPT LANGUAGE="JavaScript">
+    var jjyxqkmb = <?php echo json_encode($jjyxqkmb);?>;
+  </SCRIPT>
+<script>
+    function startTime()
+    {
+        var today=new Date()
+        var years=today.getFullYear();
+        var months=today.getMonth();
+        var d=today.getDate()
+        var h=today.getHours()
+        var m=today.getMinutes()
+        var s=today.getSeconds()
+        // add a zero in front of numbers<10
+        months=months+1
+        months=checkTime(months)
+        d=checkTime(d)
+        m=checkTime(m)
+        s=checkTime(s)
+        var weekday=new Array(7)
+        weekday[0]="星期日"
+        weekday[1]="星期一"
+        weekday[2]="星期二"
+        weekday[3]="星期三"
+        weekday[4]="星期四"
+        weekday[5]="星期五"
+        weekday[6]="星期六"
+        var w=weekday[today.getDay()]
+        document.getElementById('ShowTime').innerHTML=years+"-"+months+"-"+d+"  "+w+" "+h+":"+m+":"+s;
+        t=setTimeout('startTime()',500)
+    }
+    function checkTime(i)
+    {
+        if (i<10)
+        {i="0" + i}
+        return i
+    }
+
+
+    function writeObj(obj){ 
+     var description = ""; 
+     for(var i in obj){ 
+     var property=obj[i]; 
+     description+=i+" = "+property+"\n"; 
+     } 
+     alert(description); 
+    } 
+
+</script>
+
+<script>
+ var ss = new Array();
+
+ var jysr = new Array();
+ var jysr_mb = new Array();
+ var tzqd = new Array();
+ var tzqd_mb = new Array();
+ var rzqys = new Array();
+ var rzqys_mb = new Array();
+for (var i = 0; i < jjyxqkmb.length; i++) {
+      ss[i] = jjyxqkmb[i].name;
+      jysr[i] = jjyxqkmb[i].jysr;
+      jysr_mb[i] = jjyxqkmb[i].jysr_mb;
+      tzqd[i] = jjyxqkmb[i].tzqd;
+      tzqd_mb[i] = jjyxqkmb[i].tzqd_mb;
+      rzqys[i] = jjyxqkmb[i].rzqys;
+      rzqys_mb[i] = jjyxqkmb[i].rzqys_mb;
+    
+}
+
+    var myChart8 = echarts.init(document.getElementById('main8'));
+       option8 = {
+            title: {
+                top:'15px',
+                text: '入区企业',
+                textStyle:{
+                color:'#fff'
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                },
+            },
+
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                data: ss,
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value}'
+                },
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            series: [{
+                name: '完成值',
+                type: 'bar',
+                data: rzqys
+            }, {
+                name: '目标值',
+                type: 'bar',
+                data: rzqys_mb
+            }]
+        };
+    myChart8.setOption(option8);
+
+    var myChart7 = echarts.init(document.getElementById('main7'));
+       option7 = {
+            title: {
+                top:'15px',
+                text: '经营收入',
+                textStyle:{
+                color:'#fff'
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                data: ss,
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value}'
+                },
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            series: [{
+                name: '完成值',
+                type: 'bar',
+                data: jysr
+            }, {
+                name: '目标值',
+                type: 'bar',
+                data: jysr_mb
+            }]
+        };
+    myChart7.setOption(option7);
+
+    var myChart6 = echarts.init(document.getElementById('main6'));
+       option6 = {
+            title: {
+                top:'15px',
+                text: '投资强度',
+                textStyle:{
+                color:'#fff'
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                data: ss,
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value}'
+                },
+                axisLine:{  
+                    lineStyle:{  
+                        color:'#fff'
+                    }  
+                }
+            }],
+            series: [{
+                name: '完成值',
+                type: 'bar',
+                data: tzqd
+            }, {
+                name: '目标值',
+                type: 'bar',
+                data: tzqd_mb
+            }]
+        };
+    myChart6.setOption(option6);
+ 
+   
+
+</script>
+
+
+
+
+
+
+

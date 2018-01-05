@@ -18,14 +18,14 @@
     
     <div class="main_r right" style="min-height: 600px;">
         <include file="public@qiyetop" />
-        <div class="right_title"><span>限上企业数据上报（亿元）</span></div>
+        <div class="right_title"><span>限上企业数据上报（万元）</span></div>
           <form class="js-ajax-form" action="{:url('user/Jjyxqk/editPost')}" method="post" id="register"> 
             <div class="center_form">
               <dl>
                 <dt>上报日期</dt>
                 <dd><input type="text" name="date" value="{$qysjfx.date}" placeholder="1994-6-7" class="input large"/></dd>
               </dl>
-              <dl>
+<!--               <dl>
                 <dt>是否四上企业</dt>
                 <dd>
                     <select name="is_ssqy" style="width:326px;"  datatype="*" sucmsg=" ">
@@ -39,36 +39,36 @@
                         <option value="1" >是</option>
                     </select>
                 </dd>
-              </dl>
+              </dl> -->
              
 
-              <dl>
+<!--               <dl>
                 <dt>行业类型</dt>
                 <dd>
-                <select name="fl" style="width:326px;"  datatype="*" sucmsg=" ">
+                <select name="fl" style="width:326px;"  datatype="*" sucmsg=" "> -->
 <!--                     <volist name="fuwu" id="vo">
                         <option value="{$vo.id}" <if condition="$vo.id eq $qysjfx.fl">selected = "selected"</if>>
                            {$vo.name}
                         </option>
                     </volist> -->
-                    <option value="1" <if condition="1 eq $qysjfx.fl">selected = "selected"</if> >工业</option>
+<!--                     <option value="1" <if condition="1 eq $qysjfx.fl">selected = "selected"</if> >工业</option>
                     <option value="2" <if condition="2 eq $qysjfx.fl">selected = "selected"</if> >建筑业</option>
                     <option value="3" <if condition="3 eq $qysjfx.fl">selected = "selected"</if> >批零住餐</option>
                     <option value="4" <if condition="4 eq $qysjfx.fl">selected = "selected"</if> >服务业</option>
                 </select>
                 </dd>
-              </dl>
-              <dl>
+              </dl> -->
+<!--               <dl>
                 <dt>生产规模</dt>
                 <dd><input type="text" value="{$qysjfx.scgm}" name="scgm" class="input large"/></dd>
-              </dl>
+              </dl> -->
 
 
-              <dl>
+<!--               <dl>
                 <dt>主要产品</dt>
                 <dd><input type="text" value="{$qysjfx.zycp}" name="zycp" class="input large"/></dd>
               </dl>
-              <dl>
+ -->              <dl>
                 <dt>工业总产值</dt>
                 <dd><input type="text" value="{$qysjfx.gmzcz}" name="gmzcz" class="input large"/></dd>
               </dl>
@@ -77,9 +77,23 @@
                 <dt>经营收入</dt>
                 <dd><input type="text" value="{$qysjfx.jysr}" name="jysr" class="input large"/></dd>
               </dl>
-              <dl>
+<!--               <dl>
                 <dt>利润总额</dt>
                 <dd><input type="text" value="{$qysjfx.lrze}" name="lrze" class="input large"/></dd>
+              </dl> -->
+
+              <dl>
+                <dt>入驻企业数</dt>
+                <dd><input type="text" value="{$qysjfx.rzqys}" name="rzqys" class="input large"/></dd>
+              </dl>
+
+              <dl>
+                <dt>累计投资</dt>
+                <dd><input type="text" value="{$qysjfx.ljtz}" name="ljtz" placeholder="单位：（万元）" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt>开发面积</dt>
+                <dd><input type="text" value="{$qysjfx.kfmj}" name="kfmj" placeholder="单位：（亩）" class="input large"/></dd>
               </dl>
 
               <dl>
@@ -92,7 +106,7 @@
               </dl>
 
               <dl>
-                <dt>直接投资额</dt>
+                <dt>利用省外投资额</dt>
                 <dd><input type="text" value="{$qysjfx.sjlyswzjtze}" name="sjlyswzjtze" class="input large"/></dd>
               </dl>
               <dl>

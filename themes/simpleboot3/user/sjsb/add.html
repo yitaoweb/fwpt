@@ -18,86 +18,71 @@
     
     <div class="main_r right" style="min-height: 600px;">
         <include file="public@qiyetop" />
-        <div class="right_title"><span>限上企业数据上报</span></div>
+        <div class="right_title"><span>限上企业数据上报</span>&nbsp;&nbsp;单位（万元）</div>
           <form class="js-ajax-form" action="{:url('user/sjsb/addPost')}" method="post" id="register"> 
             <div class="center_form">
               <dl>
                 <dt>上报日期</dt>
-                <dd><input type="text" name="date" placeholder="1994-6-7" class="input large"/></dd>
+                <dd><input type="text" name="date" id="sbrq" placeholder="1994-6-7" class="input large"/></dd>
               </dl>
               <dl>
-                <dt></dt>
-                <dd></dd>
-              </dl>
-             
-
-              <dl>
-                <dt>行业类型</dt>
+                <dt>行业总分类型</dt>
                 <dd>
-                <select name="fl" id="fl" style="width:326px;"  datatype="*" sucmsg=" ">
-                    <option value="0" selected="selected">请选服务类型</option>
-                    {$categories_tree}
+                <select name="zfl" id="zfl" style="width:326px;"  datatype="*" sucmsg=" ">
+                    <option value="0" >请选总分服务类型</option>
+                    <option value="1" >批发</option>
+                    <option value="2" >零售</option>
+                    <option value="5" >住宿</option>
+                    <option value="6" >餐饮</option>
                 </select>
                 </dd>
               </dl>
+<!--               <dl>
+                <dt>行业细分类型</dt>
+                <dd>
+                <select name="fl" id="fl" style="width:326px;"  datatype="*" sucmsg=" ">
+                    <option value="0" selected="selected">请选细分服务类型</option>
+                    {$categories_tree}
+                </select>
+                </dd>
+              </dl>             
               <dl>
                 <dt></dt>
                 <dd></dd>
-              </dl>
+              </dl> -->
               <script type="text/javascript">
-                   $("#fl").change(function(){
+                   $("#zfl").change(function(){
                         if($(this).val() == "5"){
                              $("#dd").show();
+                             $("#lxtj").show();
+                             $("#sxtj").show();
                              $("#dds").hide();
                              $("#ddss").hide();
+                             $("#ddsss").hide();
                         }else if($(this).val() == "6"){
-                          $("#dds").show();
-                          $("#dd").hide();
-                          $("#ddss").hide();
+                           $("#dd").show();
+                            $("#lxtj").show();
+                             $("#sxtj").show();
+                             $("#dds").hide();
+                             $("#ddss").hide();
+                             $("#ddsss").hide();
+                        }else if($(this).val() == "2"){
+                          $("#ddsss").show();
+                          $("#lxtj").show();
+                          $("#sxtj").hide();
+                           $("#ddss").hide();
+                           $("#dd").hide();
+                           $("#dds").hide();
                         }else{
-                          $("#ddss").show();
+                          $("#lxtj").show();
+                          $("#sxtj").show();
+                           $("#ddss").show();
+                           $("#ddsss").show();
                            $("#dd").hide();
                            $("#dds").hide();
                         }
                    })
               </script>
-<div id="dd" style="display:none;">
-              <dl>
-                <dt>客房收入</dt>
-                <dd><input type="text" name="kfsr" class="input large"/></dd>
-              </dl>
-              <dl>
-                <dt></dt>
-                <dd></dd>
-              </dl>
-
-              <dl>
-                <dt>餐费收入</dt>
-                <dd><input type="text" name="cfsr" class="input large"/></dd>
-              </dl>
-              <dl>
-                <dt></dt>
-                <dd></dd>
-              </dl>
-
-              <dl>
-                <dt>商品销售额收入</dt>
-                <dd><input type="text" name="spxse" class="input large"/></dd>
-              </dl>
-              <dl>
-                <dt></dt>
-                <dd></dd>
-              </dl>
-
-              <dl>
-                <dt>其他收入</dt>
-                <dd><input type="text" name="qtsr" class="input large"/></dd>
-              </dl>
-              <dl>
-                <dt></dt>
-                <dd></dd>
-              </dl>
-</div>
 <div id="dds" style="display:none;">
               <dl>
                 <dt>营业收入</dt>
@@ -108,54 +93,77 @@
                 <dd></dd>
               </dl>
 </div>
-<div id="ddss">              
+<div id="ddss" style="display:none;">              
               <dl>
-                <dt>当月销售额</dt>
-                <dd><input type="text" name="xse" class="input large"/></dd>
-              </dl>
-              <dl>
-                <dt></dt>
-                <dd></dd>
-              </dl>
-
-              <dl>
-                <dt>当月零售额</dt>
-                <dd><input type="text" name="lse" class="input large"/></dd>
-              </dl>
-              <dl>
-                <dt></dt>
-                <dd></dd>
+                <dt>当月批发销售额</dt>
+                <dd><input type="text" name="xse" id="xse" class="input large"/></dd>
               </dl>
 </div>
+ 
+<div id="ddsss" style="display:none;">
               <dl>
-                <dt>同期</dt>
-                <dd><input type="text" name="tq" class="input large"/></dd>
+                <dt>当月零售额</dt>
+                <dd><input type="text" name="lse" id="lse" class="input large"/></dd>
+              </dl>
+</div>
+
+<div id="sxtj" style="display:none;">
+              <dl>
+                <dt>销售额同期</dt>
+                <dd><input type="text" name="tq" id="tq" class="input large"/></dd>
               </dl>
               <dl>
-                <dt></dt>
-                <dd></dd>
+                <dt>销售额同比</dt>
+                <dd><input type="text" name="tb" id="tb" class="input large"/></dd>
               </dl>
 
               <dl>
-                <dt>同比</dt>
-                <dd><input type="text" name="tb" class="input large"/></dd>
+                <dt>销售额环比</dt>
+                <dd><input type="text" name="hb" id="hb" class="input large"/></dd>
+              </dl>
+</div>
+
+<div id="lxtj" style="display:none;">
+              <dl>
+                <dt>零售额同期</dt>
+                <dd><input type="text" name="lstq" id="lstq" class="input large"/></dd>
               </dl>
               <dl>
-                <dt></dt>
-                <dd></dd>
+                <dt>零售额同比</dt>
+                <dd><input type="text" name="lstb" id="lstb" class="input large"/></dd>
               </dl>
 
               <dl>
-                <dt>环比</dt>
-                <dd><input type="text" name="hb" class="input large"/></dd>
+                <dt>零售额环比</dt>
+                <dd><input type="text" name="lshb" id="lshb" class="input large"/></dd>
               </dl>
+</div>
+
+ <div id="dd" style="display:none;">
+
               <dl>
-                <dt></dt>
-                <dd></dd>
+                <dt>客房收入</dt>
+                <dd><input type="text" name="kfsr" class="input large"/></dd>
               </dl>
 
 
-            
+              <dl>
+                <dt>餐费收入</dt>
+                <dd><input type="text" name="cfsr" class="input large"/></dd>
+              </dl>
+
+              <dl>
+                <dt>商品销售额收入</dt>
+                <dd><input type="text" name="spxse" class="input large"/></dd>
+              </dl>
+
+
+              <dl>
+                <dt>其他收入</dt>
+                <dd><input type="text" name="qtsr" class="input large"/></dd>
+              </dl>
+
+</div>           
               <dl style="width:100%; height:120px">
                 <dt>备注</dt>
                <dd><textarea name="bz" rows="2" cols="20"  style="height:100px;width:709px;"></textarea></dd>
@@ -176,7 +184,48 @@
             </div>
             </form>
     </div>
-</div>							
+</div>		
+<!--   <script type="text/javascript">
+      function thb(){
+        $.post('/user/sjsb/thb',{sbrq:$("#sbrq").val()},function(data){
+               eval("var ret = "+data);
+               var xse = $("#xse").val();
+            if(xse.length != 0){
+
+
+               if(ret.get_tb.length != 0){
+                 var tb_xse = ret.get_tb[0]['xse'];
+                 $("#tq").val(tb_xse+"%");
+                 $("#tb").val(Math.floor((xse-tb_xse)/tb_xse*100));
+               }else{
+                  alert("同比、同期没有数据");
+               }
+               if(ret.get_hb.length != 0){
+                var hb_xse = ret.get_hb[0]['xse'];
+                $("#hb").val(Math.floor((xse-hb_xse)/hb_xse*100));
+               }else{
+                  alert("环比没有数据");
+               } 
+
+            }else{
+              var xse = $("#lse").val();
+               if(ret.get_tb.length != 0){
+                 var tb_xse = ret.get_tb[0]['xse'];
+                 $("#tq").val(tb_xse);
+                 $("#tb").val(Math.floor((xse-tb_xse)/tb_xse*100));
+               }else{
+                  alert("同比、同期没有数据");
+               }
+               if(ret.get_hb.length != 0){
+                var hb_xse = ret.get_hb[0]['xse'];
+                $("#hb").val(Math.floor((xse-hb_xse)/hb_xse*100));
+               }else{
+                  alert("环比没有数据");
+               } 
+            }            
+        })
+      }
+  </script>		 -->			
   <include file="public@link" />
 	<include file="public@footer" />
 

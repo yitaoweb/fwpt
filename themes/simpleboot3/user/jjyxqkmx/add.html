@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$user_login}  - 修改资料</title>
+<meta name="keywords" content=""/>
+<meta name="description" content="">
+<include file="public@head"/>
+
+</head>
+<body class="body-white" id="top">
+
+<include file="public@nav" />
+<div class="local">当前位置：<a href="index.html">首页</a> &gt;&nbsp;<if condition='($user_type == 2)'>企业<else/>机构</if>中心</div>
+<div class="main">
+    <div class="main_l left">
+        <include file="public@qiyenav" />
+    </div>
+    
+    <div class="main_r right" style="min-height: 600px;">
+        <include file="public@qiyetop" />
+        <div class="right_title"><span>经济运行情况明细</span>&nbsp;&nbsp;单位（万元）</div>
+          <form class="js-ajax-form" action="{:url('user/Jjyxqkmx/addPost')}" method="post" id="register"> 
+            <div class="center_form">
+              <dl>
+                <dt>上报日期</dt>
+                <dd><input type="text" name="date" placeholder="1994-6-7" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt>企业名称</dt>
+                <dd><input type="text" name="qyname"  class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt>是否四上企业</dt>
+                <dd>
+                    <select name="is_ssqy" style="width:326px;"  datatype="*" sucmsg=" ">
+                        <option value="1" >是</option>
+                        <option value="0">否</option>
+                    </select>
+                </dd>
+              </dl>
+             
+
+              <dl>
+                <dt>行业类型</dt>
+                <dd>
+                <select name="fl" style="width:326px;"  datatype="*" sucmsg=" ">
+                    <option value="1" >工业</option>
+                    <option value="2" >建筑业</option>
+                    <option value="3" >批零住餐</option>
+                    <option value="4" >服务业</option>
+<!--                     <volist name="fuwu" id="vo">
+                        <option value="{$vo.id}">{$vo.name}</option>
+                    </volist> -->
+                </select>
+                </dd>
+              </dl>
+              <dl>
+                <dt>生产规模</dt>
+                <dd><input type="text" name="scgm" class="input large"/></dd>
+              </dl>
+
+
+              <dl>
+                <dt>主要产品</dt>
+                <dd><input type="text" name="zycp" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt>工业总产值</dt>
+                <dd><input type="text" name="gmzcz" class="input large"/></dd>
+              </dl>
+
+              <dl>
+                <dt>经营收入</dt>
+                <dd><input type="text" name="jysr" class="input large"/></dd>
+              </dl>
+<!--               <dl>
+                <dt>利润总额</dt>
+                <dd><input type="text" name="lrze" class="input large"/></dd>
+              </dl> -->
+<!--               <dl>
+                <dt>入驻企业数</dt>
+                <dd><input type="text" name="rzqys" class="input large"/></dd>
+              </dl> -->
+
+<!--               <dl>
+                <dt>投资强度</dt>
+                <dd><input type="text" name="tzqd" placeholder="单位：（万元/亩）" class="input large"/></dd>
+              </dl> -->
+
+              <dl>
+                <dt>税收收入</dt>
+                <dd><input type="text" name="shsr" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt>招商引资到位额</dt>
+                <dd><input type="text" name="zsyzdwe" class="input large"/></dd>
+              </dl>
+
+              <dl>
+                <dt>利用省外投资额</dt>
+                <dd><input type="text" name="sjlyswzjtze" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt>固定资产投资额</dt>
+                <dd><input type="text" name="gdzctze" class="input large"/></dd>
+              </dl>
+
+              <dl>
+                <dt>进出口额</dt>
+                <dd><input type="text" name="jcke" class="input large"/></dd>
+              </dl>
+              <dl>
+                <dt>研究与试验发展经费</dt>
+                <dd><input type="text" name="yjysyfzjf" class="input large"/></dd>
+              </dl>
+
+             
+              <dl>
+                <dt></dt>
+                <dd>
+                  <button type="submit" class="btn-block btn-blue js-ajax-submit">确定提交</button>
+                </dd>
+              </dl>
+            </div>
+            </form>
+    </div>
+</div>							
+  <include file="public@link" />
+	<include file="public@footer" />
+
+	<!-- /container -->
+	<include file="public@scripts" />
+</body>
+</html>

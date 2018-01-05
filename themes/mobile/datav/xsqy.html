@@ -45,7 +45,7 @@
                 <div class="lower-screen">
 
                     <div class="card">
-                        <h2>销售额上报月份统计</h2>
+                        <h2>行业分类占比</h2>
                         <br><br>
                          <div style="width: 100%;height:350px;" id="main1"></div>
 <!--                         <p>Created by Lewi Hussey.</p> -->
@@ -69,12 +69,19 @@
     var qysjfxss = <?php echo json_encode($qysjfxss);?>;
   </SCRIPT>
 <script type="text/javascript">
+     var pf = <?php echo json_encode($pf);?>;
+    var ls = <?php echo json_encode($ls);?>;
+    var zs = <?php echo json_encode($zs);?>;
+    var cy = <?php echo json_encode($cy);?>;
+
     var lsy;
     var pfy;
     var zsy;
     var cyy;
     var time = new Array();
     var xsearr = new Array();
+    var lsearr = new Array();
+    var myChart1 = echarts.init(document.getElementById('main1'),'chalk');
     for(var i=0;i<qysjfxs.length;i++){
        if(qysjfxs[i].fl == 1){
            lsy = qysjfxs[i].xse;
@@ -88,13 +95,94 @@
        if(qysjfxs[i].fl == 4){
            cyy = qysjfxs[i].xse;
        }
-    };
+    }
     for(var i=0;i<qysjfxss.length;i++){
+
          time[i]=qysjfxss[i].time;
          xsearr[i]=qysjfxss[i].xse;
-    };
+         lsearr[i]=qysjfxss[i].lse;
+    }
+
+    var pf_xse = 0;
+    var pf_lse = 0;
+
+    var ls_xse = 0;
+    var ls_lse = 0;
+
+    var zs_cfsr = 0;
+    var zs_spxse = 0;
+    var zs_qtsr = 0;
+
+    var cy_yysy = 0;
+
+    if (pf[0].num != 0) {
+        pf_xse = pf[0].xse;
+        pf_lse = pf[0].lse;
+    }
+
+    if (ls[0].num != 0) {
+        ls_xse = ls[0].xse;
+        ls_xse = ls[0].lse;
+    }
+
+    if (zs[0].num != 0) {
+        zs_kfsr = zs[0].kfsr;
+        zs_cfsr = zs[0].cfsr;
+        zs_spxse = zs[0].spxse;
+        zs_qtsr = zs[0].qtsr;
+    }
+    if (cy[0].num != 0) {
+        cy_yysr = cy[0].yysr;
+    }
    var myChart = echarts.init(document.getElementById('main'));
-   option = {
+    option = {
+
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['销售额','零售额']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: time
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name:'销售额',
+                type:'line',
+                stack: '总量',
+                data:xsearr
+            },
+            {
+                name:'零售额',
+                type:'line',
+                stack: '总量',
+                data:lsearr
+            }
+        ]
+    };
+myChart.setOption(option);
+
+
+
+var myChart1 = echarts.init(document.getElementById('main1'));
+option1 = {
     tooltip : {
         trigger: 'item',
         formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -102,7 +190,7 @@
     legend: {
         orient: 'vertical',
         left: 'left',
-        data: ['零售行业','批发行业','住宿行业','餐饮行业']
+        data: ['餐饮','零售','住宿','批发']
     },
     series : [
         {
@@ -111,10 +199,10 @@
             radius : '55%',
             center: ['50%', '60%'],
             data:[
-                {value:lsy, name:'零售行业'},
-                {value:pfy, name:'批发行业'},
-                {value:zsy, name:'住宿行业'},
-                {value:cyy, name:'餐饮行业'}
+                {value:cy_yysr, name:'餐饮'},
+                {value:ls_lse, name:'零售'},
+                {value:zs_kfsr, name:'住宿'},
+                {value:pf_xse, name:'批发'}
             ],
             itemStyle: {
                 emphasis: {
@@ -123,46 +211,6 @@
                     shadowColor: 'rgba(0, 0, 0, 0.5)'
                 }
             }
-        }
-    ]
-};
-
-myChart.setOption(option);
-
-
-
-var myChart1 = echarts.init(document.getElementById('main1'));
-option1 = {
-    tooltip: {
-        trigger: 'axis'
-    },
-    legend: {
-        data:['Step Start', 'Step Middle', 'Step End']
-    },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    toolbox: {
-        feature: {
-            saveAsImage: {}
-        }
-    },
-    xAxis: {
-        type: 'category',
-        data: time
-    },
-    yAxis: {
-        type: 'value'
-    },
-    series: [
-        {
-            name:'亿元',
-            type:'line',
-            step: 'start',
-            data:xsearr
         }
     ]
 };

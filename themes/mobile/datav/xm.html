@@ -55,7 +55,7 @@
     </script>
 
 <script type="text/javascript">
-    $.ajax({
+        $.ajax({
         type: "POST",
         url: "{:url('datav/api/site_xm')}",
         dataType:"json",
@@ -64,25 +64,38 @@
                 //writeObj(result);
                 var myChart1 = echarts.init(document.getElementById('main1'),'chalk');
     
-                var hours = ['1', '2', '3', '4', '5', '6', '7','8', '9', '10','11','12'];
-                var days = [ '在谈', '新签', '拟开', '在建', '重点', '新投'];
+                var hours = ['','1', '2', '3', '4', '5', '6', '7','8', '9', '10','11','12', ' 合计',''];
+                var days = [ '','小计','在谈', '新签', '拟开','新开', '在建', '重点', '新投'];
                 var data = result;
                 data = data.map(function (item) {
-                    return [item[1], item[0], item[2]];
+                    return [item[1], item[0], item[2], item[3], item[4],];
                 });
                 option = {
                     title: {
                         text: '',
                         link: 'https://github.com/pissang/echarts-next/graphs/punch-card'
                     },
+                   
                     legend: {
                         data: ['Punch Card'],
                         left: 'right'
                     },
                     tooltip: {
                         position: 'top',
+                        confine:true,
                         formatter: function (params) {
-                            return '在'+hours[params.value[0]] + '份有 ' +params.value[2] + ' 个 ' +  days[params.value[1]];
+
+                            if (params['data'][1] == 1 ) {
+                                if (params['data'][0] == 13) {
+                                    return '共有 ' +params.value[2] + ' 个项目,' + ',投资总额 ' +params.value[3] + ' 亿元，引资总额 ' +  params.value[4]+'亿元';
+                                }else{
+                                    return '在'+hours[params.value[0]] + '份共有 ' +params.value[2] + ' 个项目, ' + ',投资总额 ' +params.value[3] + ' 亿元，引资总额 ' +  params.value[4]+'亿元';
+                                }
+                            }else{
+                                return '在'+hours[params.value[0]] + '份有 ' +params.value[2] + ' 个 ' +  days[params.value[1]]+ ',投资总额 ' +params.value[3] + ' 亿元，引资总额 ' +  params.value[4]+'亿元';
+                            }
+
+                            
                         }
                     },
                     grid: {
@@ -98,7 +111,7 @@
                             show: true,
                             textStyle: {
                                 fontSize: 16,
-                                
+                                color:'#40c1BE'
                                 }
                             },
                         boundaryGap: false,
@@ -120,7 +133,7 @@
                             show: true,
                             textStyle: {
                                 fontSize: 20,
-                                
+                                color:'#40c1BE'
                                 }
                             },
                         boundaryGap: false,
@@ -135,17 +148,75 @@
                             show: false
                         }
                     },
+              
                     series: [{
                         name: '数据量',
                         type: 'scatter',
                         symbolSize: function (val) {
-                            return val[2] * 15;
+                            //writeObj(val);
+                            if (val[1] == 1 ) {
+                                if (val[0] == 13) {
+                                    return 50;
+                                }else{
+                                    return 20;
+                                }
+                                
+                            }else{
+                                return val[2] * 10;
+                            }
+                            //writeObj(val);
+                            
                         },
+                        animationDelay: function (idx) {
+                            return idx * 5;
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: function (params) {
+                                    if (params['data'][1] == 1 ) {
+                                        if (params['data'][0] == 13) {
+                                            return '#fec42c';
+                                        }else{
+                                            return '#dd4444';
+                                        }
+                                        
+                                    }else{
+                                        return '#40c1BE';
+                                    }
+                                },
+                                shadowBlur: 5,
+                                shadowColor: '#05C3F9'
+                            }
+                        },
+                        
                         data: data
                     }]
                 };
 
                 myChart1.setOption(option);
+
+                myChart1.on('click', function (params) {
+
+                  
+
+                    var m = params.value[0];
+
+                    var t = params.value[1]-1;
+
+                    var str ='/m/'+m+'/t/'+t;
+
+                    var strs = "{:url('datav/show/xm_info')}";
+                    var url = insertString(strs,'.',str);
+                   // alert(url);
+                    var w = 0;
+                    if (t == 1 || t == 6) {
+                        w = 800;
+                    }else{
+                        w = 1000;
+                    }
+                   art.dialog.open(url,{lock:false,title:days[params.value[1]],width:w,height:500,yesText:'关闭',background: '#071c43',opacity: 0.87});
+                   // writeObj(params);
+                });
             }
             
         },

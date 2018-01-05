@@ -189,14 +189,63 @@ class ShowController extends HomeBaseController
     //数据分析 - 经济运行情况数据分析
     public function jj()
     {
+         $timestampfl = date('y-m-d',time());
+         if(isset($_GET["qytime"])){
+            $timestampfl = $_GET["qytime"];
+         }
         $sub_title='经济运行情况数据分析';
         $this->assign('sub_title',$sub_title);
         $get_jj = Db::query('select sum(jysr) as jysr,sum(lrze) as lrze,sum(shsr) as shsr ,sum(zsyzdwe) as zsyzdwe,sum(sjlyswzjtze) as sjlyswzjtze,sum(gdzctze) as gdzctze,sum(jcke) as jcke ,sum(yjysyfzjf) as yjysyfzjf from pt_jjyxqk');
 
         $get_jjs = Db::query(' select DATE_FORMAT(pt_jjyxqk.date,"%m") as time,  sum(jysr) as jysr,sum(lrze) as lrze,sum(shsr) as shsr ,sum(zsyzdwe) as zsyzdwe,sum(sjlyswzjtze) as sjlyswzjtze,sum(gdzctze) as gdzctze,sum(jcke) as jcke ,sum(yjysyfzjf) as yjysyfzjf  from pt_jjyxqk group by DATE_FORMAT(pt_jjyxqk.date,"%m")');
+
+                $get_mb = Db::query('select c.user_nickname as name,b.*,sum(a.scgm)as scgm,sum(a.gmzcz)as gmzcz,sum(a.jysr)as jysr,sum(a.lrze)as lrze,sum(a.shsr)as shsr,sum(a.zsyzdwe)as zsyzdwe,sum(a.sjlyswzjtze)as sjlyswzjtze,sum(a.gdzctze)as gdzctze,sum(a.jcke)as jcke from pt_jjyxqk as a LEFT JOIN pt_portal_jjyxqkmb as b on a.user_id=b.xzqy_id LEFT JOIN pt_user as c on c.id=a.user_id where date_format(a.date, "%y")=date_format("'.$timestampfl.'", "%y") GROUP BY a.user_id');
+
         $this->assign('get_jj',$get_jj);
         $this->assign('get_jjs',$get_jjs);
+        $this->assign('get_mb',$get_mb);
         return $this->fetch(':jj');
+    }
+
+    public function qst()
+    {
+         $timestampfl = date('y-m-d',time());
+        $sub_title='经济运行情况数据分析';
+        $this->assign('sub_title',$sub_title);
+        $get_jj = Db::query('select sum(jysr) as jysr,sum(lrze) as lrze,sum(shsr) as shsr ,sum(zsyzdwe) as zsyzdwe,sum(sjlyswzjtze) as sjlyswzjtze,sum(gdzctze) as gdzctze,sum(jcke) as jcke ,sum(yjysyfzjf) as yjysyfzjf from pt_jjyxqk');
+
+        $get_jjs = Db::query(' select DATE_FORMAT(pt_jjyxqk.date,"%m") as time,  sum(jysr) as jysr,sum(lrze) as lrze,sum(shsr) as shsr ,sum(zsyzdwe) as zsyzdwe,sum(sjlyswzjtze) as sjlyswzjtze,sum(gdzctze) as gdzctze,sum(jcke) as jcke ,sum(yjysyfzjf) as yjysyfzjf  from pt_jjyxqk group by DATE_FORMAT(pt_jjyxqk.date,"%m")');
+
+
+        $this->assign('get_jj',$get_jj);
+        $this->assign('get_jjs',$get_jjs);
+        return $this->fetch(':qst');
+    }
+
+    public function jjyxqksy(){
+        $timestampfl = date('y-m-d',time());
+         if(isset($_GET["qytime"])){
+            $timestampfl = $_GET["qytime"];
+         }
+         $sub_title='经济运行情况数据分析';
+         $this->assign('sub_title',$sub_title);
+        $jjyxqk = Db::query('select count(a.id)as rzqys_mb,sum(a.jysr)as jysr_mb,sum(a.ljtz)/sum(a.kfmj)as tzqd_mb,sum(a.sjlyswzjtze)as sjlyswzjtze_mb,sum(a.yjysyfzjf)as yjysyfzjf_mb from pt_jjyxqk as a where date_format(a.date, "%y")=date_format("'.$timestampfl.'", "%y")');
+        $jjyxqkmb = Db::query('select * from pt_portal_jjyxqksy where date=date_format("'.$timestampfl.'", "%y")');
+        $this->assign('jjyxqk',$jjyxqk);
+        $this->assign('jjyxqkmb',$jjyxqkmb);
+         return $this->fetch(':jjyxqksy');
+    }
+
+    public function jjyxqkxq(){
+        $timestampfl = date('y-m-d',time());
+         if(isset($_GET["qytime"])){
+            $timestampfl = $_GET["qytime"];
+         }
+         $sub_title='经济运行情况数据分析';
+         $this->assign('sub_title',$sub_title);
+        $jjyxqkmb = Db::query('select d.*,c.name as name,sum(a.rzqys)as rzqys,sum(a.jysr)as jysr,sum(a.ljtz)/sum(a.kfmj)as tzqd from pt_jjyxqk as a LEFT JOIN pt_user as b on b.id=a.user_id LEFT JOIN pt_portal_xzqy as c on b.qy_area=c.id LEFT JOIN pt_portal_jjyxqkmbxq as d on d.xzqy_id=c.id where date_format(a.date, "%y")=date_format("'.$timestampfl.'", "%y") GROUP BY c.id');
+        $this->assign('jjyxqkmb',$jjyxqkmb);
+         return $this->fetch(':jjyxqkxq');
     }
 
 

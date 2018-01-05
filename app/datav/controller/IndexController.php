@@ -29,7 +29,7 @@ class IndexController extends HomeBaseController
         if ($this->request->isPost()) {                                  
            
             $data = $this->request->post();
-        
+
             $userModel         = new UserModel();
             $user['user_pass'] = $data['password'];
             $user['user_login'] = $data['username'];

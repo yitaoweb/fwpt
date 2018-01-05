@@ -100,7 +100,7 @@ class ApiController extends HomeBaseController
     }
 
     public function jjyxqk(){
-        $jjyxqk = Db::query('select a.fl as fl,sum(a.gmzcz) as gmzcz from pt_jjyxqk as a group by a.fl');
+        $jjyxqk = Db::query('select a.fl as fl,sum(a.gmzcz) as gmzcz from pt_jjyxqkmx as a group by a.fl');
         return $jjyxqk;
     }
 

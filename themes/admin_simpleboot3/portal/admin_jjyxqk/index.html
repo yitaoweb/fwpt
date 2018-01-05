@@ -5,7 +5,19 @@
     <ul class="nav nav-tabs">
         <li class="active"><a href="{:url('AdminJjyxqk/index')}">数据分析</a></li>
     </ul>
-
+    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminJjyxqk/index')}">
+        开发区:
+        <select name="kfq" class="form-control"  datatype="*" sucmsg=" ">
+                    <option value="0">请选择</option>
+                    <foreach name="user" item="vo">
+                       <option value="{$vo.id}" >{$vo.user_nickname}</option>
+                    </foreach>
+        </select>
+        <input type="submit" class="btn btn-primary" value="搜索"/>
+        <a class="btn btn-danger" href="{:url('AdminJjyxqk/index')}">清空</a>
+        <input type="submit" class="btn btn-primary" name="dc" value="导出"/>
+<!--         <a class="btn btn-danger" href="{:url('AdminJjyxqk/index',array('name'=>2))}">导出</a> -->
+    </form>
 
 
     <form method="post" class="js-ajax-form margin-top-20">
@@ -17,7 +29,7 @@
             <tr>
                 <th width="50">ID</th>
 
-                        <th>主要产品</th>
+                        <th>入区企业数</th>
                         <th>经营收入</th>
                         <th>工业总产值</th>
                         <th>上报日期</th>
@@ -29,7 +41,7 @@
             <foreach name="tags" item="vo">
                 <tr>
                     <td>{$vo.id}</td>
-                        <td>{$vo.zycp}</td>
+                        <td>{$vo.rzqys}</td>
                         <td>{$vo.jysr}</td>
                         <td>{$vo.gmzcz}</td>
                         <td>{$vo.date}</td>
@@ -52,9 +64,13 @@
                 </tr>
             </foreach>
                 <tr>
-                  <td colspan="2" style="text-align: center;"><b>合计</b></td>
-                  <td colspan="1" ><b>经营收入：</b>{$xmcoun[0]['jysr']}<b>亿元</b></td>
-                  <td colspan="0" ><b>工业总产值：</b>{$xmcoun[0]['gmzcz']}<b>亿元</b></td>
+                  <td colspan="1" style="text-align: center;"><b>合计</b></td>
+                  <td colspan="1" ><b>经营收入：</b>{$xmcoun[0]['jysr']}<b>万元</b></td>
+                  <td colspan="0" ><b>工业总产值：</b>{$xmcoun[0]['gmzcz']}<b>万元</b></td>
+                  <td colspan="0" ><b>固定资产：</b>{$xmcoun[0]['gdzctze']}<b>万元</b></td>
+                  <td colspan="0" ><b>招商引资：</b>{$xmcoun[0]['zsyzdwe']}<b>万元</b></td>
+                  <td colspan="0" ><b>进出口：</b>{$xmcoun[0]['jcke']}<b>万元</b></td>
+                  <td colspan="0" ><b>税收：</b>{$xmcoun[0]['shsr']}<b>万元</b></td>
                 </tr>
             </tbody>
             <tfoot>

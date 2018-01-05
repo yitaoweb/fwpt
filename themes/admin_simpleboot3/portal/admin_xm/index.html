@@ -7,15 +7,22 @@
     </ul>
 <form class="well form-inline margin-top-20" method="post" action="{:url('AdminXm/sh')}">
                  <select class="form-control" name="pageselect" onchange="window.open(options[selectedIndex].value,'_self')">
-                       <option value="{:url('AdminXm/index',array('id'=>0))}" <if condition="$id eq 0">selected = "selected"</if>>请选择</option>
-                        <option value="{:url('AdminXm/index',array('id'=>1))}" <if condition="$id eq 1">selected = "selected"</if>>在谈项目表</option>
-                         <option value="{:url('AdminXm/index',array('id'=>2))}" <if condition="$id eq 2">selected = "selected"</if>>新签约项目明细表</option>
-                          <option value="{:url('AdminXm/index',array('id'=>3))}" <if condition="$id eq 3">selected = "selected"</if>>拟开工项目表</option>
-                           <option value="{:url('AdminXm/index',array('id'=>4))}" <if condition="$id eq 4">selected = "selected"</if>>新开工项目明细表</option>
-                            <option value="{:url('AdminXm/index',array('id'=>5))}" <if condition="$id eq 5">selected = "selected"</if>>在建项目明细表</option>
-                             <option value="{:url('AdminXm/index',array('id'=>6))}" <if condition="$id eq 6">selected = "selected"</if>>2016年前重点投产项目明细表</option>
-                              <option value="{:url('AdminXm/index',array('id'=>7))}" <if condition="$id eq 7">selected = "selected"</if>>新投产项目明细表</option>
+                       <option value="{:url('AdminXm/index',array('id'=>0,'kfqid'=>$kfqid))}" <if condition="$id eq 0">selected = "selected"</if>>请选择</option>
+                        <option value="{:url('AdminXm/index',array('id'=>1,'kfqid'=>$kfqid))}" <if condition="$id eq 1">selected = "selected"</if>>在谈项目表</option>
+                         <option value="{:url('AdminXm/index',array('id'=>2,'kfqid'=>$kfqid))}" <if condition="$id eq 2">selected = "selected"</if>>新签约项目明细表</option>
+                          <option value="{:url('AdminXm/index',array('id'=>3,'kfqid'=>$kfqid))}" <if condition="$id eq 3">selected = "selected"</if>>拟开工项目表</option>
+                           <option value="{:url('AdminXm/index',array('id'=>4,'kfqid'=>$kfqid))}" <if condition="$id eq 4">selected = "selected"</if>>新开工项目明细表</option>
+                            <option value="{:url('AdminXm/index',array('id'=>5,'kfqid'=>$kfqid))}" <if condition="$id eq 5">selected = "selected"</if>>在建项目明细表</option>
+                             <option value="{:url('AdminXm/index',array('id'=>6,'kfqid'=>$kfqid))}" <if condition="$id eq 6">selected = "selected"</if>>2016年前重点投产项目明细表</option>
+                              <option value="{:url('AdminXm/index',array('id'=>7,'kfqid'=>$kfqid))}" <if condition="$id eq 7">selected = "selected"</if>>新投产项目明细表</option>
                   </select>
+                  <select class="form-control" name="pageselect" onchange="window.open(options[selectedIndex].value,'_self')">
+                       <option value="{:url('AdminXm/index',array('id'=>0))}" <if condition="$id eq 0">selected = "selected"</if>>请选择</option>
+                       <volist name="user" id="vos">
+                           <option value="{:url('AdminXm/index',array('kfqid'=>$vos.id,'id'=>$id))}" >{$vos['user_nickname']}</option>
+                       </volist>
+                  </select>
+                  <a class="btn btn-danger" href="{:url('AdminXm/index',array('id'=>$id,'kfqid'=>$kfqid,'name'=>2))}">导出</a>
     </form>
 
 
@@ -29,8 +36,8 @@
                 <th width="50">ID</th>
                         <th>开发区</th>
                         <th>项目名称</th>
-                        <th>投资总额（亿元）</th>
-                        <th>引资总额（亿元）</th>
+                        <th>投资总额（万元）</th>
+                        <th>引资总额（万元）</th>
                         <th>投资方名称</th>
                         <th>状态</th>
                         <th>操作</th>
@@ -41,9 +48,9 @@
                 <tr>
                     <td>{$vo.id}</td>
                     <td>
-                        <volist name="fuwu" id="vos">
-                            <if condition="$vos.id eq $vo.kfq">
-                                {$vos.name}
+                        <volist name="user" id="vos">
+                            <if condition="$vos.id eq $vo.user_id">
+                                {$vos.user_nickname}
                             </if>
                         </volist>
                         </td>
@@ -70,9 +77,11 @@
                 </tr>
             </foreach>
                 <tr>
-                  <td colspan="2" style="text-align: center;"><b>合计</b></td>
-                  <td colspan="2" ><b>投资总额：</b>{$xmcoun[0]['tzze']}<b>亿元</b></td>
-                  <td colspan="3" ><b>引资总额：</b>{$xmcoun[0]['yzze']}<b>亿元</b></td>
+                  <td colspan="1" style="text-align: center;"><b>合计</b></td>
+                  <td ><b>项目数量：</b>{$xmcoun[0]['sl']}<b></b></td>
+                  <td colspan="2" ><b>投资总额：</b>{$xmcoun[0]['tzze']}<b>万元</b></td>
+                  <td colspan="3" ><b>引资总额：</b>{$xmcoun[0]['yzze']}<b>万元</b></td>
+
                 </tr>
             </tbody>
             <tfoot>
@@ -80,8 +89,8 @@
                 <th width="50">ID</th>
                         <th>开发区</th>
                         <th>项目名称</th>
-                        <th>投资总额（亿元）</th>
-                        <th>引资总额（亿元）</th>
+                        <th>投资总额（万元）</th>
+                        <th>引资总额（万元）</th>
                         <th>投资方名称</th>
                         <th>状态</th>
                         <th>操作</th>
