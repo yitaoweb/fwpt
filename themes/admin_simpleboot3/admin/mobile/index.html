@@ -1,0 +1,35 @@
+<include file="public@header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:url('mobile/index')}">手机配置</a></li>
+		</ul>
+		<form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('Admin/mobile/indexPost')}">
+			<div class="form-group">
+				<label for="input-from_name" class="col-sm-2 control-label"><span class="form-required">*</span>APIID</label>
+				<div class="col-md-6 col-sm-10">
+					<input type="text" class="form-control" id="input-from_name" name="sms_name" value="{$sms_name|default=''}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="input-from" class="col-sm-2 control-label"><span class="form-required">*</span>APIKEY</label>
+				<div class="col-md-6 col-sm-10">
+					<input type="text" class="form-control" id="input-from" name="sms_pwd" value="{$sms_pwd|default=''}">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+					<a class="btn btn-warning" href="javascript:parent.openIframeDialog('{:url('mobile/test')}','发送测试邮件',{width:'600px',height:'400px'});">测试邮件</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script src="__STATIC__/js/admin.js"></script>
+	<script>
+		
+	</script>
+</body>
+</html>
