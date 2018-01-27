@@ -11,7 +11,7 @@
 namespace app\portal\controller;
 
 use cmf\controller\HomeBaseController;
-use app\portal\model\PortalSsfwModel;
+use app\portal\model\PortalSshyModel;
 use app\portal\model\PortalXzqyModel;
 use think\Db;
 class SupplyController extends HomeBaseController
@@ -24,7 +24,7 @@ class SupplyController extends HomeBaseController
         $cid2                  = $this->request->param('cid2', 0, 'intval');
         
         $where = array();
-        $portalSsfwModel = new PortalSsfwModel();
+        $portalSsfwModel = new PortalSshyModel();
 
         //当前一级分类
         $cat = $portalSsfwModel->where('id', $cid)->where('status', 1)->find();

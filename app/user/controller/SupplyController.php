@@ -64,7 +64,7 @@ class SupplyController extends UserBaseController
     {
         $user = cmf_get_current_user();
         $this->assign($user);
-        $fuwu=Db::name('portal_ssfw')->where('1=1')->order('id')->select();
+        $fuwu=Db::name('portal_sshy')->where('1=1')->order('id')->select();
         $this->assign('fuwu',$fuwu);
         $this->assign("um",2);
         return $this->fetch();
