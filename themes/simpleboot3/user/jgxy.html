@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content="">
+    <include file="public@head"/>
+    <script type="text/javascript">
+        //全局变量
+        var GV = {
+            ROOT: "__ROOT__/",
+            WEB_ROOT: "__WEB_ROOT__/",
+            JS_ROOT: "static/js/"
+        };
+    </script>
+    <script src="__TMPL__/public/assets/js/jquery-1.10.2.min.js"></script>
+    <script src="__TMPL__/public/assets/js/jquery-migrate-1.2.1.js"></script>
+    <script src="__STATIC__/js/wind.js"></script>
+
+    <script type="text/javascript" src="__TMPL__/public/assets/js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/laydate/laydate.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/Validform_v5.3.2.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/layout.js"></script>
+    <script type="text/javascript" src="__TMPL__/public/assets/js/custominput.js"></script>    
+    
+</head>
+
+<body class="body-white">
+<include file="public@nav"/>
+<br>
+<div style="text-align: center;width: 50%;margin: auto;">
+   <textarea  style="height: 600px; width: 100%;">{$jgxy}</textarea>
+</div>
+<br>
+<div class="register_tip"><a href="{:url('user/register/jigou')}" style="color: #ffffff" class="btn-block btn-blue">确认</a></div>
+
+<include file="public@scripts"/>
+
+</body>
+</html>

@@ -247,7 +247,8 @@
           mtb[i] = mres[i].tb;
           mhb[i] = mres[i].hb;
     }
-
+        var color = '#189cbb';
+        var lineColor = '#0a324b';
     var option = {
        
         title: [{
@@ -294,6 +295,19 @@
             nameTextStyle: {
                 fontSize: 16
             },
+             axisLabel: {
+                show: true,
+                interval: 'auto',
+                formatter: '{value}',
+                textStyle: {
+                        color: color
+                    }
+            },
+            axisLine: {
+                lineStyle: {
+                     color: lineColor,
+                }
+            },
             //axisLabel:{  
             //             interval:0,//横轴信息全部显示  
             //            rotate:-30,//-30度角倾斜显示  
@@ -315,6 +329,19 @@
             nameTextStyle: {
                 fontSize: 16
             },
+            axisLabel: {
+                show: true,
+                interval: 'auto',
+                formatter: '{value}',
+                textStyle: {
+                        color: color
+                    }
+            },
+            axisLine: {
+                lineStyle: {
+                     color: lineColor,
+                }
+            },
             axisTick: {
                 alignWithLabel: true
             },
@@ -334,11 +361,14 @@
             axisLabel: {
                 show: true,
                 interval: 'auto',
-                formatter: '{value}'
+                formatter: '{value}',
+                textStyle: {
+                        color: color
+                    }
             },
             axisLine: {
                 lineStyle: {
-                    //color: colors[1]
+                     color: lineColor,
                 }
             },
             splitLine: {
@@ -356,7 +386,15 @@
             axisLabel: {
                 show: true,
                 interval: 'auto',
-                formatter: '{value}'
+                formatter: '{value}',
+                textStyle: {
+                        color: color
+                    }
+            },
+            axisLine: {
+                lineStyle: {
+                     color: lineColor,
+                }
             },
             axisLine: {
                 lineStyle: {

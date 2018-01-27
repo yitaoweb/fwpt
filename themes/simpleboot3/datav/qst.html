@@ -48,7 +48,11 @@
     </header>
     <div class="content">
         <div class="box site">
-            <div class="sub_main" id="main1"></div>
+            <div class="sub_main" style="width: 30%;height: 45%;margin: 0 1.5%" id="main1"></div>
+            <div class="sub_main" style="width: 30%;height: 45%;margin: 0 1.5%" id="main2"></div>
+            <div class="sub_main" style="width: 30%;height: 45%;margin: 0 1.5%" id="main3"></div>
+            <div class="sub_main" style="width: 30%;height: 45%;margin: 0 1.5%" id="main4"></div>
+            <div class="sub_main" style="width: 30%;height: 45%;margin: 0 1.5%" id="main5"></div>
         </div>
     </div>
 
@@ -117,6 +121,11 @@
 
 <script type="text/javascript">
     var myChart1 = echarts.init(document.getElementById('main1'),'chalk');
+    var myChart2 = echarts.init(document.getElementById('main2'),'chalk');
+    var myChart3 = echarts.init(document.getElementById('main3'),'chalk');
+    var myChart4 = echarts.init(document.getElementById('main4'),'chalk');
+    var myChart5 = echarts.init(document.getElementById('main5'),'chalk');
+
     //var colors = ['orange', '#d14a61', '#1E90FF'];
     var time = new Array();
     var jysr = new Array();
@@ -128,446 +137,461 @@
     for(var i=0;i<get_jjs.length;i++){
           time[i] = get_jjs[i].time;
           jysr[i] = get_jjs[i].jysr;
-          lrze[i] = get_jjs[i].lrze;
           shsr[i] = get_jjs[i].shsr;
           zsyzdwe[i] = get_jjs[i].zsyzdwe;
           gdzctze[i] = get_jjs[i].gdzctze;
     }
-    var option = {
-       
-        title: [{
-            text: '收入支出汇总表',
-            left: '18%',
-            top: '1%',
-            textAlign: 'center'
-        }, {
-            text: '经营收入统计',
-            left: '50%',
-            top: '1%',
-            textAlign: 'center'
-        }, {
-            text: '利润总额统计',
-            left: '85%',
-            top: '1%',
-            textAlign: 'center'
-        }, {
-            text: '税收收入统计',
-            left: '18%',
-            top: '51%',
-            textAlign: 'center'
-        }, {
-            text: '招商引资到位额统计',
-            left: '50%',
-            top: '51%',
-            textAlign: 'center'
-        }, {
-            text: '固定资产投资额统计',
-            left: '85%',
-            top: '51%',
-            textAlign: 'center'
-        }],
-        tooltip: {
-            trigger: 'axis'
+    var color = '#189cbb';
+
+
+ option4 = {
+    title: {
+        text: '固定资产投资额'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: time,
+        axisLabel: {
+                show: true,
+                interval: 'auto',
+                formatter: '{value}',
+                textStyle: {
+                        color: color
+                    }
+            },
+        axisLine: { //设置X轴的颜色
+            lineStyle: {
+                color: '#ffffff'
+            }
+        }
+    },
+    yAxis: {
+        type: 'value',
+        axisLabel: {
+                show: true,
+                interval: 'auto',
+                formatter: '{value}',
+                textStyle: {
+                        color: color
+                    }
+            },
+        axisLine: { //设置y轴的颜色
+            lineStyle: {
+                color: '#ffffff'
+            }
+        }
+    },
+    series: [{
+
+        type: 'line',
+        stack: '总量',
+        smooth: true, //点与点之间的幅度,false为直线
+        symbol: 'circle',
+        symbolSize: 5,
+        showSymbol: true,   //是否显示点数据的圆点
+        itemStyle: {    //设置折线的border颜色
+            normal: {
+                color: 'rgb(0,136,212)',
+                borderColor: 'rgba(0,136,212,0.2)',
+                borderWidth: 10
+            }
         },
-        grid: [{
-            show: false,
-            left: '3%',
-            top: '5%',
-            containLabel: true,
-            width: '28%',
-            height: '40%'
-        }, {
-            show: false,
-            left: '33%',
-            top: '5%',
-            containLabel: true,
-            width: '28%',
-            height: '40%'
-        }, {
-            show: false,
-            left: '66%',
-            top: '5%',
-            containLabel: true,
-            width: '28%',
-            height: '40%'
-        }, {
-            show: false,
-            left: '3%',
-            top: '55%',
-            containLabel: true,
-            width: '28%',
-            height: '40%'
-        }, {
-            show: false,
-            left: '33%',
-            top: '55%',
-            containLabel: true,
-            width: '28%',
-            height: '40%'
-        }, {
-            show: false,
-            left: '66%',
-            top: '55%',
-            containLabel: true,
-            width: '28%',
-            height: '40%'
-        }],
-        // legend: [{
-        //   data:['各幅值区间暂降频次', '暂降频次2'],
-        //   x:'right',
-        // },{data:['暂降频次3', '暂降频次4'],
-        //      x:'right',
-        // }],
-        xAxis: [{
-            gridIndex: 0,
-            type: 'category',
-            name: '',
-            nameLocation: 'center',
-            nameGap: '30',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            //axisLabel:{  
-            //             interval:0,//横轴信息全部显示  
-            //            rotate:-30,//-30度角倾斜显示  
-            //       }  ,
-            axisTick: {
-                alignWithLabel: true
-            },
-            data: ['经营收入', '利润总额', '税收收入', '招商引资', '直接投资', '固定资产', '进出口额', '发展经费',]
-        }, {
-            gridIndex: 1,
-            type: 'category',
-            name: '',
-            nameLocation: 'center',
-            nameGap: '30',
-            nameTextStyle: {
-                fontSize: 14
-            },
-            boundaryGap: false,
-            //axisLabel:{  
-            //             interval:0,//横轴信息全部显示  
-            //            rotate:-30,//-30度角倾斜显示  
-            //       }  ,
-            axisTick: {
-                alignWithLabel: true
-            },
-            data: time
-        }, {
-            gridIndex: 2,
-            type: 'category',
-            //axisLabel:{  
-            //         interval:0,//横轴信息全部显示  
-            //         rotate:-30,//-30度角倾斜显示  
-            //   }  ,
-            name: '',
-            nameLocation: 'center',
-            nameGap: '30',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisTick: {
-                alignWithLabel: true
-            },
-            data: time
-
-        }, {
-            gridIndex: 3,
-            type: 'category',
-            //axisLabel:{  
-            //         interval:0,//横轴信息全部显示  
-            //         rotate:-30,//-30度角倾斜显示  
-            //   }  ,
-            name: '',
-            nameLocation: 'center',
-            nameGap: '30',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisTick: {
-                alignWithLabel: true
-            },
-            boundaryGap: false,
-            data: time
-
-        }, {
-            gridIndex: 4,
-            type: 'category',
-            //axisLabel:{  
-            //         interval:0,//横轴信息全部显示  
-            //         rotate:-30,//-30度角倾斜显示  
-            //   }  ,
-            name: '',
-            nameLocation: 'center',
-            nameGap: '30',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisTick: {
-                alignWithLabel: true
-            },
-            data: time
-
-        }, {
-            gridIndex: 5,
-            type: 'category',
-            //axisLabel:{  
-            //         interval:0,//横轴信息全部显示  
-            //         rotate:-30,//-30度角倾斜显示  
-            //   }  ,
-            name: '',
-            nameLocation: 'center',
-            nameGap: '30',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisTick: {
-                alignWithLabel: true
-            },
-            boundaryGap: false,
-            data: time
-
-        }],
-        yAxis: [{
-            gridIndex: 0,
-            type: 'value',
-            name: '',
-            nameLocation: 'center',
-            nameGap: '30',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisLine: {
-                lineStyle: {
-                    //color: colors[1]
-                }
-            },
-            splitLine: {
-                show: false
+        label: { //设置点数据的提示
+            normal: {
+                show: true,
+                position: 'bottom'
             }
-        }, {
-            gridIndex: 1,
-            type: 'value',
-            name: '',
-            nameLocation: 'center',
-            nameGap: '40',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisLabel: {
+        },
+        data: gdzctze,
+        markPoint: { //设置最大值和最小值
+            data: [{
+                type: 'max',
+                name: '最大值'
+            }, {
+                type: 'min',
+                name: '最小值'
+            }]
+        }
+
+    }]
+};   
+
+
+ option3 = {
+    title: {
+        text: '招商引资到位额'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: time,
+        axisLabel: {
                 show: true,
                 interval: 'auto',
-                formatter: '{value}'
+                formatter: '{value}',
+                textStyle: {
+                        color: color
+                    }
             },
-            //position: 'right',
-            axisLine: {
-                lineStyle: {
-                    //color: colors[0]
-                }
-            },
-            splitLine: {
-                show: false
+        axisLine: { //设置X轴的颜色
+            lineStyle: {
+                color: '#ffffff'
             }
-        }, {
-            gridIndex: 2,
-            type: 'value',
-            name: '',
-            nameLocation: 'center',
-            nameGap: '30',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisLine: {
-                lineStyle: {
-                    //color: colors[0]
-                }
-            },
-            splitLine: {
-                show: false
-            },
-            position: 'left'
-        }, {
-            gridIndex: 3,
-            type: 'value',
-            name: '',
-            nameLocation: 'center',
-            nameGap: '40',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisLabel: {
+        }
+    },
+    yAxis: {
+        type: 'value',
+        axisLabel: {
                 show: true,
                 interval: 'auto',
-                formatter: '{value}'
+                formatter: '{value}',
+                textStyle: {
+                        color: color
+                    }
             },
-            axisLine: {
-                lineStyle: {
-                    //color: colors[1]
-                }
-            },
-            splitLine: {
-                show: false
-            },
-            position: 'left'
-        }, {
-            gridIndex: 4,
-            type: 'value',
-            name: '',
-            nameLocation: 'center',
-            nameGap: '30',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisLine: {
-                lineStyle: {
-                    //color: colors[0]
-                }
-            },
-            splitLine: {
-                show: false
-            },
-            position: 'left'
-        }, {
-            gridIndex: 5,
-            type: 'value',
-            name: '',
-            nameLocation: 'center',
-            nameGap: '40',
-            nameTextStyle: {
-                fontSize: 16
-            },
-            axisLabel: {
+        axisLine: { //设置y轴的颜色
+            lineStyle: {
+                color: '#ffffff'
+            }
+        }
+    },
+    series: [{
+
+        type: 'line',
+        stack: '总量',
+        smooth: true, //点与点之间的幅度,false为直线
+        symbol: 'circle',
+        symbolSize: 5,
+        showSymbol: true,   //是否显示点数据的圆点
+        itemStyle: {    //设置折线的border颜色
+            normal: {
+                color: 'rgb(0,136,212)',
+                borderColor: 'rgba(0,136,212,0.2)',
+                borderWidth: 10
+            }
+        },
+        label: { //设置点数据的提示
+            normal: {
+                show: true,
+                position: 'bottom'
+            }
+        },
+        data: zsyzdwe,
+        markPoint: { //设置最大值和最小值
+            data: [{
+                type: 'max',
+                name: '最大值'
+            }, {
+                type: 'min',
+                name: '最小值'
+            }]
+        }
+
+    }]
+};
+   
+
+
+option2 = {
+    title: {
+        text: '税收收入'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: time,
+        axisLabel: {
                 show: true,
                 interval: 'auto',
-                formatter: '{value}'
+                formatter: '{value}',
+                textStyle: {
+                        color: color
+                    }
             },
-            axisLine: {
-                lineStyle: {
-                    //color: colors[1]
-                }
-            },
-            splitLine: {
-                show: false
-            },
-            position: 'left'
-        }],
-        series: [{
-                name: '亿元',
-                type: 'line',
-                xAxisIndex: 0,
-                yAxisIndex: 0,
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top',
-
-                    }
-                },
-                data: [get_jj[0].jysr, get_jj[0].lrze, get_jj[0].shsr, get_jj[0].zsyzdwe, get_jj[0].sjlyswzjtze, get_jj[0].gdzctze, get_jj[0].jcke, get_jj[0].yjysyfzjf]
-            }, {
-
-                name: '经营收入',
-                type: 'line',
-                smooth: true,
-                barWidth: 25,
-                xAxisIndex: 1,
-                yAxisIndex: 1,
-                symbolSize: 8, //拐点大小
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top',
-                        color: '#FAD860',
-                    }
-                },
-                lineStyle: {
-                    normal: {
-                        width: 4,
-                        color: '#FAD860'
-                    }
-                },
-
-                data: jysr
-            }, {
-
-                name: '利润总额',
-                type: 'line',
-                xAxisIndex: 2,
-                yAxisIndex: 2,
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top',
-                    }
-                },
-
-                data: lrze
-            }, {
-
-                name: '税收收入',
-                type: 'line',
-                smooth: true,
-                barWidth: 25,
-                xAxisIndex: 3,
-                yAxisIndex: 3,
-                symbolSize: 8, //拐点大小
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top',
-                        color: '#9BCA63',
-                    }
-                },
-                lineStyle: {
-                    normal: {
-                        width: 4,
-                        color: '#9BCA63'
-                    }
-                },
-                data: shsr
-            }, {
-
-                name: '招商引资到位额',
-                type: 'line',
-                xAxisIndex: 4,
-                yAxisIndex: 4,
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top',
-                    }
-                },
-
-                data: zsyzdwe
-            }, {
-
-                name: '固定资产投资额',
-                type: 'line',
-                smooth: true,
-                barWidth: 25,
-                xAxisIndex: 5,
-                yAxisIndex: 5,
-                symbolSize: 8, //拐点大小
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top',
-                        color: '#9BCA63',
-                    }
-                },
-                lineStyle: {
-                    normal: {
-                        width: 4,
-                        color: '#9BCA63'
-                    }
-                },
-                data: gdzctze
+        axisLine: { //设置X轴的颜色
+            lineStyle: {
+                color: '#ffffff'
             }
+        }
+    },
+    yAxis: {
+        type: 'value',
+        axisLabel: {
+                show: true,
+                interval: 'auto',
+                formatter: '{value}',
+                textStyle: {
+                        color: color
+                    }
+            },
+        axisLine: { //设置y轴的颜色
+            lineStyle: {
+                color: '#ffffff'
+            }
+        }
+    },
+    series: [{
 
-        ]
-    };
+        type: 'line',
+        stack: '总量',
+        smooth: true, //点与点之间的幅度,false为直线
+        symbol: 'circle',
+        symbolSize: 5,
+        showSymbol: true,   //是否显示点数据的圆点
+        itemStyle: {    //设置折线的border颜色
+            normal: {
+                color: 'rgb(0,136,212)',
+                borderColor: 'rgba(0,136,212,0.2)',
+                borderWidth: 10
+            }
+        },
+        label: { //设置点数据的提示
+            normal: {
+                show: true,
+                position: 'bottom'
+            }
+        },
+        data: shsr,
+        markPoint: { //设置最大值和最小值
+            data: [{
+                type: 'max',
+                name: '最大值'
+            }, {
+                type: 'min',
+                name: '最小值'
+            }]
+        }
+
+    }]
+};
+
+option1 = {
+    title: {
+        text: '经营收入'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: time,
+        axisLabel: {
+                show: true,
+                interval: 'auto',
+                formatter: '{value}',
+                textStyle: {
+                        color: color
+                    }
+            },
+        axisLine: { //设置X轴的颜色
+            lineStyle: {
+                color: '#ffffff'
+            }
+        }
+    },
+    yAxis: {
+        type: 'value',
+        axisLabel: {
+                show: true,
+                interval: 'auto',
+                formatter: '{value}',
+                textStyle: {
+                        color: color
+                    }
+            },
+        axisLine: { //设置y轴的颜色
+            lineStyle: {
+                color: '#ffffff'
+            }
+        }
+    },
+    series: [{
+
+        type: 'line',
+        stack: '总量',
+        smooth: true, //点与点之间的幅度,false为直线
+        symbol: 'circle',
+        symbolSize: 5,
+        showSymbol: true,   //是否显示点数据的圆点
+        itemStyle: {    //设置折线的border颜色
+            normal: {
+                color: 'rgb(0,136,212)',
+                borderColor: 'rgba(0,136,212,0.2)',
+                borderWidth: 10
+            }
+        },
+        label: { //设置点数据的提示
+            normal: {
+                show: true,
+                position: 'bottom'
+            }
+        },
+        data: jysr,
+        markPoint: { //设置最大值和最小值
+            data: [{
+                type: 'max',
+                name: '最大值'
+            }, {
+                type: 'min',
+                name: '最小值'
+            }]
+        }
+
+    }]
+};
+
+option = {
+    title: {
+        text: '收入支出汇总表'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['经营收入', '税收收入', '招商引资', '直接投资', '固定资产', '进出口额', '发展经费',],
+        axisLabel: {
+                show: true,
+                interval: 'auto',
+                formatter: '{value}',
+                textStyle: {
+                        color: color
+                    }
+            },
+        axisLine: { //设置X轴的颜色
+            lineStyle: {
+                color: '#ffffff'
+            }
+        }
+    },
+    yAxis: {
+        type: 'value',
+        axisLabel: {
+                show: true,
+                interval: 'auto',
+                formatter: '{value}',
+                textStyle: {
+                        color: color
+                    }
+            },
+        axisLine: { //设置y轴的颜色
+            lineStyle: {
+                color: '#ffffff'
+            }
+        }
+    },
+    series: [{
+
+        type: 'line',
+        stack: '总量',
+        smooth: true, //点与点之间的幅度,false为直线
+        symbol: 'circle',
+        symbolSize: 5,
+        showSymbol: true,   //是否显示点数据的圆点
+        itemStyle: {    //设置折线的border颜色
+            normal: {
+                color: 'rgb(0,136,212)',
+                borderColor: 'rgba(0,136,212,0.2)',
+                borderWidth: 10
+            }
+        },
+        label: { //设置点数据的提示
+            normal: {
+                show: true,
+                position: 'bottom'
+            }
+        },
+        data: [get_jj[0].jysr, get_jj[0].shsr, get_jj[0].zsyzdwe, get_jj[0].sjlyswzjtze, get_jj[0].gdzctze, get_jj[0].jcke, get_jj[0].yjysyfzjf],
+        markPoint: { //设置最大值和最小值
+            data: [{
+                type: 'max',
+                name: '最大值'
+            }, {
+                type: 'min',
+                name: '最小值'
+            }]
+        }
+
+    }]
+};
 
     myChart1.setOption(option);
+    myChart2.setOption(option1);
+    myChart3.setOption(option2);
+    myChart4.setOption(option3);
+    myChart5.setOption(option4);
 
 </script>
 

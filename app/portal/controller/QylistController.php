@@ -42,14 +42,14 @@ class QylistController extends HomeBaseController
 
         $where['user_type'] = 2; //机构
         if ($cid > 0) {
-            $arr=Db::name('portal_ssfw')->where('parent_id',$cid)->field('id')->select()->toArray();
+            $arr=Db::name('portal_sshy')->where('parent_id',$cid)->field('id')->select()->toArray();
              $arr = array_column($arr,'id');
             //var_dump($arr);die;
-            $where['qy_ssfw'] = array('in',$arr);
+            $where['qy_sshy'] = array('in',$arr);
         }
 
         if ($cid2 > 0) {
-            $where['qy_ssfw'] = $cid2;
+            $where['qy_sshy'] = $cid2;
         }
 
         if ($fid) {

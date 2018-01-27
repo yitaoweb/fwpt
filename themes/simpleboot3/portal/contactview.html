@@ -17,15 +17,19 @@
 <div class="local">当前位置：首页 &gt;&nbsp;联系点&gt;&nbsp;联系点详情</div>
 <div class="main">
 <div class="main_l right">
-<div class="left_title">通过公告</div>
+<div class="left_title">联系点列表</div>
 <ul class="tabnews">
-            <li><a href="NewsView.aspx?Code=93264f7c-9beb-415d-98bd-b4928db5a0e7" target="_blank">长治市妇幼保健院：用爱守护  请不要轻言放弃（系列报道一）</a></li><li><a href="NewsView.aspx?Code=6d38a0ce-5a7e-44d2-837e-3582234efcbf" target="_blank">同煤集团轩煤公司焦家寨矿 开展“倡家风、促和谐”活动</a></li><li><a href="NewsView.aspx?Code=2c09236a-274e-4b16-833b-4cccbcc40e1e" target="_blank">山西长治：史上最严交规处罚</a></li><li><a href="NewsView.aspx?Code=d1e0c3ef-c803-40af-8339-325de17dfc75" target="_blank">海姿焦化厂浓烟滚滚污染环境 当地环保部门形同虚设</a></li><li><a href="NewsView.aspx?Code=01064499-9ee9-4a7c-8e7c-f59a7570150c" target="_blank">轩煤公司焦家寨矿：技术创新实现降本增效</a></li><li><a href="NewsView.aspx?Code=6545b883-d6fd-41c8-94f0-db2ceb013ef9" target="_blank">黎城县交警大队召开党的十九大报告精神专题学习会议</a></li><li><a href="NewsView.aspx?Code=a8744c7b-8a54-46e4-8ae5-9f43fe91abb8" target="_blank">大美振兴：太行明珠 全国夺目</a></li><li><a href="NewsView.aspx?Code=77064b1e-cb7b-4e91-965d-852a16bfa51b" target="_blank">中国北方第一文化巨族之宅：皇城相府</a></li><li><a href="NewsView.aspx?Code=15bcc266-9cce-4a21-b241-07142fcd602d" target="_blank">城镇垃圾处理费征收使用管理办法正在研究制定</a></li><li><a href="NewsView.aspx?Code=939fee04-1c81-4e16-bf1f-8b36d0f4eb25" target="_blank">古老乌力格尔宣传党的十九大精神</a></li>
+    <foreach name="lists" item="vo" empty="$emptylist">
+            <li><a href="{:cmf_url('portal/Contact/view',array('id'=>$vo.id))}" target="_blank">{$vo.lxd_name}</a></li>
+    </foreach>
 </ul>
 <div class="clearfix"></div>
 
-<div class="left_title">行业动态</div>
+<div class="left_title">服务机构</div>
 <ul class="tabnews">
-            <li><a href="NewsView.aspx?Code=93264f7c-9beb-415d-98bd-b4928db5a0e7" target="_blank">长治市妇幼保健院：用爱守护  请不要轻言放弃（系列报道一）</a></li><li><a href="NewsView.aspx?Code=6d38a0ce-5a7e-44d2-837e-3582234efcbf" target="_blank">同煤集团轩煤公司焦家寨矿 开展“倡家风、促和谐”活动</a></li><li><a href="NewsView.aspx?Code=2c09236a-274e-4b16-833b-4cccbcc40e1e" target="_blank">山西长治：史上最严交规处罚</a></li><li><a href="NewsView.aspx?Code=d1e0c3ef-c803-40af-8339-325de17dfc75" target="_blank">海姿焦化厂浓烟滚滚污染环境 当地环保部门形同虚设</a></li><li><a href="NewsView.aspx?Code=01064499-9ee9-4a7c-8e7c-f59a7570150c" target="_blank">轩煤公司焦家寨矿：技术创新实现降本增效</a></li><li><a href="NewsView.aspx?Code=6545b883-d6fd-41c8-94f0-db2ceb013ef9" target="_blank">黎城县交警大队召开党的十九大报告精神专题学习会议</a></li><li><a href="NewsView.aspx?Code=a8744c7b-8a54-46e4-8ae5-9f43fe91abb8" target="_blank">大美振兴：太行明珠 全国夺目</a></li><li><a href="NewsView.aspx?Code=77064b1e-cb7b-4e91-965d-852a16bfa51b" target="_blank">中国北方第一文化巨族之宅：皇城相府</a></li><li><a href="NewsView.aspx?Code=15bcc266-9cce-4a21-b241-07142fcd602d" target="_blank">城镇垃圾处理费征收使用管理办法正在研究制定</a></li><li><a href="NewsView.aspx?Code=939fee04-1c81-4e16-bf1f-8b36d0f4eb25" target="_blank">古老乌力格尔宣传党的十九大精神</a></li>
+    <foreach name="jg" item="vo" empty="$emptylist">
+            <li><a href="{:cmf_url('portal/Jghome/index',array('id'=>$vo.id))}" target="_blank">{$vo.user_nickname}</a></li>
+    </foreach>
             </ul>
 
 </div>

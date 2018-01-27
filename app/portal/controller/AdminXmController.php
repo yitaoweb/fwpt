@@ -40,13 +40,21 @@ class AdminXmController extends AdminBaseController
         $intId = $this->request->param("name", 0, 'intval');
         $id = $this->request->param('id', 0, 'intval');
         $kfqid = $this->request->param('kfqid', 0, 'intval');
+<<<<<<< HEAD
         $timeq = $this->request->param('timeq', date('Y-m-d')); 
+=======
+        $timeq = $this->request->param('timeq', 0); 
+>>>>>>> origin/qhn
         $portalTagModel = new XmModel();
         $PortalSshyModel = new PortalXzqyModel();
         $fuwu = $PortalSshyModel->select();
         $user = Db::name('user')->where('user_type',5)->select();
         $xmcoun = Db::query('select count(id)as sl,sum(tzze) as tzze,sum(yzze) as yzze from pt_xm');
+<<<<<<< HEAD
        if($id != 0 && $kfqid != 0){
+=======
+        if($id != 0 && $kfqid != 0){
+>>>>>>> origin/qhn
           $xmcoun = Db::query('select count(id)as sl,sum(tzze) as tzze,sum(yzze) as yzze from pt_xm where user_id='.$kfqid.' and xm_qf ='.$id);
           $portalTagModel->where('xm_qf',$id);
           $portalTagModel->where('user_id',$kfqid);
@@ -59,6 +67,7 @@ class AdminXmController extends AdminBaseController
           $xmcoun = Db::query('select count(id)as sl,sum(tzze) as tzze,sum(yzze) as yzze from pt_xm where user_id='.$kfqid.'');
           $portalTagModel->where('user_id',$kfqid);
         }
+
         $portalTagModel->order(["id" => "ASC"]);
         $tags = $portalTagModel->paginate(10);
         $xlsData = $portalTagModel->select();
@@ -246,9 +255,16 @@ class AdminXmController extends AdminBaseController
         $this->assign("tags", $tags);
         $this->assign("user", $user);
         $this->assign("xmcoun", $xmcoun);
+<<<<<<< HEAD
         $this->assign("id", $id);
         $this->assign("kfqid", $kfqid);
         $this->assign("timeq", $timeq);
+=======
+           $this->assign("id", $id);
+           $this->assign("kfqid", $kfqid);
+           $this->assign("timeq", $timeq);
+   
+>>>>>>> origin/qhn
         $this->assign('page', $tags->render());
 
         return $this->fetch();

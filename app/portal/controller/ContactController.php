@@ -65,13 +65,19 @@ class ContactController extends HomeBaseController
     {
 
         $id = $this->request->param('id', 0, 'intval');
-       
+       $Contactlist = Db::name('portal_lxd');
+       $Contactlist = $Contactlist->order('list_order')->paginate(10);
+
+       $jg = Db::name('user');
+       $jg = $jg->where('user_type',3)->order('id')->paginate(10);
+
         $contact = Db::name('portal_lxd')->where('id',$id)->find();
 
     $xzqys = Db::name('portal_xzqy')->select();
     $this->assign('xzqys', $xzqys);
         $this->assign($contact);                 //机构简介
-        
+        $this->assign("lists", $Contactlist->items());
+        $this->assign("jg", $jg->items());
         $listTpl ='contactview';
 
         return $this->fetch('/' . $listTpl);

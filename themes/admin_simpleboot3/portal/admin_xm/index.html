@@ -19,12 +19,21 @@
                   <select class="form-control" name="pageselect" onchange="window.open(options[selectedIndex].value,'_self')">
                        <option value="{:url('AdminXm/index',array('id'=>0))}" <if condition="$id eq 0">selected = "selected"</if>>请选择</option>
                        <volist name="user" id="vos">
+<<<<<<< HEAD
                            <option value="{:url('AdminXm/index',array('kfqid'=>$vos.id,'id'=>$id,'timeq'=>$timeq))}" <if condition="$kfqid eq $vos.id">selected = "selected"</if> >{$vos['user_nickname']}</option>
                        </volist>
                   </select>
                   <input id="times" class="form-control js-bootstrap-date" type="text" name="timeq" value="{$timeq}" onchange="show(this)">
                   <!-- <input type="submit" class="btn btn-primary" value="导出"/>-->
                   <a class="btn btn-danger" href="{:url('AdminXm/index',array('id'=>$id,'kfqid'=>$kfqid,'name'=>2,'timeq'=>$timeq))}">导出</a> 
+=======
+                           <option value="{:url('AdminXm/index',array('kfqid'=>$vos.id,'id'=>$id))}" <if condition="$kfqid eq $vos.id">selected = "selected"</if>>{$vos['user_nickname']}</option>
+                       </volist>
+                  </select>
+                  <input class="form-control js-bootstrap-date" type="text" name="timeq" >
+                  <input type="submit" class="btn btn-primary" value="导出"/>
+<!--                   <a class="btn btn-danger" href="{:url('AdminXm/index',array('id'=>$id,'kfqid'=>$kfqid,'name'=>2))}">导出</a> -->
+>>>>>>> origin/qhn
     </form>
 
 <script type="text/javascript">

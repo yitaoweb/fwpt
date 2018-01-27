@@ -56,6 +56,23 @@ class RegisterController extends HomeBaseController
             return $this->fetch(":qyregister");
         }
     }
+
+    public function jgxy(){
+        $noNeedDirs     = [".", "..", ".svn", 'fonts'];
+        $adminThemesDir = config('cmf_admin_theme_path') . config('cmf_admin_default_theme') . '/public/assets/themes/';
+        $adminStyles    = cmf_scan_dir($adminThemesDir . '*', GLOB_ONLYDIR);
+        $adminStyles    = array_diff($adminStyles, $noNeedDirs);
+        $cdnSettings    = cmf_get_option('cdn_settings');
+        $cmfSettings    = cmf_get_option('cmf_settings');
+        $adminSettings  = cmf_get_option('admin_settings');
+        $this->assign(cmf_get_option('site_info'));
+        $this->assign("admin_styles", $adminStyles);
+        $this->assign("templates", []);
+        $this->assign("cdn_settings", $cdnSettings);
+        $this->assign("admin_settings", $adminSettings);
+        $this->assign("cmf_settings", $cmfSettings);
+       return $this->fetch(":jgxy");
+    }
     /**
      * 限额以上企业
      */

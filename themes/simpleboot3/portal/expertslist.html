@@ -50,7 +50,7 @@
             <dl id="select2">
                 <dt>二级分类：</dt>
                 <dd class="select-all <if condition='($cid2 == 0)'>selected</if>">
-                    <a href="{:cmf_url('portal/experts/index',array('cid'=>0,'cid2'=>0))}">全部</a>
+                    <a href="{:cmf_url('portal/experts/index',array('cid'=>$cid,'cid2'=>0))}">全部</a>
                 </dd>
                 <volist name="cat2" id="vo">
                     <dd class="<if condition='($cid2 == $vo.id)'>selected</if>"><a href="{:cmf_url('portal/experts/index',array('cid'=>$cid,'cid2'=>$vo['id']))}">{$vo.name}</a></dd>

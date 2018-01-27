@@ -76,11 +76,9 @@
                             </if>
                         </td>
                         <td>
-                            <if condition="$vo.stat eq 0 || $vo.stat eq 2">
                                  <a href="{:url('user/xm/edit',array('id'=>$vo['id']))}">修改</a>
                                  <a href="{:url('user/xm/insertid',array('id'=>$vo['id']))}">新增</a>
                                   <a href="{:url('user/xm/delete',array('id'=>$vo['id']))}">删除</a>
-                            </if>
                         </td>
                       </tr>
                       </foreach>
