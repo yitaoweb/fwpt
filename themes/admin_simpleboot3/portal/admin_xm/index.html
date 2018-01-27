@@ -7,45 +7,27 @@
     </ul>
 <form class="well form-inline margin-top-20" method="post" action="{:url('AdminXm/index',array('id'=>0,'kfqid'=>$kfqid))}">
                  <select class="form-control" name="pageselect" onchange="window.open(options[selectedIndex].value,'_self')">
-                       <option value="{:url('AdminXm/index',array('id'=>0,'kfqid'=>$kfqid,'timeq'=>$timeq))}" <if condition="$id eq 0">selected = "selected"</if>>请选择</option>
-                        <option value="{:url('AdminXm/index',array('id'=>1,'kfqid'=>$kfqid,'timeq'=>$timeq))}" <if condition="$id eq 1">selected = "selected"</if>>在谈项目表</option>
-                         <option value="{:url('AdminXm/index',array('id'=>2,'kfqid'=>$kfqid,'timeq'=>$timeq))}" <if condition="$id eq 2">selected = "selected"</if>>新签约项目明细表</option>
-                          <option value="{:url('AdminXm/index',array('id'=>3,'kfqid'=>$kfqid,'timeq'=>$timeq))}" <if condition="$id eq 3">selected = "selected"</if>>拟开工项目表</option>
-                           <option value="{:url('AdminXm/index',array('id'=>4,'kfqid'=>$kfqid,'timeq'=>$timeq))}" <if condition="$id eq 4">selected = "selected"</if>>新开工项目明细表</option>
-                            <option value="{:url('AdminXm/index',array('id'=>5,'kfqid'=>$kfqid,'timeq'=>$timeq))}" <if condition="$id eq 5">selected = "selected"</if>>在建项目明细表</option>
-                             <option value="{:url('AdminXm/index',array('id'=>6,'kfqid'=>$kfqid,'timeq'=>$timeq))}" <if condition="$id eq 6">selected = "selected"</if>>2016年前重点投产项目明细表</option>
-                              <option value="{:url('AdminXm/index',array('id'=>7,'kfqid'=>$kfqid,'timeq'=>$timeq))}" <if condition="$id eq 7">selected = "selected"</if>>新投产项目明细表</option>
+                       <option value="{:url('AdminXm/index',array('id'=>0,'kfqid'=>$kfqid))}" <if condition="$id eq 0">selected = "selected"</if>>请选择</option>
+                        <option value="{:url('AdminXm/index',array('id'=>1,'kfqid'=>$kfqid))}" <if condition="$id eq 1">selected = "selected"</if>>在谈项目表</option>
+                         <option value="{:url('AdminXm/index',array('id'=>2,'kfqid'=>$kfqid))}" <if condition="$id eq 2">selected = "selected"</if>>新签约项目明细表</option>
+                          <option value="{:url('AdminXm/index',array('id'=>3,'kfqid'=>$kfqid))}" <if condition="$id eq 3">selected = "selected"</if>>拟开工项目表</option>
+                           <option value="{:url('AdminXm/index',array('id'=>4,'kfqid'=>$kfqid))}" <if condition="$id eq 4">selected = "selected"</if>>新开工项目明细表</option>
+                            <option value="{:url('AdminXm/index',array('id'=>5,'kfqid'=>$kfqid))}" <if condition="$id eq 5">selected = "selected"</if>>在建项目明细表</option>
+                             <option value="{:url('AdminXm/index',array('id'=>6,'kfqid'=>$kfqid))}" <if condition="$id eq 6">selected = "selected"</if>>2016年前重点投产项目明细表</option>
+                              <option value="{:url('AdminXm/index',array('id'=>7,'kfqid'=>$kfqid))}" <if condition="$id eq 7">selected = "selected"</if>>新投产项目明细表</option>
                   </select>
                   <select class="form-control" name="pageselect" onchange="window.open(options[selectedIndex].value,'_self')">
                        <option value="{:url('AdminXm/index',array('id'=>0))}" <if condition="$id eq 0">selected = "selected"</if>>请选择</option>
                        <volist name="user" id="vos">
-<<<<<<< HEAD
-                           <option value="{:url('AdminXm/index',array('kfqid'=>$vos.id,'id'=>$id,'timeq'=>$timeq))}" <if condition="$kfqid eq $vos.id">selected = "selected"</if> >{$vos['user_nickname']}</option>
-                       </volist>
-                  </select>
-                  <input id="times" class="form-control js-bootstrap-date" type="text" name="timeq" value="{$timeq}" onchange="show(this)">
-                  <!-- <input type="submit" class="btn btn-primary" value="导出"/>-->
-                  <a class="btn btn-danger" href="{:url('AdminXm/index',array('id'=>$id,'kfqid'=>$kfqid,'name'=>2,'timeq'=>$timeq))}">导出</a> 
-=======
                            <option value="{:url('AdminXm/index',array('kfqid'=>$vos.id,'id'=>$id))}" <if condition="$kfqid eq $vos.id">selected = "selected"</if>>{$vos['user_nickname']}</option>
                        </volist>
                   </select>
                   <input class="form-control js-bootstrap-date" type="text" name="timeq" >
                   <input type="submit" class="btn btn-primary" value="导出"/>
 <!--                   <a class="btn btn-danger" href="{:url('AdminXm/index',array('id'=>$id,'kfqid'=>$kfqid,'name'=>2))}">导出</a> -->
->>>>>>> origin/qhn
     </form>
 
-<script type="text/javascript">
-    function show(e){
-      var d= e.value;
-      var url = "{:url('AdminXm/index',array('kfqid'=>$kfqid,'id'=>$id))}";
 
-      url = url +"/timeq/"+d;
-      
-      window.open(url,'_self');
-    }
-</script>
     <form method="post" class="js-ajax-form margin-top-20">
         <div class="table-actions">
             <!--<button type="submit" class="btn btn-primary btn-sm js-ajax-submit">{:lang('SORT')}</button>-->

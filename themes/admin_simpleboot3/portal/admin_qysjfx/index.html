@@ -6,9 +6,9 @@
         <li class="active"><a href="{:url('AdminQysjfx/index')}">限上企业数据分析</a></li>
     </ul>
     <form class="well form-inline margin-top-20" method="post" action="{:url('AdminQysjfx/index')}">
-        开始时间：<input class="form-control js-bootstrap-date" type="text" name="post[published_timeq]"
+        开始时间：<input class="form-control js-bootstrap-datetime" type="text" name="post[published_timeq]"
                                    value="{$timestamq}">
-        停止时间：<input class="form-control js-bootstrap-date" type="text" name="post[published_timeh]"
+        停止时间：<input class="form-control js-bootstrap-datetime" type="text" name="post[published_timeh]"
                                    value="{$timestamh}">
 
         <input type="submit" class="btn btn-primary" value="搜索"/>
