@@ -49,7 +49,7 @@
         <li class="select-list">
             <dl id="select1">
                 <dt>服务区域：</dt>
-                <dd class="select-all <if condition='($fid == 0)'>selected</if>"><a href="#">全部</a></dd>
+                <dd class="select-all <if condition='($fid == 0)'>selected</if>"><a href="{:cmf_url('portal/Jglist/index',array('cid'=>$cid))}">全部</a></dd>
                 <volist name="area" id="vo">
                     <dd class="<if condition='($fid == $vo.id)'>selected</if>">
                     <a href="{:cmf_url('portal/Jglist/index',array('cid'=>$cat['id'],'fid'=>$vo['id'],'cid2'=>$cid2))}">{$vo.name}</a></dd>
@@ -81,18 +81,7 @@
                 <div class="linkto">电话<span>{$vo.tel}</span><a href="{:cmf_url('portal/Jghome/index',array('id'=>$vo.id))}">进入机构</a></div>
                 <h1>{$vo.user_nickname}</h1>
                 <p>服务地址：山西-长治-{$vo.qy_address}</p>
-                <p>
-                服务区域：
-                   <php>
-                                    foreach (json_decode($vo['fwqy']) as $s){
-                                        foreach ($xzqys as $ss) {
-                                             if($s == $ss['id']){
-                                                echo $ss['name'].',';
-                                             }
-                                        } 
-                                     }
-                            </php>
-                </p>
+
                 <p>服务项目：{:getfield('portal_ssfw',$vo.qy_ssfw,'name')}服务</p>
             </div>
         </foreach>                 

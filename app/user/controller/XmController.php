@@ -32,6 +32,8 @@ class XmController extends UserBaseController
           $gongqiuQuery->where('xm_qf',$id);
         }
 
+          $gongqiuQuery->where('stat',$stat);
+
           $gongqiuQuery->where('user_id',$userId);
 
         $all           = $gongqiuQuery->order('id desc')->paginate(10);

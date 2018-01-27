@@ -53,14 +53,12 @@ class SettingController extends AdminBaseController
         $cdnSettings    = cmf_get_option('cdn_settings');
         $cmfSettings    = cmf_get_option('cmf_settings');
         $adminSettings  = cmf_get_option('admin_settings');
-
         $this->assign(cmf_get_option('site_info'));
         $this->assign("admin_styles", $adminStyles);
         $this->assign("templates", []);
         $this->assign("cdn_settings", $cdnSettings);
         $this->assign("admin_settings", $adminSettings);
         $this->assign("cmf_settings", $cmfSettings);
-
         return $this->fetch();
     }
 

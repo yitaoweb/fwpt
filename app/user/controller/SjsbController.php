@@ -29,6 +29,7 @@ class SjsbController extends UserBaseController
         $userId               = cmf_get_current_user_id();
         $gongqiuQuery            = Db::name("qysjfx");
         $gongqiuQuery->where('user_id',$userId);
+        $gongqiuQuery->where('stat',$stat);
         $all           = $gongqiuQuery->order('id desc')->paginate(10);
 
         $this->assign($user);

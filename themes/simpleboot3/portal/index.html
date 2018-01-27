@@ -66,7 +66,7 @@
         <ul class="slide-cont">
           <slides id="$top_slide_id">
             <li class="slide-item"> 
-              <a href="" target="blank"> 
+              <a href="{:cmf_get_image_url($vo.url)}" target="blank"> 
                 <img src="{:cmf_get_image_url($vo.image)}" alt=""/> 
               </a>
               <div class="slide-txt">
@@ -107,8 +107,8 @@
   <div class="menu1">
     <a href="{:cmf_url('user/Login/index')}" class="bluelink left radius4">企业登录</a>
     <a href="{:cmf_url('user/Register/qiye')}" class="right radius4">企业注册</a>
-    <a href="{:cmf_url('user/Login/index')}" class="bluelink left radius4">机构登录</a>
-    <a href="{:cmf_url('user/Register/jigou')}" class="right radius4">机构注册</a>
+    <a href="{:cmf_url('user/Login/index')}" class="bluelink left radius4">服务机构登录</a>
+    <a href="{:cmf_url('user/Register/jigou')}" class="right radius4">服务机构注册</a>
   </div>
   <div class="menu2">
     <a href="/guide.html" class="m01"><br/>服务指南</a>
@@ -158,7 +158,7 @@
 
 <div class="index-right-box">
 <div class="news-title"><span><a href="javascript:;">数据分析入口</a></span></div>
-<a href="/datav/show/index"><img src="__TMPL__/public/assets/images/sjfx.jpg" /></a>
+<a href="/datav/public/login"><img src="__TMPL__/public/assets/images/sjfx.jpg" /></a>
 </div>
 
 <div class="box-title left mt10"><span><a href="#" target="_blank">服务分类</a></span></div>
@@ -232,7 +232,14 @@
             <td><a href="{:cmf_url('portal/Demand/view',array('id'=>$vo.id))}">{$vo.title}</a></td>
             <td>{:getfield('user',$vo.user_id,'user_nickname')}</td>
             <td>{:getfield('portal_ssfw',$vo.ssfw_id,'name')}</td>
-            <td>{$vo.state|state=###}</td>
+             
+            <td>
+                 <if condition='($vo.sh_state eq 1)'>
+                审核
+                <else/>
+                未审核
+             </if>
+            </td>
             <td>{$vo.time}</td>
           </tr>
         </volist>

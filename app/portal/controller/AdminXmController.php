@@ -40,24 +40,26 @@ class AdminXmController extends AdminBaseController
         $intId = $this->request->param("name", 0, 'intval');
         $id = $this->request->param('id', 0, 'intval');
         $kfqid = $this->request->param('kfqid', 0, 'intval');
+        $timeq = $this->request->param('timeq', 0); 
         $portalTagModel = new XmModel();
         $PortalSshyModel = new PortalXzqyModel();
         $fuwu = $PortalSshyModel->select();
         $user = Db::name('user')->where('user_type',5)->select();
         $xmcoun = Db::query('select count(id)as sl,sum(tzze) as tzze,sum(yzze) as yzze from pt_xm');
         if($id != 0 && $kfqid != 0){
-          $xmcoun = Db::query('select sum(id)as sl,sum(tzze) as tzze,sum(yzze) as yzze from pt_xm where user_id='.$kfqid.' and xm_qf ='.$id);
+          $xmcoun = Db::query('select count(id)as sl,sum(tzze) as tzze,sum(yzze) as yzze from pt_xm where user_id='.$kfqid.' and xm_qf ='.$id);
           $portalTagModel->where('xm_qf',$id);
           $portalTagModel->where('user_id',$kfqid);
         }
-        if($id != 0){
+        if($id != 0 && $kfqid == 0){
           $xmcoun = Db::query('select count(id)as sl,sum(tzze) as tzze,sum(yzze) as yzze from pt_xm where xm_qf ='.$id);
           $portalTagModel->where('xm_qf',$id);
         }
-        if($kfqid != 0){
+        if($kfqid != 0 && $id == 0){
           $xmcoun = Db::query('select count(id)as sl,sum(tzze) as tzze,sum(yzze) as yzze from pt_xm where user_id='.$kfqid.'');
           $portalTagModel->where('user_id',$kfqid);
         }
+
         $portalTagModel->order(["id" => "ASC"]);
         $tags = $portalTagModel->paginate(10);
         if($intId == 2){
@@ -89,6 +91,7 @@ class AdminXmController extends AdminBaseController
         $this->assign("xmcoun", $xmcoun);
            $this->assign("id", $id);
            $this->assign("kfqid", $kfqid);
+           $this->assign("timeq", $timeq);
    
         $this->assign('page', $tags->render());
 

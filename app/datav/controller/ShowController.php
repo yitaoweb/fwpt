@@ -37,6 +37,7 @@ class ShowController extends HomeBaseController
             $this->assign('title',$title);
         } 
         else {
+
             $this->error("您还没有登录！", url("datav/public/login"));
             exit();
         }

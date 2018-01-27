@@ -18,7 +18,29 @@
     
     <div class="main_r right" style="min-height: 600px;">
         <include file="public@qiyetop" />
-        <div class="right_title"><span>限上企业数据上报</span> &nbsp;&nbsp;单位（万元）</div>
+        <div class="right_title"><span>
+          <if condition="$xm.xm_qf eq 1">
+             在谈项目表
+          </if>
+          <if condition="$xm.xm_qf eq 2">
+             新签约项目明细表
+          </if>
+          <if condition="$xm.xm_qf eq 3">
+             拟开工项目表
+          </if>
+          <if condition="$xm.xm_qf eq 4">
+             新开工项目明细表
+          </if>
+          <if condition="$xm.xm_qf eq 5">
+             在建项目明细表
+          </if>
+          <if condition="$xm.xm_qf eq 6">
+             2016年重点投产项目
+          </if>
+          <if condition="$xm.xm_qf eq 7">
+             新投产项目明细表
+          </if>
+        </span> &nbsp;&nbsp;单位（万元）</div>
           <form class="js-ajax-form" action="{:url('user/Xm/addPost')}" method="post" id="register"> 
             <div class="center_form">
               <dl>
@@ -27,7 +49,7 @@
               </dl>
               <dl>
                 <dt>上报日期</dt>
-                <dd><input type="text" name="date" value="{$xm.date}" placeholder="上一次上报日期：1994-6-7" class="input large"/></dd>
+                <dd><input type="text" name="date"  placeholder="1994-6-7" class="input large"/></dd>
               </dl>
               <dl>
                 <dt>投资总额</dt>
@@ -143,7 +165,7 @@
                 <dd>
 <!--                   <input type="hidden" name="id" value="{$xm.id}"> -->
                   <input type="hidden" name="xm_qf" value="{$xm.xm_qf}">
-                  <button type="submit">确定提交</button>
+                  <button type="submit" class="btn-block btn-blue js-ajax-submit">确定提交</button>
                 </dd>
               </dl>
             </div>

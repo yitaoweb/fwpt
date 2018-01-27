@@ -307,7 +307,8 @@ $.ajax({
                 }
             }
         })
-
+        var color = '#189cbb';
+        var lineColor = '#0a324b'
         var option3 = {
             tooltip: {
                 trigger: 'axis',
@@ -327,9 +328,15 @@ $.ajax({
             xAxis: [{
                 type: 'category',
                 boundaryGap: false,
+                axisLabel: {
+                    textStyle: {
+                        color: color,
+                        fontSize: 16*scale,
+                    }
+                },
                 axisLine: {
                     lineStyle: {
-                        color: '#57617B'
+                        color: lineColor,
                     }
                 },
                 data: fwxqname
@@ -355,9 +362,15 @@ $.ajax({
                 axisTick: {
                     show: false
                 },
+                axisLabel: {
+                    textStyle: {
+                        color: color,
+                        fontSize: 16*scale,
+                    }
+                },
                 axisLine: {
                     lineStyle: {
-                        color: '#57617B'
+                        color: lineColor,
                     }
                 },
                 axisLabel: {
@@ -517,11 +530,14 @@ $.ajax({
         }
             
         //option
+        var color = '#189cbb';
+        var lineColor = '#0a324b'
         var option4 = {
    
             tooltip : {
                 trigger: 'axis'
             }, 
+
             grid: {
                 left: '3%',
                 right: '4%',
@@ -530,12 +546,34 @@ $.ajax({
                 containLabel: true
             },   
             xAxis: {
-                data: fwname
+                data: fwname,
+                axisLabel: {
+                    textStyle: {
+                        color: color,
+                        fontSize: 16*scale,
+                    }
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: lineColor,
+                    }
+                }
             },
             yAxis: {
                 splitNumber : 3,
                 max : '50',
-                min : '1'
+                min : '1',
+                axisLabel: {
+                    textStyle: {
+                        color: color,
+                        fontSize: 16*scale,
+                    }
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: lineColor,
+                    }
+                }
             },
             series: [{
                 type: 'line',
@@ -748,7 +786,7 @@ $.ajax({
                     },
                      axisLine: {
                         show:false,
-                    },
+                    }
                     
                 }
             ],
@@ -768,9 +806,7 @@ $.ajax({
                           show:true,
                           position:'bottom',
                           formatter:'{c}亿元 \n{b}',
-                          textStyle:{
-                              color:'#666'
-                          }
+                          
                       }  
                     },
                     itemStyle:{

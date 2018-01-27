@@ -5,7 +5,7 @@
     <ul class="nav nav-tabs">
         <li class="active"><a href="{:url('AdminJjyxqk/index')}">开发区数据分析</a></li>
     </ul>
-<form class="well form-inline margin-top-20" method="post" action="{:url('AdminXm/sh')}">
+<form class="well form-inline margin-top-20" method="post" action="{:url('AdminXm/index',array('id'=>0,'kfqid'=>$kfqid))}">
                  <select class="form-control" name="pageselect" onchange="window.open(options[selectedIndex].value,'_self')">
                        <option value="{:url('AdminXm/index',array('id'=>0,'kfqid'=>$kfqid))}" <if condition="$id eq 0">selected = "selected"</if>>请选择</option>
                         <option value="{:url('AdminXm/index',array('id'=>1,'kfqid'=>$kfqid))}" <if condition="$id eq 1">selected = "selected"</if>>在谈项目表</option>
@@ -19,10 +19,12 @@
                   <select class="form-control" name="pageselect" onchange="window.open(options[selectedIndex].value,'_self')">
                        <option value="{:url('AdminXm/index',array('id'=>0))}" <if condition="$id eq 0">selected = "selected"</if>>请选择</option>
                        <volist name="user" id="vos">
-                           <option value="{:url('AdminXm/index',array('kfqid'=>$vos.id,'id'=>$id))}" >{$vos['user_nickname']}</option>
+                           <option value="{:url('AdminXm/index',array('kfqid'=>$vos.id,'id'=>$id))}" <if condition="$kfqid eq $vos.id">selected = "selected"</if>>{$vos['user_nickname']}</option>
                        </volist>
                   </select>
-                  <a class="btn btn-danger" href="{:url('AdminXm/index',array('id'=>$id,'kfqid'=>$kfqid,'name'=>2))}">导出</a>
+                  <input class="form-control js-bootstrap-date" type="text" name="timeq" >
+                  <input type="submit" class="btn btn-primary" value="导出"/>
+<!--                   <a class="btn btn-danger" href="{:url('AdminXm/index',array('id'=>$id,'kfqid'=>$kfqid,'name'=>2))}">导出</a> -->
     </form>
 
 

@@ -24,7 +24,7 @@ class IndexController extends HomeBaseController
     	$qiu = Db::name('portal_gxfb')->where("gx",1)->where('state', 1)->order('time')->limit(2)->select()->toArray();
     	//需求信息
     	$where['state'] = array('egt',0);
-    	$supply = Db::name('portal_fwxq')->where($where)->order('time')->limit(10)->select()->toArray();
+    	$supply = Db::name('portal_fwxq')->where($where)->order('time')->limit(9)->select()->toArray();
     	//专家库
     	$zjk = Db::name('portal_zjk')->limit(4)->select();
     	$this->assign('gong', $gong);        //供应信息
